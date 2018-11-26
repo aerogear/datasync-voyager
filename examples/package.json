@@ -1,6 +1,7 @@
 {
-  "name": "examples",
+  "name": "apollo-voyager-example",
   "version": "0.1.0",
+  "private": true,
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,9 +9,8 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@aerogear/apollo-voyager-server": "file:../packages/apollo-voyager-server",
+    "@aerogear/apollo-voyager-server": "1.0.0",
     "express": "^4.16.4",
-    "graphql": "^14.0.0",
     "graphql-tools": "^4.0.3"
   },
   "devDependencies": {
