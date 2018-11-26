@@ -2,8 +2,8 @@
   "name": "@aerogear/apollo-voyager-server",
   "version": "1.0.0",
   "description": "> TODO: description",
-  "author": "Dara Hayes <dara.hayes@redhat.com>",
-  "homepage": "",
+  "author": "AeroGear Team<aerogear@googlegroups.com>",
+  "homepage": "http://aerogear.org",
   "license": "Apache-2.0",
   "main": "dist/apollo-voyager-server.js",
   "directories": {
@@ -17,6 +17,8 @@
     "access": "public"
   },
   "scripts": {
+    "compile": "tsc --build tsconfig.json",
+    "clean-compile": "tsc --build tsconfig.json --clean",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
