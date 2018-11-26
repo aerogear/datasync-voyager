@@ -8,7 +8,7 @@
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
     "compile:clean": "lerna exec -- npm run clean-compile",
-    "watch": "tsc --build tsconfig.build.json --watch"
+    "watch": "lerna exec --parallel --stream -- npm run watch"
   },
   "devDependencies": {
     "@types/node": "^10.12.10",

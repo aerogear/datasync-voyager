@@ -3,8 +3,9 @@ import { ApolloServer, Config } from 'apollo-server-express'
 import ApolloVoyagerContextProvider from '@aerogear/apollo-voyager-context'
 
 /**
+ *
  * Initialises an Apollo server that has been extended with the voyager framework
- * @param baseApolloConfig 
+ * @param baseApolloConfig
  */
 export function newApolloServer(baseApolloConfig: Config): ApolloServer {
   const { schema } = baseApolloConfig
