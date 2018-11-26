@@ -3,9 +3,5 @@
     "composite": true
   },
   "files": [],
-  "include": [],
-  "references": [
-    { "path": "./packages/apollo-voyager-server" },
-    { "path": "./packages/apollo-voyager-context" }
-  ]
+  "include": []
 }
