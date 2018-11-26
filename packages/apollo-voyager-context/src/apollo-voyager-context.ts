@@ -2,7 +2,7 @@ import { IncomingMessage } from 'http'
 
 /**
  * The VoyagerContextProvider will be used to extend the GraphQL context
- * With info from the various Voyager framework components 
+ * With info from the various Voyager framework components
  * e.g. Security, Audit Logging, client info.
  */
 export default class VoyagerContextProvider {
@@ -28,7 +28,7 @@ export default class VoyagerContextProvider {
 
   /**
    * Combines the Voyager context provider function with the user context function (or object)
-   * 
+   *
    * @param defaultContextProvider the Voyager default context provider function
    * @param userContextProvider the user supplied context provider
    */

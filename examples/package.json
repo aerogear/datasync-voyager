@@ -4,7 +4,10 @@
   "private": true,
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "",
+    "watch": "echo skip",
+    "clean-compile": "",
+    "test": ""
   },
   "author": "",
   "license": "Apache-2.0",
