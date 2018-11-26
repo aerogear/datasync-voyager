@@ -1,0 +1,14 @@
+{
+  "name": "data-sync-framework-spike",
+  "private": true,
+  "scripts": {
+    "compile": "tsc --build tsconfig.build.json",
+    "compile:clean": "tsc --build tsconfig.build.json --clean",
+    "watch": "tsc --build tsconfig.build.json --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.10",
+    "lerna": "^3.4.3",
+    "typescript": "^3.1.6"
+  }
+}
