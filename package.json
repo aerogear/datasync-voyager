@@ -6,8 +6,8 @@
     "clean": "lerna clean --yes",
     "lint": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts'",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
-    "compile": "tsc --build tsconfig.build.json",
-    "compile:clean": "tsc --build tsconfig.build.json --clean",
+    "compile": "lerna exec -- npm run compile",
+    "compile:clean": "lerna exec -- npm run clean-compile",
     "watch": "tsc --build tsconfig.build.json --watch"
   },
   "devDependencies": {

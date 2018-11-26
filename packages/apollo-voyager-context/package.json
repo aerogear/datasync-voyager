@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/apollo-voyager-context.js",
   "scripts": {
+    "compile": "tsc --build tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
