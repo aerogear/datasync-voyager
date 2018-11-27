@@ -1,5 +1,5 @@
 const express = require('express')
-const { newApolloServer, gql } = require('@aerogear/apollo-voyager-server')
+const { newApolloServer, gql } = require('../packages/apollo-voyager-server')
 const { makeExecutableSchema } = require('graphql-tools')
 
 const PORT = 4000
