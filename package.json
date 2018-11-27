@@ -1,5 +1,5 @@
 {
-  "name": "data-sync-framework-spike",
+  "name": "@aerogear/apollo-voyager-server-monorepo",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",

@@ -19,17 +19,20 @@
   "scripts": {
     "compile": "tsc --build tsconfig.json",
     "watch": "tsc --build tsconfig.json --watch",
-    "clean-compile": "tsc --build tsconfig.json --clean",
+    "compile:clean": "tsc --build tsconfig.json --clean",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
     "@aerogear/apollo-voyager-context": "1.0.0",
     "apollo-server": "^2.2.2",
-    "apollo-server-express": "^2.2.2",
-    "graphql": "^14.0.2"
+    "apollo-server-express": "^2.2.2"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.3",
-    "@types/node": "^10.12.10"
+    "@types/node": "^10.12.10",
+    "typescript": "^3.1.6"
+  },
+  "peerDependencies": {
+    "graphql": "^0.12.0 || ^0.13.0 || ^14.0.0"
   }
 }
