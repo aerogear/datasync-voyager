@@ -16,7 +16,7 @@ export class KeycloakSecurityService implements SecurityService {
     this.keycloakConfig = keycloakConfig
     this.schemaDirectives = schemaDirectives
     this.authContextProvider = KeycloakAuthContextProvider
-    this.log = console
+    this.log = console // TODO we should come up with a good solution for this
   }
 
   getSchemaDirectives () {
