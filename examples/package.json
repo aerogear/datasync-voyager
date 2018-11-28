@@ -4,10 +4,10 @@
   "private": true,
   "description": "",
   "scripts": {
-    "compile": "",
-    "watch": "echo skip",
-    "clean-compile": "",
-    "test": ""
+    "compile": "exit 0",
+    "watch": "exit 0",
+    "clean-compile": "exit 0",
+    "test": "exit 0"
   },
   "author": "",
   "license": "Apache-2.0",
