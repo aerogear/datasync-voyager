@@ -47,7 +47,7 @@ If you have run the `npm run bootstrap` command, the dependencies should already
 `basic/server.js` is the simplest example of how to use the `apollo-voyager-server` framework.
 
 ```
-$ node examples/server.js
+$ node examples/basic/server.js
 🚀 Server ready at http://localhost:4000/graphql
 ```
 
