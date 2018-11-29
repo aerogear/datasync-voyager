@@ -1,0 +1,17 @@
+{
+  "name": "@aerogear/apollo-voyager-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "compile": "tsc --build tsconfig.json",
+    "watch": "tsc --build tsconfig.json --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:clean": "tsc --build tsconfig.json --clean"
+  },
+  "author": "AeroGear Team<aerogear@googlegroups.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "typescript": "^3.1.6"
+  }
+}

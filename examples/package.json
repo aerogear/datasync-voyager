@@ -14,6 +14,7 @@
   "dependencies": {
     "@aerogear/apollo-voyager-keycloak": "1.0.0",
     "@aerogear/apollo-voyager-server": "1.0.0",
+    "@aerogear/apollo-voyager-metrics": "1.0.0",
     "express": "^4.16.4",
     "graphql": "^14.0.2",
     "graphql-tools": "^4.0.3"
