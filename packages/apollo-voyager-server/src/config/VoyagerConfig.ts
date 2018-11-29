@@ -1,6 +1,6 @@
 import { SecurityService } from '../security/SecurityService'
 
-export default interface VoyagerConfig {
+export interface VoyagerConfig {
   
   /**
    * Optional security service to be applied

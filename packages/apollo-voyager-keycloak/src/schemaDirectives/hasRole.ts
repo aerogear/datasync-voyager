@@ -7,7 +7,7 @@ import Joi from 'joi'
 
 const log = pino()
 
-export default class hasRole extends SchemaDirectiveVisitor {
+export class HasRoleDirective extends SchemaDirectiveVisitor {
 
   visitFieldDefinition (field: any) {
     const { resolve = defaultFieldResolver } = field

@@ -1,7 +1,7 @@
 'use strict'
 import { ApolloServer, Config } from 'apollo-server-express'
-import ApolloVoyagerContextProvider from '@aerogear/apollo-voyager-context'
-import VoyagerConfig from './config/VoyagerConfig'
+import { ApolloVoyagerContextProvider } from '@aerogear/apollo-voyager-context'
+import { VoyagerConfig } from './config/VoyagerConfig'
 /**
  *
  * Initialises an Apollo server that has been extended with the voyager framework

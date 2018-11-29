@@ -1,7 +1,6 @@
-import HasRoleDirective from './hasRole'
+import { HasRoleDirective } from './hasRole'
 
-const directives = {
+export const schemaDirectives = {
   hasRole: HasRoleDirective
 }
 
-export default directives

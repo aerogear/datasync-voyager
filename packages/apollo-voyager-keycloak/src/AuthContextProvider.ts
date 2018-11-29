@@ -1,7 +1,7 @@
 import { Request } from "express"
 import { IncomingMessage } from "http"
 
-export default class KeycloakAuthContextProvider {
+export class KeycloakAuthContextProvider {
 
   public readonly request : any
   public readonly accessToken : any

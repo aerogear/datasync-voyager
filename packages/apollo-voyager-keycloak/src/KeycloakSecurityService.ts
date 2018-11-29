@@ -1,6 +1,6 @@
 import { SecurityService } from '@aerogear/apollo-voyager-server'
-import schemaDirectives from './schemaDirectives'
-import KeycloakAuthContextProvider from './AuthContextProvider'
+import { schemaDirectives } from './schemaDirectives'
+import { KeycloakAuthContextProvider } from './AuthContextProvider'
 import { Router } from 'express'
 import session from 'express-session'
 import Keycloak from 'keycloak-connect'
