@@ -5,7 +5,7 @@ import { IncomingMessage } from 'http'
  * With info from the various Voyager framework components
  * e.g. Security, Audit Logging, client info.
  */
-export default class VoyagerContextProvider {
+export class ApolloVoyagerContextProvider {
 
   public userContext: any
 
@@ -20,7 +20,7 @@ export default class VoyagerContextProvider {
     let contextBuilder : Function
 
     if (this.userContext && typeof this.userContext === 'function') {
-      return this.combineContexts(VoyagerContextProvider.defaultContextProvider, this.userContext)
+      return this.combineContexts(ApolloVoyagerContextProvider.defaultContextProvider, this.userContext)
     } else {
       return this.userContext
     }
@@ -34,7 +34,7 @@ export default class VoyagerContextProvider {
    */
   combineContexts(defaultContextProvider: Function, userContextProvider: Function): Function {
     return async function combineContexts({ req }: { req: IncomingMessage }): Promise<Object> {
-      const defaultContext = VoyagerContextProvider.defaultContextProvider({ req })
+      const defaultContext = ApolloVoyagerContextProvider.defaultContextProvider({ req })
       let userContext = userContextProvider({ req })
 
       if (userContext instanceof Promise) {
