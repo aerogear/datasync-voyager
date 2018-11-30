@@ -1,10 +1,10 @@
-import { Request } from "express"
-import { IncomingMessage } from "http"
+import { Request } from 'express'
+import { IncomingMessage } from 'http'
 
 export class KeycloakAuthContextProvider {
 
-  public readonly request : any
-  public readonly accessToken : any
+  public readonly request: any
+  public readonly accessToken: any
   public readonly authenticated: boolean
 
   constructor (request: any) {
@@ -13,19 +13,19 @@ export class KeycloakAuthContextProvider {
     this.authenticated = !!(this.accessToken)
   }
 
-  getToken () {
+  public getToken () {
     return this.accessToken
   }
 
-  isAuthenticated () {
+  public isAuthenticated () {
     return this.authenticated
   }
 
-  getTokenContent () {
+  public getTokenContent () {
     return this.isAuthenticated() ? this.getToken().content : null
   }
 
-  hasRole (role: String) {
+  public hasRole (role: string) {
     return this.isAuthenticated() && this.getToken().hasRole(role)
   }
 }

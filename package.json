@@ -2,9 +2,11 @@
   "name": "@aerogear/apollo-voyager-server-monorepo",
   "private": true,
   "scripts": {
+    "test": "echo ok",
     "bootstrap": "lerna bootstrap --hoist",
     "clean": "lerna clean --yes",
     "lint": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts'",
+    "format": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts' --fix",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
     "compile:clean": "lerna exec -- npm run clean-compile",

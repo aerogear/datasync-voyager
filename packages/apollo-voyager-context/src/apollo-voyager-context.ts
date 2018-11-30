@@ -1,5 +1,7 @@
 import { IncomingMessage } from 'http'
 
+type ContextFunction = (object: any) => any
+
 /**
  * The VoyagerContextProvider will be used to extend the GraphQL context
  * With info from the various Voyager framework components
@@ -7,18 +9,26 @@ import { IncomingMessage } from 'http'
  */
 export class ApolloVoyagerContextProvider {
 
+  /**
+   * The Voyager default context provider function. Right now it simply adds the request
+   * to the context (like old sync server).
+   */
+  public static defaultContextProvider ({ req }: { req: IncomingMessage }): object {
+    return {
+      request: req
+    }
+  }
+
   public userContext: any
 
-  constructor(userContext: any) {
+  constructor (userContext: any) {
     this.userContext = userContext
   }
 
   /**
    * returns the context object or function that should be passed into new ApolloServer()
    */
-  getContext(): any {
-    let contextBuilder : Function
-
+  public getContext (): any {
     if (this.userContext && typeof this.userContext === 'function') {
       return this.combineContexts(ApolloVoyagerContextProvider.defaultContextProvider, this.userContext)
     } else {
@@ -32,8 +42,8 @@ export class ApolloVoyagerContextProvider {
    * @param defaultContextProvider the Voyager default context provider function
    * @param userContextProvider the user supplied context provider
    */
-  combineContexts(defaultContextProvider: Function, userContextProvider: Function): Function {
-    return async function combineContexts({ req }: { req: IncomingMessage }): Promise<Object> {
+  public combineContexts (defaultContextProvider: ContextFunction, userContextProvider: ContextFunction): object {
+    return async function combineContexts ({ req }: { req: IncomingMessage }): Promise<object> {
       const defaultContext = ApolloVoyagerContextProvider.defaultContextProvider({ req })
       let userContext = userContextProvider({ req })
 
@@ -42,16 +52,6 @@ export class ApolloVoyagerContextProvider {
       }
 
       return { ...defaultContext, ...userContext }
-    }
-  }
-
-  /**
-   * The Voyager default context provider function. Right now it simply adds the request
-   * to the context (like old sync server).
-   */
-  static defaultContextProvider({ req }: { req: IncomingMessage }): Object {
-    return {
-      request: req
     }
   }
 }

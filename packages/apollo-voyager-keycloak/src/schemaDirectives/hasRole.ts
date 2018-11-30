@@ -1,15 +1,15 @@
-import { SchemaDirectiveVisitor } from 'graphql-tools'
-import { defaultFieldResolver } from 'graphql'
 import { ForbiddenError } from 'apollo-server-express'
+import { defaultFieldResolver } from 'graphql'
+import { SchemaDirectiveVisitor } from 'graphql-tools'
+import Joi from 'joi'
 // import newInternalServerError from '???' // need to figure out where this comes from
 import pino from 'pino' // also need to figure out where this comes from
-import Joi from 'joi'
 
 const log = pino()
 
 export class HasRoleDirective extends SchemaDirectiveVisitor {
 
-  visitFieldDefinition (field: any) {
+  public visitFieldDefinition (field: any) {
     const { resolve = defaultFieldResolver } = field
     const { error, value } = this.validateArgs()
 
@@ -34,7 +34,7 @@ export class HasRoleDirective extends SchemaDirectiveVisitor {
 
       let foundRole = null // this will be the role the user was successfully authorized on
 
-      foundRole = roles.find((role: String) => {
+      foundRole = roles.find((role: string) => {
         return context.auth.hasRole(role)
       })
 
@@ -52,7 +52,7 @@ export class HasRoleDirective extends SchemaDirectiveVisitor {
     }
   }
 
-  validateArgs () {
+  public validateArgs () {
     // joi is dope. Read the docs and discover the magic.
     // https://github.com/hapijs/joi/blob/master/API.md
     const argsSchema = Joi.object({

@@ -1,13 +1,13 @@
 'use strict'
-import { ApolloServer, Config } from 'apollo-server-express'
 import { ApolloVoyagerContextProvider } from '@aerogear/apollo-voyager-context'
+import { ApolloServer, Config } from 'apollo-server-express'
 import { VoyagerConfig } from './config/VoyagerConfig'
 /**
  *
  * Initialises an Apollo server that has been extended with the voyager framework
  * @param baseApolloConfig
  */
-export function ApolloVoyagerServer(baseApolloConfig: Config, voyagerConfig: VoyagerConfig): ApolloServer {
+export function ApolloVoyagerServer (baseApolloConfig: Config, voyagerConfig: VoyagerConfig): ApolloServer {
   const { schema } = baseApolloConfig
 
   // Build the context provider using user supplied context
