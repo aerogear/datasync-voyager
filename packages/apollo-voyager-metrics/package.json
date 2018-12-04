@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "prom-client": "^11.2.0",
-    "@aerogear/apollo-voyager-tools": "file:../apollo-voyager-tools"
+    "@aerogear/apollo-voyager-tools": "^1.0.0"
   }
 }

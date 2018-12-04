@@ -23,7 +23,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-context": "file:../apollo-voyager-context",
+    "@aerogear/apollo-voyager-context": "^1.0.0",
     "apollo-server": "^2.2.2",
     "apollo-server-express": "^2.2.2"
   },
