@@ -25,10 +25,5 @@
   "dependencies": {
     "prom-client": "^11.2.0",
     "@aerogear/apollo-voyager-tools": "file:../apollo-voyager-tools"
-  },
-  "devDependencies": {
-    "@types/graphql": "^14.0.3",
-    "@types/node": "^10.12.10",
-    "typescript": "^3.1.6"
   }
 }

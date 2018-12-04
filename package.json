@@ -21,9 +21,14 @@
   },
   "devDependencies": {
     "graphql": "^14.0.2",
+    "@types/graphql": "^0.13.2",
     "@types/node": "^10.12.10",
     "lerna": "^3.4.3",
     "typescript": "^3.1.6",
-    "tslint": "^5.11.0"
+    "tslint": "^5.11.0",
+    "@types/express-session": "^1.15.11",
+    "@types/joi": "^14.0.0",
+    "@types/keycloak-connect": "^4.5.0",
+    "@types/pino": "^5.8.2"
   }
 }
