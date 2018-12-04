@@ -1,10 +1,21 @@
 {
   "extends": "tslint:recommended",
+  "linterOptions": {
+      "exclude": [
+          "node_modules/**"
+      ]
+  },
   "rules": {
+    "semicolon": [
+      true,
+      "never"
+    ],
     "quotemark": [
       true,
       "single"
     ],
+    "max-line-length": [false],
+    "space-before-function-paren": [true, "always"],
     "only-arrow-functions": [
       false
     ],
@@ -34,7 +45,6 @@
       "allow-pascal-case",
       "allow-leading-underscore"
     ],
-    "no-unused-variable": true,
     "interface-name": [
       false
     ]

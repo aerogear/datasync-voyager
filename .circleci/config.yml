@@ -1,0 +1,53 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/aerogear
+    docker:
+      # Node 8 LTS
+      - image: circleci/node:carbon
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: npm install
+      - run:
+          name: bootstrap project
+          command: npm run bootstrap
+      - run:
+          name: compile
+          command: npm run compile
+      - run:
+          name: run lint
+          command: npm run lint
+      - run:
+          name: test
+          command: npm test
+  npm_publish:
+    working_directory: ~/aerogear
+    docker:
+      # Node 8 LTS
+      - image: circleci/node:carbon
+    steps:
+      - checkout
+        # Allows us to authenticate with the npm registry
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: CI=true npm run release:prep
+      - run: TAG=$CIRCLE_TAG npm run release:validate
+      - run: npm run publish
+
+workflows:
+  version: 2
+  build_and_release:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - npm_publish:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/ # allow anything because tag syntax is validated as part of validate-release.sh
+            branches:
+              ignore: /.*/

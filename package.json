@@ -2,18 +2,27 @@
   "name": "@aerogear/apollo-voyager-server-monorepo",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "test": "echo ok",
+    "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "lint": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts'",
+    "format": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts' --fix",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
     "compile:clean": "lerna exec -- npm run clean-compile",
     "watch": "lerna exec --parallel --stream -- npm run watch"
   },
+  "dependencies": {},
   "devDependencies": {
+    "@types/express-session": "^1.15.11",
+    "@types/graphql": "^0.13.2",
+    "@types/joi": "^14.0.0",
+    "@types/keycloak-connect": "^4.5.0",
     "@types/node": "^10.12.10",
+    "@types/pino": "^5.8.2",
+    "graphql": "^0.13.2",
     "lerna": "^3.4.3",
-    "typescript": "^3.1.6",
-    "tslint": "^5.11.0"
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
   }
 }

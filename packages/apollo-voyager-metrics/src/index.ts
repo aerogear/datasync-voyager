@@ -1,7 +1,7 @@
-import Prometheus from 'prom-client'
 import { buildPath } from '@aerogear/apollo-voyager-tools'
+import { NextFunction, Response } from 'express'
 import { IncomingMessage } from 'http'
-import { Response } from 'express'
+import Prometheus from 'prom-client'
 
 interface ResponseWithVoyagerMetrics extends Response {
   requestStart: number
@@ -42,7 +42,7 @@ export function getMetrics (req: IncomingMessage, res: Response) {
   serverResponseMetric.reset()
 }
 
-export function responseLoggingMetric (req: IncomingMessage, res: ResponseWithVoyagerMetrics, next: Function) {
+export function responseLoggingMetric (req: IncomingMessage, res: ResponseWithVoyagerMetrics, next: NextFunction) {
   const requestMethod = req.method as string
 
   res.requestStart = Date.now()
@@ -50,7 +50,7 @@ export function responseLoggingMetric (req: IncomingMessage, res: ResponseWithVo
   res.on('finish', onResFinished)
   res.on('error', onResFinished)
 
-  if (next) next()
+  if (next) { next() }
 
   function onResFinished (err: any) {
     res.removeListener('error', onResFinished)

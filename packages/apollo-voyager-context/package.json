@@ -10,8 +10,5 @@
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
   "author": "AeroGear Team<aerogear@googlegroups.com>",
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "typescript": "^3.1.6"
-  }
+  "license": "Apache-2.0"
 }
