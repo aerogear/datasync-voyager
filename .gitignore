@@ -2,8 +2,6 @@
 # Ignore the compiled output.
 dist/
 
-packages/*/package-lock.json
-
 # Logs
 logs
 *.log
