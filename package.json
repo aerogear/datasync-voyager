@@ -12,13 +12,7 @@
     "compile:clean": "lerna exec -- npm run clean-compile",
     "watch": "lerna exec --parallel --stream -- npm run watch"
   },
-  "dependencies": {
-    "@aerogear/apollo-voyager-context": "file:./packages/apollo-voyager-context",
-    "@aerogear/apollo-voyager-keycloak": "file:./packages/apollo-voyager-keycloak",
-    "@aerogear/apollo-voyager-metrics": "file:./packages/apollo-voyager-metrics",
-    "@aerogear/apollo-voyager-server": "file:./packages/apollo-voyager-server",
-    "@aerogear/apollo-voyager-tools": "file:./packages/apollo-voyager-tools"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/express-session": "^1.15.11",
     "@types/graphql": "^0.13.2",
