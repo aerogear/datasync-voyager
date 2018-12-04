@@ -7,10 +7,6 @@ jobs:
       - image: circleci/node:carbon
     steps:
       - checkout
-      # Intentionally leaving out the caching bits first to look at build times
-      # Without caching
-      # - restore_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install dependencies
           command: npm install
@@ -20,28 +16,12 @@ jobs:
       - run:
           name: compile
           command: npm run compile
-      # - save_cache:
-      #     key: dependency-cache-{{ checksum "package.json" }}
-      #     paths:
-      #       - ./node_modules
-      # - run:
-      #     # Hoisting will cache some of the packages, but rest needs to be installed separtely
-      #     name: install-package-dependencies-after-cache
-      #     command: npm run bootstrap
       - run:
           name: run lint
           command: npm run lint
       - run:
           name: test
           command: npm test
-      # - store_artifacts:
-      #     path: test-results.xml
-      #     prefix: tests
-      # - store_artifacts:
-      #     path: coverage
-      #     prefix: coverage
-      # - store_test_results:
-      #     path: test-results.xml
   npm_publish:
     working_directory: ~/aerogear
     docker:
