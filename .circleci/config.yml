@@ -13,7 +13,7 @@ jobs:
       #     key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install dependencies
-          command: npm install --no-package-lock
+          command: npm install
       - run:
           name: bootstrap project
           command: npm run bootstrap
