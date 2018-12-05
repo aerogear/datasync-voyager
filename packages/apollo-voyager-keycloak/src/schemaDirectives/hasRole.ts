@@ -1,13 +1,26 @@
 import { ForbiddenError } from 'apollo-server-express'
-import { defaultFieldResolver } from 'graphql'
+import {defaultFieldResolver, GraphQLSchema} from 'graphql'
 import { SchemaDirectiveVisitor } from 'graphql-tools'
 import Joi from 'joi'
 // import newInternalServerError from '???' // need to figure out where this comes from
 import pino from 'pino' // also need to figure out where this comes from
 
+import { VisitableSchemaType } from 'graphql-tools/dist/schemaVisitor'
+
 const log = pino()
 
 export class HasRoleDirective extends SchemaDirectiveVisitor {
+
+  constructor (config: {
+      name: string
+      args: { [name: string]: any }
+      visitedType: VisitableSchemaType
+      schema: GraphQLSchema
+      context: { [key: string]: any }
+    }) {
+    // see https://github.com/apollographql/graphql-tools/issues/837
+    super(config as any)
+  }
 
   public visitFieldDefinition (field: any) {
     const { resolve = defaultFieldResolver } = field
