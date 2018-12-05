@@ -20,12 +20,26 @@
     "compile": "tsc --build tsconfig.json",
     "watch": "tsc --build tsconfig.json --watch",
     "compile:clean": "tsc --build tsconfig.json --clean",
-    "test": "exit 0"
+    "test": "ava '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
     "@aerogear/apollo-voyager-context": "^1.0.0",
     "apollo-server": "^2.2.2",
     "apollo-server-express": "^2.2.2"
+  },
+  "devDependencies": {
+    "ava": "1.0.0-rc.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "peerDependencies": {
     "graphql": "^0.12.0 || ^0.13.2"
