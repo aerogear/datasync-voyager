@@ -5,7 +5,7 @@
     "test": "echo ok",
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
-    "lint": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts'",
+    "lint": "tslint '*/*/src/**/*.ts'",
     "format": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts' --fix",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
