@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test": "echo ok",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --no-ci",
     "clean": "lerna clean --yes",
     "lint": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts'",
     "format": "tslint '*/*/src/**/*.ts' '*/*/test/**/*.ts' --fix",
