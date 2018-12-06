@@ -58,52 +58,22 @@ This project has rules for commit messages (loosely based on [Conventional Commi
 
 ### Commit Message Format
 
-A good commit message should describe what changed and why.
+We like short commit messages. But we also like some structure. It's very simple.
 
-1. The first line should
-  
-    - Be prefixed with one of `fix(module):`, `feat(module):`, or `breaking(module):`, where `fix` represents a semver patch change, `feat` represents a semver minor change and `breaking` represents a semver major change.
-    - `module` should reference the affected module. All our module names follow the convention `apollo-voyager-<name>`. `module` should be the `<name>` part only.
-    - Contain a short description of the change in all lowercase characters. Try to keep the first line shorter tham 100 characters.
+TL;DR just add one of `fix:`, `feat:`, `breaking:` to the beginning of your commit.
 
-    Examples:
+Examples:
 
-    - fix(server): add new options to ApolloVoyagerServerOptions interface
-    - feat(keycloak): add RBAC feature to keycloak package.
+  - fix: ensure server starts correctly
+  - feat: add RBAC feature to keycloak module.
+  - breaking: renamed apollo server constructor
 
-    Please note you can also choose from one of the following if you think one is more appropriate:
+Please note you can also choose from one of the following if you think one is more appropriate.
 
-    - `doc`: Documentation only changes
-    - `test`: Adding missing tests or correcting existing tests
-    - `refactor`: A code change that neither fixes a bug nor adds a feature
-    - `ci`: Changes to our CI configuration files and scripts.
-
-2. You can optionally add a body that describes the commit in more detail.
-
-3. If your commit fixes an open issue, you can add a reference to it at the end of the log.
-
-    Examples:
-
-      - Fixes: https://issues.jboss.org/browse/AEROGEAR-8195
-      - Refs: https://issues.jboss.org/browse/AEROGEAR-8195
-
-4. If your commit introduces a breaking change (Semver Major), your commit message
-should explain what the breaking change is, the reason it was introduced, and which
-situation would trigger the breaking change.
-
-Sample complete commit message:
-
-```txt
-fix(module): explain the commit in one line. in most cases this is good enough.
-
-The body of the commit message is totally optional.
-You can use it to explaining things in more detail,
-possibly giving some background about the issue
-being fixed.
-
-Fixes: https://issues.jboss.org/browse/AEROGEAR-8192
-Refs: https://issues.jboss.org/browse/AEROGEAR-8193
-```
+- `doc`: Documentation only changes
+- `test`: Adding missing tests or correcting existing tests
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `ci`: Changes to our CI configuration files and scripts.
 
 ### Step 5: Rebase
 
