@@ -60,7 +60,7 @@ This project has rules for commit messages (loosely based on [Conventional Commi
 
 We like short commit messages. But we also like some structure. It's very simple.
 
-TL;DR just add one of `fix:`, `feat:`, `breaking:` to the beginning of your commit.
+Simply add add one of `fix:`, `feat:`, `breaking:` to the beginning of your commit.
 
 Examples:
 
@@ -68,7 +68,13 @@ Examples:
   - feat: add RBAC feature to keycloak module.
   - breaking: renamed apollo server constructor
 
-Please note you can also choose from one of the following if you think one is more appropriate.
+The reasons for this are as follows:
+
+* Commit messages are more readable, especially when looking through the **project history**.
+* Commit messages describe whether a major, minor or patch change has been introduced (see [semver.org](https://semver.org/))
+* Commit messages can be used to generate a changelog.
+
+Please note you can also choose from one of the following key words if you think one is more appropriate.
 
 - `doc`: Documentation only changes
 - `test`: Adding missing tests or correcting existing tests
