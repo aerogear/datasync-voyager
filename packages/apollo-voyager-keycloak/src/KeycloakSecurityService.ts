@@ -43,6 +43,7 @@ export class KeycloakSecurityService implements SecurityService {
 
     this.log.info('Initializing Keycloak authentication')
     const memoryStore = new session.MemoryStore()
+
     expressRouter.use(session({
       secret: this.keycloakConfig.secret || 'secret',
       resave: false,
