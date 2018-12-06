@@ -5,7 +5,7 @@
     "test": "lerna exec -- npm test",
     "bootstrap": "lerna bootstrap  --no-ci",
     "clean": "lerna clean --yes",
-    "lint": "tslint '*/*/src/**/*.ts' --exclude '*/*/src/**/*.test.ts'",
+    "lint": "tslint '*/*/src/**/*.ts' --exclude '*/*/src/**/*.test.ts' && tslint -c tslint_tests.json '*/*/src/**/*.test.ts'",
     "format": "tslint '*/*/src/**/*.ts' --fix --force > /dev/null",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
