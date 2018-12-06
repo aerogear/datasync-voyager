@@ -78,32 +78,28 @@ A good commit message should describe what changed and why.
     - `refactor`: A code change that neither fixes a bug nor adds a feature
     - `ci`: Changes to our CI configuration files and scripts.
 
-2. Keep the second line blank
+2. You can optionally add a body that describes the commit in more detail.
 
-3. Try to keep all lines under 100 characters
-
-4. If your commit fixes an open issue, you can add a reference to it at the end of the log.
+3. If your commit fixes an open issue, you can add a reference to it at the end of the log.
 
     Examples:
 
       - Fixes: https://issues.jboss.org/browse/AEROGEAR-8195
       - Refs: https://issues.jboss.org/browse/AEROGEAR-8195
 
-5. If your commit introduces a breaking change (Semver Major), your commit message
+4. If your commit introduces a breaking change (Semver Major), your commit message
 should explain what the breaking change is, the reason it was introduced, and which
 situation would trigger the breaking change.
 
 Sample complete commit message:
 
 ```txt
-fix(module): explain the commit in one line
+fix(module): explain the commit in one line. in most cases this is good enough.
 
-Body of commit message is a few lines of text, explaining things
-in more detail, possibly giving some background about the issue
-being fixed, etc.
-
-Body of commit message may have multiple paragraphs if you wish.
-Please make sure the paragraphs are under 100 characters.
+The body of the commit message is totally optional.
+You can use it to explaining things in more detail,
+possibly giving some background about the issue
+being fixed.
 
 Fixes: https://issues.jboss.org/browse/AEROGEAR-8192
 Refs: https://issues.jboss.org/browse/AEROGEAR-8193
