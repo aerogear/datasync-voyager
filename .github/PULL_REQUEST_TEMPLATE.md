@@ -17,4 +17,4 @@ Contributors guide: https://github.com/aerogear/apollo-voyager-server/blob/maste
 - [ ] `npm test` passes
 - [ ] tests are included
 - [ ] documentation is changed or added
-- [ ] commit message follows [commit guidelines](https://github.com/aerogear/apollo-voyager-server/blob/master/CONTRIBUTING.md#commit-message-guidelines)
+- [ ] commit message follows [commit guidelines](../doc/guides/pull-requests.md#commit-message-guidelines)
