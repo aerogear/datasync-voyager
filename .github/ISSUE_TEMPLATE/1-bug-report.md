@@ -19,5 +19,6 @@ simple and free of external dependencies as you can.
 
 * **Module**:
 * **Version**:
+* **Node.js / npm versions:**
 
-<!-- Please provide more details below this comment. -->
+<!-- Please provide more details and steps to reproduce the issue below this comment. -->
