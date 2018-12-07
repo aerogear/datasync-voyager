@@ -1,30 +1,28 @@
 import { buildPath } from '@aerogear/apollo-voyager-tools'
 import { NextFunction, Response } from 'express'
+import { Application } from 'express'
+import { IFieldResolver, IResolvers } from 'graphql-tools'
 import { IncomingMessage } from 'http'
 import Prometheus from 'prom-client'
 
-interface ResponseWithVoyagerMetrics extends Response {
-  requestStart: number
-}
-
-Prometheus.collectDefaultMetrics()
+let promMetricsEnabled = false
 
 const resolverTimingMetric = new Prometheus.Histogram({
   name: 'resolver_timing_ms',
   help: 'Resolver response time in milliseconds',
-  labelNames: ['datasource_type', 'operation_type', 'name']
+  labelNames: ['operation_type', 'name']
 })
 
 const resolverRequestsMetric = new Prometheus.Counter({
   name: 'requests_resolved',
   help: 'Number of requests resolved by server',
-  labelNames: ['datasource_type', 'operation_type', 'path']
+  labelNames: ['operation_type', 'path']
 })
 
 const resolverRequestsTotalMetric = new Prometheus.Counter({
   name: 'requests_resolved_total',
   help: 'Number of requests resolved by server in total',
-  labelNames: ['datasource_type', 'operation_type', 'path']
+  labelNames: ['operation_type', 'path']
 })
 
 const serverResponseMetric = new Prometheus.Histogram({
@@ -33,7 +31,68 @@ const serverResponseMetric = new Prometheus.Histogram({
   labelNames: ['request_type', 'error']
 })
 
-export function getMetrics (req: IncomingMessage, res: Response) {
+interface ResolverObject {
+  [key: string]: IFieldResolver<any, any>
+}
+
+export function enableDefaultMetricsColleciton () {
+  if (!promMetricsEnabled) {
+    Prometheus.collectDefaultMetrics()
+    promMetricsEnabled = true
+  }
+}
+
+export function wrapResolversForMetrics (resolvers: {[key: string]: ResolverObject}): {[key: string]: ResolverObject} {
+  const output: {[key: string]: ResolverObject} = {}
+  for (const typeKey in resolvers) {
+    if (!resolvers.hasOwnProperty(typeKey)) {
+      continue
+    }
+    const fieldResolversForType = resolvers[typeKey]
+    output[typeKey] = {}
+    for (const fieldKey in fieldResolversForType) {
+      if (!fieldResolversForType.hasOwnProperty(fieldKey)) {
+        continue
+      }
+      const resolverForField = fieldResolversForType[fieldKey]
+      output[typeKey][fieldKey] = wrapSingleResolverForMetrics(resolverForField)
+    }
+  }
+
+  return output
+}
+
+export function applyResponseLoggingMetricsMiddleware (app: Application) {
+  app.use(responseLoggingMetric as (req: IncomingMessage, res: Response, next: NextFunction) => void)
+}
+
+export function applyMetricsMiddleware (app: Application) {
+  app.get('/metrics', getMetrics)
+}
+
+///////////////////////////////////////////////////////////////
+
+function wrapSingleResolverForMetrics (resolverFn: IFieldResolver<any, any>): IFieldResolver<any, any> {
+  return (obj, args, context, info) => {
+    return new Promise(async (resolve, reject) => {
+      const resolverStartTime = Date.now()
+      try {
+        const result = await resolverFn(obj, args, context, info)
+        resolve(result)
+
+        const timeTook = Date.now() - resolverStartTime
+        updateResolverMetrics(info, timeTook)
+      } catch (error) {
+        // we only publish time in success. const timeTook
+        // NOPE: const timeTook = Date.now() - resolverStartTime
+        // NOPE: updateResolverMetrics(info, timeTook)
+        reject(error)
+      }
+    })
+  }
+}
+
+function getMetrics (req: IncomingMessage, res: Response) {
   res.set('Content-Type', Prometheus.register.contentType)
   res.end(Prometheus.register.metrics())
 
@@ -42,8 +101,51 @@ export function getMetrics (req: IncomingMessage, res: Response) {
   serverResponseMetric.reset()
 }
 
-export function responseLoggingMetric (req: IncomingMessage, res: ResponseWithVoyagerMetrics, next: NextFunction) {
+function updateResolverMetrics (resolverInfo: any, responseTime: number) {
+  const {
+    operation: {operation: resolverMappingType},
+    fieldName: resolverMappingName,
+    path: resolverWholePath,
+    parentType: resolverParentType
+  } = resolverInfo
+
+  let path
+  if (resolverParentType.name === 'Query' || resolverParentType.name === 'Mutation' || resolverParentType.name === 'Subscription') {
+    path = `${resolverParentType.name}.${buildPath(resolverWholePath)}`
+  } else {
+    path = buildPath(resolverWholePath)
+  }
+
+  resolverTimingMetric
+    .labels(
+      resolverMappingType,
+      path
+    )
+    .observe(responseTime)
+
+  resolverRequestsMetric
+    .labels(
+      resolverMappingType,
+      path
+    )
+    .inc(1)
+
+  resolverRequestsTotalMetric
+    .labels(
+      resolverMappingType,
+      path
+    )
+    .inc(1)
+}
+
+interface ResponseWithVoyagerMetrics extends Response {
+  requestStart: number
+}
+
+function responseLoggingMetric (req: IncomingMessage, res: ResponseWithVoyagerMetrics, next: NextFunction) {
   const requestMethod = req.method as string
+
+  res = res as ResponseWithVoyagerMetrics
 
   res.requestStart = Date.now()
 
@@ -63,34 +165,4 @@ export function responseLoggingMetric (req: IncomingMessage, res: ResponseWithVo
       .labels(requestMethod, String(requestFailed))
       .observe(responseTime)
   }
-}
-
-export function updateResolverMetrics (resolverInfo: any, responseTime: number) {
-  const {
-    operation: {operation: resolverMappingType},
-    fieldName: resolverMappingName,
-    path: resolverWholePath,
-    parentType: resolverParentType,
-    dataSourceType
-  } = resolverInfo
-
-  resolverTimingMetric
-    .labels(dataSourceType, resolverMappingType, resolverMappingName)
-    .observe(responseTime)
-
-  resolverRequestsMetric
-    .labels(
-      dataSourceType,
-      resolverMappingType,
-      `${resolverParentType}.${buildPath(resolverWholePath)}`
-    )
-    .inc(1)
-
-  resolverRequestsTotalMetric
-    .labels(
-      dataSourceType,
-      resolverMappingType,
-      `${resolverParentType}.${buildPath(resolverWholePath)}`
-    )
-    .inc(1)
 }
