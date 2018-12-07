@@ -9,7 +9,7 @@ Contributors guide: https://github.com/aerogear/apollo-voyager-server/blob/maste
 
 ### Description
 
-<!-- Please provide a description of your pull request -->
+<!-- Please provide a description of your pull request and any relevant steps needed to verify it -->
 
 ##### Checklist
 <!-- Remove items that do not apply. For completed items, change [ ] to [x]. -->
