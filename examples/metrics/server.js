@@ -2,29 +2,45 @@ const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
 
 const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
-const { getMetrics, responseLoggingMetric } = require('../../packages/apollo-voyager-metrics')
+const { wrapResolversForMetrics, applyMetricsMiddleware, enableDefaultMetricsColleciton, applyResponseLoggingMetricsMiddleware } = require('../../packages/apollo-voyager-metrics')
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
   type Query {
     hello: String
+    getUser: User 
+  }
+
+  type User {
+    name: String
+    favoriteHorse: Horse
+  }
+
+  type Horse {
+    name: String
+    breed: String
   }
 `
 
 // Resolver functions. This is our business logic
-const resolvers = {
+let resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
-      
-      // we can access the request object provided by the Voyager framework
-      console.log(context.request.body)
-      
-      // we can access the context added below also
-      console.log(context.serverName)
       return `Hello world from ${context.serverName}`
+    },
+    getUser: (obj, args, context, info) => {
+      return {name: 'Arthur Morgan'}
+    }
+  },
+  User:{
+    favoriteHorse: (obj, args, context, info) => {
+      return {name: 'Biscuit', breed: 'Arabian'}
     }
   }
 }
+
+enableDefaultMetricsColleciton()
+resolvers = wrapResolversForMetrics(resolvers)
 
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
@@ -37,15 +53,14 @@ const context = async ({ req }) => {
 }
 
 // Initialize the apollo voyager server with our schema and context
-const server = ApolloVoyagerServer({ 
+const server = ApolloVoyagerServer({
   schema,
   context
 })
 
 const app = express()
-app.use(responseLoggingMetric)
-app.use('/metrics', getMetrics)
-
+applyResponseLoggingMetricsMiddleware(app)
+applyMetricsMiddleware(app)
 
 server.applyMiddleware({ app })
 

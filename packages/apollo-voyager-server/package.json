@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@aerogear/apollo-voyager-context": "^1.0.0",
+    "@aerogear/apollo-voyager-metrics": "^1.0.0",
     "apollo-server": "^2.2.2",
     "apollo-server-express": "^2.2.2"
   },
