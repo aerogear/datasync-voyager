@@ -1,10 +1,24 @@
-import { buildPath } from '@aerogear/apollo-voyager-tools'
+import { buildPath, wrapResolvers, ResolverObject } from '@aerogear/apollo-voyager-tools'
 import { GraphQLResolveInfo } from 'graphql'
 import { IFieldResolver } from 'graphql-tools'
 import pino from 'pino'
 
+interface AuditLogger {
+  info (log: {
+    msg: string
+    requestId: string
+    operationType: string
+    fieldName: string
+    parentTypeName: string
+    path: string
+    success: boolean
+    parent: any
+    arguments: any
+  }): void
+}
+
 const log = pino()
-const auditLogger = log.child({tag: 'AUDIT'})
+const auditLogger: AuditLogger = log.child({tag: 'AUDIT'})
 
 let auditLogEnabled = false
 
@@ -16,26 +30,8 @@ export function setAuditLogEnabled (val: boolean): void {
   auditLogEnabled = val
 }
 
-interface ResolverObject {
-  [key: string]: IFieldResolver<any, any>
-}
-
 export function wrapResolversForAuditLogging (resolverMappings: { [key: string]: ResolverObject }): { [key: string]: ResolverObject } {
-  const output: { [key: string]: ResolverObject } = {}
-
-  const typeKeys = Object.keys(resolverMappings)
-  for (const typeKey of typeKeys) {
-    output[typeKey] = {}
-
-    const fieldResolversForType = resolverMappings[typeKey]
-    const fieldKeysForType = Object.keys(fieldResolversForType)
-    for (const fieldKey of fieldKeysForType) {
-      const resolverForField = fieldResolversForType[fieldKey]
-      output[typeKey][fieldKey] = wrapSingleResolverForAuditLogging(resolverForField)
-    }
-  }
-
-  return output
+  return wrapResolvers(resolverMappings, wrapSingleResolverForAuditLogging)
 }
 
 export function auditLog (success: boolean, request: any, info: GraphQLResolveInfo, parent: any, args: any, msg: string) {

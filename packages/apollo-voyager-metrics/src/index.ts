@@ -1,4 +1,4 @@
-import { buildPath } from '@aerogear/apollo-voyager-tools'
+import { buildPath, wrapResolvers, ResolverObject } from '@aerogear/apollo-voyager-tools'
 import { NextFunction, Response } from 'express'
 import { Application } from 'express'
 import { IFieldResolver } from 'graphql-tools'
@@ -31,10 +31,6 @@ const serverResponseMetric = new Prometheus.Histogram({
   labelNames: ['request_type', 'error']
 })
 
-interface ResolverObject {
-  [key: string]: IFieldResolver<any, any>
-}
-
 export function enableDefaultMetricsColleciton () {
   if (!promMetricsEnabled) {
     Prometheus.collectDefaultMetrics()
@@ -43,21 +39,7 @@ export function enableDefaultMetricsColleciton () {
 }
 
 export function wrapResolversForMetrics (resolverMappings: {[key: string]: ResolverObject}): {[key: string]: ResolverObject} {
-  const output: {[key: string]: ResolverObject} = {}
-
-  const typeKeys = Object.keys(resolverMappings)
-  for (const typeKey of typeKeys) {
-    output[typeKey] = {}
-
-    const fieldResolversForType = resolverMappings[typeKey]
-    const fieldKeysForType = Object.keys(fieldResolversForType)
-    for (const fieldKey of fieldKeysForType) {
-      const resolverForField = fieldResolversForType[fieldKey]
-      output[typeKey][fieldKey] = wrapSingleResolverForMetrics(resolverForField)
-    }
-  }
-
-  return output
+    return wrapResolvers(resolverMappings, wrapSingleResolverForMetrics)
 }
 
 export function applyResponseLoggingMetricsMiddleware (app: Application) {
