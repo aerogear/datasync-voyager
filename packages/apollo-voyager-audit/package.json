@@ -1,0 +1,34 @@
+{
+  "name": "@aerogear/apollo-voyager-audit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "compile": "tsc --build tsconfig.json",
+    "watch": "tsc --build tsconfig.json --watch",
+    "compile:clean": "tsc --build tsconfig.json --clean",
+    "test": "ava '*.test.ts' '**/*.test.ts'"
+  },
+  "dependencies": {
+    "@aerogear/apollo-voyager-tools": "^1.0.0",
+    "graphql-tools": "^4.0.3",
+    "pino": "^5.9.0"
+  },
+  "devDependencies": {
+    "@types/pino": "^5.8.2",
+    "ava": "1.0.0-rc.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  },
+  "author": "AeroGear Team<aerogear@googlegroups.com>",
+  "license": "Apache-2.0",
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
+}

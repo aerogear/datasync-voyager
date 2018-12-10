@@ -1,7 +1,7 @@
 import { buildPath } from '@aerogear/apollo-voyager-tools'
 import { NextFunction, Response } from 'express'
 import { Application } from 'express'
-import { IFieldResolver, IResolvers } from 'graphql-tools'
+import { IFieldResolver } from 'graphql-tools'
 import { IncomingMessage } from 'http'
 import Prometheus from 'prom-client'
 
