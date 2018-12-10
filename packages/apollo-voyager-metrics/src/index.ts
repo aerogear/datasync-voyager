@@ -1,4 +1,4 @@
-import { buildPath, wrapResolvers, ResolverObject } from '@aerogear/apollo-voyager-tools'
+import { buildPath, ResolverObject, wrapResolvers } from '@aerogear/apollo-voyager-tools'
 import { NextFunction, Response } from 'express'
 import { Application } from 'express'
 import { IFieldResolver } from 'graphql-tools'

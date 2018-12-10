@@ -1,4 +1,4 @@
-import { buildPath, wrapResolvers, ResolverObject } from '@aerogear/apollo-voyager-tools'
+import { buildPath, ResolverObject, wrapResolvers } from '@aerogear/apollo-voyager-tools'
 import { GraphQLResolveInfo } from 'graphql'
 import { IFieldResolver } from 'graphql-tools'
 import pino from 'pino'
