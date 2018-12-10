@@ -42,18 +42,16 @@ export function enableDefaultMetricsColleciton () {
   }
 }
 
-export function wrapResolversForMetrics (resolvers: {[key: string]: ResolverObject}): {[key: string]: ResolverObject} {
+export function wrapResolversForMetrics (resolverMappings: {[key: string]: ResolverObject}): {[key: string]: ResolverObject} {
   const output: {[key: string]: ResolverObject} = {}
-  for (const typeKey in resolvers) {
-    if (!resolvers.hasOwnProperty(typeKey)) {
-      continue
-    }
-    const fieldResolversForType = resolvers[typeKey]
+
+  const typeKeys = Object.keys(resolverMappings)
+  for (const typeKey of typeKeys) {
     output[typeKey] = {}
-    for (const fieldKey in fieldResolversForType) {
-      if (!fieldResolversForType.hasOwnProperty(fieldKey)) {
-        continue
-      }
+
+    const fieldResolversForType = resolverMappings[typeKey]
+    const fieldKeysForType = Object.keys(fieldResolversForType)
+    for (const fieldKey of fieldKeysForType) {
       const resolverForField = fieldResolversForType[fieldKey]
       output[typeKey][fieldKey] = wrapSingleResolverForMetrics(resolverForField)
     }

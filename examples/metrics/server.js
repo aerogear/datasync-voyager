@@ -8,17 +8,6 @@ const { wrapResolversForMetrics, applyMetricsMiddleware, enableDefaultMetricsCol
 const typeDefs = gql`
   type Query {
     hello: String
-    getUser: User 
-  }
-
-  type User {
-    name: String
-    favoriteHorse: Horse
-  }
-
-  type Horse {
-    name: String
-    breed: String
   }
 `
 
@@ -27,14 +16,6 @@ let resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
       return `Hello world from ${context.serverName}`
-    },
-    getUser: (obj, args, context, info) => {
-      return {name: 'Arthur Morgan'}
-    }
-  },
-  User:{
-    favoriteHorse: (obj, args, context, info) => {
-      return {name: 'Biscuit', breed: 'Arabian'}
     }
   }
 }
