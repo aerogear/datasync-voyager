@@ -42,7 +42,6 @@ const resolvers = {
 const keycloakService = new KeycloakSecurityService(keycloakConfig)
 
 // get the keycloak context provider and directives
-const AuthContextProvider = keycloakService.getAuthContextProvider()
 const schemaDirectives = keycloakService.getSchemaDirectives()
 
 const schema = makeExecutableSchema({ 
@@ -56,17 +55,22 @@ const schema = makeExecutableSchema({
 // That will be available via the `context` argument the resolver functions
 const context = ({ req }) => {
   return { 
-    serverName: 'Voyager Server',
-    // add the keycloak Auth Context Provider
-    auth: new AuthContextProvider(req) 
+    serverName: 'Voyager Server'
   }
 }
 
 // Initialize the apollo voyager server with our schema and context
-const server = ApolloVoyagerServer({ 
+
+const apolloConfig = { 
   schema,
   context
-})
+}
+
+const voyagerConfig = {
+  securityService: keycloakService
+}
+
+const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
 
 const app = express()
 

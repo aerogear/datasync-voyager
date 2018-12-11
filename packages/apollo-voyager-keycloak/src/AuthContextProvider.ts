@@ -7,9 +7,9 @@ export class KeycloakAuthContextProvider {
   public readonly accessToken: any
   public readonly authenticated: boolean
 
-  constructor (request: any) {
-    this.request = request
-    this.accessToken = (request && request.kauth && request.kauth.grant) ? request.kauth.grant.access_token : undefined
+  constructor ({ req }: { req: any }) {
+    this.request = req
+    this.accessToken = (req && req.kauth && req.kauth.grant) ? req.kauth.grant.access_token : undefined
     this.authenticated = !!(this.accessToken)
   }
 

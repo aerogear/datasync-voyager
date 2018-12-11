@@ -29,11 +29,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
-const context = async ({ req }) => {
-  // add some context to GraphQL requests
-  console.log('my context provider')
-  return { serverName: 'Voyager Server' }
-}
+const context = { serverName: 'Voyager Server' }
 
 // Initialize the apollo voyager server with our schema and context
 const server = ApolloVoyagerServer({ 
