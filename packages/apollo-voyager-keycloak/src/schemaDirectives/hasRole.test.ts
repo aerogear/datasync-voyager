@@ -50,7 +50,7 @@ test('context.auth.hasRole() is called', async (t) => {
   }
   const context = {
     request: req,
-    auth: new KeycloakAuthContextProvider(req)
+    auth: new KeycloakAuthContextProvider({ req })
   }
 
   const info = {
@@ -96,7 +96,7 @@ test('visitFieldDefinition accepts an array of roles', async (t) => {
   }
   const context = {
     request: req,
-    auth: new KeycloakAuthContextProvider(req)
+    auth: new KeycloakAuthContextProvider({ req })
   }
 
   const info = {
@@ -132,7 +132,7 @@ test('if there is no authentication, then an error is returned and the original 
   const req = {}
   const context = {
     request: req,
-    auth: new KeycloakAuthContextProvider(req)
+    auth: new KeycloakAuthContextProvider({ req })
   }
 
   const info = {
@@ -181,7 +181,7 @@ test('if token does not have the required role, then an error is returned and th
   }
   const context = {
     request: req,
-    auth: new KeycloakAuthContextProvider(req)
+    auth: new KeycloakAuthContextProvider({ req })
   }
 
   const info = {
@@ -234,7 +234,7 @@ test('if hasRole arguments are invalid, visitSchemaDirective does not throw, but
   }
   const context = {
     request: req,
-    auth: new KeycloakAuthContextProvider(req)
+    auth: new KeycloakAuthContextProvider({ req })
   }
 
   const info = {

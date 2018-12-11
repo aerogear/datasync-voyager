@@ -23,7 +23,6 @@
     "test": "ava '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-context": "0.1.0",
     "@aerogear/apollo-voyager-audit": "0.1.0",
     "@aerogear/apollo-voyager-metrics": "0.1.0",
     "@aerogear/apollo-voyager-tools": "0.1.0",
