@@ -1,12 +1,21 @@
 import { IFieldResolver } from 'graphql-tools'
 
-export interface ResolverObject {
-  [key: string]: IFieldResolver<any, any>
+export interface FieldResolver extends IFieldResolver<any, any> {
 }
 
-export function wrapResolvers (resolverMappings: { [key: string]: ResolverObject },
-                               resolverWrapper: (resolver: IFieldResolver<any, any>) => IFieldResolver<any, any>): { [key: string]: ResolverObject } {
-  const output: { [key: string]: ResolverObject } = {}
+export interface ResolverObject {
+  [key: string]: FieldResolver
+}
+
+export interface ResolverMappings {
+  [key: string]: ResolverObject
+}
+
+export type ResolverWrapper = (resolver: FieldResolver) => FieldResolver
+
+export function wrapResolvers (resolverMappings: ResolverMappings,
+                               resolverWrapper: ResolverWrapper): ResolverMappings {
+  const output: ResolverMappings = {}
 
   const typeKeys = Object.keys(resolverMappings)
   for (const typeKey of typeKeys) {
