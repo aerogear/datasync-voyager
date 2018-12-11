@@ -1,7 +1,6 @@
-import { buildPath, ResolverObject, wrapResolvers } from '@aerogear/apollo-voyager-tools'
+import { buildPath } from '@aerogear/apollo-voyager-tools'
 import { NextFunction, Response } from 'express'
 import { Application } from 'express'
-import { IFieldResolver } from 'graphql-tools'
 import { IncomingMessage } from 'http'
 import Prometheus from 'prom-client'
 
@@ -31,15 +30,11 @@ const serverResponseMetric = new Prometheus.Histogram({
   labelNames: ['request_type', 'error']
 })
 
-export function enableDefaultMetricsColleciton () {
+export function enableDefaultMetricsCollection () {
   if (!promMetricsEnabled) {
     Prometheus.collectDefaultMetrics()
     promMetricsEnabled = true
   }
-}
-
-export function wrapResolversForMetrics (resolverMappings: {[key: string]: ResolverObject}): {[key: string]: ResolverObject} {
-    return wrapResolvers(resolverMappings, wrapSingleResolverForMetrics)
 }
 
 export function applyResponseLoggingMetricsMiddleware (app: Application) {
@@ -50,38 +45,7 @@ export function applyMetricsMiddleware (app: Application) {
   app.get('/metrics', getMetrics)
 }
 
-///////////////////////////////////////////////////////////////
-
-function wrapSingleResolverForMetrics (resolverFn: IFieldResolver<any, any>): IFieldResolver<any, any> {
-  return (obj, args, context, info) => {
-    return new Promise(async (resolve, reject) => {
-      const resolverStartTime = Date.now()
-      try {
-        const result = await resolverFn(obj, args, context, info)
-        resolve(result)
-
-        const timeTook = Date.now() - resolverStartTime
-        updateResolverMetrics(info, timeTook)
-      } catch (error) {
-        // we only publish time in success. const timeTook
-        // NOPE: const timeTook = Date.now() - resolverStartTime
-        // NOPE: updateResolverMetrics(info, timeTook)
-        reject(error)
-      }
-    })
-  }
-}
-
-function getMetrics (req: IncomingMessage, res: Response) {
-  res.set('Content-Type', Prometheus.register.contentType)
-  res.end(Prometheus.register.metrics())
-
-  resolverTimingMetric.reset()
-  resolverRequestsMetric.reset()
-  serverResponseMetric.reset()
-}
-
-function updateResolverMetrics (resolverInfo: any, responseTime: number) {
+export function updateResolverMetrics (resolverInfo: any, responseTime: number) {
   const {
     operation: {operation: resolverMappingType},
     fieldName: resolverMappingName,
@@ -116,6 +80,17 @@ function updateResolverMetrics (resolverInfo: any, responseTime: number) {
       path
     )
     .inc(1)
+}
+
+///////////////////////////////////////////////////////////////
+
+function getMetrics (req: IncomingMessage, res: Response) {
+  res.set('Content-Type', Prometheus.register.contentType)
+  res.end(Prometheus.register.metrics())
+
+  resolverTimingMetric.reset()
+  resolverRequestsMetric.reset()
+  serverResponseMetric.reset()
 }
 
 interface ResponseWithVoyagerMetrics extends Response {

@@ -1,8 +1,8 @@
 const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
 
-const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
-const { wrapResolversForMetrics, applyMetricsMiddleware, enableDefaultMetricsColleciton, applyResponseLoggingMetricsMiddleware } = require('../../packages/apollo-voyager-metrics')
+const { ApolloVoyagerServer, gql, voyagerResolvers } = require('../../packages/apollo-voyager-server')
+const { applyMetricsMiddleware, enableDefaultMetricsCollection, applyResponseLoggingMetricsMiddleware } = require('../../packages/apollo-voyager-metrics')
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
@@ -20,8 +20,8 @@ let resolvers = {
   }
 }
 
-enableDefaultMetricsColleciton()
-resolvers = wrapResolversForMetrics(resolvers)
+enableDefaultMetricsCollection()
+resolvers = voyagerResolvers(resolvers, { metrics:true })
 
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 

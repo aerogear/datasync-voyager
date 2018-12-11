@@ -1,8 +1,7 @@
 const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
 
-const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
-const { setAuditLogEnabled, wrapResolversForAuditLogging} = require('../../packages/apollo-voyager-audit')
+const { ApolloVoyagerServer, gql, voyagerResolvers } = require('../../packages/apollo-voyager-server')
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
@@ -20,8 +19,7 @@ let resolvers = {
   }
 }
 
-setAuditLogEnabled(true)
-resolvers = wrapResolversForAuditLogging(resolvers)
+resolvers = voyagerResolvers(resolvers, { auditLogging: true })
 
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
