@@ -38,7 +38,7 @@ function createApolloClient (host: string, authHeaders?: { [key: string]: string
     headers: authHeaders
   }
 
-  const httpLink = new HttpLink(httpLinkConfig)
+  const httpLink = new HttpLink(httpLinkConfig as any)
 
   // Create a WebSocket link:
   const wsLink = new WebSocketLink({
