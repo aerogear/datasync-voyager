@@ -24,5 +24,9 @@
     "require": [
       "ts-node/register"
     ]
+  },
+  "dependencies": {
+    "@types/debug": "0.0.31",
+    "debug": "^4.1.0"
   }
 }

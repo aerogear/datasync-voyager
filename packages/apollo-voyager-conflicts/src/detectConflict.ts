@@ -1,36 +1,34 @@
-import { GraphQLError } from 'graphql'
+import debug from 'debug'
+import { CONFLICT_ERROR, CONFLICT_LOGGER } from './constants'
 import { ConflictResolutionData } from './handleConflict'
-const prefix = 'AgSync:'
-const CONFLICT_TYPE = prefix + 'DataConflict'
-const VALIDATION_TYPE = prefix + 'Validation'
+import { SyncServerError } from './SyncServerError'
 
-/**
- * Represents server side error
- */
-export class SyncServerError extends GraphQLError {
-
-  public type: string
-  public version: number
-  public data: any
-
-  constructor (message: string, data: any, type: string) {
-    super(message)
-    this.type = type || VALIDATION_TYPE
-    this.data = data
-    this.version = data.version
-  }
+interface ObjectState {
+  serverData: ConflictResolutionData,
+  clientData: ConflictResolutionData
+  detect (): SyncServerError | undefined
 }
 
 // Default strategy for conflict resolution
 // Method accept server and client data and return true if conflict detected
-const defaultConflictDetection = (server: ConflictResolutionData, client: ConflictResolutionData) => {
-  if (server.version && client.version) {
-    if (server.version !== client.version) {
-      return new SyncServerError('Conflict when saving data', server, CONFLICT_TYPE)
+export class VersionFieldConflict implements ObjectState {
+  public serverData: ConflictResolutionData
+  public clientData: ConflictResolutionData
+
+  private logger = debug(CONFLICT_LOGGER)
+  constructor (objectState: ObjectState) {
+    this.clientData = objectState.clientData
+    this.serverData = objectState.serverData
+  }
+
+  public detect = () => {
+    if (this.serverData.version && this.clientData.version) {
+      if (this.serverData.version !== this.clientData.version) {
+        this.logger(`Conflict when saving data. current: ${this.serverData}, client: ${this.clientData}`)
+        return new SyncServerError('Conflict when saving data', this.serverData, CONFLICT_ERROR)
+      }
+    } else {
+      this.logger('conflict resolution not enabled')
     }
-  } else {
-    console.trace('conflict resolution not enabled')
   }
 }
-
-export { defaultConflictDetection as detectConflict }
