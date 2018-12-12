@@ -1,49 +1,65 @@
-import { SyncServerError } from './detectConflict'
+import debug from 'debug'
+import { CONFLICT_ERROR, CONFLICT_LOGGER } from './constants'
+import { SyncServerError } from './SyncServerError'
 
-function RETURN_TO_CLIENT (conflict: SyncServerError, currentRecord: ConflictResolutionData, client: ConflictResolutionData): SyncServerError {
-  console.warn(`Conflict detected. Server: ${currentRecord} client: ${client}`)
-  return conflict
-}
+export const logger = debug(CONFLICT_LOGGER)
 
-function CLIENT_WINS (conflict: SyncServerError, currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionHandler {
-  console.warn(`Conflict detected. Server: ${currentRecord} client: ${client}`)
-  const newVersion = currentRecord.version + 1
-  const newRecord = { ...client, version: newVersion }
-  return newRecord
-}
+export class DefaultResolutionHandlers {
+  /**
+   *
+   * @param currentRecord the object state that the server knows about
+   * @param client the object state that the client knows about
+   */
+  public returnToClient: ConflictResolutionHandler = (currentRecord: ConflictResolutionData, client: ConflictResolutionData): SyncServerError => {
+    logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
+    return new SyncServerError('Conflict detected.', currentRecord, CONFLICT_ERROR)
+  }
+  /**
+   *
+   * @param currentRecord the object state that the server knows about
+   * @param client the object state that the client knows about
+   */
+  public clientWins: ConflictResolutionHandler = (currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionData => {
+    logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
+    const newVersion = currentRecord.version + 1
+    const newRecord = { ...client, version: newVersion }
+    return newRecord
+  }
+  /**
+   *
+   * @param currentRecord the object state that the server knows about
+   * @param client the object state that the client knows about
+   */
+  public serverWins: ConflictResolutionHandler = (currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionData => {
+    logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
+    return currentRecord
+  }
+  /**
+   *
+   * @param currentRecord the object state that the server knows about
+   * @param client the object state that the client knows about
+   */
+  public mergeClientOntoServer: ConflictResolutionHandler = (currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionData => {
+    logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
+    const newVersion = currentRecord.version + 1
+    const newRecord = { ...Object.assign(currentRecord, client), version: newVersion }
+    return newRecord
+  }
+  /**
+   *
+   * @param currentRecord the object state that the server knows about
+   * @param client the object state that the client knows about
+   */
+  public mergeServerOntoClient: ConflictResolutionHandler = (currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionData => {
+    logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
+    const newVersion = currentRecord.version + 1
+    const newRecord = Object.assign(client, currentRecord)
+    newRecord.version = newVersion
+    return newRecord
+  }
 
-function SERVER_WINS (conflict: SyncServerError, currentRecord: ConflictResolutionData, client: ConflictResolutionData): SyncServerError {
-  console.warn(`Conflict detected. Server: ${currentRecord} client: ${client}`)
-  return conflict
-}
-
-function MERGE_CLIENT_ONTO_SERVER (conflict: SyncServerError, currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionHandler {
-  console.warn(`Conflict detected. Server: ${currentRecord} client: ${client}`)
-  const newVersion = currentRecord.version + 1
-  const newRecord = { ...Object.assign(currentRecord, client), version: newVersion }
-  return newRecord
-}
-
-function MERGE_SERVER_ONTO_CLIENT (conflict: SyncServerError, currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionHandler {
-  console.warn(`Conflict detected. Server: ${currentRecord} client: ${client}`)
-  const newVersion = currentRecord.version + 1
-  const newRecord = Object.assign(client, currentRecord)
-  newRecord.version = newVersion
-  return newRecord
-}
-
-export const handleConflict = function (handler: ConflictResolutionHandler, conflict: SyncServerError, currentRecord: ConflictResolutionData, client: ConflictResolutionData) {
-  return handler(conflict, currentRecord, client)
 }
 
 export type ConflictResolutionData = any
 
-export type ConflictResolutionHandler = (conflict: SyncServerError, currentRecord: ConflictResolutionData, client: ConflictResolutionData) => ConflictResolutionData
-
-export const conflictHandlers = {
-  RETURN_TO_CLIENT: 'RETURN_TO_CLIENT',
-  CLIENT_WINS: 'CLIENT_WINS',
-  SERVER_WINS: 'SERVER_WINS',
-  MERGE_CLIENT_ONTO_SERVER: 'MERGE_CLIENT_ONTO_SERVER',
-  MERGE_SERVER_ONTO_CLIENT: 'MERGE_SERVER_ONTO_CLIENT'
-}
+export type ConflictResolutionHandler = (currentRecord: ConflictResolutionData, client: ConflictResolutionData) => ConflictResolutionData | SyncServerError
