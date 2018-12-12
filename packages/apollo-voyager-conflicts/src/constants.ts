@@ -5,4 +5,4 @@ export const CONFLICT_ERROR = 'AgSync:DataConflict'
 export const VALIDATION_ERROR = 'AgSync:Validation'
 
 // Feature loggers
-export const MUTATION_QUEUE_LOGGER = 'AeroGearSync:OfflineMutations'
+export const CONFLICT_LOGGER = 'AeroGearSync:Conflict'
