@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@aerogear/apollo-voyager-server": "^1.0.0",
-    "apollo-server-express": "^2.2.2",
+    "apollo-server-express": "2.2.2",
     "express-session": "^1.15.6",
     "joi": "^14.3.0",
     "keycloak-connect": "^4.6.0",
