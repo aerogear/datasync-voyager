@@ -2,7 +2,6 @@ import { ForbiddenError } from 'apollo-server-express'
 import {defaultFieldResolver, GraphQLSchema} from 'graphql'
 import { SchemaDirectiveVisitor } from 'graphql-tools'
 import Joi from 'joi'
-// import newInternalServerError from '???' // need to figure out where this comes from
 import pino from 'pino' // also need to figure out where this comes from
 
 import { VisitableSchemaType } from 'graphql-tools/dist/schemaVisitor'
@@ -26,24 +25,24 @@ export class HasRoleDirective extends SchemaDirectiveVisitor {
     const { resolve = defaultFieldResolver } = field
     const { error, value } = this.validateArgs()
 
+    if (error) {
+      log.error(`Invalid hasRole directive on field ${field.name}`, error)
+      throw error
+    }
+
     const { roles } = value
 
     field.resolve = async function (root: any, args: any, context: any, info: any) {
-      // must check for a validation error at runtime
-      // to ensure an appropriate message is sent back
       log.info(`checking user is authorized to access ${field.name} on parent ${info.parentType.name}. Must have one of [${roles}]`)
-
-      if (error) {
-        log.error(`Invalid hasRole directive on field ${field.name} on parent ${info.parentType.name}`, error)
-        // throw newInternalServerError(context)
-        throw new Error(context)
-      }
 
       if (!context.auth || !context.auth.isAuthenticated()) {
         const AuthorizationErrorMessage = `Unable to find authentication. Authorization is required for field ${field.name} on parent ${info.parentType.name}. Must have one of the following roles: [${roles}]`
         log.error({ error: AuthorizationErrorMessage })
         throw new ForbiddenError(AuthorizationErrorMessage)
       }
+
+      const { request } = context
+      const token = (request && request.kauth && request.kauth.grant) ? request.kauth.grant.access_token : undefined
 
       let foundRole = null // this will be the role the user was successfully authorized on
 
@@ -53,7 +52,7 @@ export class HasRoleDirective extends SchemaDirectiveVisitor {
 
       if (!foundRole) {
         const AuthorizationErrorMessage = `user is not authorized for field ${field.name} on parent ${info.parentType.name}. Must have one of the following roles: [${roles}]`
-        log.error({ error: AuthorizationErrorMessage, details: context.auth.getTokenContent() })
+        log.error({ error: AuthorizationErrorMessage, details: token.content })
         throw new ForbiddenError(AuthorizationErrorMessage)
       }
 
