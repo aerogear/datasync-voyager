@@ -27,8 +27,9 @@
     "@aerogear/apollo-voyager-context": "^1.0.0",
     "@aerogear/apollo-voyager-metrics": "^1.0.0",
     "@aerogear/apollo-voyager-tools": "^1.0.0",
-    "apollo-server": "^2.2.2",
-    "apollo-server-express": "^2.2.2"
+    "apollo-server": "2.2.2",
+    "apollo-server-express": "2.2.2",
+    "graphql-tools": "^4.0.3"
   },
   "devDependencies": {
     "@types/node-fetch": "^2.1.4",
