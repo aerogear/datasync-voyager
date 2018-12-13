@@ -1,6 +1,3 @@
-import { Request } from 'express'
-import { IncomingMessage } from 'http'
-
 export class KeycloakAuthContextProvider {
 
   public readonly request: any
