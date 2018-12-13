@@ -7,6 +7,7 @@ export const logger = debug(CONFLICT_LOGGER)
 
 /**
  *
+ * @param helper the responsable to check the conflict and move the object to the next stage
  * @param currentRecord the object state that the server knows about
  * @param client the object state that the client knows about
  */
@@ -16,6 +17,7 @@ export const returnToClient: ConflictResolutionHandler = (helper: ObjectState, c
 }
 /**
  *
+ * @param helper the responsable to check the conflict and move the object to the next stage
  * @param currentRecord the object state that the server knows about
  * @param client the object state that the client knows about
  */
@@ -24,6 +26,7 @@ export const clientWins: ConflictResolutionHandler = (helper: ObjectState, curre
 }
 /**
  *
+ * @param helper the responsable to check the conflict and move the object to the next stage
  * @param currentRecord the object state that the server knows about
  * @param client the object state that the client knows about
  */
@@ -32,26 +35,24 @@ export const serverWins: ConflictResolutionHandler = (helper: ObjectState, curre
   return currentRecord
 }
 /**
- *
+ * @param helper the responsable to check the conflict and move the object to the next stage
  * @param currentRecord the object state that the server knows about
  * @param client the object state that the client knows about
  */
 export const mergeClientOntoServer: ConflictResolutionHandler = (helper: ObjectState, currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionData => {
   logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
   const serverNextState = helper.next(currentRecord)
-  const newRecord = Object.assign(serverNextState, client)
-  return newRecord
+  return Object.assign(serverNextState, client)
 }
 /**
- *
+ * @param helper the responsable to check the conflict and move the object to the next stage
  * @param currentRecord the object state that the server knows about
  * @param client the object state that the client knows about
  */
 export const mergeServerOntoClient: ConflictResolutionHandler = (helper: ObjectState, currentRecord: ConflictResolutionData, client: ConflictResolutionData): ConflictResolutionData => {
   logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
   const clientNextState = helper.next(client)
-  const newRecord = Object.assign(clientNextState, currentRecord)
-  return newRecord
+  return Object.assign(clientNextState, currentRecord)
 }
 
 /**
