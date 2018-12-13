@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@types/debug": "0.0.31",
+    "@aerogear/apollo-voyager-tools": "^1.0.0",
     "debug": "^4.1.0"
   }
 }

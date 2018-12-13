@@ -1,3 +1,3 @@
-export * from './detectConflict'
-export * from './handleConflict'
-export * from './SyncServerError'
+export * from './conflictHandlers'
+export * from './ObjectState'
+export * from './VersionedObjectState'
