@@ -10,7 +10,7 @@ export const logger = debug(CONFLICT_LOGGER)
  * @param currentRecord the object state that the server knows about
  * @param client the object state that the client knows about
  */
-export const returnToClient: ConflictResolutionHandler = (currentRecord: ConflictResolutionData, client: ConflictResolutionData): SyncServerError => {
+export const returnToClient: ConflictResolutionHandler = (helper: ObjectState, currentRecord: ConflictResolutionData, client: ConflictResolutionData): SyncServerError => {
   logger(`Conflict detected. Server: ${currentRecord} client: ${client}`)
   return new SyncServerError('Conflict detected.', currentRecord, CONFLICT_ERROR)
 }
