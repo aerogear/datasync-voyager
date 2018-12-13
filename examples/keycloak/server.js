@@ -4,7 +4,7 @@ const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
 
 const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
-const { KeycloakSecurityService } = require('../../packages/apollo-voyager-keycloak')
+const { KeycloakSecurityService, KeycloakAuthContextProvider, schemaDirectives } = require('../../packages/apollo-voyager-keycloak')
 
 
 const keycloakConfig = JSON.parse(fs.readFileSync(path.resolve(__dirname, './config/keycloak.json')))
@@ -27,7 +27,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
-      
+
       // log some of the auth related info added to the context
       console.log(context.auth.isAuthenticated())
       console.log(context.auth.getTokenContent())
@@ -41,11 +41,7 @@ const resolvers = {
 // Initialize the keycloak service
 const keycloakService = new KeycloakSecurityService(keycloakConfig)
 
-// get the keycloak context provider and directives
-const AuthContextProvider = keycloakService.getAuthContextProvider()
-const schemaDirectives = keycloakService.getSchemaDirectives()
-
-const schema = makeExecutableSchema({ 
+const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
   // add the keycloak directives
@@ -55,15 +51,15 @@ const schema = makeExecutableSchema({
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
 const context = ({ req }) => {
-  return { 
+  return {
     serverName: 'Voyager Server',
     // add the keycloak Auth Context Provider
-    auth: new AuthContextProvider(req) 
+    auth: new KeycloakAuthContextProvider(req)
   }
 }
 
 // Initialize the apollo voyager server with our schema and context
-const server = ApolloVoyagerServer({ 
+const server = ApolloVoyagerServer({
   schema,
   context
 })

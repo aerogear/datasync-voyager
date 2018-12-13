@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import { KeycloakAuthContextProvider } from './AuthContextProvider'
+import { KeycloakAuthContextProvider } from './KeycloakAuthContextProvider'
 
 test('provider.getToken() returns request.kauth.grant.access_token', (t) => {
   const token = {

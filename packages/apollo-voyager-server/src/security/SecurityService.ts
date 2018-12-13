@@ -9,20 +9,6 @@ import { Router } from 'express'
  */
 export interface SecurityService {
   /**
-   * getSchemaDirectives should return an object containing directive
-   * implementations. e.g. @isAuthenticated, @hasRole
-   */
-  getSchemaDirectives (): any
-
-  /**
-   * getAuthContextProvider returns the security service's AuthContextProvider
-   * The AuthContextProvider is responsible for adding the appropriate
-   * Auth related info from the request into the the GraphQL context
-   * Inside resolve functions. Example: context.auth.user
-   */
-  getAuthContextProvider (): any
-
-  /**
    *
    * @param expressApp the express router
    * @param options any additional options necessary

@@ -2,29 +2,15 @@ import { SecurityService } from '@aerogear/apollo-voyager-server'
 import { Router } from 'express'
 import session from 'express-session'
 import Keycloak from 'keycloak-connect'
-import { KeycloakAuthContextProvider } from './AuthContextProvider'
-import { schemaDirectives } from './schemaDirectives'
 
 export class KeycloakSecurityService implements SecurityService {
 
-  public readonly keycloakConfig: any
-  public readonly schemaDirectives: any
-  public readonly authContextProvider: any
-  public readonly log: any
+  protected readonly keycloakConfig: any
+  protected log: any
 
   constructor (keycloakConfig: any) {
     this.keycloakConfig = keycloakConfig
-    this.schemaDirectives = schemaDirectives
-    this.authContextProvider = KeycloakAuthContextProvider
     this.log = console // TODO we should come up with a good solution for this
-  }
-
-  public getSchemaDirectives () {
-    return this.schemaDirectives
-  }
-
-  public getAuthContextProvider () {
-    return this.authContextProvider
   }
 
   /**

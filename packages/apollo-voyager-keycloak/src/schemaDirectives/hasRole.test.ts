@@ -4,7 +4,7 @@ import { GraphQLSchema } from 'graphql'
 import { VisitableSchemaType } from 'graphql-tools/dist/schemaVisitor'
 import { HasRoleDirective } from './hasRole'
 
-import {KeycloakAuthContextProvider} from '../AuthContextProvider'
+import { KeycloakAuthContextProvider } from '../KeycloakAuthContextProvider'
 
 const createHasRoleDirective = (directiveArgs: any) => {
   return new HasRoleDirective({
