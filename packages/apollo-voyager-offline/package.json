@@ -1,7 +1,7 @@
 {
-  "name": "@aerogear/apollo-voyager-conflicts",
+  "name": "@aerogear/apollo-voyager-offline",
   "version": "1.0.0",
-  "description": "",
+  "description": "A package to provide offline capabilities such as recovery from data conflicts.",
   "main": "dist/index.js",
   "scripts": {
     "compile": "tsc --build tsconfig.json",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@types/debug": "0.0.31",
+    "@aerogear/apollo-voyager-tools": "^1.0.0",
     "debug": "^4.1.0"
   }
 }
