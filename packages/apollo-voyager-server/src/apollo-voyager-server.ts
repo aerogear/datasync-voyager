@@ -1,8 +1,8 @@
 'use strict'
 import { ApolloServer, Config } from 'apollo-server-express'
+import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig'
 import { VoyagerConfig } from './config/VoyagerConfig'
 import { ApolloVoyagerContextProvider } from './context/ApolloVoyagerContextProvider'
-import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig';
 
 /**
  *

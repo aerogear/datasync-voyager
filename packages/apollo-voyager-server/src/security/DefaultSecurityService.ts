@@ -1,33 +1,32 @@
+import { AuthContextProvider } from './AuthContextProvider'
 import { SecurityService } from './SecurityService'
-import { AuthContextProvider } from './AuthContextProvider';
 
 export class DefaultSecurityService implements SecurityService {
-  
-  getSchemaDirectives() {
+
+  public getSchemaDirectives () {
     return null
   }
 
-  applyAuthMiddleware() {
+  public applyAuthMiddleware () {
     return null
   }
 
-  getAuthContextProvider() {
+  public getAuthContextProvider () {
     return DefaultAuthContextProvider
   }
 }
 
-
 export class DefaultAuthContextProvider implements AuthContextProvider {
-  
-  isAuthenticated() {
+
+  public isAuthenticated () {
     return false
   }
 
-  hasRole() {
+  public hasRole () {
     return false
   }
 
-  getUser() {
+  public getUser () {
     return null
   }
 }
