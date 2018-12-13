@@ -13,7 +13,6 @@ export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConf
   const { schema, context } = baseApolloConfig
 
   // Build the context provider using user supplied context
-  // TODO: support context objects from users. Right now we support functions
   const voyagerConfig = new DefaultVoyagerConfig().merge(clientVoyagerConfig)
   const contextProviderConfig = { userContext: context, ...voyagerConfig }
 
