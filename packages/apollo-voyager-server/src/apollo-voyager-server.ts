@@ -11,7 +11,6 @@ import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig';
  */
 export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: VoyagerConfig): ApolloServer {
   const { schema, context } = baseApolloConfig
-  // const { securityService } = voyagerConfig
 
   // Build the context provider using user supplied context
   // TODO: support context objects from users. Right now we support functions
@@ -28,4 +27,4 @@ export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConf
 export { gql } from 'apollo-server-express'
 export { SecurityService } from './security/SecurityService'
 export { AuthContextProvider } from './security/AuthContextProvider'
-// export * from './voyagerResolver'
+export * from './voyagerResolver'
