@@ -3,6 +3,7 @@
 dist/
 
 packages/*/package-lock.json
+examples/package-lock.json
 
 # Logs
 logs
