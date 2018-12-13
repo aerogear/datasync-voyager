@@ -213,37 +213,7 @@ test('if hasRole arguments are invalid, visitSchemaDirective does not throw, but
     name: 'testField'
   }
 
-  t.notThrows(() => {
+  t.throws(() => {
     directive.visitFieldDefinition(field)
-  })
-
-  const root = {}
-  const args = {}
-  const req = {
-    id: '123',
-    kauth: {
-      grant: {
-        access_token: {
-          hasRole: (role: string) => {
-            t.deepEqual(role, directiveArgs.role)
-            return false
-          }
-        }
-      }
-    }
-  }
-  const context = {
-    request: req,
-    auth: new KeycloakAuthContextProvider({ req })
-  }
-
-  const info = {
-    parentType: {
-      name: 'testParent'
-    }
-  }
-
-  await t.throwsAsync(async () => {
-    await field.resolve(root, args, context, info)
   })
 })
