@@ -1,4 +1,4 @@
-import debug from 'debug'
+import * as debug from 'debug'
 import { ConflictResolutionData } from './conflictHandlers'
 import { CONFLICT_LOGGER } from './constants'
 import { ObjectState } from './ObjectState'
@@ -8,7 +8,7 @@ import { ObjectState } from './ObjectState'
  * Detects conflicts and allows moving to next state using the version field of the object
  */
 export class VersionedObjectState implements ObjectState {
-  private logger = debug(CONFLICT_LOGGER)
+  private logger = debug.default(CONFLICT_LOGGER)
 
   public hasConflict (serverData: any, clientData: any) {
     if (serverData.version && clientData.version) {
