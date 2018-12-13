@@ -43,7 +43,7 @@ export class ApolloVoyagerContextProvider {
         userContext = await userContext
       }
 
-      return { ...userContext, ...defaultContext, }
+      return { ...userContext, ...defaultContext }
     }
   }
 
