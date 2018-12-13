@@ -9,11 +9,6 @@
     "test": "ava '*.test.ts' '**/*.test.ts'",
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
-  "devDependencies": {
-    "ava": "1.0.0-rc.2",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.6"
-  },
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "license": "Apache-2.0",
   "ava": {
@@ -25,8 +20,13 @@
       "ts-node/register"
     ]
   },
-  "dependencies": {
+  "devDependencies": {
     "@types/debug": "0.0.31",
+    "ava": "1.0.0-rc.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
     "@aerogear/apollo-voyager-tools": "^1.0.0",
     "debug": "^4.1.0"
   }
