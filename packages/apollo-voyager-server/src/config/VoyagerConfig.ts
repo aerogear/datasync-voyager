@@ -8,5 +8,5 @@ export interface VoyagerConfig extends Config {
    */
   securityService: SecurityService
 
-  auditLog: any
+  auditLog?: any
 }
