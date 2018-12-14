@@ -19,9 +19,4 @@ export class KeycloakAuthContextProvider implements AuthContextProvider {
   public hasRole (role: string): boolean {
     return this.isAuthenticated() && this.accessToken.hasRole(role)
   }
-
-  // TODO where can we get this from?? The accessToken is kind of like a user but not exactly.
-  public getUser () {
-    return null
-  }
 }
