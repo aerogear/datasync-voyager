@@ -8,8 +8,6 @@ export class DefaultVoyagerConfig implements VoyagerConfig {
    */
   public securityService: SecurityService = new DefaultSecurityService()
 
-  public auditLog: any
-
   public merge (userConfig: VoyagerConfig) {
     return Object.assign(this, userConfig)
   }
