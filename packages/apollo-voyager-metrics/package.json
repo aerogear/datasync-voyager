@@ -20,7 +20,7 @@
     "compile": "tsc --build tsconfig.json",
     "watch": "tsc --build tsconfig.json --watch",
     "compile:clean": "tsc --build tsconfig.json --clean",
-    "test": "ava '*.test.ts' '**/*.test.ts'"
+    "test": "ava -v '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
     "prom-client": "^11.2.0",
