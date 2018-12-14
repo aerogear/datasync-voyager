@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/apollo-voyager-metrics",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "> TODO: description",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "prom-client": "^11.2.0",
-    "@aerogear/apollo-voyager-tools": "^1.0.0",
+    "@aerogear/apollo-voyager-tools": "0.1.0",
     "apollo-server": "^2.2.2",
     "apollo-server-express": "^2.2.2"
   },

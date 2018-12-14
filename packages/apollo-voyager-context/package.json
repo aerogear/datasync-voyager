@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/apollo-voyager-context",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/apollo-voyager-context.js",
   "scripts": {

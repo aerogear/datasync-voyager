@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/apollo-voyager-audit",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "ava '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-tools": "^1.0.0",
+    "@aerogear/apollo-voyager-tools": "^0.1.0",
     "graphql-tools": "^4.0.3",
     "pino": "^5.9.0"
   },

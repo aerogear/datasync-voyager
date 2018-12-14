@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/apollo-voyager-keycloak",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "> TODO: description",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
@@ -23,7 +23,7 @@
     "test": "ava '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-server": "^1.0.0",
+    "@aerogear/apollo-voyager-server": "^0.1.0",
     "apollo-server-express": "2.2.2",
     "express-session": "^1.15.6",
     "joi": "^14.3.0",
