@@ -25,8 +25,4 @@ export class DefaultAuthContextProvider implements AuthContextProvider {
   public hasRole () {
     return false
   }
-
-  public getUser () {
-    return null
-  }
 }
