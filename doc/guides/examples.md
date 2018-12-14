@@ -45,7 +45,7 @@ docker-compose up
 
 * Open [http://localhost:8080/auth/admin/](http://localhost:8080/auth/admin/) and login with the user `admin` and password `admin`.
 * Click **Add Realm** and click **Select File** next to the **Import** label.
-* Select the [examples/keycloak/config/realm-export.json](examples/keycloak/config/realm-export.json) file and click **Create**.
+* Select the [examples/keycloak/config/realm-export.json](../../examples/keycloak/config/realm-export.json) file and click **Create**.
 * Click **Users** and add a new user called `developer`. You can choose your own name if you wish.
 * Under the **Credentials** tab add a new password of **developer** and make sure it is not temporary. You can choose your own password if you wish.
 * Under the **Role Mappings** tab assign the **admin** realm role.
