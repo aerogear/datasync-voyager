@@ -16,6 +16,9 @@
     "compile:clean": "tsc --build tsconfig.json --clean",
     "test": "ava -v '*.test.ts' '**/*.test.ts'"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@aerogear/apollo-voyager-tools": "^0.1.0",
     "graphql-tools": "^4.0.3",
