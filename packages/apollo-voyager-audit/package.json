@@ -1,7 +1,14 @@
 {
   "name": "@aerogear/apollo-voyager-audit",
   "version": "0.1.0",
-  "description": "",
+  "description": "Adds audit logging capabilities to Apollo Voyager Server.",
+  "author": "AeroGear Team<aerogear@googlegroups.com>",
+  "homepage": "http://aerogear.org",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-audit"
+  },
   "main": "dist/index.js",
   "scripts": {
     "compile": "tsc --build tsconfig.json",
@@ -20,8 +27,6 @@
     "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
   },
-  "author": "AeroGear Team<aerogear@googlegroups.com>",
-  "license": "Apache-2.0",
   "ava": {
     "compileEnhancements": false,
     "extensions": [

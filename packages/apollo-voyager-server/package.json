@@ -1,9 +1,13 @@
 {
   "name": "@aerogear/apollo-voyager-server",
   "version": "0.1.0",
-  "description": "> TODO: description",
+  "description": "The core Apollo Voyager Server library.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-server"
+  },
   "license": "Apache-2.0",
   "main": "dist/apollo-voyager-server.js",
   "directories": {
