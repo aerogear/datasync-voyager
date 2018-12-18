@@ -27,10 +27,10 @@
     "test": "ava -v '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "prom-client": "^11.2.0",
-    "@aerogear/apollo-voyager-tools": "0.1.0",
+    "@aerogear/apollo-voyager-tools": "^0.1.0",
     "apollo-server": "^2.2.2",
-    "apollo-server-express": "^2.2.2"
+    "apollo-server-express": "^2.2.2",
+    "prom-client": "^11.2.0"
   },
   "devDependencies": {
     "ava": "1.0.0-rc.2",

@@ -35,13 +35,13 @@
     "pino": "^5.9.0"
   },
   "devDependencies": {
-    "ava": "1.0.0-rc.2",
     "@types/express-session": "^1.15.11",
     "@types/graphql": "^14.0.3",
     "@types/joi": "^14.0.0",
     "@types/keycloak-connect": "^4.5.0",
     "@types/node": "^10.12.10",
     "@types/pino": "^5.8.2",
+    "ava": "1.0.0-rc.2",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
   },
