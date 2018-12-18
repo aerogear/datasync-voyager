@@ -1,4 +1,4 @@
-# apollo-voyager-server
+# apollo-voyager-keycloak
 
 [![CircleCI](https://circleci.com/gh/aerogear/apollo-voyager-server.svg?style=svg)](https://circleci.com/gh/aerogear/apollo-voyager-server)
 
