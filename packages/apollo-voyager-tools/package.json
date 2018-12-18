@@ -1,7 +1,13 @@
 {
   "name": "@aerogear/apollo-voyager-tools",
   "version": "0.1.0",
-  "description": "",
+  "description": "Tooling library used across Apollo Voyager Server modules.",
+  "author": "AeroGear Team<aerogear@googlegroups.com>",
+  "homepage": "http://aerogear.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-tools"
+  },
   "main": "dist/index.js",
   "scripts": {
     "compile": "tsc --build tsconfig.json",
@@ -17,7 +23,6 @@
     "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
   },
-  "author": "AeroGear Team<aerogear@googlegroups.com>",
   "license": "Apache-2.0",
   "ava": {
     "compileEnhancements": false,
