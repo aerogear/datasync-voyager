@@ -17,11 +17,11 @@ jobs:
           name: compile
           command: npm run compile
       - run:
-          name: run lint
-          command: npm run lint
-      - run:
           name: test
           command: npm test
+      - run:
+          name: run lint
+          command: npm run lint
   npm_publish:
     working_directory: ~/aerogear
     docker:
