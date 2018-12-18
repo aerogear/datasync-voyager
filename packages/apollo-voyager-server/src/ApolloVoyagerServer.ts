@@ -22,8 +22,3 @@ export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConf
   const server = new ApolloServer(apolloConfig)
   return server
 }
-
-export { gql } from 'apollo-server-express'
-export { SecurityService } from './security/SecurityService'
-export { AuthContextProvider } from './security/AuthContextProvider'
-export * from './voyagerResolver'

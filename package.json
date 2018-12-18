@@ -9,7 +9,7 @@
     "format": "tslint '*/*/src/**/*.ts' --fix --force > /dev/null",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
-    "compile:clean": "lerna exec -- npm run clean-compile",
+    "compile:clean": "lerna exec -- npm run compile:clean",
     "watch": "lerna exec --parallel --stream -- npm run watch"
   },
   "dependencies": {},
