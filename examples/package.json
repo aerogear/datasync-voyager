@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "exit 0",
     "watch": "exit 0",
-    "clean-compile": "exit 0",
+    "compile:clean": "exit 0",
     "test": "exit 0"
   },
   "author": "",

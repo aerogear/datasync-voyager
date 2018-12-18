@@ -1,1 +1,1 @@
-export { KeycloakSecurityService } from './KeycloakSecurityService'
+export * from './KeycloakSecurityService'
