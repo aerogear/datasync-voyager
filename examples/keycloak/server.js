@@ -30,8 +30,9 @@ const resolvers = {
       
       // log some of the auth related info added to the context
       console.log(context.auth.isAuthenticated())
+      console.log(context.auth.accessToken.content.name)
 
-      const name = context.auth.getTokenContent().name || 'world'
+      const name = context.auth.accessToken.content.name || 'world'
       return `Hello ${name} from ${context.serverName}`
     }
   }
