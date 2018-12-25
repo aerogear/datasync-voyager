@@ -33,19 +33,26 @@ This script will interactively prompt you and ask what version you would like to
 
 [source,bash]
 --
-lerna info version 2.9.0
-lerna info current version 0.0.0
-lerna info Checking for updated packages...
-lerna info Comparing with initial commit.
-lerna info Checking for prereleased packages...
-? Select a new version (currently 0.0.0) Patch (0.0.1)
+? Select a new version (currently 0.1.4) (Use arrow keys)
+❯ Patch (0.1.5)
+  Minor (0.2.0)
+  Major (1.0.0)
+  Prepatch (0.1.5-alpha.0)
+  Preminor (0.2.0-alpha.0)
+  Premajor (1.0.0-alpha.0)
+  Custom Prerelease
+  Custom Version
+
 
 Changes:
- - @aerogear/auth: 0.0.0 => 0.0.1
- - @aerogear/core: 0.0.0 => 0.0.1
- - @aerogear/cordova-plugin-aerogear-metrics: 0.0.0 => 0.0.1
+ - apollo-voyager-example: 0.1.4 => 0.1.5 (private)
+ - @aerogear/apollo-voyager-audit: 0.1.4 => 0.1.5
+ - @aerogear/apollo-voyager-keycloak: 0.1.4 => 0.1.5
+ - @aerogear/apollo-voyager-metrics: 0.1.4 => 0.1.5
+ - @aerogear/apollo-voyager-server: 0.1.4 => 0.1.5
+ - @aerogear/apollo-voyager-tools: 0.1.4 => 0.1.5
 
-? Are you sure you want to publish the above changes? Yes
+? Are you sure you want to publish these packages? (ynH) y
 Repository is ready for release.
 --
 
@@ -53,17 +60,24 @@ Use `git status` to verify that the version numbers in the correct files have be
 
 [source, bash]
 --
-$ git status
-On branch release-x.y.z
+On branch release-0.1.5
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        renamed:    doc/guides/publishing.md -> doc/guides/publishing.adoc
+
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
+        modified:   doc/guides/publishing.adoc
+        modified:   examples/package.json
         modified:   lerna.json
-        modified:   packages/auth/package.json
-        modified:   packages/core/package.json
-        modified:   packages/metrics-cordova/package.json
-        modified:   packages/metrics-cordova/plugin.xml
+        modified:   packages/apollo-voyager-audit/package.json
+        modified:   packages/apollo-voyager-keycloak/package.json
+        modified:   packages/apollo-voyager-metrics/package.json
+        modified:   packages/apollo-voyager-server/package.json
+        modified:   packages/apollo-voyager-tools/package.json
 --
 
 Commit and push these changes, then open a Pull Request to `master`.
