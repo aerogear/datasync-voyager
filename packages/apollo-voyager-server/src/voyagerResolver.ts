@@ -20,7 +20,7 @@ function voyagerResolverPartial (config: VoyagerResolversConfig): ResolverWrappe
         try {
           const result = await resolverFn(obj, args, context, info)
           if (config && config.auditLogging) {
-            auditLog(true, context.request, info, obj, args, '')
+            auditLog(true, context, info, obj, args, '')
           }
           resolve(result)
 
@@ -34,7 +34,7 @@ function voyagerResolverPartial (config: VoyagerResolversConfig): ResolverWrappe
           // NOPE: updateResolverMetrics(info, timeTook)
           // but, we audit log in case of failure too
           if (config && config.auditLogging) {
-            auditLog(false, context.request, info, obj, args, error.message)
+            auditLog(false, context, info, obj, args, error.message)
           }
           reject(error)
         }
