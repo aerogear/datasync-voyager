@@ -10,7 +10,10 @@
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
     "compile:clean": "lerna exec -- npm run compile:clean",
-    "watch": "lerna exec --parallel --stream -- npm run watch"
+    "watch": "lerna exec --parallel --stream -- npm run watch",
+    "release:prep": "./scripts/prepareRelease.sh",
+    "release:validate": "./scripts/validateRelease.sh",
+    "publish": "lerna exec npm publish"
   },
   "dependencies": {},
   "devDependencies": {
