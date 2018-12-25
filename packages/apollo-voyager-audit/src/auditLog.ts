@@ -14,16 +14,18 @@ interface AuditLogger {
     parent: any
     arguments: any
     clientInfo: any
+    authenticated: boolean
+    userInfo: any
   }): void
 }
 
 const log = pino()
 const auditLogger: AuditLogger = log.child({tag: 'AUDIT'})
 
-export function auditLog (success: boolean, request: any, info: GraphQLResolveInfo, parent: any, args: any, msg: string) {
+export function auditLog (success: boolean, context: any, info: GraphQLResolveInfo, parent: any, args: any, msg: string) {
   auditLogger.info({
     msg: msg || '',
-    requestId: request ? request.id : '',
+    requestId: context && context.request ? context.request.id : '',
     operationType: info.operation.operation,
     fieldName: info.fieldName,
     parentTypeName: info.parentType.name,
@@ -31,6 +33,8 @@ export function auditLog (success: boolean, request: any, info: GraphQLResolveIn
     success,
     parent,
     arguments: args,
-    clientInfo: request && request.body && request.body.extensions && request.body.extensions.metrics || undefined
+    clientInfo: context && context.request && context.request.body && context.request.body.extensions && context.request.body.extensions.metrics || undefined,
+    authenticated: !!(context && context.auth && context.auth.isAuthenticated()),
+    userInfo: (context && context.auth && context.auth.accessToken) ? context.auth.accessToken.content : undefined
   })
 }
