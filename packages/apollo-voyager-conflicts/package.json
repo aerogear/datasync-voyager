@@ -30,7 +30,9 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-tools": "^0.1.7",
     "debug": "^4.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
