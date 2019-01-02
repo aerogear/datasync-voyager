@@ -1,17 +1,18 @@
-# Displaying metrics and exploring audit logs
+# Audit Logs and Metrics
 
 ## Overview
 
-Audit logging is a mechanism to track the actions. This is useful to learn the specifics of an action such as who created a resource, when and with what parameters.
+Audit logging is a mechanism to track the actions. This is useful to learn the specifics of an action such as who created 
+a resource, when and with what parameters.
 
-In Voyager framework, audit logs are made use not only in audit trailing but also in aggregating data and having an overview.
+In Voyager framework, audit logs can be used not only for audit trailing but also for aggregating data and having an overview.
 This overview is what is called *metrics* in the rest of this document.
 
 
 ## Architecture
 
 Voyager framework provides out of the box implementation for audit logging with sensible defaults. Once enabled, framework
-will print audit logs to `stdout` with the details of the requests and the outcome in JSON format.
+prints audit logs to `stdout` with the details of the requests and their outcome in JSON format.
 
 An example message is below.
 
@@ -92,19 +93,18 @@ An example message is below.
 }
 ```
 
-`clientInfo` property of the audit log message will only be available if the client is sending the client information to Voyager server. That 
+`clientInfo` property of the audit log message is available only if the client is sending the client information to Voyager server. That 
 has to be enabled separately in the client.
-Also, data in that property can only be collected if the app is a Cordova app or a native app. Simple web clients cannot get the device/client/app details 
+Also, data in that property can only be collected if the app is a Cordova app or a native app. Simple web clients cannot get the device, client nor app details 
 and thus cannot send this information.
 
+`userInfo` property is available only if the Voyager server is protected by an identity manager, such as Keycloak, and if the user is authenticated.
 
-`userInfo` property will only be available if the Voyager server is protected by an identity manager, such as Keycloak, and if the user is authenticated.
-
-## Enabling audit logging in Voyager Server
+## Enabling Audit Logging in Voyager Server
 
 Audit logging is not enabled by default in Voyager framework.
 
-The only step necessary to enable audit logs is to import `voyagerResolvers` function and wrap your resolvers with it:
+The only step necessary to enable audit logs is to import `voyagerResolvers` function and wrap the resolvers with it:
  
 ```javascript
 const { voyagerResolvers } = require('@aerogear/apollo-voyager-server');
@@ -117,9 +117,9 @@ const schema = makeExecutableSchema({ typeDefs, myResolvers });
 // ...
 ```
 
-Your resolvers will be wrapped with Voyager's resolvers that produce audit logs.
+Resolvers will be wrapped with Voyager's resolvers that produce audit logs.
 
-## Sending device information in Voyager clients
+## Sending Device Information in Voyager Clients
 
 In order to send device information to Voyager server, `auditLogging` has to be enabled while creating a client instance:
  
@@ -140,12 +140,15 @@ Also, `cordova-plugin-aerogear-metrics` Cordova plugin has to be installed so th
 cordova plugin add cordova-plugin-aerogear-metrics
 ```
 
-## Exploring audit logs
+## Exploring Audit Logs
 
-Voyager framework prints audit logs simply to `stdout` and it is another component's responsibility to pick up these logs and provide
+Voyager framework simply prints audit logs to `stdout` and it is responsibility of another component to pick up these logs and provide
 functionality to the user to make use of the logs.
 
-While you can choose any solution as you like, EFK stack (ElasticSearch+Fluentd+Kibana) on OpenShift is the chosen solution in this guide.
+Although you can choose any solution as you like, EFK stack (ElasticSearch+Fluentd+Kibana) on OpenShift is the chosen solution in this guide.
+
+Also, although you can print anything to `stdout` in your application as audit logs and they are sent to ElasticSearch by Fluentd, the functionality 
+provided by Voyager framework is that the audit log messages are printed in a format that is used by the Kibana dashboards that are also provided.
 
 ## Configuring OpenShift
 
@@ -153,10 +156,10 @@ OpenShift logging can be enabled as described in [OpenShift documentation](https
 
 Once enabled, OpenShift logging will create a Fluentd instance per cluster node that reads the `stdout` and `stderr` of the pods in that node
 and pushes the readings to the centralized ElasticSearch instance. Documents created in ElasticSearch instance can be then explored and 
-visualized by the Kibana instance that's also installed by OpenShift logging.
+visualized by the Kibana instance, which is also installed by OpenShift logging.
 
-OpenShift logging creates an index per namespace and that index is only available to users that have access to that namespace.
-It also creates the index pattern in Kibana in the same way.
+OpenShift logging creates an index per namespace and that index is only available to users who have access to that namespace.
+It also creates the index patterns in Kibana in the same way.
 
 By default, OpenShift also provides a [curator](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/about.html) which deletes the old 
 log messages from ElasticSearch to reduce storage needs and improve performance. This has an impact on audit trails and also metrics.
@@ -167,14 +170,17 @@ Fluentd can be configured to write log messages to a separate storage, such as [
 In terms of metrics, curator's deletion age config should not be set shorter than the desired time range that you would like
 to see the metrics for.
 
-While you can print anything to `stdout` in your application and they will end up in ElasticSearch, the functionality provided by Voyager 
-framework is that audit log messages are printed in a format that is used by the Kibana dashboards also provided.
 
+### Importing Kibana Saved Objects
 
-### Importing Kibana saved objects
+Kibana is a visualization tool that has a great integration with ElasticSearch.
 
-A template for Kibana saved objects is available. When it is imported, a number of saved searches, visualizations and a
-dashboard are created in Kibana.
+A template for Kibana saved objects is available. When the saved objects are imported, a number of saved searches, visualizations and a
+dashboard are created in Kibana. These then can be used to have an overview of the Voyager application.
+
+A screenshot of the provided dashboard, which consists of multiple visualizations, is below.
+
+![](kibana-dashboard-screenshot.png) 
 
 OpenShift logging creates ElasticSearch indices per namespace and the index names have the format `project.<project-name>.<project-uid>`.
 For example `project.myproject.49f9a0b6-09b5-11e9-9597-069f7827c758`.
@@ -198,7 +204,7 @@ sed \
  kibanaImportTemplate.json > kibanaImport.json
 ```
 
-You may find out `kibanaImportTemplate.json` [here](./kibanaImportTemplate.json).
+You may find `kibanaImportTemplate.json` [here](./kibanaImportTemplate.json).
 
 Once the `kibanaImport.json` file is generated, it has to be imported into Kibana. 
 
@@ -224,12 +230,11 @@ Error: Could not locate that index-pattern-field (id: audit.clientInfo.data.devi
 Because of these conditions, Kibana saved objects have to be imported after there is some audit logs are already in ElasticSearch.
 At the moment, no mechanisms are provided to overcome this problem.
 
-### Viewing the dashboard and audit logs
+### Viewing the Dashboard and Audit Logs
 
-When the Kibana saved objects are imported, a dashboard will be available with lots of different visualizations.
-
-That can be used as an overview of the Voyager application status.
+When the Kibana saved objects are imported, a dashboard is available with several visualizations that can be used as an 
+overview of the Voyager application status.
 
 At the bottom of the dashboard, audit log messages can be explored directly.
 
-For more information on how to use Kibana, please consult [Kibana documentation](https://www.elastic.co/products/kibana).   
+For more information on how to use Kibana, please consult [Kibana documentation](https://www.elastic.co/products/kibana).
