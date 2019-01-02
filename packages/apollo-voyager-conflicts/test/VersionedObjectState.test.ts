@@ -1,30 +1,25 @@
-import { expect } from 'chai'
-import 'mocha'
+import test from 'ava'
 import { VersionedObjectState } from '../src'
 
-describe('Versioned ObjectState', () => {
+test('With conflict', (t) => {
+  const objectState = new VersionedObjectState()
+  const serverData = { name: 'AeroGear', version: 1 }
+  const clientData = { name: 'Red Hat', version: 2 }
+  t.deepEqual(objectState.hasConflict(serverData, clientData), true)
+})
 
-  it('With conflict', () => {
-    const objectState = new VersionedObjectState()
-    const serverData = {name: 'AeroGear', version: 1}
-    const clientData = {name: 'Red Hat', version: 2}
+test('Without conflict', (t) => {
 
-    expect(objectState.hasConflict(serverData, clientData)).eq(true)
-  })
+  const objectState = new VersionedObjectState()
+  const serverData = { name: 'AeroGear', version: 1 }
+  const clientData = { name: 'AeroGear', version: 1 }
 
-  it('Without conflict', () => {
+  t.deepEqual(objectState.hasConflict(serverData, clientData), false)
+})
 
-    const objectState = new VersionedObjectState()
-    const serverData = {name: 'AeroGear', version: 1}
-    const clientData = {name: 'AeroGear', version: 1}
-
-    expect(objectState.hasConflict(serverData, clientData)).eq(false)
-  })
-
-  it('Next stage ', () => {
-    const serverData = {name: 'AeroGear', version: 1}
-    const objectState = new VersionedObjectState()
-    objectState.next(serverData)
-    expect(serverData.version).eq(2)
-  })
+test('Next stage ', (t) => {
+  const serverData = { name: 'AeroGear', version: 1 }
+  const objectState = new VersionedObjectState()
+  objectState.next(serverData)
+  t.deepEqual(serverData.version, 2)
 })
