@@ -15,7 +15,7 @@
       "single"
     ],
     "max-line-length": [false],
-    "space-before-function-paren": [true, "always"],
+    "space-before-function-paren": [false, "always"],
     "only-arrow-functions": [
       false
     ],
