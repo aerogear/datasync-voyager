@@ -56,7 +56,7 @@ function applyMetricsMiddleware (app: Application, config: MetricsConfiguration)
   app.get(path, app)
 }
 
-function updateResolverMetrics (resolverInfo: any, responseTime: number) {
+export function updateResolverMetrics (resolverInfo: any, responseTime: number) {
   const {
     operation: {operation: resolverMappingType},
     fieldName: resolverMappingName,

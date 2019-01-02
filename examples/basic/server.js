@@ -25,8 +25,6 @@ const resolvers = {
   }
 }
 
-const schema = makeExecutableSchema({ typeDefs, resolvers })
-
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
 const context = ({ req }) => {
@@ -36,8 +34,9 @@ const context = ({ req }) => {
 }
 
 // Initialize the apollo voyager server with our schema and context
-const server = ApolloVoyagerServer({ 
-  schema,
+const server = ApolloVoyagerServer({
+  typeDefs,
+  resolvers,
   context
 })
 

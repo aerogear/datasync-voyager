@@ -1,7 +1,8 @@
 const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
 
-const { ApolloVoyagerServer, gql, voyagerResolvers } = require('../../packages/apollo-voyager-server')
+const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
+const auditLogger = require('../../packages/apollo-voyager-audit')
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
@@ -19,10 +20,6 @@ let resolvers = {
   }
 }
 
-resolvers = voyagerResolvers(resolvers, { auditLogging: true })
-
-const schema = makeExecutableSchema({ typeDefs, resolvers })
-
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
 const context = async ({ req }) => {
@@ -31,13 +28,21 @@ const context = async ({ req }) => {
   return { serverName: 'Voyager Server' }
 }
 
-// Initialize the apollo voyager server with our schema and context
-const server = ApolloVoyagerServer({
-  schema,
+const apolloConfig = {
+  typeDefs,
+  resolvers,
   context
-})
+}
+
+const voyagerConfig = {
+  auditLogger
+}
+
+// Initialize the apollo voyager server with our schema and context
+const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
 
 const app = express()
+
 server.applyMiddleware({ app })
 
 const port = 4000
