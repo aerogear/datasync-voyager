@@ -34,3 +34,8 @@ export class VersionedObjectState implements ObjectState {
     return currentObjectState
   }
 }
+
+/**
+ * Default instance of VersionedObjectState
+ */
+export const versionStateHandler = new VersionedObjectState()
