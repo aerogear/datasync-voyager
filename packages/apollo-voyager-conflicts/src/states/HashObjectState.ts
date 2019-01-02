@@ -1,7 +1,7 @@
 import * as debug from 'debug'
 import { ObjectState } from '../api/ObjectState'
-import { CONFLICT_LOGGER } from '../constants'
 import { ObjectStateData } from '../api/ObjectStateData';
+import { CONFLICT_LOGGER } from '../constants'
 
 /**
  * Object state manager using a hash field on object
