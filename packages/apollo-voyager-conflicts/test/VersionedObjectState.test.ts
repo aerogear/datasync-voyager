@@ -5,7 +5,6 @@ import { VersionedObjectState } from '../src'
 describe('Versioned ObjectState', () => {
 
   it('With conflict', () => {
-
     const objectState = new VersionedObjectState()
     const serverData = {name: 'AeroGear', version: 1}
     const clientData = {name: 'Red Hat', version: 2}
@@ -23,13 +22,9 @@ describe('Versioned ObjectState', () => {
   })
 
   it('Next stage ', () => {
-
     const serverData = {name: 'AeroGear', version: 1}
-
     const objectState = new VersionedObjectState()
     objectState.next(serverData)
-
     expect(serverData.version).eq(2)
   })
-
 })
