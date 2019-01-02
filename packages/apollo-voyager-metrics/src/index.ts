@@ -30,22 +30,33 @@ const serverResponseMetric = new Prometheus.Histogram({
   labelNames: ['request_type', 'error']
 })
 
-export function enableDefaultMetricsCollection () {
+export interface MetricsConfiguration {
+  path: string
+}
+
+export function applyMetricsMiddlewares(app: Application, config: MetricsConfiguration) {
+  enableDefaultMetricsCollection()
+  applyResponseLoggingMetricsMiddleware(app)
+  applyMetricsMiddleware(app, config)
+}
+
+function enableDefaultMetricsCollection () {
   if (!promMetricsEnabled) {
     Prometheus.collectDefaultMetrics()
     promMetricsEnabled = true
   }
 }
 
-export function applyResponseLoggingMetricsMiddleware (app: Application) {
+function applyResponseLoggingMetricsMiddleware (app: Application) {
   app.use(responseLoggingMetric as (req: IncomingMessage, res: Response, next: NextFunction) => void)
 }
 
-export function applyMetricsMiddleware (app: Application) {
-  app.get('/metrics', getMetrics)
+function applyMetricsMiddleware (app: Application, config: MetricsConfiguration) {
+  let path = config && config.path ? config.path : '/metrics'
+  app.get(path, app)
 }
 
-export function updateResolverMetrics (resolverInfo: any, responseTime: number) {
+function updateResolverMetrics (resolverInfo: any, responseTime: number) {
   const {
     operation: {operation: resolverMappingType},
     fieldName: resolverMappingName,
