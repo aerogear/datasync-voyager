@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
-const { makeExecutableSchema } = require('graphql-tools')
 
 const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
 const { KeycloakSecurityService } = require('../../packages/apollo-voyager-keycloak')
@@ -44,13 +43,6 @@ const keycloakService = new KeycloakSecurityService(keycloakConfig)
 // get the keycloak context provider and directives
 const schemaDirectives = keycloakService.getSchemaDirectives()
 
-const schema = makeExecutableSchema({ 
-  typeDefs,
-  resolvers,
-  // add the keycloak directives
-  schemaDirectives
-})
-
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
 const context = ({ req }) => {
@@ -62,7 +54,10 @@ const context = ({ req }) => {
 // Initialize the apollo voyager server with our schema and context
 
 const apolloConfig = { 
-  schema,
+  typeDefs,
+  resolvers,
+  // add the keycloak directives
+  schemaDirectives,
   context
 }
 
