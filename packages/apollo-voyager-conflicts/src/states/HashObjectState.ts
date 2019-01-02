@@ -1,6 +1,7 @@
 import * as debug from 'debug'
 import { ObjectState } from '../api/ObjectState'
 import { CONFLICT_LOGGER } from '../constants'
+import { ObjectStateData } from '../api/ObjectStateData';
 
 /**
  * Object state manager using a hash field on object
@@ -22,7 +23,8 @@ export class HashObjectState implements ObjectState {
     this.hash = hashImpl
   }
 
-  public hasConflict(serverData: any, clientData: any) {
+  public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
+
     if (serverData.hash && clientData.hash) {
       if (serverData.hash !== clientData.hash) {
         this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
@@ -32,7 +34,7 @@ export class HashObjectState implements ObjectState {
     return false
   }
 
-  public next = (currentObjectState: ConflictResolutionData): ConflictResolutionData => {
+  public next = (currentObjectState: ObjectStateData): ObjectStateData => {
     this.logger(`Moving object to next state, ${currentObjectState}`)
     currentObjectState.hash = this.hash(currentObjectState)
     return currentObjectState
