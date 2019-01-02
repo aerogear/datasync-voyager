@@ -5,7 +5,7 @@ import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
 import { CONFLICT_LOGGER } from '../constants'
 
-export const logger = debug(CONFLICT_LOGGER)
+const logger = debug(CONFLICT_LOGGER)
 
 /**
  * @param currentRecord the object state that the server knows about
