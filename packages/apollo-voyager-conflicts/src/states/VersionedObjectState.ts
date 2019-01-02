@@ -1,16 +1,24 @@
 import * as debug from 'debug'
-import { ConflictResolutionData } from './conflictHandlers'
-import { CONFLICT_LOGGER } from './constants'
-import { ObjectState } from './ObjectState'
+import { ObjectState } from '../api/ObjectState'
+import { ObjectStateData } from '../api/ObjectStateData'
+import { CONFLICT_LOGGER } from '../constants'
 
 /**
- * An out of the box object state manager using a version field
+ * Object state manager using a version field
  * Detects conflicts and allows moving to next state using the version field of the object
+ *
+ * VersionedObjectState requires GraphQL types to contain version field.
+ * For example:
+ *
+ * type User {
+ *   id: ID!
+ *   version: String
+ * }
  */
 export class VersionedObjectState implements ObjectState {
   private logger = debug.default(CONFLICT_LOGGER)
 
-  public hasConflict (serverData: any, clientData: any) {
+  public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
     if (serverData.version && clientData.version) {
       if (serverData.version !== clientData.version) {
         this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
@@ -20,7 +28,7 @@ export class VersionedObjectState implements ObjectState {
     return false
   }
 
-  public next = (currentObjectState: ConflictResolutionData): ConflictResolutionData => {
+  public next = (currentObjectState: ObjectStateData): ObjectStateData => {
     this.logger(`Moving object to next state, ${currentObjectState}`)
     currentObjectState.version = currentObjectState.version + 1
     return currentObjectState
