@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql'
-import { ObjectStateData } from '../ObjectStateData'
+import { ObjectStateData } from './ObjectStateData'
 
 /**
  * Data returned back to client wrapped in error objects.
