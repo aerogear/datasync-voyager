@@ -32,7 +32,7 @@ export interface ConflictData {
  * Conflict error that is being returned when server
  * Error specific to Voyager framework
  */
-export class DataConflictError extends GraphQLError {
+export class ObjectConflictError extends GraphQLError {
   public conflictInfo: any
 
   constructor(data: ConflictData) {
