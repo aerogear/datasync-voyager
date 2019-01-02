@@ -34,7 +34,7 @@ export class HashObjectState implements ObjectState {
     return false
   }
 
-  public next = (currentObjectState: ObjectStateData): ObjectStateData => {
+  public nextState(currentObjectState: ObjectStateData) {
     this.logger(`Moving object to next state, ${currentObjectState}`)
     currentObjectState.hash = this.hash(currentObjectState)
     return currentObjectState

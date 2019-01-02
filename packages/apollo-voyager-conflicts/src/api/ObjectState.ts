@@ -19,5 +19,5 @@ export interface ObjectState {
    *
    * @param currentObjectState the object wish you would like to progress to its next state
    */
-  next(currentObjectState: ObjectStateData): ObjectStateData
+  nextState(currentObjectState: ObjectStateData): ObjectStateData
 }

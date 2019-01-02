@@ -1,6 +1,6 @@
 import test from 'ava'
 import {
-  returnToClient
+  handleConflictOnClient
 } from '../src'
 
 test('Conflict Handlers - Return To Client', (t) => {
@@ -8,7 +8,7 @@ test('Conflict Handlers - Return To Client', (t) => {
   const clientData = { name: 'Red Hat', version: 2 }
 
   try {
-    returnToClient(serverData, clientData)
+    handleConflictOnClient(serverData, clientData)
   } catch (resolutionData) {
     t.deepEqual(resolutionData.conflictInfo.resolvedOnServer, false)
   }
