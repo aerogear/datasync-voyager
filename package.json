@@ -13,7 +13,7 @@
     "watch": "lerna exec --parallel --stream -- npm run watch",
     "release:prep": "./scripts/prepareRelease.sh",
     "release:validate": "./scripts/validateRelease.sh",
-    "publish": "lerna exec npm publish"
+    "publish": "lerna --no-private exec npm publish"
   },
   "dependencies": {},
   "devDependencies": {
