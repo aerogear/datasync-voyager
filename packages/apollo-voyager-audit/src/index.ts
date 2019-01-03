@@ -1,1 +1,1 @@
-export { auditLog } from './auditLog'
+export * from './auditLog'
