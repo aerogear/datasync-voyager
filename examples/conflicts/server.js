@@ -1,6 +1,6 @@
 const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
-
+const queries = require("./queries")
 const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
 
 const { conflictHandler, handleConflictOnClient } = require('../../packages/apollo-voyager-conflicts')
@@ -24,22 +24,23 @@ const typeDefs = gql`
 `
 // In Memory Data Source
 let hello = {
-  to: "Stewo Hapala",
+  to: 'Stewo Hapala',
   version: 1
 }
 
 // Resolver functions. This is our business logic
 const resolvers = {
   Mutation: {
-    changeHello: (obj, clientData) => {
-      if (conflictHandler.hasConflict(hello, clientData)) {
-        return handleConflictOnClient(hello, clientData)
+    changeHello: (obj, args, context, info) => {
+      if (conflictHandler.hasConflict(hello, args)) {
+        return handleConflictOnClient(hello, args)
       }
-      return hello = conflictHandler.nextState(clientData)
+      hello = conflictHandler.nextState(args)
+      return hello
     }
   },
   Query: {
-    hello: () => {
+    hello: (obj, args, context, info) => {
       return hello.to;
     }
   }
@@ -59,18 +60,10 @@ const context = ({ req }) => {
 const server = ApolloVoyagerServer({
   playground: {
     tabs: [{
-      query: `
-          mutation changeHello {
-            changeHello(to: "Me!", version: 1){
-              to
-              version
-            }
-          }
-
-          query hello {
-            hello
-          }
-    `}]
+      endpoint: '/graphql',
+      variables: {},
+      query: queries
+    }]
   },
   schema,
   context

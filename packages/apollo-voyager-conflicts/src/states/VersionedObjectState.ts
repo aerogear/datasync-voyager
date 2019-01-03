@@ -19,11 +19,10 @@ export class VersionedObjectState implements ObjectState {
   private logger = debug.default(CONFLICT_LOGGER)
 
   public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
-    if (serverData.version && clientData.version) {
-      if (serverData.version !== clientData.version) {
-        this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
-        return true
-      }
+    if (serverData.version && clientData.version &&
+      serverData.version !== clientData.version) {
+      this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
+      return true
     }
     return false
   }

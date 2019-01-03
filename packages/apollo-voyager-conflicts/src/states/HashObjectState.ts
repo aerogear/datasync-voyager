@@ -24,12 +24,10 @@ export class HashObjectState implements ObjectState {
   }
 
   public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
-
-    if (serverData.hash && clientData.hash) {
-      if (serverData.hash !== clientData.hash) {
-        this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
-        return true
-      }
+    if (serverData.hash && clientData.hash
+      && serverData.hash !== clientData.hash) {
+      this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
+      return true
     }
     return false
   }
