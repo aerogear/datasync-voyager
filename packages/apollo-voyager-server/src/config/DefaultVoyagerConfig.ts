@@ -1,8 +1,8 @@
+import { AuditLogger } from '../audit'
+import { DefaultAuditLogger } from '../audit/DefaultAuditLogger'
 import { DefaultSecurityService } from '../security/DefaultSecurityService'
 import { SecurityService } from '../security/SecurityService'
 import { VoyagerConfig } from './VoyagerConfig'
-import { AuditLogger } from '../audit';
-import { DefaultAuditLogger } from '../audit/DefaultAuditLogger';
 
 export class DefaultVoyagerConfig implements VoyagerConfig {
   /**

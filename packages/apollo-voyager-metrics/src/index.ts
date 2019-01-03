@@ -34,7 +34,7 @@ export interface MetricsConfiguration {
   path: string
 }
 
-export function applyMetricsMiddlewares(app: Application, config: MetricsConfiguration) {
+export function applyMetricsMiddlewares (app: Application, config: MetricsConfiguration) {
   enableDefaultMetricsCollection()
   applyResponseLoggingMetricsMiddleware(app)
   applyMetricsMiddleware(app, config)
@@ -52,7 +52,7 @@ function applyResponseLoggingMetricsMiddleware (app: Application) {
 }
 
 function applyMetricsMiddleware (app: Application, config: MetricsConfiguration) {
-  let path = config && config.path ? config.path : '/metrics'
+  const path = config && config.path ? config.path : '/metrics'
   app.get(path, app)
 }
 
