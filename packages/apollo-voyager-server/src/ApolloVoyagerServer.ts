@@ -21,13 +21,13 @@ export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConf
   }
 
   const voyagerConfig = new DefaultVoyagerConfig().merge(clientVoyagerConfig)
-  
+
   // Build the context provider using user supplied context
   const contextProviderConfig = { userContext: context, ...voyagerConfig }
 
   const contextProvider = new ApolloVoyagerContextProvider(contextProviderConfig)
   const schemaDirectives = buildSchemaDirectives(baseApolloConfig, voyagerConfig)
-  
+
   const apolloConfig = { ...baseApolloConfig, context: contextProvider.getContext(), schemaDirectives }
 
   const server = new ApolloServer(apolloConfig)
