@@ -8,40 +8,40 @@ const { conflictHandler, handleConflictOnClient } = require('../../packages/apol
 
 // Types
 const typeDefs = gql`
-  type Hello {
-    to: String
+  type Greeting {
+    msg: String
     ## Can be used to track conflicts
     version: Int
   }
 
   type Query {
-    hello: String
+    greeting: String
   }
 
   type Mutation {
-    changeHello(to: String!, version: Int!): Hello
+    changeGreeting(msg: String!, version: Int!): Greeting
   }
 `
 // In Memory Data Source
-let hello = {
-  to: 'Voyager Server',
+let greeting = {
+  msg: 'greeting from Voyager Server',
   version: 1
 }
 
 // Resolver functions. This is our business logic
 const resolvers = {
   Mutation: {
-    changeHello: (obj, args, context, info) => {
-      if (conflictHandler.hasConflict(hello, args)) {
-        return handleConflictOnClient(hello, args)
+    changeGreeting: (obj, args, context, info) => {
+      if (conflictHandler.hasConflict(greeting, args)) {
+        return handleConflictOnClient(greeting, args)
       }
-      hello = conflictHandler.nextState(args)
-      return hello
+      greeting = conflictHandler.nextState(args)
+      return greeting
     }
   },
   Query: {
-    hello: (obj, args, context, info) => {
-      return hello.to;
+    greeting: (obj, args, context, info) => {
+      return greeting.msg;
     }
   }
 }

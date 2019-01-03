@@ -1,13 +1,13 @@
 const queries =
-`mutation changeHello {
-  changeHello(to: "GraphQL developer", version: 1){
-    to
+`mutation changeGreeting {
+  changeGreeting(msg: "Hello from GraphQL developer", version: 1){
+    msg
     version
   }
 }
 
-query hello {
-  hello
+query greeting {
+  greeting
 }`
 
 module.exports = queries
