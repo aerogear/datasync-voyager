@@ -1,5 +1,4 @@
 const express = require('express')
-const { makeExecutableSchema } = require('graphql-tools')
 
 const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
 const metrics = require('../../packages/apollo-voyager-metrics')
