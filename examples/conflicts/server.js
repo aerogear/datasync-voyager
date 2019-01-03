@@ -24,7 +24,7 @@ const typeDefs = gql`
 `
 // In Memory Data Source
 let hello = {
-  to: 'Stewo Hapala',
+  to: 'Voyager Server',
   version: 1
 }
 
