@@ -1,5 +1,5 @@
+import { AuditLogger } from '../audit'
 import { SecurityService } from '../security/SecurityService'
-import { AuditLogger } from '../audit';
 
 export interface VoyagerContextProviderConfig {
   userContext?: any,

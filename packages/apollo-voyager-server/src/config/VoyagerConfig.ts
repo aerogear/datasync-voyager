@@ -1,6 +1,6 @@
-import { SecurityService } from '../security/SecurityService'
-import { Metrics } from '../metrics'
 import { AuditLogger } from '../audit'
+import { Metrics } from '../metrics'
+import { SecurityService } from '../security/SecurityService'
 
 export interface VoyagerConfig {
 

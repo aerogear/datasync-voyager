@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http'
+import { AuditLogger } from '../audit'
 import { VoyagerContextProviderConfig } from './VoyagerContextConfig'
-import { AuditLogger } from '../audit';
 
 type ContextFunction = (object: any) => any
 

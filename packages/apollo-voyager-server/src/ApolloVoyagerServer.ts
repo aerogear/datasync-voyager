@@ -1,9 +1,9 @@
 'use strict'
+import { ResolverMappings } from '@aerogear/apollo-voyager-tools'
 import { ApolloServer, Config } from 'apollo-server-express'
 import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig'
 import { VoyagerConfig } from './config/VoyagerConfig'
 import { ApolloVoyagerContextProvider } from './context/ApolloVoyagerContextProvider'
-import { ResolverMappings } from '@aerogear/apollo-voyager-tools'
 import { voyagerResolvers } from './voyagerResolver'
 
 /**
