@@ -12,7 +12,7 @@ import { voyagerResolvers } from './voyagerResolver'
  * @param baseApolloConfig
  */
 export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: VoyagerConfig): ApolloServer {
-  const { typeDefs, resolvers, schema, context } = baseApolloConfig
+  const { typeDefs, resolvers, context } = baseApolloConfig
 
   if (typeDefs && resolvers) {
     if (clientVoyagerConfig && (clientVoyagerConfig.auditLogger || clientVoyagerConfig.metrics)) {
@@ -20,13 +20,31 @@ export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConf
     }
   }
 
-  // Build the context provider using user supplied context
   const voyagerConfig = new DefaultVoyagerConfig().merge(clientVoyagerConfig)
+  
+  // Build the context provider using user supplied context
   const contextProviderConfig = { userContext: context, ...voyagerConfig }
 
   const contextProvider = new ApolloVoyagerContextProvider(contextProviderConfig)
-  const apolloConfig = { ...baseApolloConfig, context: contextProvider.getContext() }
+  const schemaDirectives = buildSchemaDirectives(baseApolloConfig, voyagerConfig)
+  
+  const apolloConfig = { ...baseApolloConfig, context: contextProvider.getContext(), schemaDirectives }
 
   const server = new ApolloServer(apolloConfig)
   return server
+}
+
+function buildSchemaDirectives(apolloConfig: Config, voyagerConfig: VoyagerConfig) {
+  const userDirectives = apolloConfig.schemaDirectives
+  const securityDirectives = voyagerConfig.securityService.getSchemaDirectives()
+
+  if (userDirectives && securityDirectives) {
+    return { ...userDirectives, ...securityDirectives }
+  }
+  if (securityDirectives) {
+    return securityDirectives
+  }
+  if (userDirectives) {
+    return userDirectives
+  }
 }

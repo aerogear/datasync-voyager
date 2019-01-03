@@ -40,9 +40,6 @@ const resolvers = {
 // Initialize the keycloak service
 const keycloakService = new KeycloakSecurityService(keycloakConfig)
 
-// get the keycloak context provider and directives
-const schemaDirectives = keycloakService.getSchemaDirectives()
-
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
 const context = ({ req }) => {
@@ -56,8 +53,6 @@ const context = ({ req }) => {
 const apolloConfig = { 
   typeDefs,
   resolvers,
-  // add the keycloak directives
-  schemaDirectives,
   context
 }
 
