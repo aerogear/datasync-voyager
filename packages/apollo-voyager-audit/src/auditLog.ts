@@ -24,6 +24,9 @@ interface AuditLogger {
 const log = pino()
 const auditLogger: AuditLogger = log.child({tag: 'AUDIT'})
 
+// You might be thinking this function is really similar to the one below. It is.
+// However, I tried to break this down and avoid repetition and the resulting code was actually harder to understand
+// It's not worth it ;)
 export function auditLog (msg: string, obj: any, args: any, context: any, info: GraphQLResolveInfo) {
   auditLogger.info({
     audit: {
