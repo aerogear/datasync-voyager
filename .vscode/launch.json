@@ -23,6 +23,15 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Launch Audit Logging Example",
+      "program": "${workspaceFolder}/examples/auditLogging/server.js",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Conflict Example",
       "program": "${workspaceFolder}/examples/conflicts/server.js",
       "outFiles": [
