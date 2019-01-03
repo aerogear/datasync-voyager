@@ -1,5 +1,6 @@
 import { IncomingMessage } from 'http'
 import { VoyagerContextProviderConfig } from './VoyagerContextConfig'
+import { AuditLogger } from '../audit';
 
 type ContextFunction = (object: any) => any
 
@@ -11,6 +12,7 @@ type ContextFunction = (object: any) => any
 export class ApolloVoyagerContextProvider {
 
   public config: VoyagerContextProviderConfig
+  public auditLogger: AuditLogger
   public authContextProvider: any
   public userContextFunction: any
   public userContextObject: any
@@ -24,9 +26,8 @@ export class ApolloVoyagerContextProvider {
       this.userContextObject = this.config.userContext
     }
 
-    if (this.config.securityService) {
-      this.authContextProvider = this.config.securityService.getAuthContextProvider()
-    }
+    this.authContextProvider = this.config.securityService.getAuthContextProvider()
+    this.auditLogger = config.auditLogger
   }
 
   /**
@@ -61,7 +62,8 @@ export class ApolloVoyagerContextProvider {
   private getDefaultContext ({ req }: { req: IncomingMessage }): {[key: string]: any} {
     const defaultContext: {[key: string]: any} = {
       request: req,
-      auth: new this.authContextProvider({ req })
+      auth: new this.authContextProvider({ req }),
+      auditLog: this.auditLogger.auditLog
     }
     return defaultContext
   }

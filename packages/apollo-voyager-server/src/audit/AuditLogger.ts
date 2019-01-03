@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql'
 
 export interface AuditLogger {
-  auditLog (success: boolean, context: any, info: GraphQLResolveInfo, parent: any, args: any, msg: string): void
+  logResolverCompletion (msg: string, success: boolean, obj: any, args: any, context: any, info: GraphQLResolveInfo): void
+  auditLog(msg: string, obj: any, args: any, context: any, info: GraphQLResolveInfo): void
 }
