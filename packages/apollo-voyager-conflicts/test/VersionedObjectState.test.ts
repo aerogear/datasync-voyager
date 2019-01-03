@@ -19,6 +19,6 @@ test('Without conflict', (t) => {
 test('Next state ', (t) => {
   const serverData = { name: 'AeroGear', version: 1 }
   const objectState = new VersionedObjectState()
-  objectState.nextState(serverData)
-  t.deepEqual(serverData.version, 2)
+  const next = objectState.nextState(serverData)
+  t.deepEqual(next.version, 2)
 })

@@ -1,6 +1,6 @@
 const queries =
 `mutation changeHello {
-  changeHello(to: "Me!", version: 1){
+  changeHello(to: "GraphQL developer", version: 1){
     to
     version
   }

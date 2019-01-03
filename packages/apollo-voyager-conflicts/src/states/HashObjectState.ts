@@ -4,16 +4,7 @@ import { ObjectStateData } from '../api/ObjectStateData'
 import { CONFLICT_LOGGER } from '../constants'
 
 /**
- * Object state manager using a hash field on object
- * Detects conflicts and allows moving to next state using the hash field of the object
- *
- * HashObjectState requires GraphQL types to contain hash field.
- * For example:
- *
- * type User {
- *   id: ID!
- *   hash: String
- * }
+ * Object state manager using a hashing method provided by user
  */
 export class HashObjectState implements ObjectState {
   private logger = debug.default(CONFLICT_LOGGER)
@@ -24,17 +15,14 @@ export class HashObjectState implements ObjectState {
   }
 
   public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
-    if (serverData.hash && clientData.hash
-      && serverData.hash !== clientData.hash) {
-      this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
+    if (this.hash(serverData) !== this.hash(clientData)) {
       return true
     }
     return false
   }
 
   public nextState(currentObjectState: ObjectStateData) {
-    this.logger(`Moving object to next state, ${currentObjectState}`)
-    currentObjectState.hash = this.hash(currentObjectState)
+    // Hash can be calculated at any time and it is not added to object
     return currentObjectState
   }
 }
