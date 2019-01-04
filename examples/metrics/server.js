@@ -3,8 +3,6 @@ const express = require('express')
 const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
 const metrics = require('../../packages/apollo-voyager-metrics')
 
-const auditLogger = require('../../packages/apollo-voyager-audit')
-
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
   type Query {
@@ -36,7 +34,6 @@ const apolloConfig = {
 }
 
 const voyagerConfig = {
-  auditLogger,
   metrics
 }
 
@@ -44,6 +41,7 @@ const voyagerConfig = {
 const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
 
 const app = express()
+
 metrics.applyMetricsMiddlewares(app)
 
 server.applyMiddleware({ app })
