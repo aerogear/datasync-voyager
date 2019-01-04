@@ -7,7 +7,6 @@ import { CONFLICT_LOGGER } from '../constants'
  * Object state manager using a hashing method provided by user
  */
 export class HashObjectState implements ObjectState {
-  private logger = debug.default(CONFLICT_LOGGER)
   private hash: (object: any) => string
 
   constructor(hashImpl: (object: any) => string) {
