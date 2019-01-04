@@ -4,8 +4,6 @@ import { Application } from 'express'
 import { IncomingMessage } from 'http'
 import Prometheus from 'prom-client'
 
-let promMetricsEnabled = false
-
 const resolverTimingMetric = new Prometheus.Histogram({
   name: 'resolver_timing_ms',
   help: 'Resolver response time in milliseconds',
@@ -34,26 +32,15 @@ export interface MetricsConfiguration {
   path: string
 }
 
+/**
+ * 
+ * @param app 
+ * @param config 
+ */
 export function applyMetricsMiddlewares (app: Application, config: MetricsConfiguration) {
-  enableDefaultMetricsCollection()
-  applyResponseLoggingMetricsMiddleware(app)
-  applyMetricsMiddleware(app, config)
-}
-
-function enableDefaultMetricsCollection () {
-  if (!promMetricsEnabled) {
-    Prometheus.collectDefaultMetrics()
-    promMetricsEnabled = true
-  }
-}
-
-function applyResponseLoggingMetricsMiddleware (app: Application) {
+  Prometheus.collectDefaultMetrics()
   app.use(responseLoggingMetric as (req: IncomingMessage, res: Response, next: NextFunction) => void)
-}
-
-function applyMetricsMiddleware (app: Application, config: MetricsConfiguration) {
-  const path = config && config.path ? config.path : '/metrics'
-  app.get(path, app)
+  applyMetricsMiddleware(app, config)
 }
 
 export function updateResolverMetrics (resolverInfo: any, responseTime: number) {
@@ -91,6 +78,11 @@ export function updateResolverMetrics (resolverInfo: any, responseTime: number) 
       path
     )
     .inc(1)
+}
+
+function applyMetricsMiddleware (app: Application, config: MetricsConfiguration) {
+  const path = config && config.path ? config.path : '/metrics'
+  app.get(path, app)
 }
 
 ///////////////////////////////////////////////////////////////
