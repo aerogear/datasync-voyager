@@ -1,11 +1,11 @@
 'use strict'
 import { ResolverMappings } from '@aerogear/apollo-voyager-tools'
 import { ApolloServer, Config } from 'apollo-server-express'
+import { buildSchemaDirectives } from './buildSchemaDirectives'
 import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig'
 import { VoyagerConfig } from './config/VoyagerConfig'
 import { ApolloVoyagerContextProvider } from './context/ApolloVoyagerContextProvider'
 import { voyagerResolvers } from './voyagerResolver'
-import { buildSchemaDirectives } from './buildSchemaDirectives'
 
 /**
  *
@@ -34,4 +34,3 @@ export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConf
   const server = new ApolloServer(apolloConfig)
   return server
 }
-

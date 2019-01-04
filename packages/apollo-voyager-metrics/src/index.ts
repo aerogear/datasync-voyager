@@ -33,9 +33,9 @@ export interface MetricsConfiguration {
 }
 
 /**
- * 
- * @param app 
- * @param config 
+ *
+ * @param app
+ * @param config
  */
 export function applyMetricsMiddlewares (app: Application, config: MetricsConfiguration) {
   Prometheus.collectDefaultMetrics()
