@@ -5,6 +5,7 @@ import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig'
 import { VoyagerConfig } from './config/VoyagerConfig'
 import { ApolloVoyagerContextProvider } from './context/ApolloVoyagerContextProvider'
 import { voyagerResolvers } from './voyagerResolver'
+import { buildSchemaDirectives } from './buildSchemaDirectives'
 
 /**
  *
@@ -34,17 +35,3 @@ export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConf
   return server
 }
 
-function buildSchemaDirectives(apolloConfig: Config, voyagerConfig: VoyagerConfig) {
-  const userDirectives = apolloConfig.schemaDirectives
-  const securityDirectives = voyagerConfig.securityService.getSchemaDirectives()
-
-  if (userDirectives && securityDirectives) {
-    return { ...userDirectives, ...securityDirectives }
-  }
-  if (securityDirectives) {
-    return securityDirectives
-  }
-  if (userDirectives) {
-    return userDirectives
-  }
-}
