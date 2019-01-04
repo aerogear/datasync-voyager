@@ -24,3 +24,7 @@ The [Examples Guide](./doc/guides/examples.md) walks through some example applic
 
 * [Basic Example Application](./doc/guides/examples.md#basic-example) - This typical hello world example shows how to set up Apollo Voyager Server.
 * [Application with Authentication and RBAC](./doc/guides/examples.md#keycloak-example) - This example shows how to add authentication and and role based access control to your application using [Keycloak](https://www.keycloak.org/)
+
+## API Docs
+
+The [API Documentation Page](./doc/api/api.md) links to the documentation for the individual packages included in this repo. The documentation is a work in progress.
