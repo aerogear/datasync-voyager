@@ -16,6 +16,14 @@ test('Without conflict', (t) => {
   t.deepEqual(objectState.hasConflict(serverData, clientData), false)
 })
 
+test('Missing version', (t) => {
+  const objectState = new VersionedObjectState()
+  const serverData = { name: 'AeroGear'}
+  const clientData = { name: 'AeroGear', version: 1 }
+
+  t.deepEqual(objectState.hasConflict(serverData, clientData), false)
+})
+
 test('Next state ', (t) => {
   const serverData = { name: 'AeroGear', version: 1 }
   const objectState = new VersionedObjectState()
