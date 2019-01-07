@@ -9,14 +9,12 @@ import { ObjectStateData } from './ObjectStateData'
 export interface ObjectState {
 
   /**
-   *
    * @param serverData the data currently on the server
    * @param clientData the data the client wishes to perform some mutation with
    */
   hasConflict(serverData: ObjectStateData, clientData: ObjectStateData): boolean
 
   /**
-   *
    * @param currentObjectState the object wish you would like to progress to its next state
    */
   nextState(currentObjectState: ObjectStateData): ObjectStateData

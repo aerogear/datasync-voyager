@@ -33,10 +33,10 @@ export interface ConflictData {
  * Error specific to Voyager framework
  */
 export class ObjectConflictError extends GraphQLError {
-  public conflictInfo: any
+  public conflictInfo: ConflictData
 
   constructor(data: ConflictData) {
-    super('VoyagerConflict')
+    super('GraphQLConflict')
     this.conflictInfo = data
   }
 }
