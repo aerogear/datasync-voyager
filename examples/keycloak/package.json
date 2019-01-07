@@ -1,0 +1,22 @@
+{
+  "name": "apollo-voyager-keycloak-example",
+  "version": "0.1.7",
+  "description": "",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aerogear/apollo-voyager-audit": "^0.1.7",
+    "@aerogear/apollo-voyager-keycloak": "^0.1.7",
+    "@aerogear/apollo-voyager-metrics": "^0.1.7",
+    "@aerogear/apollo-voyager-server": "^0.1.7",
+    "express": "^4.16.4",
+    "graphql-tools": "^4.0.3",
+    "graphql": "^0.13.2"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.3"
+  }
+}

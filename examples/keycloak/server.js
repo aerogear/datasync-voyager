@@ -2,11 +2,11 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 
-const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
-const { KeycloakSecurityService } = require('../../packages/apollo-voyager-keycloak')
+const { ApolloVoyagerServer, gql } = require('@aerogear/apollo-voyager-server')
+const { KeycloakSecurityService } = require('@aerogear/apollo-voyager-keycloak')
 
-
-const keycloakConfig = JSON.parse(fs.readFileSync(path.resolve(__dirname, './config/keycloak.json')))
+const keycloakConfigPath = process.env.KEYCLOAK_CONFIG || path.resolve(__dirname, './config/keycloak.json')
+const keycloakConfig = JSON.parse(fs.readFileSync(keycloakConfigPath))
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
