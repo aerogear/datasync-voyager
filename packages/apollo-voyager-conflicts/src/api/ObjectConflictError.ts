@@ -20,6 +20,11 @@ export interface ConflictData {
   clientData?: ObjectStateData
 
   /**
+   * Base data that before server side changes that caused conflict were applied
+   */
+  baseData?: ObjectStateData
+
+  /**
    * Flag used to inform client that conflict was already resolved on the server
    * and no further processing is needed. When flag is true `serverData` field will contain
    * resolved information. If value is false client will need to resolve conflict on their side
