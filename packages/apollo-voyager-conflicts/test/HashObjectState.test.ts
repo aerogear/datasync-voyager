@@ -16,9 +16,9 @@ test('Without conflict', (t) => {
   t.deepEqual(objectState.hasConflict(serverData, clientData), false)
 })
 
-test('Next state ', (t) => {
+test('Next state ', async (t) => {
   const serverData = { name: 'AeroGear' }
   const objectState = new HashObjectState((data) => JSON.stringify(data))
-  const next = objectState.nextState(serverData)
+  const next = await objectState.nextState(serverData)
   t.deepEqual(serverData, next)
 })

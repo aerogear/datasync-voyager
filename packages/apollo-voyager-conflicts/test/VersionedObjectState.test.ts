@@ -24,9 +24,9 @@ test('Missing version', (t) => {
   t.deepEqual(objectState.hasConflict(serverData, clientData), false)
 })
 
-test('Next state ', (t) => {
+test('Next state ', async (t) => {
   const serverData = { name: 'AeroGear', version: 1 }
   const objectState = new VersionedObjectState()
-  const next = objectState.nextState(serverData)
+  const next = await objectState.nextState(serverData)
   t.deepEqual(next.version, 2)
 })
