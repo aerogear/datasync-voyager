@@ -2,6 +2,8 @@
 export * from './api/ObjectState'
 export * from './api/ObjectConflictError'
 export * from './api/ObjectStateData'
+export * from './api/StatePersistence'
+export * from './api/ConflictLogger'
 
 // State implementations
 export * from './states/VersionedObjectState'

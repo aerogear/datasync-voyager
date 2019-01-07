@@ -1,3 +1,4 @@
+import { ConflictLogger } from './ConflictLogger'
 import { ObjectStateData } from './ObjectStateData'
 import { StatePersistence } from './StatePersistence'
 
@@ -36,4 +37,10 @@ export interface ObjectState {
    * @param statePersistence implementation for state persistence
    */
   enableStatePersistence(statePersistence: StatePersistence): void
+
+  /**
+   * Enable logging for conflict resolution package
+   * @param logger - logger implementation
+   */
+  enableLogging(logger: ConflictLogger): void
 }
