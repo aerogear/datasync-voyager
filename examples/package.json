@@ -7,7 +7,7 @@
     "compile": "exit 0",
     "watch": "exit 0",
     "compile:clean": "exit 0",
-    "test": "exit 0"
+    "test": "ava 'test/*.test.js'"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -20,6 +20,8 @@
     "graphql-tools": "^4.0.3"
   },
   "devDependencies": {
-    "@types/graphql": "^14.0.3"
+    "@types/graphql": "^14.0.3",
+    "ava": "^1.0.1",
+    "axios": "^0.18.0"
   }
 }
