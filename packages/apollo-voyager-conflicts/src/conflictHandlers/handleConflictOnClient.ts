@@ -2,9 +2,6 @@ import debug from 'debug'
 import { ConflictResolutionHandler } from '../api/ConflictHandler'
 import { ObjectConflictError } from '../api/ObjectConflictError'
 import { ObjectStateData } from '../api/ObjectStateData'
-import { CONFLICT_LOGGER } from '../constants'
-
-const logger = debug(CONFLICT_LOGGER)
 
 /**
  * @param currentRecord the object state that the server knows about
@@ -12,10 +9,6 @@ const logger = debug(CONFLICT_LOGGER)
  */
 export const handleConflictOnClient: ConflictResolutionHandler =
   (serverState: ObjectStateData, clientState: ObjectStateData) => {
-    logger(`Conflict detected.
-    Sending data to resolve conflict on client
-    Server: ${serverState} client: ${clientState}`)
-
     throw new ObjectConflictError({
       clientData: clientState,
       serverData: serverState,
