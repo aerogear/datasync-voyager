@@ -1,13 +1,13 @@
-import * as debug from 'debug'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
-import { CONFLICT_LOGGER } from '../constants'
+import { StatePersistence } from '../api/StatePersistence'
 
 /**
  * Object state manager using a hashing method provided by user
  */
 export class HashObjectState implements ObjectState {
   private hash: (object: any) => string
+  private statePersistence?: StatePersistence
 
   constructor(hashImpl: (object: any) => string) {
     this.hash = hashImpl
@@ -20,8 +20,21 @@ export class HashObjectState implements ObjectState {
     return false
   }
 
-  public nextState(currentObjectState: ObjectStateData) {
+  public async nextState(currentObjectState: ObjectStateData) {
+    if (this.statePersistence) {
+      this.statePersistence.persist(currentObjectState)
+    }
     // Hash can be calculated at any time and it is not added to object
     return currentObjectState
+  }
+
+  public async previousState(currentObjectState: ObjectStateData) {
+    if (this.statePersistence) {
+      return await this.statePersistence.fetch(currentObjectState)
+    }
+  }
+
+  public enableStatePersistence(statePersistence: StatePersistence): void {
+    this.statePersistence = statePersistence
   }
 }

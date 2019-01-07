@@ -1,4 +1,5 @@
 import { ObjectStateData } from './ObjectStateData'
+import { StatePersistence } from './StatePersistence'
 
 /**
  * Interface for handling changing state of the object.
@@ -17,5 +18,22 @@ export interface ObjectState {
   /**
    * @param currentObjectState the object wish you would like to progress to its next state
    */
-  nextState(currentObjectState: ObjectStateData): ObjectStateData
+  nextState(currentObjectState: ObjectStateData): Promise<ObjectStateData>
+
+  /**
+   * Gets previous state from state persistence api
+   *
+   * @see enableDataHistory to enable state persistence api
+   * @param currentObjectState
+   */
+  previousState(currentObjectState: ObjectStateData): Promise<ObjectStateData>
+
+  /**
+   * Enables state persistence for ObjectState
+   * State persistence allows to retrieve previous versions of the
+   * objects in order to resolve data conflicts
+   *
+   * @param statePersistence implementation for state persistence
+   */
+  enableStatePersistence(statePersistence: StatePersistence): void
 }
