@@ -36,3 +36,15 @@ Run the linter.
 ```
 npm run lint
 ```
+
+Run the tests of example apps
+
+``` bash
+docker-compose -f examples/keycloak/config/docker-compose.yml up
+# Wait for keycloak instance to spin up and in other terminal window run
+cd examples && npm run test-examples
+```
+
+> **Note**
+>
+> If you comment out the `test.after.always` function call in [examples/test/keycloak.test.js](../../examples/test/keycloak.test.js) and run the tests, the configuration of Keycloak instance will remain, so you can use it for development. Look into the test and [examples/test/util/configureKeycloak.js](../../examples/test/util/configureKeycloak.js) file to get the list of users, roles and login password.

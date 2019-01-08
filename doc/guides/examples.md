@@ -91,6 +91,6 @@ query hello {
 
 ### Role Based Access Control
 
-The query above will only work if the authenticated user has the `admin` role. You can see this rule being applied with the `@hasRole(role: "admin")` directive in [examples/keycloak/server.js](examples/keycloak/server.js#L22).
+The query above will only work if the authenticated user has the `admin` role. You can see this rule being applied with the `@hasRole(role: "admin")` directive in [examples/keycloak/server.js](../../examples/keycloak/server.js#L22).
 
 Try change the the role to a made up role and restart the server. Try the sample query again and verify that an error is displayed.
