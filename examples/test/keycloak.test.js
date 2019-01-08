@@ -2,17 +2,16 @@ const test = require('ava')
 const axios = require('axios')
 
 const localKeycloak = require('./util/configureKeycloak')
-const { app, server } = require('../keycloak/server')
+
 const getAuthToken = require('./util/getAuthToken')
 
 process.env.KEYCLOAK_CONFIG_FILE = require('path').resolve(__dirname, '../keycloak/config/keycloak.json')
 const keycloakConfig = require(process.env.KEYCLOAK_CONFIG_FILE)
 
-const TEST_PASSWORD = 'admin'
+const exampleAppPort = 4000
+let exampleAppGraphqlPath
 
-// Run Keycloak Example Application
-const port = 4000
-app.listen({ port })
+const TEST_PASSWORD = 'admin'
 
 // Used in CI
 function modifyKeycloakServerUrl (url) {
@@ -28,7 +27,7 @@ async function sendQuery(token, maxRedirects) {
   }
   return await axios({
       method: 'POST',
-      url: `http://localhost:${port}${server.graphqlPath}`,
+      url: `http://localhost:${exampleAppPort}${exampleAppGraphqlPath}`,
       data: {
           "query":"{ hello }"
       },
@@ -42,6 +41,12 @@ test.before(async () => {
   if (process.env.KEYCLOAK_HOST && process.env.KEYCLOAK_PORT) {
     modifyKeycloakServerUrl(`http://${process.env.KEYCLOAK_HOST}:${process.env.KEYCLOAK_PORT}/auth`)
   }
+  // Run Keycloak Example Application
+  const { app, server } = require('../keycloak/server')
+  app.listen({ port: exampleAppPort })
+  exampleAppGraphqlPath = server.graphqlPath
+
+  // Configure Keycloak (users, roles)
   await localKeycloak.prepareKeycloak(keycloakConfig['auth-server-url'], TEST_PASSWORD)
 })
 
@@ -51,7 +56,7 @@ test.after.always(async () => {
 
 test('Unauthenticated request (with invalid token) should fail', async t => {
   try {
-    const res = await sendQuery(undefined, 0)
+    await sendQuery(undefined, 0)
     t.fail('unauthenticated request passed')
   } catch (e) {
     t.deepEqual(e.response.status, 302, 'Improper HTTP redirection to Keycloak')
