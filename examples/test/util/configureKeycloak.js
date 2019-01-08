@@ -1,5 +1,5 @@
 const axios = require('axios')
-const realmToImport = require('../config/realm-export.json')
+const realmToImport = require('../../keycloak/config/realm-export.json')
 
 
 const config = {

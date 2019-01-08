@@ -5,7 +5,7 @@ const localKeycloak = require('./util/configureKeycloak')
 const { app, server } = require('../keycloak/server')
 const getAuthToken = require('./util/getAuthToken')
 
-process.env.KEYCLOAK_CONFIG_FILE = require('path').resolve(__dirname, './config/keycloak.json')
+process.env.KEYCLOAK_CONFIG_FILE = require('path').resolve(__dirname, '../keycloak/config/keycloak.json')
 const keycloakConfig = require(process.env.KEYCLOAK_CONFIG_FILE)
 
 const TEST_PASSWORD = 'admin'
