@@ -21,7 +21,7 @@ function modifyKeycloakServerUrl (url) {
   fs.writeFileSync(process.env.KEYCLOAK_CONFIG_FILE, JSON.stringify(keycloakConfig))
 }
 
-async function sendQuery(token) {
+async function sendQuery(token, maxRedirects) {
   const headers = { 'Content-Type': 'application/json' }
   if (token) {
     headers['Authorization'] = token
@@ -33,7 +33,7 @@ async function sendQuery(token) {
           "query":"{ hello }"
       },
       headers,
-      maxRedirects: 0
+      maxRedirects
   })
 }
 
@@ -51,7 +51,7 @@ test.after.always(async () => {
 
 test('Unauthenticated request (with invalid token) should fail', async t => {
   try {
-    const res = await sendQuery()
+    const res = await sendQuery(undefined, 0)
     t.fail('unauthenticated request passed')
   } catch (e) {
     t.deepEqual(e.response.status, 302, 'Improper HTTP redirection to Keycloak')
