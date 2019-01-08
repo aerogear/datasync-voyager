@@ -7,7 +7,7 @@
     "compile": "exit 0",
     "watch": "exit 0",
     "compile:clean": "exit 0",
-    "test-examples": "ava 'test/*.test.js'"
+    "test-examples": "ava --concurrency=1 test/*.test.js"
   },
   "author": "",
   "license": "Apache-2.0",
