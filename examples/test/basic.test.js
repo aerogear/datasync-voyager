@@ -18,8 +18,9 @@ async function sendQuery() {
 
 test('Test basic app functionality', async t => {
   try {
-    const res = await sendQuery();
-    t.deepEqual(res.status, 200);
+    const res = await sendQuery()
+    t.deepEqual(res.status, 200)
+    t.deepEqual(res.data.errors, undefined)
   } catch (error) {
     return console.error(error)
   }
