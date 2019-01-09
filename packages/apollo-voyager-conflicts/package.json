@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/apollo-voyager-conflicts",
-  "version": "0.1.0-alpha",
+  "version": "0.2.7-rc1",
   "description": "A package to provide conflict handler framework for GraphQL server",
   "main": "dist/index.js",
   "scripts": {
@@ -27,8 +27,6 @@
     "nyc": "^11.7.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
-  },
-  "dependencies": {
   },
   "publishConfig": {
     "access": "public"
