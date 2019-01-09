@@ -1,15 +1,15 @@
-import * as debug from 'debug'
+import { ConflictLogger } from '../api/ConflictLogger'
 import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
-import { CONFLICT_LOGGER } from '../constants'
 
 /**
  * Object state manager using a hashing method provided by user
  */
 export class HashObjectState implements ObjectState {
   private hash: (object: any) => string
+  private logger: ConflictLogger | undefined
 
   constructor(hashImpl: (object: any) => string) {
     this.hash = hashImpl
@@ -17,6 +17,10 @@ export class HashObjectState implements ObjectState {
 
   public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
     if (this.hash(serverData) !== this.hash(clientData)) {
+      if (this.logger) {
+        this.logger.info(`Conflict when saving data.
+        current: ${serverData}, client: ${clientData}`)
+      }
       return true
     }
     return false
@@ -31,15 +35,20 @@ export class HashObjectState implements ObjectState {
     return new ConflictResolution(false, serverState, clientState)
   }
 
-  public async resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
-     let resolvedState = strategy(serverState, clientState, baseState)
+  public async resolveOnServer(strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
+    let resolvedState = strategy(serverState, clientState, baseState)
 
-     if (resolvedState instanceof Promise) {
-       resolvedState = await resolvedState
-     }
+    if (resolvedState instanceof Promise) {
+      resolvedState = await resolvedState
+    }
 
-     resolvedState = this.nextState(resolvedState)
+    resolvedState = this.nextState(resolvedState)
 
-     return new ConflictResolution(true, resolvedState, clientState, baseState)
+    return new ConflictResolution(true, resolvedState, clientState, baseState)
   }
+
+  public enableLogging(logger: ConflictLogger): void {
+    this.logger = logger
+  }
+
 }

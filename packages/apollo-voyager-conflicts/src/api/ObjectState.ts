@@ -1,3 +1,4 @@
+import { ConflictLogger } from './ConflictLogger'
 import { ConflictResolution } from './ConflictResolution'
 import { ConflictResolutionStrategy } from './ConflictResolutionStrategy'
 import { ObjectStateData } from './ObjectStateData'
@@ -38,4 +39,10 @@ export interface ObjectState {
    * @param baseState the base object state that the client state is based off.
    */
   resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData): Promise<ConflictResolution>
+
+  /**
+   * Enable logging for conflict resolution package
+   * @param logger - logger implementation
+   */
+  enableLogging(logger: ConflictLogger): void
 }
