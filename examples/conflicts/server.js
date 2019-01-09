@@ -45,14 +45,10 @@ const resolvers = {
         const clientState = args
         const strategy = customGreetingResolutionStrategy
         
+        // resolvedState is the new record the user should persist
+        // payload is the specially built message that should be returned to the client
         const { resolvedState, payload } = await conflictHandler.resolveOnServer(strategy, serverState, clientState)
         greeting = resolvedState
-
-        // uncomment this code and comment out the code above to try client resolution
-
-        // const { payload } = conflictHandler.resolveOnClient(greeting, args)
-        // console.log(payload)
-        
         return payload
       }
       greeting = conflictHandler.nextState(args)
