@@ -6,10 +6,10 @@ If you have run the `npm run bootstrap` command, the dependencies should already
 
 ## Basic Example
 
-`basic/server.js` is the simplest example of how to use the `apollo-voyager-server` framework.
+`basic/index.js` is the simplest example of how to use the `apollo-voyager-server` framework.
 
 ```
-$ node examples/basic/server.js
+$ node examples/basic/index.js
 🚀 Server ready at http://localhost:4000/graphql
 ```
 
@@ -25,7 +25,7 @@ query hello {
 
 ## Keycloak Example
 
-`keycloak/server.js` shows how we can use the `KeycloakSecurityService` from `apollo-voyager-keycloak` to protect our app with Keycloak.
+`keycloak/index.js` shows how we can use the `KeycloakSecurityService` from `apollo-voyager-keycloak` to protect our app with Keycloak.
 
 This example shows 
 
@@ -54,7 +54,7 @@ docker-compose up
 ### Start the Server
 
 ```
-node examples/keycloak/server.js
+node examples/keycloak/index.js
 Initializing Keycloak authentication
 🚀 Server ready at http://localhost:4000/graphql
 ```
@@ -91,6 +91,6 @@ query hello {
 
 ### Role Based Access Control
 
-The query above will only work if the authenticated user has the `admin` role. You can see this rule being applied with the `@hasRole(role: "admin")` directive in [examples/keycloak/server.js](examples/keycloak/server.js#L22).
+The query above will only work if the authenticated user has the `admin` role. You can see this rule being applied with the `@hasRole(role: "admin")` directive in [examples/keycloak/server.js](../../examples/keycloak/server.js#L22).
 
 Try change the the role to a made up role and restart the server. Try the sample query again and verify that an error is displayed.
