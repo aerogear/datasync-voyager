@@ -65,7 +65,7 @@ test.serial('Sending a mutation with existing version number should return error
 
 test.serial('Sending a mutation following version number should not return error', async t => {
   try {
-    const res = await sendQuery(testQueries.mutation(2))
+    const res = await sendQuery(testQueries.mutation(3))
     t.deepEqual(res.status, 200)
     t.deepEqual(res.data.errors, undefined)
   } catch (error) {
@@ -78,7 +78,7 @@ test.serial(`Sending a query again should return the newest version of greeting 
     const res = await sendQuery(testQueries.greeting)
     t.deepEqual(res.status, 200)
     t.deepEqual(res.data.errors, undefined)
-    t.deepEqual(res.data.data.greeting, 'Hello2')
+    t.deepEqual(res.data.data.greeting, 'Hello3')
   } catch (error) {
     return console.error(error)
   }
