@@ -1,6 +1,6 @@
 const test = require('ava')
 const axios = require('axios')
-const { server, app } = require('../basic/server')
+const { server, app } = require('../auditLogging/server')
 
 const port = 4000
 app.listen({ port })
@@ -16,7 +16,7 @@ async function sendQuery() {
     });
 }
 
-test('Sending a request to basic example app should return OK status code and no errors', async t => {
+test('Sending a request to metrics example app should return OK status code and no errors', async t => {
   try {
     const res = await sendQuery()
     t.deepEqual(res.status, 200)
