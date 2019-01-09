@@ -3,7 +3,7 @@ const { makeExecutableSchema } = require('graphql-tools')
 const queries = require("./queries")
 const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
 
-const { conflictHandler, handleConflictOnClient } = require('../../packages/apollo-voyager-conflicts')
+const { conflictHandler } = require('../../packages/apollo-voyager-conflicts')
 
 
 // Types
@@ -28,12 +28,32 @@ let greeting = {
   version: 1
 }
 
+// Custom conflict resolution strategy that concatenates the msg properties together
+const customGreetingResolutionStrategy = function (serverData, clientData, baseData) {
+  return {
+    msg: serverData.msg + ' ' + clientData.msg
+  }
+}
+
 // Resolver functions. This is our business logic
 const resolvers = {
   Mutation: {
-    changeGreeting: (obj, args, context, info) => {
+    changeGreeting: async (obj, args, context, info) => {
       if (conflictHandler.hasConflict(greeting, args)) {
-        return handleConflictOnClient(greeting, args)
+
+        const serverState = greeting
+        const clientState = args
+        const strategy = customGreetingResolutionStrategy
+        
+        const { resolvedState, payload } = await conflictHandler.resolveOnServer(strategy, serverState, clientState)
+        greeting = resolvedState
+
+        // uncomment this code and comment out the code above to try client resolution
+
+        // const { payload } = conflictHandler.resolveOnClient(greeting, args)
+        // console.log(payload)
+        
+        return payload
       }
       greeting = conflictHandler.nextState(args)
       return greeting

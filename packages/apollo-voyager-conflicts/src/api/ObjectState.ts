@@ -1,4 +1,6 @@
 import { ObjectStateData } from './ObjectStateData'
+import { ConflictResolution } from './ConflictResolution'
+import { ConflictResolutionStrategy } from './ConflictResolutionStrategy'
 
 /**
  * Interface for handling changing state of the object.
@@ -10,14 +12,30 @@ export interface ObjectState {
 
   /**
    *
-   * @param serverData the data currently on the server
-   * @param clientData the data the client wishes to perform some mutation with
+   * @param serverState the data currently on the server
+   * @param clientState the data the client wishes to perform some mutation with
    */
-  hasConflict(serverData: ObjectStateData, clientData: ObjectStateData): boolean
+  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData): boolean
 
   /**
    *
-   * @param currentObjectState the object wish you would like to progress to its next state
+   * @param objectState the object wish you would like to progress to its next state
    */
-  nextState(currentObjectState: ObjectStateData): ObjectStateData
+  nextState(objectState: ObjectStateData): ObjectStateData
+
+  /**
+  *
+  * @param serverState the current state of the object on the server
+  * @param clientState the state of the object the client wishes to perform some mutation with
+  * @param baseState the base object state that the client state is based off.
+  */
+  resolveOnClient(serverState: ObjectStateData, clientState: ObjectStateData): ConflictResolution
+
+  /**
+  *
+  * @param serverState the current state of the object on the server
+  * @param clientState the state of the object the client wishes to perform some mutation with
+  * @param baseState the base object state that the client state is based off.
+  */
+  resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData): Promise<ConflictResolution>
 }

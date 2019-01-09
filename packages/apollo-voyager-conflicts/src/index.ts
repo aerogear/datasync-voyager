@@ -1,6 +1,6 @@
 // Conflict api
 export * from './api/ObjectState'
-export * from './api/ObjectConflictError'
+export * from './api/ConflictResolution'
 export * from './api/ObjectStateData'
 
 // State implementations
@@ -10,5 +10,3 @@ export * from './states/HashObjectState'
 export { versionStateHandler as conflictHandler }
   from './states/VersionedObjectState'
 
-// Conflict handlers
-export * from './conflictHandlers/handleConflictOnClient'
