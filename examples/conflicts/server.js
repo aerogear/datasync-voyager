@@ -5,6 +5,7 @@ const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-serv
 
 const { conflictHandler } = require('../../packages/apollo-voyager-conflicts')
 
+conflictHandler.enableLogging(console)
 
 // Types
 const typeDefs = gql`
@@ -44,7 +45,7 @@ const resolvers = {
         const serverState = greeting
         const clientState = args
         const strategy = customGreetingResolutionStrategy
-        
+
         // resolvedState is the new record the user should persist
         // payload is the specially built message that should be returned to the client
         const { resolvedState, payload } = await conflictHandler.resolveOnServer(strategy, serverState, clientState)
