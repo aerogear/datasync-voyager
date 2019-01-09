@@ -24,22 +24,24 @@ export class VersionedObjectState implements ObjectState {
       if (serverData.version !== clientData.version) {
         if (this.logger) {
           this.logger.info(`Conflict when saving data.
-          current: ${serverData}, client: ${clientData}`)
+          current: ${ JSON.stringify(serverData)},
+          client: ${JSON.stringify(clientData)}`)
         }
         return true
       }
     } else if (this.logger) {
       this.logger.info(
         `Supplied object is missing version field required to determine conflict
-         server: ${serverData}
-         client: ${clientData}`)
+         server: ${JSON.stringify(serverData)}
+         client: ${JSON.stringify(clientData)}`)
     }
     return false
   }
 
   public nextState(currentObjectState: ObjectStateData) {
     if (this.logger) {
-      this.logger.info(`Moving object to next state, ${currentObjectState}`)
+      this.logger.info(`Moving object to next state,
+      ${JSON.stringify(currentObjectState)}`)
     }
     currentObjectState.version = currentObjectState.version + 1
     return currentObjectState

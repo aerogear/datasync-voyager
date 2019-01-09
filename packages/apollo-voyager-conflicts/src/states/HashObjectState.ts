@@ -19,7 +19,8 @@ export class HashObjectState implements ObjectState {
     if (this.hash(serverData) !== this.hash(clientData)) {
       if (this.logger) {
         this.logger.info(`Conflict when saving data.
-        current: ${serverData}, client: ${clientData}`)
+        current: ${ JSON.stringify(serverData)},
+        client: ${JSON.stringify(clientData)}`)
       }
       return true
     }
