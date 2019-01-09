@@ -46,7 +46,9 @@ export class ConflictResolution {
       serverState,
       clientState
     })
-    this.resolvedState = serverState
+    if (resolvedOnServer) {
+      this.resolvedState = serverState
+    }
   }
 }
 
