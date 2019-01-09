@@ -1,9 +1,8 @@
-import * as debug from 'debug'
+import { ConflictLogger } from '../api/ConflictLogger'
 import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
-import { CONFLICT_LOGGER } from '../constants'
 
 /**
  * Object state manager using a version field
@@ -18,16 +17,19 @@ import { CONFLICT_LOGGER } from '../constants'
  * }
  */
 export class VersionedObjectState implements ObjectState {
-  private logger = debug.default(CONFLICT_LOGGER)
+  private logger: ConflictLogger | undefined
 
   public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
     if (serverData.version && clientData.version) {
       if (serverData.version !== clientData.version) {
-        this.logger(`Conflict when saving data. current: ${serverData}, client: ${clientData}`)
+        if (this.logger) {
+          this.logger.info(`Conflict when saving data.
+          current: ${serverData}, client: ${clientData}`)
+        }
         return true
       }
-    } else {
-      this.logger(
+    } else if (this.logger) {
+      this.logger.info(
         `Supplied object is missing version field required to determine conflict
          server: ${serverData}
          client: ${clientData}`)
@@ -36,30 +38,32 @@ export class VersionedObjectState implements ObjectState {
   }
 
   public nextState(currentObjectState: ObjectStateData) {
-    this.logger(`Moving object to next state, ${currentObjectState}`)
+    if (this.logger) {
+      this.logger.info(`Moving object to next state, ${currentObjectState}`)
+    }
     currentObjectState.version = currentObjectState.version + 1
     return currentObjectState
   }
 
   public resolveOnClient(serverState: ObjectStateData, clientState: ObjectStateData) {
-    this.logger(`Conflict detected.
-    Sending data to resolve conflict on client
-    Server: ${serverState} client: ${clientState}`)
-
     return new ConflictResolution(false, serverState, clientState)
   }
 
-  public async resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
-     let resolvedState = strategy(serverState, clientState, baseState)
+  public async resolveOnServer(strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
+    let resolvedState = strategy(serverState, clientState, baseState)
 
-     if (resolvedState instanceof Promise) {
-       resolvedState = await resolvedState
-     }
+    if (resolvedState instanceof Promise) {
+      resolvedState = await resolvedState
+    }
 
-     resolvedState.version = serverState.version
-     resolvedState = this.nextState(resolvedState)
+    resolvedState.version = serverState.version
+    resolvedState = this.nextState(resolvedState)
 
-     return new ConflictResolution(true, resolvedState, clientState, baseState)
+    return new ConflictResolution(true, resolvedState, clientState, baseState)
+  }
+
+  public enableLogging(logger: ConflictLogger): void {
+    this.logger = logger
   }
 }
 
