@@ -1,7 +1,7 @@
 import * as debug from 'debug'
-import { ObjectState } from '../api/ObjectState'
-import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ConflictResolution } from '../api/ConflictResolution'
+import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
+import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
 import { CONFLICT_LOGGER } from '../constants'
 
@@ -55,7 +55,7 @@ export class VersionedObjectState implements ObjectState {
      if (resolvedState instanceof Promise) {
        resolvedState = await resolvedState
      }
-     
+
      resolvedState.version = serverState.version
      resolvedState = this.nextState(resolvedState)
 

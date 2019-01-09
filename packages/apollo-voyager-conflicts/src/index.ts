@@ -9,4 +9,3 @@ export * from './states/HashObjectState'
 // Default API state handler
 export { versionStateHandler as conflictHandler }
   from './states/VersionedObjectState'
-

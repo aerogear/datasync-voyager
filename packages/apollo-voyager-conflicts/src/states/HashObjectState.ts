@@ -1,8 +1,8 @@
 import * as debug from 'debug'
-import { ObjectState } from '../api/ObjectState'
-import { ObjectStateData } from '../api/ObjectStateData'
 import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
+import { ObjectState } from '../api/ObjectState'
+import { ObjectStateData } from '../api/ObjectStateData'
 import { CONFLICT_LOGGER } from '../constants'
 
 /**
