@@ -37,7 +37,16 @@ export interface ConflictData {
  */
 export class ConflictResolution {
 
+  /**
+   * payload is the full conflict object
+   * that should be sent back to the client
+   */
   public payload: ObjectConflictError
+
+  /**
+   * resolvedState is the newly resolved object that should be
+   * persisted by developers.
+   */
   public resolvedState?: ObjectStateData
 
   constructor(resolvedOnServer: boolean, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
