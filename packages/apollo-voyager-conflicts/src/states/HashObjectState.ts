@@ -1,6 +1,8 @@
 import * as debug from 'debug'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
+import { ConflictResolution } from '../api/ConflictResolution'
+import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { CONFLICT_LOGGER } from '../constants'
 
 /**
@@ -23,5 +25,21 @@ export class HashObjectState implements ObjectState {
   public nextState(currentObjectState: ObjectStateData) {
     // Hash can be calculated at any time and it is not added to object
     return currentObjectState
+  }
+
+  public resolveOnClient(serverState: ObjectStateData, clientState: ObjectStateData) {
+    return new ConflictResolution(false, serverState, clientState)
+  }
+
+  public async resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
+     let resolvedState = strategy(serverState, clientState, baseState)
+
+     if (resolvedState instanceof Promise) {
+       resolvedState = await resolvedState
+     }
+
+     resolvedState = this.nextState(resolvedState)
+
+     return new ConflictResolution(true, resolvedState, clientState, baseState)
   }
 }

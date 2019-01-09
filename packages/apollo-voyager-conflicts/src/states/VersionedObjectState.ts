@@ -1,5 +1,7 @@
 import * as debug from 'debug'
 import { ObjectState } from '../api/ObjectState'
+import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
+import { ConflictResolution } from '../api/ConflictResolution'
 import { ObjectStateData } from '../api/ObjectStateData'
 import { CONFLICT_LOGGER } from '../constants'
 
@@ -37,6 +39,27 @@ export class VersionedObjectState implements ObjectState {
     this.logger(`Moving object to next state, ${currentObjectState}`)
     currentObjectState.version = currentObjectState.version + 1
     return currentObjectState
+  }
+
+  public resolveOnClient(serverState: ObjectStateData, clientState: ObjectStateData) {
+    this.logger(`Conflict detected.
+    Sending data to resolve conflict on client
+    Server: ${serverState} client: ${clientState}`)
+
+    return new ConflictResolution(false, serverState, clientState)
+  }
+
+  public async resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
+     let resolvedState = strategy(serverState, clientState, baseState)
+
+     if (resolvedState instanceof Promise) {
+       resolvedState = await resolvedState
+     }
+     
+     resolvedState.version = serverState.version
+     resolvedState = this.nextState(resolvedState)
+
+     return new ConflictResolution(true, resolvedState, clientState, baseState)
   }
 }
 

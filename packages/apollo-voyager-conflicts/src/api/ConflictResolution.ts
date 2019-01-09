@@ -12,20 +12,42 @@ export interface ConflictData {
    * Data that was modified on the server.
    * Source of the conflict with additional fields that changed over the time.
    */
-  serverData: ObjectStateData
+  serverState: ObjectStateData
 
   /**
    * Original data that was sent from client and cannot be applied because of conflict
    */
-  clientData?: ObjectStateData
+  clientState?: ObjectStateData
 
   /**
    * Flag used to inform client that conflict was already resolved on the server
-   * and no further processing is needed. When flag is true `serverData` field will contain
+   * and no further processing is needed. When flag is true `serverState` field will contain
    * resolved information. If value is false client will need to resolve conflict on their side
-   * and both `serverData` and `clientData` will be available
+   * and both `serverState` and `clientState` will be available
    */
   resolvedOnServer: boolean
+}
+
+/**
+ * A ConflictResolution is the result of the actual conflict resolution process.
+ * It provides the resolvedState which is the newly resolved state that should be persisted by users.
+ * It also provides a payload which should be returned to the client. 
+ * This payload is a special error class that contains information about the conflict, 
+ * how it was resolved, and any new state the client needs to know about.
+ */
+export class ConflictResolution {
+  
+  public payload: ObjectConflictError
+  public resolvedState?: ObjectStateData
+  
+  constructor(resolvedOnServer: boolean, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
+    this.payload = new ObjectConflictError({
+      resolvedOnServer,
+      serverState,
+      clientState
+    })
+    this.resolvedState = serverState
+  }
 }
 
 /**

@@ -6,4 +6,4 @@ import { ObjectStateData } from './ObjectStateData'
  *
  * @throws ObjectConflictError with resolution info
  */
-export type ConflictResolutionHandler = (serverState: ObjectStateData, clientState: ObjectStateData) => void
+export type ConflictResolutionStrategy = (serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) => Promise<ObjectStateData> | ObjectStateData
