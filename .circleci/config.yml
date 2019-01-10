@@ -80,6 +80,7 @@ workflows:
       - npm_publish:
           requires:
             - build
+            - test_examples
           filters:
             tags:
               only: /.*/ # allow anything because tag syntax is validated as part of validate-release.sh
