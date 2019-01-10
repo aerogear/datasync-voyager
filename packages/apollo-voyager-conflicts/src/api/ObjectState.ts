@@ -28,7 +28,6 @@ export interface ObjectState {
    *
    * @param serverState the current state of the object on the server
    * @param clientState the state of the object the client wishes to perform some mutation with
-   * @param baseState the base object state that the client state is based off.
    */
   resolveOnClient(serverState: ObjectStateData, clientState: ObjectStateData): ConflictResolution
 
@@ -36,9 +35,8 @@ export interface ObjectState {
    *
    * @param serverState the current state of the object on the server
    * @param clientState the state of the object the client wishes to perform some mutation with
-   * @param baseState the base object state that the client state is based off.
    */
-  resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData): Promise<ConflictResolution>
+  resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData): Promise<ConflictResolution>
 
   /**
    * Enable logging for conflict resolution package
