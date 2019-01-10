@@ -56,7 +56,7 @@ Changes:
 Repository is ready for release.
 --
 
-==== Preparing a Pre Release
+=== Prepare a Pre-Release
 
 Prepare a pre-release by adding a suffix to the end of the release tag. Examples of valid pre-release tags:
 
@@ -68,7 +68,7 @@ If you choose to use a pre-release tag, the publish scripts later on will publis
 
 This means that `npm install @aerogear/<package>@next` will install your new prerelease, while `npm install @aerogear/<package>` will still publish the latest regular release.
 
-===== Commit the Changes
+=== Commit the Changes
 
 Use `git status` to verify that the version numbers in the correct files have been updated.
 
