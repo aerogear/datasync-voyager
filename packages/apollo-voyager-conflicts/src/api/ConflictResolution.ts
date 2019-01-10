@@ -49,7 +49,7 @@ export class ConflictResolution {
    */
   public resolvedState?: ObjectStateData
 
-  constructor(resolvedOnServer: boolean, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
+  constructor(resolvedOnServer: boolean, serverState: ObjectStateData, clientState: ObjectStateData) {
     this.payload = new ObjectConflictError({
       resolvedOnServer,
       serverState,

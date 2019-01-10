@@ -36,8 +36,8 @@ export class HashObjectState implements ObjectState {
     return new ConflictResolution(false, serverState, clientState)
   }
 
-  public async resolveOnServer(strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData, baseState?: ObjectStateData) {
-    let resolvedState = strategy(serverState, clientState, baseState)
+  public async resolveOnServer(strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData) {
+    let resolvedState = strategy(serverState, clientState)
 
     if (resolvedState instanceof Promise) {
       resolvedState = await resolvedState
@@ -45,7 +45,7 @@ export class HashObjectState implements ObjectState {
 
     resolvedState = this.nextState(resolvedState)
 
-    return new ConflictResolution(true, resolvedState, clientState, baseState)
+    return new ConflictResolution(true, resolvedState, clientState)
   }
 
   public enableLogging(logger: ConflictLogger): void {
