@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/apollo-voyager-tools",
-  "version": "0.2.7-rc1",
+  "version": "0.2.7-rc2",
   "description": "Tooling library used across Apollo Voyager Server modules.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
