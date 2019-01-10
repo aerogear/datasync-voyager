@@ -66,7 +66,7 @@ Prepare a pre-release by adding a suffix to the end of the release tag. Examples
 
 If you choose to use a pre-release tag, the publish scripts later on will publish the packages using a `next` tag.
 
-This means that `npm install @aerogear/<package>@next` will install your new prerelease, while `npm install @aerogear/<package>` will still publish the latest regular release.
+This means that `npm install @aerogear/<package>@next` will install your new pre-release, while `npm install @aerogear/<package>` will still publish the latest regular release.
 
 === Commit the Changes
 
