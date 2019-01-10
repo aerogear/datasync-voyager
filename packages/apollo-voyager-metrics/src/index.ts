@@ -82,7 +82,7 @@ export function updateResolverMetrics (resolverInfo: any, responseTime: number) 
 
 function applyMetricsMiddleware (app: Application, config: MetricsConfiguration) {
   const path = config && config.path ? config.path : '/metrics'
-  app.get(path, app)
+  app.get(path, getMetrics)
 }
 
 ///////////////////////////////////////////////////////////////
