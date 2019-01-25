@@ -29,8 +29,8 @@ query hello {
 
 This example shows
 
-* How to set up authentication on the `/graphql` endpoint
-* How to add role based access control on a Schema level using the `@hasRole` directive.
+- How to set up authentication on the `/graphql` endpoint
+- How to add role based access control on a Schema level using the `@hasRole` directive.
 
 ### Keycloak Setup
 
@@ -43,13 +43,13 @@ cd examples/keycloak/config
 docker-compose up
 ```
 
-* Open [http://localhost:8080/auth/admin/](http://localhost:8080/auth/admin/) and login with the user `admin` and password `admin`.
-* Click **Add Realm** and click **Select File** next to the **Import** label.
-* Select the [examples/keycloak/config/realm-export.json](../../examples/keycloak/config/realm-export.json) file and click **Create**.
-* Click **Users** and add a new user called `developer`. You can choose your own name if you wish.
-* Under the **Credentials** tab add a new password of **developer** and make sure it is not temporary. You can choose your own password if you wish.
-* Under the **Role Mappings** tab assign the **admin** realm role.
-* Select the **voyager-testing** option from the **Client Roles** dropdown and assign the **admin** role.
+- Open [http://localhost:8080/auth/admin/](http://localhost:8080/auth/admin/) and login with the user `admin` and password `admin`.
+- Click **Add Realm** and click **Select File** next to the **Import** label.
+- Select the [examples/keycloak/config/realm-export.json](../../examples/keycloak/config/realm-export.json) file and click **Create**.
+- Click **Users** and add a new user called `developer`. You can choose your own name if you wish.
+- Under the **Credentials** tab add a new password of **developer** and make sure it is not temporary. You can choose your own password if you wish.
+- Under the **Role Mappings** tab assign the **admin** realm role.
+- Select the **voyager-testing** option from the **Client Roles** dropdown and assign the **admin** role.
 
 ### Start the Server
 
@@ -74,7 +74,7 @@ Do not worry, this error is caused by the playground making unauthenticated requ
 In a new tab, open [http://localhost:4000/token](http://localhost:4000/token). You should see a JSON result.
 
 ```json
-{"Authorization":"Bearer <Long String of Characters>"}
+{ "Authorization": "Bearer <Long String of Characters>" }
 ```
 
 Copy the entire JSON result to your clipboard and navigate back to the Playground at [http://localhost:4000/graphql](http://localhost:4000/graphql).
@@ -118,7 +118,7 @@ Example contains 2 resolvers:
 - changeGreetingClient: Resolver configured to resolve conflict on client
 
 
-Conflict will be triggered when version supplied as mutation parameter will be 
+Conflict will be triggered when version supplied as mutation parameter will be
 different than version that server expects. To mitigate that in GraphQL Playground please:
 
 1) Execute `changeGreeting` mutation.
@@ -129,3 +129,32 @@ Second execution is going to cause conflict because version that is supplied did
 Incrementing version will sucesfully save data without conflict.
 
 
+## 3rd party integrations example
+
+`integrations/index.js` shows, how it is easy to integrate two web services under one GraphQL based API.
+
+```
+$ node examples/integrations/index.js
+🚀 Server ready at http://localhost:4000/graphql
+```
+
+Open http://localhost:4000/graphql and you can try query such as this:
+
+```
+query getCharacterInfo {
+  getCharacterInfo(id:11) {
+    name
+    surname
+    height
+    gender
+    genderFromName {
+      firstName
+      lastName
+      scale
+      gender
+    }
+  }
+}
+```
+
+Columns that are directly in `getCharacterInfo` are resolved from [Star Wars People API](https://swapi.co/). Then `genderFromName` is resolved using [Namsor Gender Free API](https://api.namsor.com/), connected by `name` and `surname`.
