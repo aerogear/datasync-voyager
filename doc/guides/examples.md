@@ -27,7 +27,7 @@ query hello {
 
 `keycloak/index.js` shows how we can use the `KeycloakSecurityService` from `apollo-voyager-keycloak` to protect our app with Keycloak.
 
-This example shows 
+This example shows
 
 * How to set up authentication on the `/graphql` endpoint
 * How to add role based access control on a Schema level using the `@hasRole` directive.
@@ -77,7 +77,7 @@ In a new tab, open [http://localhost:4000/token](http://localhost:4000/token). Y
 {"Authorization":"Bearer <Long String of Characters>"}
 ```
 
-Copy the entire JSON result to your clipboard and navigate back to the Playground at [http://localhost:4000/graphql](http://localhost:4000/graphql). 
+Copy the entire JSON result to your clipboard and navigate back to the Playground at [http://localhost:4000/graphql](http://localhost:4000/graphql).
 
 In the Playground, click the **HTTP Headers** button and paste the JSON result into the input box. If successful, the error will disappear and it is now possible to make queries.
 
@@ -94,3 +94,21 @@ query hello {
 The query above will only work if the authenticated user has the `admin` role. You can see this rule being applied with the `@hasRole(role: "admin")` directive in [examples/keycloak/server.js](../../examples/keycloak/server.js#L22).
 
 Try change the the role to a made up role and restart the server. Try the sample query again and verify that an error is displayed.
+
+## Conflict Example
+
+`conflict/index.js` provides example for server side implementation of data conflict package that can be used with conjunction with `apollo-voyager-server` framework to detect and handle data conflicts.
+
+```
+$ node examples/conflicts/index.js
+🚀 Server ready at http://localhost:4000/graphql
+```
+
+Open [http://localhost:4000/graphql](http://localhost:4000/graphql) and you will see the GraphQL Playground. This is a space where you can try out queries and see the results.
+
+To trigger example conflict please execute `changeGreeting` mutation.
+First execution of the `changeGreeting` is going to perform successful update.
+Second execution is going to cause conflict because version that is supplied did not change.
+Incrementing version should allow conflict to pass.
+
+
