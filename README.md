@@ -24,6 +24,7 @@ The [Examples Guide](./doc/guides/examples.md) walks through some example applic
 
 * [Basic Example Application](./doc/guides/examples.md#basic-example) - This typical hello world example shows how to set up Apollo Voyager Server.
 * [Application with Authentication and RBAC](./doc/guides/examples.md#keycloak-example) - This example shows how to add authentication and and role based access control to your application using [Keycloak](https://www.keycloak.org/)
+* [3rd party web-services integration](./doc/guides/examples.md#3rd-party-integrations-example) - This example shows integration between two public web services, unified with one GraphQL API.
 
 ## API Docs
 
