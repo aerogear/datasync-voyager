@@ -20,7 +20,10 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    ## Server resolution policy
     changeGreeting(msg: String!, version: Int!): Greeting
+    ## Client resolution policy
+    changeGreetingClient(msg: String!, version: Int!): Greeting
   }
 `
 // In Memory Data Source
@@ -30,7 +33,7 @@ let greeting = {
 }
 
 // Custom conflict resolution strategy that concatenates the msg properties together
-const customGreetingResolutionStrategy = function (serverData, clientData, baseData) {
+const customGreetingResolutionStrategy = function(serverData, clientData, baseData) {
   return {
     msg: serverData.msg + ' ' + clientData.msg
   }
@@ -47,10 +50,21 @@ const resolvers = {
         const strategy = customGreetingResolutionStrategy
 
         // resolvedState is the new record the user should persist
-        // payload is the specially built message that should be returned to the client
-        const { resolvedState, payload } = await conflictHandler.resolveOnServer(strategy, serverState, clientState)
+        // response is the specially built message that should be returned to the client
+        const { resolvedState, response } = await conflictHandler.resolveOnServer(strategy, serverState, clientState)
         greeting = resolvedState
-        return payload
+        return response
+      }
+      greeting = conflictHandler.nextState(args)
+      return greeting
+    },
+    changeGreetingClient: async (obj, args, context, info) => {
+      if (conflictHandler.hasConflict(greeting, args)) {
+        const serverState = greeting
+        const clientState = args
+        const { resolvedState, response } = await conflictHandler.resolveOnClient(serverState, clientState)
+        greeting = resolvedState
+        return response
       }
       greeting = conflictHandler.nextState(args)
       return greeting
