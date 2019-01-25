@@ -31,17 +31,17 @@ export interface ConflictData {
 /**
  * A ConflictResolution is the result of the actual conflict resolution process.
  * It provides the resolvedState which is the newly resolved state that should be persisted by users.
- * It also provides a payload which should be returned to the client.
- * This payload is a special error class that contains information about the conflict,
+ * It also provides a response which should be returned to the client.
+ * This response is a special error class that contains information about the conflict,
  * how it was resolved, and any new state the client needs to know about.
  */
 export class ConflictResolution {
 
   /**
-   * payload is the full conflict object
+   * response is the full conflict object
    * that should be sent back to the client
    */
-  public payload: ObjectConflictError
+  public response: ObjectConflictError
 
   /**
    * resolvedState is the newly resolved object that should be
@@ -50,7 +50,7 @@ export class ConflictResolution {
   public resolvedState?: ObjectStateData
 
   constructor(resolvedOnServer: boolean, serverState: ObjectStateData, clientState: ObjectStateData) {
-    this.payload = new ObjectConflictError({
+    this.response = new ObjectConflictError({
       resolvedOnServer,
       serverState,
       clientState

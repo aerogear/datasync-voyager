@@ -33,15 +33,15 @@ test('Next state ', async (t) => {
   t.deepEqual(next.version, 2)
 })
 
-test('resolveOnClient returns the expected conflict payload for the client', (t) => {
+test('resolveOnClient returns the expected conflict response for the client', (t) => {
   const serverState = { name: 'AeroGear', version: 2 }
   const clientState = { name: 'AeroGear Client', version: 1 }
   const objectState = new VersionedObjectState()
 
   const resolution = objectState.resolveOnClient(serverState, clientState)
-  
+
   const expected = {
-    payload: new ObjectConflictError({
+    response: new ObjectConflictError({
       serverState,
       clientState,
       resolvedOnServer: false
@@ -49,8 +49,8 @@ test('resolveOnClient returns the expected conflict payload for the client', (t)
   }
 
   t.falsy(resolution.resolvedState)
-  t.truthy(resolution.payload)
-  t.deepEqual(resolution.payload, expected.payload)
+  t.truthy(resolution.response)
+  t.deepEqual(resolution.response, expected.response)
 })
 
 test('resolveOnServer works with the client wins strategy', async (t) => {
@@ -69,7 +69,7 @@ test('resolveOnServer works with the client wins strategy', async (t) => {
 
   const expected = {
     resolvedState: expectedResolvedState,
-    payload: new ObjectConflictError({
+    response: new ObjectConflictError({
       serverState: expectedResolvedState,
       clientState,
       resolvedOnServer: true
@@ -77,9 +77,9 @@ test('resolveOnServer works with the client wins strategy', async (t) => {
   }
 
   t.truthy(resolution.resolvedState)
-  t.truthy(resolution.payload)
+  t.truthy(resolution.response)
   t.deepEqual(resolution.resolvedState, expected.resolvedState)
-  t.deepEqual(resolution.payload, expected.payload)
+  t.deepEqual(resolution.response, expected.response)
 })
 
 test('resolveOnServer works with the server wins strategy', async (t) => {
@@ -98,7 +98,7 @@ test('resolveOnServer works with the server wins strategy', async (t) => {
 
   const expected = {
     resolvedState: expectedResolvedState,
-    payload: new ObjectConflictError({
+    response: new ObjectConflictError({
       serverState: expectedResolvedState,
       clientState,
       resolvedOnServer: true
@@ -106,9 +106,9 @@ test('resolveOnServer works with the server wins strategy', async (t) => {
   }
 
   t.truthy(resolution.resolvedState)
-  t.truthy(resolution.payload)
+  t.truthy(resolution.response)
   t.deepEqual(resolution.resolvedState, expected.resolvedState)
-  t.deepEqual(resolution.payload, expected.payload)
+  t.deepEqual(resolution.response, expected.response)
 })
 
 test('resolveOnServer resolves the data using a custom handler', async (t) => {
@@ -116,9 +116,9 @@ test('resolveOnServer resolves the data using a custom handler', async (t) => {
   const clientState = { name: 'Client', version: 1 }
   const objectState = new VersionedObjectState()
 
-  function customStrategy(serverState: ObjectStateData, clientState: ObjectStateData) {
+  function customStrategy(serverStateObj: ObjectStateData, clientStateObj: ObjectStateData) {
     return {
-      name: `${serverState.name} ${clientState.name}`
+      name: `${serverStateObj.name} ${clientStateObj.name}`
     }
   }
 
@@ -131,7 +131,7 @@ test('resolveOnServer resolves the data using a custom handler', async (t) => {
 
   const expected = {
     resolvedState: expectedResolvedState,
-    payload: new ObjectConflictError({
+    response: new ObjectConflictError({
       serverState: expectedResolvedState,
       clientState,
       resolvedOnServer: true
@@ -139,9 +139,9 @@ test('resolveOnServer resolves the data using a custom handler', async (t) => {
   }
 
   t.truthy(resolution.resolvedState)
-  t.truthy(resolution.payload)
+  t.truthy(resolution.response)
   t.deepEqual(resolution.resolvedState, expected.resolvedState)
-  t.deepEqual(resolution.payload, expected.payload)
+  t.deepEqual(resolution.response, expected.response)
 })
 
 test('resolveOnServer applies the correct version number to resolvedState', async (t) => {
@@ -149,9 +149,9 @@ test('resolveOnServer applies the correct version number to resolvedState', asyn
   const clientState = { name: 'Client', version: 1 }
   const objectState = new VersionedObjectState()
 
-  function customStrategy(serverState: ObjectStateData, clientState: ObjectStateData) {
+  function customStrategy(serverStateObj: ObjectStateData, clientStateObj: ObjectStateData) {
     return {
-      name: `${serverState.name} ${clientState.name}`,
+      name: `${serverStateObj.name} ${clientStateObj.name}`,
       version: 50 // this gets overwritten with the correct version
     }
   }
@@ -165,7 +165,7 @@ test('resolveOnServer applies the correct version number to resolvedState', asyn
 
   const expected = {
     resolvedState: expectedResolvedState,
-    payload: new ObjectConflictError({
+    response: new ObjectConflictError({
       serverState: expectedResolvedState,
       clientState,
       resolvedOnServer: true
@@ -173,9 +173,9 @@ test('resolveOnServer applies the correct version number to resolvedState', asyn
   }
 
   t.truthy(resolution.resolvedState)
-  t.truthy(resolution.payload)
+  t.truthy(resolution.response)
   t.deepEqual(resolution.resolvedState, expected.resolvedState)
-  t.deepEqual(resolution.payload, expected.payload)
+  t.deepEqual(resolution.response, expected.response)
 })
 
 test('resolveOnServer resolves the data using a custom async handler', async (t) => {
@@ -183,7 +183,7 @@ test('resolveOnServer resolves the data using a custom async handler', async (t)
   const clientState = { name: 'Client', version: 1 }
   const objectState = new VersionedObjectState()
 
-  function customStrategy(serverState: ObjectStateData, clientState: ObjectStateData) {
+  function customStrategy(serverStateObj: ObjectStateData, clientStateObj: ObjectStateData) {
     return new Promise((resolve, reject) => {
       return resolve({
         name: `${serverState.name} ${clientState.name}`
@@ -200,7 +200,7 @@ test('resolveOnServer resolves the data using a custom async handler', async (t)
 
   const expected = {
     resolvedState: expectedResolvedState,
-    payload: new ObjectConflictError({
+    response: new ObjectConflictError({
       serverState: expectedResolvedState,
       clientState,
       resolvedOnServer: true
@@ -208,9 +208,9 @@ test('resolveOnServer resolves the data using a custom async handler', async (t)
   }
 
   t.truthy(resolution.resolvedState)
-  t.truthy(resolution.payload)
+  t.truthy(resolution.response)
   t.deepEqual(resolution.resolvedState, expected.resolvedState)
-  t.deepEqual(resolution.payload, expected.payload)
+  t.deepEqual(resolution.response, expected.response)
 })
 
 test('resolveOnServer throws if custom async strategy rejects', async (t) => {
@@ -218,7 +218,7 @@ test('resolveOnServer throws if custom async strategy rejects', async (t) => {
   const clientState = { name: 'Client', version: 1 }
   const objectState = new VersionedObjectState()
 
-  function customStrategy(serverState: ObjectStateData, clientState: ObjectStateData) {
+  function customStrategy(serverStateObj: ObjectStateData, clientStateObj: ObjectStateData) {
     return new Promise((resolve, reject) => {
       return reject(new Error('an error occurred'))
     })
@@ -228,5 +228,3 @@ test('resolveOnServer throws if custom async strategy rejects', async (t) => {
     await objectState.resolveOnServer(customStrategy, serverState, clientState)
   })
 })
-
-
