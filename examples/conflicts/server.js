@@ -62,9 +62,7 @@ const resolvers = {
       if (conflictHandler.hasConflict(greeting, args)) {
         const serverState = greeting
         const clientState = args
-        const { resolvedState, response } = await conflictHandler.resolveOnClient(serverState, clientState)
-        greeting = resolvedState
-        return response
+        return await conflictHandler.resolveOnClient(serverState, clientState).response;
       }
       greeting = conflictHandler.nextState(args)
       return greeting
