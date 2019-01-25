@@ -17,11 +17,11 @@
     "@aerogear/apollo-voyager-metrics": "^0.2.7-rc3",
     "@aerogear/apollo-voyager-server": "^0.2.7-rc3",
     "express": "^4.16.4",
-    "graphql-tools": "^4.0.3"
+    "graphql-tools": "^4.0.3",
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.3",
-    "ava": "^1.0.1",
-    "axios": "^0.18.0"
+    "ava": "^1.0.1"
   }
 }
