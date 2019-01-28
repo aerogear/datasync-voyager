@@ -1,6 +1,6 @@
 # Apollo Voyager Server
 
-Home of the Aerogear Data Sync Framework. The goal of this project is to make it easier to build secure, production ready, realtime APIs and applications with GraphQL. 
+Home of the Aerogear Data Sync Framework. The goal of this project is to make it easier to build secure, production ready, realtime APIs and applications with GraphQL.
 
 The project does this by taking the popular [Apollo Server](https://www.apollographql.com/docs/apollo-server/) framework and adding additional components to solve some common problems.
 
@@ -24,7 +24,7 @@ The [Examples Guide](./doc/guides/examples.md) walks through some example applic
 
 * [Basic Example Application](./doc/guides/examples.md#basic-example) - This typical hello world example shows how to set up Apollo Voyager Server.
 * [Application with Authentication and RBAC](./doc/guides/examples.md#keycloak-example) - This example shows how to add authentication and and role based access control to your application using [Keycloak](https://www.keycloak.org/)
-* [3rd party web-services integration](./doc/guides/examples.md#3rd-party-integrations-example) - This example shows integration between two public web services, unified with one GraphQL API.
+* [External REST API integration example](./doc/guides/examples.md#External-REST-API-integration-example) - This example shows GraphQL integration with another API
 
 ## API Docs
 

@@ -8,16 +8,9 @@ const sendQuery = query =>
 const query = `
 query getCharacterInfo {
   getCharacterInfo(id:11) {
-    name 
-    surname
-    height
+    name
+    homeworld
     gender
-    genderFromName {
-      firstName
-      lastName
-      scale
-      gender
-    }
   }
 }
 `;
@@ -28,9 +21,8 @@ test("Sending a query for Anakin Skywalker", async t => {
     t.deepEqual(res.status, 200);
     t.deepEqual(res.data.errors, undefined);
     const { data } = res.data;
-    t.deepEqual(data.getCharacterInfo.name, "Anakin");
-    t.deepEqual(data.getCharacterInfo.surname, "Skywalker");
-    t.deepEqual(data.getCharacterInfo.genderFromName.gender, "male");
+    t.deepEqual(data.getCharacterInfo.name, "Anakin Skywalker");
+    t.deepEqual(data.getCharacterInfo.gender, "male");
   } catch (error) {
     return console.error(error);
   }
