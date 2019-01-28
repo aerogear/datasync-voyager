@@ -99,16 +99,33 @@ Try change the the role to a made up role and restart the server. Try the sample
 
 `conflict/index.js` provides example for server side implementation of data conflict package that can be used with conjunction with `apollo-voyager-server` framework to detect and handle data conflicts.
 
+### Running example
+
 ```
 $ node examples/conflicts/index.js
 🚀 Server ready at http://localhost:4000/graphql
 ```
 
-Open [http://localhost:4000/graphql](http://localhost:4000/graphql) and you will see the GraphQL Playground. This is a space where you can try out queries and see the results.
+### Testing conflict resolution
 
-To trigger example conflict please execute `changeGreeting` mutation.
+Open [http://localhost:4000/graphql](http://localhost:4000/graphql).
+You will see the GraphQL Playground. This is a space where you can try out queries and see the results.
+
+Example contains 2 resolvers:
+
+- changeGreeting: Resolver configured to resolve conflict on server
+
+- changeGreetingClient: Resolver configured to resolve conflict on client
+
+
+Conflict will be triggered when version supplied as mutation parameter will be 
+different than version that server expects. To mitigate that in GraphQL Playground please:
+
+1) Execute `changeGreeting` mutation.
 First execution of the `changeGreeting` is going to perform successful update.
+2) Execute `changeGreeting` mutation again without changing version
 Second execution is going to cause conflict because version that is supplied did not change.
-Incrementing version should allow conflict to pass.
+3) Increment version and execute mutation again.
+Incrementing version will sucesfully save data without conflict.
 
 
