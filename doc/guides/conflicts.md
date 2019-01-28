@@ -1,25 +1,27 @@
-## Conflict resolution
+# Conflict Resolution
 
 ## Prerequisites:
 
 - GraphQL server with resolvers
 - Database or any other form of data storage that can cause data conflicts
 
-## Pluggable conflict resolution
+## Pluggable Conflict Resolution
 
-Pluggable conflict resolution is an concept that allows developers to define handling for collisions between data sent to resolver
+Pluggable conflict resolution is a concept that allows developers to define handling for collisions between data sent to resolver
 and data that is currently stored in the server.
 
-Pluggable conflict resolution supports following implementations:
+Pluggable conflict resolution supports the following implementations:
 - `VersionedObjectState`: depends on version field supplied in objects (used by default when importing conflictHandler)
 - `HashObjectState`: depends on hash calculated from entire object
 
-## Enabling conflict resolution mechanism
+Implementations are based on the `ObjectState` interface that can be extended to provide custom implementation for conflict detection
+
+## Enabling Conflict Resolution
 
 To enable conflict resolution developers need to use one of the pluggable conflict resolution strategies
-in each individual resolver. Depending on strategy developers will need to provide additional details.
+in each individual resolver. Depending on the strategy developers will need to provide additional details.
 
-### Version based conflict resolution
+### Version Based Conflict Resolution
 
 1. Add conflict package dependency to project
 
@@ -44,9 +46,9 @@ type Greeting {
   }
 ```
 
-3. Implement resolver for mutation
+4. Implement resolver for mutation
 
-Every conflict can be handled using set of predefined steps
+Every conflict can be handled using a set of predefined steps
 
 ```javascript
     // 1. Read data from data source
@@ -55,20 +57,20 @@ Every conflict can be handled using set of predefined steps
       // 3. Resolve conflict (client or server) and return error to client
       return await conflictHandler.resolveOnClient(serverData, clientData).response
     }
-    // 5. Call next state to update
+    // 4. Call next state to update
     greeting = conflictHandler.nextState(clientData)
-    // 6. Save object to data source
+    // 5. Save object to data source
 ```
 
 Resolvers can be implemented to handle conflicts on client or server.
-Depending on handling resolver implementation will differ.
-Please see chapter bellow for individual implementations.
+Depending on  the strategy used, the resolver implementation will differ.
+Please see the chapter below for individual implementations.
 
-## Different options for resolving conflicts
+## Options for Resolving Conflicts
 
-Conflicts can be resolved on server or client depending on resolver implementation
+Conflicts can be resolved on server or client depending on the resolver implementation
 
-### Resolving conflicts on the client
+### Conflicts on the Client
 
 ```javascript
 // Data
@@ -84,7 +86,7 @@ changeGreeting: async (obj, clientState, context, info) => {
 }
 ```
 
-### Resolving conflicts on the server
+### Conflicts on the Server
 
 ```javascript
 // Data
@@ -105,6 +107,19 @@ const serverState = ...
 > Note: For complete implementation see example application located in `examples/conflicts` folder.
 
 
-### Client conflict implementation
+## Client Conflict implementation
 
 See [Voyager Client documentation](https://github.com/aerogear/aerogear-js-sdk/tree/master/packages/sync#conflicts)
+
+
+## Implementing Custom Conflict Mechanism
+
+The`ObjectState` interface is a complete conflict resolution implementation that provides a set of rules to detect and handle conflict. Interface will allow developers to handle conflict on the client or the server. `nextSate` method is a way for interface to modify existing object before is being saved to the database.
+For example when using `lastModified` field as a way to detect conflicts:
+
+```typescript
+ public nextState(currentObjectState: ObjectStateData) {
+    currentObjectState.lastModified = new Date()
+    return currentObjectState
+  }
+```
