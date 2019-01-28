@@ -49,8 +49,8 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Integrations Example",
-      "program": "${workspaceFolder}/examples/integrations/index.js"
+      "name": "Launch REST API integration Example",
+      "program": "${workspaceFolder}/examples/restapi/index.js"
     }
   ]
 }
