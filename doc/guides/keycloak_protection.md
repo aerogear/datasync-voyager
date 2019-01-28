@@ -1,4 +1,4 @@
-## Prerequisites:
+## Prerequisites
 
 - There is a Keycloak service available.
 - You must first create a client for your application in the Keycloak Administration Console, and then click on the `Installation` tab, select `Keycloak OIDC JSON` for `Format` Option, and then click on `Download`. Save the downloaded `keycloak.json` file to your project.
