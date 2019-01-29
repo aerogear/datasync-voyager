@@ -1,7 +1,6 @@
-import { AuditLogger } from '../audit'
-import { DefaultAuditLogger } from '../audit/DefaultAuditLogger'
-import { DefaultSecurityService } from '../security/DefaultSecurityService'
-import { SecurityService } from '../security/SecurityService'
+import { AuditLogger, DefaultAuditLogger } from '@aerogear/apollo-voyager-audit'
+import { ObjectState, VersionedObjectState } from '@aerogear/apollo-voyager-conflicts'
+import { DefaultSecurityService, SecurityService } from '@aerogear/apollo-voyager-keycloak'
 import { VoyagerConfig } from './VoyagerConfig'
 
 interface UserVoyagerConfig {
@@ -15,8 +14,9 @@ export class DefaultVoyagerConfig implements VoyagerConfig {
    */
   public securityService: SecurityService = new DefaultSecurityService()
   public auditLogger: AuditLogger = new DefaultAuditLogger()
+  public conflict: ObjectState = new VersionedObjectState()
 
-  public merge (userConfig: UserVoyagerConfig) {
+  public merge(userConfig: UserVoyagerConfig) {
     if (userConfig) {
       this.securityService = (userConfig.securityService) ? userConfig.securityService : this.securityService
       this.auditLogger = (userConfig.auditLogger) ? userConfig.auditLogger : this.auditLogger
