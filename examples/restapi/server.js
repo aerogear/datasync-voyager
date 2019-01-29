@@ -9,32 +9,31 @@ const {
 
 // Types
 const typeDefs = gql`
-  type CharacterInfo {
-    name: String
-    homeworld: String
-    gender: String
+  type ModelInfo {
+    Model_ID: ID!
+    Make_Name: String
+    Model_Name : String
   }
+
   type Query {
-    getCharacterInfo(id: ID!): CharacterInfo
+    getCarModels(brand: String!): [ModelInfo]
   }
 `;
 
 // Resolver functions. This is our business logic
 const resolvers = {
   Query: {
-    getCharacterInfo: async (obj, args, context, info) => {
-      //gets JSON response from the external API, parameter `id` is passed to the external API
+    getCarModels: async (obj, args, context, info) => {
+      //gets JSON response from the external API, parameter `brand` is passed to the external API
       const response = await axios.get(
-        `http://swapi.co/api/people/${args.id}`,
+        `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${args.brand}`,
         {
           responseType: "json",
-          headers: {
-            "Content-Type": "application/json;charset=UTF-8"
-          }
+          params: { format: "json" }
         }
       );
       const { data } = response;
-      return data;
+      return data.Results;
     }
   }
 };

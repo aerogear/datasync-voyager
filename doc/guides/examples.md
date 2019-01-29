@@ -144,4 +144,4 @@ const resolvers = {
 }
 ```
 
-[examples/restapi/server.js](../../examples/restapi/server.js#L26-39) shows how easy it is to integrate the consumption of a REST API endpoint into your GraphQL resolver.
+[examples/restapi/server.js](../../examples/restapi/server.js#L26-L39) shows how easy it is to integrate the consumption of a REST API endpoint into your GraphQL resolver.
