@@ -47,6 +47,7 @@
     ],
     "interface-name": [
       false
-    ]
+    ],
+    "ordered-imports": false
   }
 }

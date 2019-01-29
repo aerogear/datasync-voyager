@@ -21,6 +21,7 @@
     "graphql-tools": "^4.0.3"
   },
   "devDependencies": {
+    "@aerogear/apollo-voyager-server": "0.2.7-rc3",
     "ava": "1.0.0-rc.2",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.6"

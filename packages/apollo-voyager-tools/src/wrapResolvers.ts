@@ -13,19 +13,20 @@ export interface ResolverMappings {
 
 export type ResolverWrapper = (resolver: FieldResolver) => FieldResolver
 
-export function wrapResolvers (resolverMappings: ResolverMappings,
-                               resolverWrapper: ResolverWrapper): ResolverMappings {
+export function wrapResolvers(resolverMappings: ResolverMappings, resolverWrapper: ResolverWrapper): ResolverMappings {
   const output: ResolverMappings = {}
-
   const typeKeys = Object.keys(resolverMappings)
   for (const typeKey of typeKeys) {
     output[typeKey] = {}
-
     const fieldResolversForType = resolverMappings[typeKey]
     const fieldKeysForType = Object.keys(fieldResolversForType)
     for (const fieldKey of fieldKeysForType) {
       const resolverForField = fieldResolversForType[fieldKey]
-      output[typeKey][fieldKey] = resolverWrapper(resolverForField)
+      if (typeKey !== 'Subscription') {
+        output[typeKey][fieldKey] = resolverWrapper(resolverForField)
+      } else {
+        output[typeKey][fieldKey] = resolverForField
+      }
     }
   }
 
