@@ -1,4 +1,4 @@
-# apollo-voyager-server API
+# voyager-server API
 
 ### ApolloVoyagerServer(apolloConfig, voyagerConfig): <ApolloServer>
 
@@ -9,7 +9,7 @@ Initializes a new Apollo Server with extension points for the Voyager Framework.
 
 ```js
 const express = require('express')
-const { ApolloVoyagerServer, gql } = require('@aerogear/apollo-voyager-server')
+const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
 
 const typeDefs = gql`
   type Query {
@@ -39,16 +39,16 @@ app.listen(4000, () =>
 
 ### VoyagerConfig
 
-The core idea behind the Voyager framework is that features can be enabled by passing their implementations in `VoyagerConfig` object. This keeps the core `apollo-voyager-server` library lightweight and decoupled from the other features such as metrics, security and audit logging. New features in the future will be enabled using this same concept.
+The core idea behind the Voyager framework is that features can be enabled by passing their implementations in `VoyagerConfig` object. This keeps the core `voyager-server` library lightweight and decoupled from the other features such as metrics, security and audit logging. New features in the future will be enabled using this same concept.
 
 This options object is used to enable the additional features provided by the Voyager framework. 
 
 * `VoyagerConfig`: <`Object`>
 
-  * `securityService`: <[`SecurityService`](#SecurityService)> - A security service module that can add authentication and authorization to a voyager application. See the [apollo-voyager-keycloak] module as an example.
+  * `securityService`: <[`SecurityService`](#SecurityService)> - A security service module that can add authentication and authorization to a voyager application. See the [voyager-keycloak] module as an example.
 
   ```js
-    const { KeycloakSecurityService } = require('@aerogear/apollo-voyager-keycloak')
+    const { KeycloakSecurityService } = require('@aerogear/voyager-keycloak')
 
     const keycloakConfig = JSON.parse(fs.readFileSync( './config/keycloak.json')))
 
@@ -72,11 +72,11 @@ This options object is used to enable the additional features provided by the Vo
     )
   ```
 
-  * `metrics`: <[`Metrics`](#Metrics)> - A metrics module that can add resolver level metrics and metrics middlewares to your application. See the [apollo-voyager-metrics] module.
+  * `metrics`: <[`Metrics`](#Metrics)> - A metrics module that can add resolver level metrics and metrics middlewares to your application. See the [voyager-metrics] module.
 
 
   ```js
-  const metrics = require('@aerogear/apollo-voyager-metrics')
+  const metrics = require('@aerogear/voyager-metrics')
 
   const apolloConfig = { typeDefs, resolvers }
   const voyagerConfig = { metrics }
@@ -95,10 +95,10 @@ This options object is used to enable the additional features provided by the Vo
   )
   ```
 
-  * `auditLogger`: <[`AuditLogger`](#AuditLogger)> - An Audit Logger module that can add Audit Logging to your application for GraphQL operations, authentication and authorization operations, conflicts, etc. See the [apollo-voyager-audit] module.
+  * `auditLogger`: <[`AuditLogger`](#AuditLogger)> - An Audit Logger module that can add Audit Logging to your application for GraphQL operations, authentication and authorization operations, conflicts, etc. See the [voyager-audit] module.
 
   ```js
-  const auditLogger = require('@aerogear/apollo-voyager-audit')
+  const auditLogger = require('@aerogear/voyager-audit')
 
   const apolloConfig = { typeDefs, resolvers }
   const voyagerConfig = { auditLogger }
@@ -128,12 +128,12 @@ See the [AuditLogger] interface.
 
 <!-- End of Doc. Links below.--->
 
-[apollo-voyager-keycloak]: https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-keycloak
-[apollo-voyager-metrics]: https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-metrics
-[apollo-voyager-audit]: https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-audit
+[voyager-keycloak]: https://github.com/aerogear/voyager-server/tree/master/packages/voyager-keycloak
+[voyager-metrics]: https://github.com/aerogear/voyager-server/tree/master/packages/voyager-metrics
+[voyager-audit]: https://github.com/aerogear/voyager-server/tree/master/packages/voyager-audit
 [Apollo API documentation]:(https://www.apollographql.com/docs/apollo-server/api/apollo-server.html#ApolloServer-listen-options-Promise).
-[SecurityService]: ../../packages/apollo-voyager-server/src/security/SecurityService.ts
-[Metrics]: ../../packages/apollo-voyager-server/src/metrics/Metrics.ts
-[AuditLogger]: ../../packages/apollo-voyager-server/src/audit/AuditLogger.ts
+[SecurityService]: ../../packages/voyager-server/src/security/SecurityService.ts
+[Metrics]: ../../packages/voyager-server/src/metrics/Metrics.ts
+[AuditLogger]: ../../packages/voyager-server/src/audit/AuditLogger.ts
 
 

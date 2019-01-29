@@ -1,6 +1,6 @@
 ## Basic Example
 
-`basic/index.js` is the simplest example of how to use the `apollo-voyager-server` framework.
+`basic/index.js` is the simplest example of how to use the `voyager-server` framework.
 
 ```
 $ node basic/index.js

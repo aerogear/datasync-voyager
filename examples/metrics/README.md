@@ -1,6 +1,6 @@
 ## Metrics Example
 
-`metrics/index.js` is the example of how to use metrics feature with the `apollo-voyager-server` framework.
+`metrics/index.js` is the example of how to use metrics feature with the `voyager-server` framework.
 
 ```
 $ node metrics/index.js

@@ -7,7 +7,7 @@
 
 1. Import Voyager Keycloak module
     ```javascript
-    const { KeycloakSecurityService } = require('../../packages/apollo-voyager-keycloak')
+    const { KeycloakSecurityService } = require('../../packages/voyager-keycloak')
     ```
 2. Read the Keycloak config and pass it to initialise the `KeycloakSecurityService`.
     ```javascript
@@ -27,7 +27,7 @@
     const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
     ```
 
-The [Keycloak Example Server Guide](https://github.com/aerogear/apollo-voyager-server/blob/master/doc/guides/examples.md#keycloak-example) has an example server based off the instructions above and shows all of the steps needed to get it running.
+The [Keycloak Example Server Guide](https://github.com/aerogear/voyager-server/blob/master/doc/guides/examples.md#keycloak-example) has an example server based off the instructions above and shows all of the steps needed to get it running.
 
 ## Use the `@hasRole` Directive On Your Schema
 

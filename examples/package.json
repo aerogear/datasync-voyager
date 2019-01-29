@@ -1,5 +1,5 @@
 {
-  "name": "apollo-voyager-example",
+  "name": "voyager-example",
   "version": "0.2.7-rc3",
   "private": true,
   "description": "",
@@ -12,11 +12,11 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@aerogear/apollo-voyager-audit": "^0.2.7-rc3",
-    "@aerogear/apollo-voyager-keycloak": "^0.2.7-rc3",
-    "@aerogear/apollo-voyager-metrics": "^0.2.7-rc3",
-    "@aerogear/apollo-voyager-server": "^0.2.7-rc3",
-    "@aerogear/apollo-voyager-conflicts": "^0.2.7-rc3",
+    "@aerogear/voyager-audit": "^0.2.7-rc3",
+    "@aerogear/voyager-keycloak": "^0.2.7-rc3",
+    "@aerogear/voyager-metrics": "^0.2.7-rc3",
+    "@aerogear/voyager-server": "^0.2.7-rc3",
+    "@aerogear/voyager-conflicts": "^0.2.7-rc3",
     "express": "^4.16.4",
     "graphql-tools": "^4.0.3",
     "axios": "^0.18.0"

@@ -1,7 +1,7 @@
 const express = require('express')
 
-const { ApolloVoyagerServer, gql } = require('@aerogear/apollo-voyager-server')
-const auditLogger = require('@aerogear/apollo-voyager-audit')
+const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
+const auditLogger = require('@aerogear/voyager-audit')
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`

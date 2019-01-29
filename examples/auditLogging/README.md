@@ -1,6 +1,6 @@
 ## Audit Logging Example
 
-`auditLogging/index.js` is the example of how to use audit logging feature with the `apollo-voyager-server` framework.
+`auditLogging/index.js` is the example of how to use audit logging feature with the `voyager-server` framework.
 
 ```
 $ node auditLogging/index.js

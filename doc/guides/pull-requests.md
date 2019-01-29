@@ -4,13 +4,13 @@
 
 ### Step 1: Fork the project
 
-Fork the project [on GitHub](https://github.com/aerogear/apollo-voyager-server) and clone your fork
+Fork the project [on GitHub](https://github.com/aerogear/voyager-server) and clone your fork
 locally.
 
 ```text
-$ git clone git@github.com:username/apollo-voyager-server.git
-$ cd apollo-voyager-server
-$ git remote add upstream https://github.com/aerogear/apollo-voyager-server.git
+$ git clone git@github.com:username/voyager-server.git
+$ cd voyager-server
+$ git remote add upstream https://github.com/aerogear/voyager-server.git
 $ git fetch upstream
 ```
 
@@ -128,7 +128,7 @@ the requirements below.
 
 Bug fixes and new features should include tests.
 
-Contributors guide: https://github.com/aerogear/apollo-voyager-server/blob/master/CONTRIBUTING.md
+Contributors guide: https://github.com/aerogear/voyager-server/blob/master/CONTRIBUTING.md
 -->
 
 ### Description
@@ -141,7 +141,7 @@ Contributors guide: https://github.com/aerogear/apollo-voyager-server/blob/maste
 - [ ] `npm test` passes
 - [ ] tests are included
 - [ ] documentation is changed or added
-- [ ] commit message follows [commit guidelines](https://github.com/aerogear/apollo-voyager-server/blob/master/CONTRIBUTING.md#commit-message-guidelines)
+- [ ] commit message follows [commit guidelines](https://github.com/aerogear/voyager-server/blob/master/CONTRIBUTING.md#commit-message-guidelines)
 ```
 
 Please try to do your best at filling out the details, but feel free to skip

@@ -1,5 +1,5 @@
 'use strict'
-import { ResolverMappings } from '@aerogear/apollo-voyager-tools'
+import { ResolverMappings } from '@aerogear/voyager-tools'
 import { ApolloServer, Config } from 'apollo-server-express'
 import { buildSchemaDirectives } from './buildSchemaDirectives'
 import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig'

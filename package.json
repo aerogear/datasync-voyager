@@ -1,5 +1,5 @@
 {
-  "name": "@aerogear/apollo-voyager-server-monorepo",
+  "name": "@aerogear/voyager-server-monorepo",
   "private": true,
   "scripts": {
     "test": "lerna exec -- npm test",

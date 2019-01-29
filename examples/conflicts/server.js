@@ -1,9 +1,9 @@
 const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
 const queries = require("./queries")
-const { ApolloVoyagerServer, gql } = require('@aerogear/apollo-voyager-server')
+const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
 
-const { conflictHandler } = require('@aerogear/apollo-voyager-conflicts')
+const { conflictHandler } = require('@aerogear/voyager-conflicts')
 
 conflictHandler.enableLogging(console)
 

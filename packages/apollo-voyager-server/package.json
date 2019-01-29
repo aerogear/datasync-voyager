@@ -1,12 +1,12 @@
 {
-  "name": "@aerogear/apollo-voyager-server",
+  "name": "@aerogear/voyager-server",
   "version": "0.2.7-rc3",
   "description": "The core Apollo Voyager Server library.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-server"
+    "url": "https://github.com/aerogear/voyager-server/tree/master/packages/voyager-server"
   },
   "license": "Apache-2.0",
   "main": "dist/index.js",
@@ -21,9 +21,9 @@
     "test": "ava -v '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-audit": "^0.2.7-rc3",
-    "@aerogear/apollo-voyager-metrics": "^0.2.7-rc3",
-    "@aerogear/apollo-voyager-tools": "^0.2.7-rc3",
+    "@aerogear/voyager-audit": "^0.2.7-rc3",
+    "@aerogear/voyager-metrics": "^0.2.7-rc3",
+    "@aerogear/voyager-tools": "^0.2.7-rc3",
     "apollo-server": "2.2.2",
     "apollo-server-express": "2.2.2",
     "graphql-tools": "^4.0.3"

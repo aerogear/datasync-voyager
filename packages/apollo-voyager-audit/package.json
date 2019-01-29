@@ -1,5 +1,5 @@
 {
-  "name": "@aerogear/apollo-voyager-audit",
+  "name": "@aerogear/voyager-audit",
   "version": "0.2.7-rc3",
   "description": "Adds audit logging capabilities to Apollo Voyager Server.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-audit"
+    "url": "https://github.com/aerogear/voyager-server/tree/master/packages/voyager-audit"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-tools": "^0.2.7-rc3",
+    "@aerogear/voyager-tools": "^0.2.7-rc3",
     "graphql-tools": "^4.0.3",
     "pino": "^5.9.0"
   },
