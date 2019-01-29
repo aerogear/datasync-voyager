@@ -1,5 +1,5 @@
 {
-  "name": "@aerogear/apollo-voyager-tools",
+  "name": "@aerogear/voyager-tools",
   "version": "0.2.7-rc3",
   "description": "Tooling library used across Apollo Voyager Server modules.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-tools"
+    "url": "https://github.com/aerogear/voyager-server/tree/master/packages/voyager-tools"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

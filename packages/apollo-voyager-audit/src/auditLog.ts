@@ -1,4 +1,4 @@
-import { buildPath } from '@aerogear/apollo-voyager-tools'
+import { buildPath } from '@aerogear/voyager-tools'
 import { GraphQLResolveInfo } from 'graphql'
 import pino from 'pino'
 

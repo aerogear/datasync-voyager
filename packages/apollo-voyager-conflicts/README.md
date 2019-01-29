@@ -4,6 +4,6 @@
 ## Usage
 
 ```
-npm install @aerogear/apollo-voyager-conflicts
+npm install @aerogear/voyager-conflicts
 ```
 

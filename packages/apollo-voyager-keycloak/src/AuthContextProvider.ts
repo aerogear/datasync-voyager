@@ -1,4 +1,4 @@
-import { AuthContextProvider } from '@aerogear/apollo-voyager-server'
+import { AuthContextProvider } from '@aerogear/voyager-server'
 import { Request } from 'express'
 import { IncomingMessage } from 'http'
 export class KeycloakAuthContextProvider implements AuthContextProvider {

@@ -45,12 +45,12 @@ This script will interactively prompt you and ask what version you would like to
 
 
 Changes:
- - apollo-voyager-example: 0.1.4 => 0.1.5 (private)
- - @aerogear/apollo-voyager-audit: 0.1.4 => 0.1.5
- - @aerogear/apollo-voyager-keycloak: 0.1.4 => 0.1.5
- - @aerogear/apollo-voyager-metrics: 0.1.4 => 0.1.5
- - @aerogear/apollo-voyager-server: 0.1.4 => 0.1.5
- - @aerogear/apollo-voyager-tools: 0.1.4 => 0.1.5
+ - voyager-example: 0.1.4 => 0.1.5 (private)
+ - @aerogear/voyager-audit: 0.1.4 => 0.1.5
+ - @aerogear/voyager-keycloak: 0.1.4 => 0.1.5
+ - @aerogear/voyager-metrics: 0.1.4 => 0.1.5
+ - @aerogear/voyager-server: 0.1.4 => 0.1.5
+ - @aerogear/voyager-tools: 0.1.4 => 0.1.5
 
 ? Are you sure you want to publish these packages? (ynH) y
 Repository is ready for release.
@@ -86,11 +86,11 @@ Changes not staged for commit:
 
         modified:   examples/package.json
         modified:   lerna.json
-        modified:   packages/apollo-voyager-audit/package.json
-        modified:   packages/apollo-voyager-keycloak/package.json
-        modified:   packages/apollo-voyager-metrics/package.json
-        modified:   packages/apollo-voyager-server/package.json
-        modified:   packages/apollo-voyager-tools/package.json
+        modified:   packages/voyager-audit/package.json
+        modified:   packages/voyager-keycloak/package.json
+        modified:   packages/voyager-metrics/package.json
+        modified:   packages/voyager-server/package.json
+        modified:   packages/voyager-tools/package.json
 --
 
 Commit and push these changes, then open a Pull Request to `master`.

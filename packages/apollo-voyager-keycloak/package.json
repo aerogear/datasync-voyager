@@ -1,5 +1,5 @@
 {
-  "name": "@aerogear/apollo-voyager-keycloak",
+  "name": "@aerogear/voyager-keycloak",
   "version": "0.2.7-rc3",
   "description": "Adds Keycloak authentication and authorization to Apollo Voyager Server",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aerogear/apollo-voyager-server/tree/master/packages/apollo-voyager-keycloak"
+    "url": "https://github.com/aerogear/voyager-server/tree/master/packages/voyager-keycloak"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
     "test": "ava -v '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "@aerogear/apollo-voyager-server": "^0.2.7-rc3",
+    "@aerogear/voyager-server": "^0.2.7-rc3",
     "apollo-server-express": "2.2.2",
     "express-session": "^1.15.6",
     "joi": "^14.3.0",

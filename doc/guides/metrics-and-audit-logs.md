@@ -107,7 +107,7 @@ Audit logging is not enabled by default in Voyager framework.
 The only step necessary to enable audit logs is to import `voyagerResolvers` function and wrap the resolvers with it:
  
 ```javascript
-const { voyagerResolvers } = require('@aerogear/apollo-voyager-server');
+const { voyagerResolvers } = require('@aerogear/voyager-server');
 
 let myResolvers = {...};  // define your resolvers as you normally would.
 

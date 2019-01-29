@@ -1,4 +1,4 @@
-import { buildPath } from '@aerogear/apollo-voyager-tools'
+import { buildPath } from '@aerogear/voyager-tools'
 import { NextFunction, Response } from 'express'
 import { Application } from 'express'
 import { IncomingMessage } from 'http'

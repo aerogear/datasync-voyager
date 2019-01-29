@@ -1,5 +1,5 @@
 'use strict'
-import { FieldResolver, ResolverMappings, ResolverObject, ResolverWrapper, wrapResolvers } from '@aerogear/apollo-voyager-tools'
+import { FieldResolver, ResolverMappings, ResolverObject, ResolverWrapper, wrapResolvers } from '@aerogear/voyager-tools'
 import { VoyagerConfig } from './config/VoyagerConfig'
 
 export function voyagerResolvers (resolverMappings: ResolverMappings, config: VoyagerConfig): ResolverMappings {

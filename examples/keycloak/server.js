@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 
-const { ApolloVoyagerServer, gql } = require('@aerogear/apollo-voyager-server')
-const { KeycloakSecurityService } = require('@aerogear/apollo-voyager-keycloak')
+const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
+const { KeycloakSecurityService } = require('@aerogear/voyager-keycloak')
 
 const keycloakConfigPath = process.env.KEYCLOAK_CONFIG || path.resolve(__dirname, './config/keycloak.json')
 const keycloakConfig = JSON.parse(fs.readFileSync(keycloakConfigPath))
@@ -26,7 +26,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
-      
+
       // log some of the auth related info added to the context
       console.log(context.auth.isAuthenticated())
       console.log(context.auth.accessToken.content.name)
@@ -43,14 +43,14 @@ const keycloakService = new KeycloakSecurityService(keycloakConfig)
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
 const context = ({ req }) => {
-  return { 
+  return {
     serverName: 'Voyager Server'
   }
 }
 
 // Initialize the apollo voyager server with our schema and context
 
-const apolloConfig = { 
+const apolloConfig = {
   typeDefs,
   resolvers,
   context

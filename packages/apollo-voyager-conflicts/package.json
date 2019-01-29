@@ -1,5 +1,5 @@
 {
-  "name": "@aerogear/apollo-voyager-conflicts",
+  "name": "@aerogear/voyager-conflicts",
   "version": "0.2.7-rc3",
   "description": "A package to provide conflict handler framework for GraphQL server",
   "main": "dist/index.js",

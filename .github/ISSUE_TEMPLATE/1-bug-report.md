@@ -9,7 +9,7 @@ Thank you for reporting a possible bug in Apollo Voyager Server
 
 Please fill in as much of the template below as you can.
 
-Module: if known, please specify the affected module name. (examples: apollo-voyager-server, apollo-voyager-context)
+Module: if known, please specify the affected module name. (examples: voyager-server, voyager-context)
 Version: version of the affected module
 
 
