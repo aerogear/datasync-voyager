@@ -5,7 +5,7 @@ import { makeExecutableSchema } from 'graphql-tools'
 
 import { ApolloServer } from 'apollo-server-express'
 import * as http from 'http'
-import { VoyagerServer, gql } from '../'
+import { gql, VoyagerServer} from '../'
 import { VoyagerConfig } from '../config/VoyagerConfig'
 import { TestApolloClient } from './testApolloClient'
 
