@@ -1,9 +1,6 @@
 import { AuditLogger, DefaultAuditLogger } from '@aerogear/apollo-voyager-audit'
-import { ObjectState, VersionedObjectState } from '@aerogear/apollo-voyager-conflicts'
 import { AuthContextProvider, DefaultAuthContextProvider, SecurityService } from '@aerogear/apollo-voyager-keycloak'
-import { Metrics } from '@aerogear/apollo-voyager-metrics'
 import test from 'ava'
-import { GraphQLResolveInfo } from 'graphql'
 import { DefaultVoyagerConfig } from '../config/DefaultVoyagerConfig'
 import { ApolloVoyagerContextProvider } from './ApolloVoyagerContextProvider'
 
@@ -19,7 +16,7 @@ test('DefaultVoyagerConfig will result in DefaultSecurityService inside the cont
   const contextFn = contextProvider.getContext()
   const context = await contextFn({ req: dummyRequest })
 
-  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: new DefaultAuditLogger().auditLog }
+  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: new DefaultAuditLogger().auditLog, conflict }
   t.deepEqual(context, expectedContext)
 })
 
@@ -61,7 +58,7 @@ test('Passing a custom security service will result in that service being inside
   const contextFn = contextProvider.getContext()
   const context = await contextFn({ req: dummyRequest })
 
-  const expectedContext = { request: dummyRequest, auth: new CustomAuthContextProvider(), auditLog: auditLogger.auditLog }
+  const expectedContext = { request: dummyRequest, auth: new CustomAuthContextProvider(), auditLog: auditLogger.auditLog, conflict }
   t.deepEqual(context, expectedContext)
 })
 
@@ -90,7 +87,7 @@ test('Passing a custom AuditLogger class will result in a custom auditLog functi
   const contextFn = contextProvider.getContext()
   const context = await contextFn({ req: dummyRequest })
 
-  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: auditLogger.auditLog }
+  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: auditLogger.auditLog, conflict }
 
   // Notice t.plan(2) at the beginning of the test
   // These are our two assertions. context.auditLog() will call t.pass()
@@ -197,7 +194,7 @@ test('if the user context is not an object or function it will not be included',
 
   const context = await contextFn({ req: dummyRequest })
 
-  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: new DefaultAuditLogger().auditLog }
+  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: new DefaultAuditLogger().auditLog, conflict }
   t.deepEqual(context, expectedContext)
 })
 
@@ -242,7 +239,7 @@ test('if the user context function returns a null or undefined value, just the d
   const contextFn = contextProvider.getContext()
   const context = await contextFn({ req: dummyRequest })
 
-  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: new DefaultAuditLogger().auditLog }
+  const expectedContext = { request: dummyRequest, auth: new DefaultAuthContextProvider(), auditLog: new DefaultAuditLogger().auditLog, conflict }
   t.deepEqual(context, expectedContext)
 })
 
