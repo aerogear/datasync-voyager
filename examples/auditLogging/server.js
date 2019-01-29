@@ -38,7 +38,7 @@ const voyagerConfig = {
   auditLogger
 }
 
-// Initialize the apollo voyager server with our schema and context
+// Initialize the voyager server with our schema and context
 const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
 
 const app = express()

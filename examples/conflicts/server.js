@@ -85,7 +85,7 @@ const context = ({ req }) => {
   }
 }
 
-// Initialize the apollo voyager server with our schema and context
+// Initialize the voyager server with our schema and context
 const server = ApolloVoyagerServer({
   playground: {
     tabs: [{
