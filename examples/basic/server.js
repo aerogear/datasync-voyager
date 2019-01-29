@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { ApolloVoyagerServer, gql } = require('../../packages/apollo-voyager-server')
+const { ApolloVoyagerServer, gql } = require('@aerogear/apollo-voyager-server')
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
@@ -13,10 +13,10 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
-      
+
       // we can access the request object provided by the Voyager framework
       console.log(context.request.body)
-      
+
       // we can access the context added below also
       console.log(context.serverName)
       return `Hello world from ${context.serverName}`
