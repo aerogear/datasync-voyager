@@ -1,8 +1,10 @@
-import { AuditLogger } from '../audit'
-import { SecurityService } from '../security/SecurityService'
+import { AuditLogger } from '@aerogear/apollo-voyager-audit'
+import { ObjectState } from '@aerogear/apollo-voyager-conflicts'
+import { SecurityService } from '@aerogear/apollo-voyager-keycloak'
 
 export interface VoyagerContextProviderConfig {
   userContext?: any,
   securityService: SecurityService,
-  auditLogger: AuditLogger
+  auditLogger: AuditLogger,
+  conflict: ObjectState
 }
