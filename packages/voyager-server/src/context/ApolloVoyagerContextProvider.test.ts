@@ -1,16 +1,15 @@
+import { AuditLogger, DefaultAuditLogger } from '@aerogear/apollo-voyager-audit'
+import { ObjectState, VersionedObjectState } from '@aerogear/apollo-voyager-conflicts'
+import { AuthContextProvider, DefaultAuthContextProvider, SecurityService } from '@aerogear/apollo-voyager-keycloak'
+import { Metrics } from '@aerogear/apollo-voyager-metrics'
 import test from 'ava'
 import { GraphQLResolveInfo } from 'graphql'
-import { AuditLogger } from '../audit'
-import { DefaultAuditLogger } from '../audit/DefaultAuditLogger'
 import { DefaultVoyagerConfig } from '../config/DefaultVoyagerConfig'
-import { AuthContextProvider } from '../security/AuthContextProvider'
-import { DefaultAuthContextProvider } from '../security/DefaultSecurityService'
-import { SecurityService } from '../security/SecurityService'
 import { ApolloVoyagerContextProvider } from './ApolloVoyagerContextProvider'
 
 test('DefaultVoyagerConfig will result in DefaultSecurityService inside the context', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, auditLogger })
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, auditLogger, conflict })
 
   const dummyRequest = {
     method: 'GET',
@@ -25,28 +24,28 @@ test('DefaultVoyagerConfig will result in DefaultSecurityService inside the cont
 })
 
 test('Passing a custom security service will result in that service being inside the context', async (t) => {
-  const { auditLogger } = new DefaultVoyagerConfig()
+  const { auditLogger, conflict } = new DefaultVoyagerConfig()
   class CustomAuthContextProvider implements AuthContextProvider {
 
-    public isAuthenticated () {
+    public isAuthenticated() {
       return false
     }
-    public hasRole () {
+    public hasRole() {
       return false
     }
-    public getUser () {
+    public getUser() {
       return null
     }
   }
 
   class CustomSecurityService implements SecurityService {
-    public getSchemaDirectives () {
+    public getSchemaDirectives() {
       return null
     }
-    public applyAuthMiddleware () {
+    public applyAuthMiddleware() {
       return null
     }
-    public getAuthContextProvider () {
+    public getAuthContextProvider() {
       return CustomAuthContextProvider
     }
   }
@@ -57,7 +56,7 @@ test('Passing a custom security service will result in that service being inside
   }
 
   const securityService = new CustomSecurityService()
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
   const context = await contextFn({ req: dummyRequest })
@@ -69,13 +68,13 @@ test('Passing a custom security service will result in that service being inside
 test('Passing a custom AuditLogger class will result in a custom auditLog function in the context', async (t) => {
   t.plan(2)
 
-  const { securityService } = new DefaultVoyagerConfig()
+  const { securityService, conflict } = new DefaultVoyagerConfig()
 
   class CustomAuditLogger implements AuditLogger {
-    public logResolverCompletion (msg: string, success: boolean, obj: any, args: any, context: any, info: GraphQLResolveInfo): void {
+    public logResolverCompletion(msg: string, success: boolean, obj: any, args: any): void {
       // no op
     }
-    public auditLog (msg: string, obj: any, args: any, context: any, info: GraphQLResolveInfo): void {
+    public auditLog(msg: string, obj: any, args: any): void {
       t.pass()
     }
   }
@@ -86,7 +85,7 @@ test('Passing a custom AuditLogger class will result in a custom auditLog functi
   }
 
   const auditLogger = new CustomAuditLogger()
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
   const context = await contextFn({ req: dummyRequest })
@@ -101,14 +100,14 @@ test('Passing a custom AuditLogger class will result in a custom auditLog functi
 })
 
 test('plain context objects are supported and merged into the resulting context', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
   const userContext = {
     some: 'value',
     another: 'property'
   }
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
   const context = await contextFn({})
@@ -120,16 +119,16 @@ test('plain context objects are supported and merged into the resulting context'
 })
 
 test('context functions are supported and the resulting object is merged into the resulting context', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
-  const userContext = function () {
+  const userContext = function() {
     return {
       some: 'value',
       another: 'property'
     }
   }
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
   const context = await contextFn({})
@@ -141,16 +140,16 @@ test('context functions are supported and the resulting object is merged into th
 })
 
 test('async context functions are supported and the resulting object is merged into the resulting context', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
-  const userContext = async function () {
+  const userContext = async function() {
     return {
       some: 'value',
       another: 'property'
     }
   }
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
   const context = await contextFn({})
@@ -162,7 +161,7 @@ test('async context functions are supported and the resulting object is merged i
 })
 
 test('context Promises are supported and the resolved object is merged into the resulting context', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
   const userContext = new Promise((resolve, reject) => {
     resolve({
@@ -171,7 +170,7 @@ test('context Promises are supported and the resolved object is merged into the 
     })
   })
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
   const context = await contextFn({})
@@ -183,11 +182,11 @@ test('context Promises are supported and the resolved object is merged into the 
 })
 
 test('if the user context is not an object or function it will not be included', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
   const userContext = 'not an object'
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
 
@@ -203,14 +202,14 @@ test('if the user context is not an object or function it will not be included',
 })
 
 test('user context properties cannot override ones provided by Voyager', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
   const userContext = {
     auth: 'my custom auth',
     request: 'my custom request'
   }
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const dummyRequest = {
     method: 'GET',
@@ -227,13 +226,13 @@ test('user context properties cannot override ones provided by Voyager', async (
 })
 
 test('if the user context function returns a null or undefined value, just the default context will be present', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
-  const userContext = function () {
+  const userContext = function() {
     return null
   }
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const dummyRequest = {
     method: 'GET',
@@ -248,14 +247,14 @@ test('if the user context function returns a null or undefined value, just the d
 })
 
 test('getContext throws when userContext function throws', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
   const errorMsg = 'error in user context'
-  const userContext = function () {
+  const userContext = function() {
     throw new Error(errorMsg)
   }
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
 
@@ -265,14 +264,14 @@ test('getContext throws when userContext function throws', async (t) => {
 })
 
 test('getContext throws when userContext Promise rejects', async (t) => {
-  const { securityService, auditLogger } = new DefaultVoyagerConfig()
+  const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
 
   const errorMsg = 'error in user context'
   const userContext = new Promise((resolve, reject) => {
     reject(new Error(errorMsg))
   })
 
-  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger })
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, userContext, auditLogger, conflict })
 
   const contextFn = contextProvider.getContext()
 

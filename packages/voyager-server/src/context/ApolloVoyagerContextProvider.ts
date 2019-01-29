@@ -1,5 +1,6 @@
+import { AuditLogger } from '@aerogear/apollo-voyager-audit'
 import { IncomingMessage } from 'http'
-import { AuditLogger } from '../audit'
+import { VoyagerContext } from './VoyagerContext'
 import { VoyagerContextProviderConfig } from './VoyagerContextConfig'
 
 type ContextFunction = (object: any) => any
@@ -17,7 +18,7 @@ export class ApolloVoyagerContextProvider {
   public userContextFunction: any
   public userContextObject: any
 
-  constructor (config: VoyagerContextProviderConfig) {
+  constructor(config: VoyagerContextProviderConfig) {
     this.config = config
 
     if (typeof this.config.userContext === 'function') {
@@ -27,15 +28,15 @@ export class ApolloVoyagerContextProvider {
     }
 
     this.authContextProvider = this.config.securityService.getAuthContextProvider()
-    this.auditLogger = config.auditLogger
+    this.auditLogger = this.config.auditLogger
   }
 
   /**
    * returns the context object or function that should be passed into new ApolloServer()
    */
-  public getContext (): ContextFunction {
+  public getContext(): ContextFunction {
     const voyagerContextProvider = this
-    return async function combineContexts ({ req }: { req: IncomingMessage }): Promise<object> {
+    return async function combineContexts({ req }: { req: IncomingMessage }): Promise<object> {
 
       const defaultContext = voyagerContextProvider.getDefaultContext({ req })
       let userContext = voyagerContextProvider.buildUserContext({ req })
@@ -48,7 +49,7 @@ export class ApolloVoyagerContextProvider {
     }
   }
 
-  private buildUserContext ({ req }: { req: IncomingMessage }): object {
+  private buildUserContext({ req }: { req: IncomingMessage }): object {
     let userContext: any
 
     if (this.userContextFunction) {
@@ -59,17 +60,18 @@ export class ApolloVoyagerContextProvider {
     return userContext
   }
 
-  private getDefaultContext ({ req }: { req: IncomingMessage }): {[key: string]: any} {
-    const defaultContext: {[key: string]: any} = {
+  private getDefaultContext({ req }: { req: IncomingMessage }): VoyagerContext {
+    const defaultContext: VoyagerContext = {
       request: req,
       auth: new this.authContextProvider({ req }),
-      auditLog: this.auditLogger.auditLog
+      auditLog: this.auditLogger.auditLog,
+      conflict: this.config.conflict
     }
     return defaultContext
   }
 }
 
-function isObject (val: any) {
+function isObject(val: any) {
   if (val === null) { return false }
   return (typeof val === 'object' && !Array.isArray(val))
 }
