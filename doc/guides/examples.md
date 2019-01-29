@@ -97,16 +97,16 @@ Try change the the role to a made up role and restart the server. Try the sample
 
 ## Conflict Example
 
-`conflict/index.js` provides example for server side implementation of data conflict package that can be used with conjunction with `apollo-voyager-server` framework to detect and handle data conflicts.
+This example demonstrates how to use the `@aerogear/vogayer-conflicts` package to detect and handle data conflicts within the resolver functions.
 
-### Running example
+### Running Example
 
 ```
 $ node examples/conflicts/index.js
 🚀 Server ready at http://localhost:4000/graphql
 ```
 
-### Testing conflict resolution
+### Testing Conflict Resolution
 
 Open [http://localhost:4000/graphql](http://localhost:4000/graphql).
 You will see the GraphQL Playground. This is a space where you can try out queries and see the results.
