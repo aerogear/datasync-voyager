@@ -66,7 +66,7 @@ Examples:
 
   - fix: ensure server starts correctly
   - feat: add RBAC feature to keycloak module.
-  - breaking: renamed apollo server constructor
+  - breaking: renamed voyager server constructor
 
 The reasons for this are as follows:
 
@@ -96,7 +96,7 @@ $ git rebase upstream/master
 
 <!-- TODO: Once we have more testing in place, it would be nice to have a better guide on tests -->
 Bug fixes and features should always come with tests. This repo mostly contains `unit` and `integration` tests.
-Unit tests are typically placed in the same directory as the code they are testing. 
+Unit tests are typically placed in the same directory as the code they are testing.
 Looking at other tests to see how they should be structured can help you write tests.
 
 Before submitting your changes in a Pull Request, always run the full test suite and lint the code.
