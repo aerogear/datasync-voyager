@@ -2,8 +2,6 @@ const express = require('express')
 const queries = require('./queries')
 const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 
-const { conflictHandler } = require('@aerogear/voyager-conflicts')
-
 conflictHandler.enableLogging(console)
 
 // Types
@@ -41,8 +39,8 @@ const customGreetingResolutionStrategy = function(serverData, clientData, baseDa
 // Resolver functions. This is our business logic
 const resolvers = {
   Mutation: {
-    changeGreeting: async (obj, args, context, info) => {
-      if (conflictHandler.hasConflict(greeting, args)) {
+    changeGreeting: async (obj, args, { conflict }, info) => {
+      if (conflict.hasConflict(greeting, args)) {
 
         const serverState = greeting
         const clientState = args
@@ -50,20 +48,20 @@ const resolvers = {
 
         // resolvedState is the new record the user should persist
         // response is the specially built message that should be returned to the client
-        const { resolvedState, response } = await conflictHandler.resolveOnServer(strategy, serverState, clientState)
+        const { resolvedState, response } = await conflict.resolveOnServer(strategy, serverState, clientState)
         greeting = resolvedState
         return response
       }
-      greeting = conflictHandler.nextState(args)
+      greeting = conflict.nextState(args)
       return greeting
     },
-    changeGreetingClient: async (obj, args, context, info) => {
-      if (conflictHandler.hasConflict(greeting, args)) {
+    changeGreetingClient: async (obj, args, { conflict }, info) => {
+      if (conflict.hasConflict(greeting, args)) {
         const serverState = greeting
         const clientState = args
-        return await conflictHandler.resolveOnClient(serverState, clientState).response;
+        return await conflict.resolveOnClient(serverState, clientState).response;
       }
-      greeting = conflictHandler.nextState(args)
+      greeting = conflict.nextState(args)
       return greeting
     }
   },
