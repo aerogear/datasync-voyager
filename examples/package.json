@@ -12,6 +12,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@aerogear/voyager-tools": "^0.3.0",
     "@aerogear/voyager-audit": "^0.3.0",
     "@aerogear/voyager-conflicts": "^0.3.0",
     "@aerogear/voyager-keycloak": "^0.3.0",
