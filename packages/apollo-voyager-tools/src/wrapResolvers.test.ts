@@ -1,59 +1,84 @@
-import auditLogger from '@aerogear/apollo-voyager-audit'
-import metrics from '@aerogear/apollo-voyager-metrics'
-import { voyagerResolvers } from '@aerogear/apollo-voyager-server'
 import test from 'ava'
+import { voyagerResolvers } from '@aerogear/apollo-voyager-server'
 import { wrapResolvers } from './wrapResolvers'
 import { FieldResolver } from './wrapResolvers'
 
-function resolverFunction() {
-  return (): FieldResolver => {
-    return (obj, args, context, info) => {
-      return context
+test('resolvers are wrapped and wrapper function executes', (t) => {
+  t.plan(4)
+  const resolversWithOutSubscription = {
+    Query: {
+      query1: () => {
+        return t.pass()
+      }
+    },
+
+    Mutation: {
+      mutation1: () => {
+        return t.pass()
+      }
     }
   }
-}
-
-const resolversWithOutSubscription = {
-  Query: {
-    allTasks: async (context: any) => {
-      return context.db.select().from('tasks')
-    }
-  },
-
-  Mutation: {
-    createTask: async (args: any, context: any) => {
-      const result = await context.db('tasks').insert(args).returning('*').then((rows: any) => rows[0])
-      return result
+  function resolverWrapper(resolverFn: FieldResolver) {
+    return (obj: any, args: any, context: any, info: any): FieldResolver => {
+      t.pass()
+      return resolverFn(obj, info, args, context)
     }
   }
-}
 
-const resolversWithSubscription = {
-  ...resolversWithOutSubscription,
-  Subscription: {
-    something: async () => {
-      const something = 'test'
-      return something
-    }
-  }
-}
-
-test('Without subscriptions', (t) => {
-  const config: any = {
-    auditLogger,
-    metrics,
-    securityService: {} as any
-  }
-  const result = wrapResolvers(voyagerResolvers(resolversWithOutSubscription, config), resolverFunction())
-  t.is(result.Subscription, undefined)
+  const wrappedResolvers = wrapResolvers(voyagerResolvers(resolversWithOutSubscription, {} as any), resolverWrapper)
+  wrappedResolvers.Query.query1({}, {}, {}, {} as any)
+  wrappedResolvers.Mutation.mutation1({}, {}, {}, {} as any)
 })
 
-test('With subscriptions', (t) => {
-  const config: any = {
-    auditLogger,
-    metrics,
-    securityService: {} as any
+test('subscriptions are not wrapped', (t) => {
+  t.plan(1)
+  const resolversWithSubscription = {
+    Subscription: {
+      subscription1: () => {
+        return t.pass()
+      }
+    }
   }
-  const result = wrapResolvers(voyagerResolvers(resolversWithSubscription, config), resolverFunction())
-  t.is(result.Subscription, undefined)
+  function resolverWrapper(resolverFn: FieldResolver) {
+    return (obj: any, args: any, context: any, info: any): FieldResolver => {
+      t.fail()
+      return resolverFn(obj, info, args, context)
+    }
+  }
+
+  const wrappedResolvers = wrapResolvers(voyagerResolvers(resolversWithSubscription, {} as any), resolverWrapper)
+  wrappedResolvers.Subscription.subscription1({}, {}, {}, {} as any)
+})
+
+test('all resolvers except subscriptions are wrapped', (t) => {
+  t.plan(5)
+  const resolversWithAll = {
+    Query: {
+      query1: () => {
+        return t.pass()
+      }
+    },
+
+    Mutation: {
+      mutation1: () => {
+        return t.pass()
+      }
+    },
+    Subscription: {
+      subscription1: () => {
+        return t.pass()
+      }
+    }
+  }
+  function resolverWrapper(resolverFn: FieldResolver) {
+    return (obj: any, args: any, context: any, info: any): FieldResolver => {
+      t.pass()
+      return resolverFn(obj, info, args, context)
+    }
+  }
+
+  const wrappedResolvers = wrapResolvers(voyagerResolvers(resolversWithAll, {} as any), resolverWrapper)
+  wrappedResolvers.Query.query1({}, {}, {}, {} as any)
+  wrappedResolvers.Mutation.mutation1({}, {}, {}, {} as any)
+  wrappedResolvers.Subscription.subscription1({}, {}, {}, {} as any)
 })
