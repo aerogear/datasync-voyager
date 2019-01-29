@@ -1,4 +1,3 @@
-import { AuthContextProvider } from '@aerogear/voyager-server'
 import { Request } from 'express'
 import { IncomingMessage } from 'http'
 import { AuthContextProvider } from './api'

@@ -1,5 +1,5 @@
-import { AuditLogger, DefaultAuditLogger } from '@aerogear/apollo-voyager-audit'
-import { AuthContextProvider, DefaultAuthContextProvider, SecurityService } from '@aerogear/apollo-voyager-keycloak'
+import { AuditLogger, DefaultAuditLogger } from '@aerogear/voyager-audit'
+import { AuthContextProvider, DefaultAuthContextProvider, SecurityService } from '@aerogear/voyager-keycloak'
 import test from 'ava'
 import { DefaultVoyagerConfig } from '../config/DefaultVoyagerConfig'
 import { ApolloVoyagerContextProvider } from './ApolloVoyagerContextProvider'

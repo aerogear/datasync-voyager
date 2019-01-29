@@ -1,4 +1,4 @@
-import { AuditLogger } from '@aerogear/apollo-voyager-audit'
+import { AuditLogger } from '@aerogear/voyager-audit'
 import { IncomingMessage } from 'http'
 import { VoyagerContext } from './VoyagerContext'
 import { VoyagerContextProviderConfig } from './VoyagerContextConfig'

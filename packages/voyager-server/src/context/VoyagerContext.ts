@@ -1,6 +1,6 @@
-import { AuditLogMethod } from '@aerogear/apollo-voyager-audit'
-import { ObjectState } from '@aerogear/apollo-voyager-conflicts'
-import { SecurityService } from '@aerogear/apollo-voyager-keycloak'
+import { AuditLogMethod } from '@aerogear/voyager-audit'
+import { ObjectState } from '@aerogear/voyager-conflicts'
+import { SecurityService } from '@aerogear/voyager-keycloak'
 import { IncomingMessage } from 'http'
 
 /**

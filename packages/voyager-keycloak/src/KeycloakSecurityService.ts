@@ -1,4 +1,3 @@
-import { SecurityService } from '@aerogear/voyager-server'
 import { Router } from 'express'
 import session from 'express-session'
 import Keycloak from 'keycloak-connect'

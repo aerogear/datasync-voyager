@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "@aerogear/voyager-audit": "^0.3.0",
-   "@aerogear/voyager-conflicts": "^0.3.0",
+    "@aerogear/voyager-conflicts": "^0.3.0",
+    "@aerogear/voyager-keycloak": "^0.3.0",
     "@aerogear/voyager-metrics": "^0.3.0",
     "@aerogear/voyager-tools": "^0.3.0",
     "apollo-server": "2.2.2",

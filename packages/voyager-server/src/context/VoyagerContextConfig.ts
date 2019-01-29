@@ -1,6 +1,6 @@
-import { auditLog } from '@aerogear/apollo-voyager-audit'
-import { ObjectState } from '@aerogear/apollo-voyager-conflicts'
-import { SecurityService } from '@aerogear/apollo-voyager-keycloak'
+import { auditLog } from '@aerogear/voyager-audit'
+import { ObjectState } from '@aerogear/voyager-conflicts'
+import { SecurityService } from '@aerogear/voyager-keycloak'
 
 export interface VoyagerContextProviderConfig {
   userContext?: any,
