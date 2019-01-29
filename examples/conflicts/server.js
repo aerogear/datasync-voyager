@@ -2,8 +2,6 @@ const express = require('express')
 const queries = require('./queries')
 const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 
-conflictHandler.enableLogging(console)
-
 // Types
 const typeDefs = gql`
   type Greeting {

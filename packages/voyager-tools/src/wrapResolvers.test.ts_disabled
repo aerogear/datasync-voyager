@@ -1,5 +1,5 @@
 import test from 'ava'
-import { voyagerResolvers } from '@aerogear/apollo-voyager-server'
+import { voyagerResolvers } from '@aerogear/voyager-server'
 import { wrapResolvers } from './wrapResolvers'
 import { FieldResolver } from './wrapResolvers'
 

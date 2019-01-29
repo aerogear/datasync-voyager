@@ -8,10 +8,10 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@aerogear/voyager-audit": "^0.1.7",
-    "@aerogear/voyager-keycloak": "^0.1.7",
-    "@aerogear/voyager-metrics": "^0.1.7",
-    "@aerogear/voyager-server": "^0.1.7",
+    "@aerogear/voyager-audit": "^0.3.0",
+    "@aerogear/voyager-keycloak": "^0.3.0",
+    "@aerogear/voyager-metrics": "^0.3.0",
+    "@aerogear/voyager-server": "^0.3.0",
     "express": "^4.16.4",
     "graphql-tools": "^4.0.3",
     "graphql": "^0.13.2"

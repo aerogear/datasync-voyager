@@ -26,7 +26,7 @@ in each individual resolver. Depending on the strategy developers will need to p
 1. Add conflict package dependency to project
 
 ```javascript
-const { conflictHandler } = require('@aerogear/apollo-voyager-conflicts')
+const { conflictHandler } = require('@aerogear/voyager-conflicts')
 ```
 
 2. Add version field to GraphQL type that should support conflict resolution

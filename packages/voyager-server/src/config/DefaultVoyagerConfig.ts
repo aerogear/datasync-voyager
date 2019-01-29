@@ -1,6 +1,6 @@
-import { AuditLogger, DefaultAuditLogger } from '@aerogear/apollo-voyager-audit'
-import { ObjectState, VersionedObjectState } from '@aerogear/apollo-voyager-conflicts'
-import { DefaultSecurityService, SecurityService } from '@aerogear/apollo-voyager-keycloak'
+import { AuditLogger, DefaultAuditLogger } from '@aerogear/voyager-audit'
+import { ObjectState, VersionedObjectState } from '@aerogear/voyager-conflicts'
+import { DefaultSecurityService, SecurityService } from '@aerogear/voyager-keycloak'
 import { VoyagerConfig } from './VoyagerConfig'
 
 interface UserVoyagerConfig {
