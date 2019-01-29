@@ -20,11 +20,7 @@ The [Contributing Guide](./CONTRIBUTING.md) will give you all of the information
 
 ## Examples
 
-The [Examples Guide](./doc/guides/examples.md) walks through some example applications which highlight some of Apollo Voyager Server's features.
-
-* [Basic Example Application](./doc/guides/examples.md#basic-example) - This typical hello world example shows how to set up Apollo Voyager Server.
-* [Application with Authentication and RBAC](./doc/guides/examples.md#keycloak-example) - This example shows how to add authentication and and role based access control to your application using [Keycloak](https://www.keycloak.org/)
-* [External REST API integration example](./doc/guides/examples.md#External-REST-API-integration-example) - This example shows GraphQL integration with another API
+The [Examples Guide](./examples/README.md) walks through some example applications which highlight some of Apollo Voyager Server's features.
 
 ## API Docs
 

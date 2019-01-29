@@ -1,28 +1,3 @@
-# Apollo Voyager Server Examples
-
-The `examples` directory has example applications that show how the Voyager framework can be used.
-
-If you have run the `npm run bootstrap` command, the dependencies should already be installed.
-
-## Basic Example
-
-`basic/index.js` is the simplest example of how to use the `apollo-voyager-server` framework.
-
-```
-$ node examples/basic/index.js
-🚀 Server ready at http://localhost:4000/graphql
-```
-
-Open [http://localhost:4000/graphql](http://localhost:4000/graphql) and you will see the GraphQL Playground. This is a space where you can try out queries and see the results.
-
-Try the following query.
-
-```
-query hello {
-  hello
-}
-```
-
 ## Keycloak Example
 
 `keycloak/index.js` shows how we can use the `KeycloakSecurityService` from `apollo-voyager-keycloak` to protect our app with Keycloak.
@@ -45,7 +20,7 @@ docker-compose up
 
 * Open [http://localhost:8080/auth/admin/](http://localhost:8080/auth/admin/) and login with the user `admin` and password `admin`.
 * Click **Add Realm** and click **Select File** next to the **Import** label.
-* Select the [examples/keycloak/config/realm-export.json](../../examples/keycloak/config/realm-export.json) file and click **Create**.
+* Select the [examples/keycloak/config/realm-export.json](./config/realm-export.json) file and click **Create**.
 * Click **Users** and add a new user called `developer`. You can choose your own name if you wish.
 * Under the **Credentials** tab add a new password of **developer** and make sure it is not temporary. You can choose your own password if you wish.
 * Under the **Role Mappings** tab assign the **admin** realm role.
@@ -54,7 +29,7 @@ docker-compose up
 ### Start the Server
 
 ```
-node examples/keycloak/index.js
+node keycloak/index.js
 Initializing Keycloak authentication
 🚀 Server ready at http://localhost:4000/graphql
 ```
@@ -91,7 +66,7 @@ query hello {
 
 ### Role Based Access Control
 
-The query above will only work if the authenticated user has the `admin` role. You can see this rule being applied with the `@hasRole(role: "admin")` directive in [examples/keycloak/server.js](../../examples/keycloak/server.js#L22).
+The query above will only work if the authenticated user has the `admin` role. You can see this rule being applied with the `@hasRole(role: "admin")` directive in [keycloak/server.js](./server.js#L22).
 
 Try change the the role to a made up role and restart the server. Try the sample query again and verify that an error is displayed.
 
@@ -118,7 +93,7 @@ Example contains 2 resolvers:
 - changeGreetingClient: Resolver configured to resolve conflict on client
 
 
-Conflict will be triggered when version supplied as mutation parameter will be
+Conflict will be triggered when version supplied as mutation parameter will be 
 different than version that server expects. To mitigate that in GraphQL Playground please:
 
 1) Execute `changeGreeting` mutation.
@@ -127,7 +102,6 @@ First execution of the `changeGreeting` is going to perform successful update.
 Second execution is going to cause conflict because version that is supplied did not change.
 3) Increment version and execute mutation again.
 Incrementing version will sucesfully save data without conflict.
-
 
 ## External REST API integration example
 
@@ -145,3 +119,4 @@ const resolvers = {
 ```
 
 [examples/restapi/server.js](../../examples/restapi/server.js#L26-L39) shows how easy it is to integrate the consumption of a REST API endpoint into your GraphQL resolver.
+
