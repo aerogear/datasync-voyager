@@ -1,11 +1,10 @@
-const express = require("express");
-const { makeExecutableSchema } = require("graphql-tools");
-const queries = require("./queries");
-const axios = require("axios");
+const express = require('express')
+const queries = require('./queries')
+const axios = require('axios')
 const {
-  ApolloVoyagerServer,
+  VoyagerServer,
   gql
-} = require("../../packages/apollo-voyager-server");
+} = require('@aerogear/voyager-server')
 
 // Types
 const typeDefs = gql`
@@ -18,7 +17,7 @@ const typeDefs = gql`
   type Query {
     getCarModels(brand: String!): [ModelInfo]
   }
-`;
+`
 
 // Resolver functions. This is our business logic
 const resolvers = {
@@ -28,42 +27,32 @@ const resolvers = {
       const response = await axios.get(
         `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/${args.brand}`,
         {
-          responseType: "json",
-          params: { format: "json" }
+          responseType: 'json',
+          params: { format: 'json' }
         }
-      );
-      const { data } = response;
-      return data.Results;
+      )
+      const { data } = response
+      return data.Results
     }
   }
-};
+}
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
-
-// The context is a function or object that can add some extra data
-// That will be available via the `context` argument the resolver functions
-const context = ({ req }) => {
-  return {
-    serverName: "Voyager Server"
-  };
-};
-
-// Initialize the apollo voyager server with our schema and context
-const server = ApolloVoyagerServer({
+// Initialize the voyager server with our schema and context
+const server = VoyagerServer({
+  typeDefs,
+  resolvers,
   playground: {
     tabs: [
       {
-        endpoint: "/graphql",
+        endpoint: '/graphql',
         variables: {},
         query: queries
       }
     ]
-  },
-  schema,
-  context
-});
+  }
+})
 
-const app = express();
-server.applyMiddleware({ app });
+const app = express()
+server.applyMiddleware({ app })
 
-module.exports = { app, server };
+module.exports = { app, server }

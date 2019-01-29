@@ -1,6 +1,5 @@
 const express = require('express')
-const { makeExecutableSchema } = require('graphql-tools')
-const queries = require("./queries")
+const queries = require('./queries')
 const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 
 const { conflictHandler } = require('@aerogear/voyager-conflicts')
@@ -75,8 +74,6 @@ const resolvers = {
   }
 }
 
-const schema = makeExecutableSchema({ typeDefs, resolvers })
-
 // The context is a function or object that can add some extra data
 // That will be available via the `context` argument the resolver functions
 const context = ({ req }) => {
@@ -87,6 +84,8 @@ const context = ({ req }) => {
 
 // Initialize the voyager server with our schema and context
 const server = VoyagerServer({
+  typeDefs,
+  resolvers,
   playground: {
     tabs: [{
       endpoint: '/graphql',
@@ -94,7 +93,6 @@ const server = VoyagerServer({
       query: queries
     }]
   },
-  schema,
   context
 })
 
