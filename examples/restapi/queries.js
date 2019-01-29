@@ -1,9 +1,9 @@
-const queries = `query getCharacterInfo {
-  getCharacterInfo(id:11) {
-    name 
-    homeworld
-    gender
-  }  
+const queries = `query getCarModels {
+  getCarModels(brand:"toyota") {
+    Model_ID
+    Make_Name
+    Model_Name
+  }
 }
 `;
 
