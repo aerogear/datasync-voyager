@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 
-const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
+const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 const { KeycloakSecurityService } = require('@aerogear/voyager-keycloak')
 
 const keycloakConfigPath = process.env.KEYCLOAK_CONFIG || path.resolve(__dirname, './config/keycloak.json')
@@ -60,7 +60,7 @@ const voyagerConfig = {
   securityService: keycloakService
 }
 
-const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
+const server = VoyagerServer(apolloConfig, voyagerConfig)
 
 const app = express()
 

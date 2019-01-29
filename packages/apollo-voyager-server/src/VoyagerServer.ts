@@ -12,7 +12,7 @@ import { voyagerResolvers } from './voyagerResolver'
  * Initialises an Apollo server that has been extended with the voyager framework
  * @param baseApolloConfig
  */
-export function ApolloVoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: VoyagerConfig): ApolloServer {
+export function VoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: VoyagerConfig): ApolloServer {
   const { typeDefs, resolvers, context } = baseApolloConfig
 
   if (typeDefs && resolvers) {

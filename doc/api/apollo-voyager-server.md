@@ -1,6 +1,6 @@
 # voyager-server API
 
-### ApolloVoyagerServer(apolloConfig, voyagerConfig): <ApolloServer>
+### VoyagerServer(apolloConfig, voyagerConfig): <ApolloServer>
 
 Initializes a new Apollo Server with extension points for the Voyager Framework.
 
@@ -9,7 +9,7 @@ Initializes a new Apollo Server with extension points for the Voyager Framework.
 
 ```js
 const express = require('express')
-const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
+const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 
 const typeDefs = gql`
   type Query {
@@ -24,7 +24,7 @@ const resolvers = {
   }
 }
 
-const server = ApolloVoyagerServer({
+const server = VoyagerServer({
   typeDefs,
   resolvers
 })
@@ -41,7 +41,7 @@ app.listen(4000, () =>
 
 The core idea behind the Voyager framework is that features can be enabled by passing their implementations in `VoyagerConfig` object. This keeps the core `voyager-server` library lightweight and decoupled from the other features such as metrics, security and audit logging. New features in the future will be enabled using this same concept.
 
-This options object is used to enable the additional features provided by the Voyager framework. 
+This options object is used to enable the additional features provided by the Voyager framework.
 
 * `VoyagerConfig`: <`Object`>
 
@@ -58,7 +58,7 @@ This options object is used to enable the additional features provided by the Vo
     const apolloConfig = { typeDefs, resolvers }
     const voyagerConfig = { securityService }
 
-    const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
+    const server = VoyagerServer(apolloConfig, voyagerConfig)
 
     const app = express()
 
@@ -81,7 +81,7 @@ This options object is used to enable the additional features provided by the Vo
   const apolloConfig = { typeDefs, resolvers }
   const voyagerConfig = { metrics }
 
-  const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
+  const server = VoyagerServer(apolloConfig, voyagerConfig)
 
   const app = express()
 
@@ -103,7 +103,7 @@ This options object is used to enable the additional features provided by the Vo
   const apolloConfig = { typeDefs, resolvers }
   const voyagerConfig = { auditLogger }
 
-  const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
+  const server = VoyagerServer(apolloConfig, voyagerConfig)
 
   const app = express()
 

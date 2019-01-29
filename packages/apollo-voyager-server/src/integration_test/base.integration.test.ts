@@ -5,7 +5,7 @@ import { makeExecutableSchema } from 'graphql-tools'
 
 import { ApolloServer } from 'apollo-server-express'
 import * as http from 'http'
-import { ApolloVoyagerServer, gql } from '../'
+import { VoyagerServer, gql } from '../'
 import { VoyagerConfig } from '../config/VoyagerConfig'
 import { TestApolloClient } from './testApolloClient'
 
@@ -130,7 +130,7 @@ test.before(async t => {
     return {serverName: 'Voyager Server'}
   }
 
-  server = ApolloVoyagerServer({
+  server = VoyagerServer({
     schema,
     context
   }, {} as VoyagerConfig)

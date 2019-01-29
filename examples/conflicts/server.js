@@ -1,7 +1,7 @@
 const express = require('express')
 const { makeExecutableSchema } = require('graphql-tools')
 const queries = require("./queries")
-const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
+const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 
 const { conflictHandler } = require('@aerogear/voyager-conflicts')
 
@@ -86,7 +86,7 @@ const context = ({ req }) => {
 }
 
 // Initialize the voyager server with our schema and context
-const server = ApolloVoyagerServer({
+const server = VoyagerServer({
   playground: {
     tabs: [{
       endpoint: '/graphql',
