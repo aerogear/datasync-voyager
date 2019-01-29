@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { ApolloVoyagerServer, gql } = require('@aerogear/voyager-server')
+const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 
 // This is our Schema Definition Language (SDL)
 const typeDefs = gql`
@@ -33,7 +33,7 @@ const context = ({ req }) => {
 }
 
 // Initialize the voyager server with our schema and context
-const server = ApolloVoyagerServer({
+const server = VoyagerServer({
   typeDefs,
   resolvers,
   context

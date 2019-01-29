@@ -24,7 +24,7 @@
     const voyagerConfig = {
       securityService: keycloakService
     }
-    const server = ApolloVoyagerServer(apolloConfig, voyagerConfig)
+    const server = VoyagerServer(apolloConfig, voyagerConfig)
     ```
 
 The [Keycloak Example Server Guide](https://github.com/aerogear/voyager-server/blob/master/doc/guides/examples.md#keycloak-example) has an example server based off the instructions above and shows all of the steps needed to get it running.
