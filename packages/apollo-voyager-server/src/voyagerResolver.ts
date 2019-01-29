@@ -14,7 +14,7 @@ export interface VoyagerResolversConfig {
 function voyagerResolverPartial (config: VoyagerConfig): ResolverWrapper {
   const { metrics, auditLogger } = config
   return (resolverFn: FieldResolver): FieldResolver => {
-    return (obj, args, context, info) => {
+    return (obj: any, args: any, context: any, info: any) => {
       return new Promise(async (resolve, reject) => {
         const resolverStartTime = Date.now()
         try {
