@@ -1,8 +1,7 @@
+import auditLogger from '@aerogear/apollo-voyager-audit'
+import metrics from '@aerogear/apollo-voyager-metrics'
+import { voyagerResolvers } from '@aerogear/apollo-voyager-server'
 import test from 'ava'
-import auditLogger from '../../apollo-voyager-audit'
-import metrics from '../../apollo-voyager-metrics'
-import { voyagerResolvers } from '../../apollo-voyager-server'
-import { VoyagerConfig } from '../../apollo-voyager-server/dist/config/VoyagerConfig'
 import { wrapResolvers } from './wrapResolvers'
 import { FieldResolver } from './wrapResolvers'
 
@@ -40,7 +39,7 @@ const resolversWithSubscription = {
 }
 
 test('Without subscriptions', (t) => {
-  const config: VoyagerConfig = {
+  const config: any = {
     auditLogger,
     metrics,
     securityService: {} as any
@@ -50,7 +49,7 @@ test('Without subscriptions', (t) => {
 })
 
 test('With subscriptions', (t) => {
-  const config: VoyagerConfig = {
+  const config: any = {
     auditLogger,
     metrics,
     securityService: {} as any
