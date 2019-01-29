@@ -1,10 +1,9 @@
+import { AuditLogger, DefaultAuditLogger } from '@aerogear/apollo-voyager-audit'
+import { ObjectState } from '@aerogear/apollo-voyager-conflicts'
+import { DefaultSecurityService, SecurityService } from '@aerogear/apollo-voyager-keycloak'
+import { Metrics } from '@aerogear/apollo-voyager-metrics'
 import test from 'ava'
 import { GraphQLResolveInfo } from 'graphql'
-
-import { AuditLogger } from '../audit'
-import { DefaultAuditLogger } from '../audit/DefaultAuditLogger'
-import { DefaultSecurityService } from '../security/DefaultSecurityService'
-import { SecurityService } from '../security/SecurityService'
 import { DefaultVoyagerConfig } from './DefaultVoyagerConfig'
 
 test('DefaultVoyagerConfig returns a blank security service by default', async (t) => {
