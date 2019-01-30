@@ -23,6 +23,16 @@ export function VoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: Vo
 
   const voyagerConfig = new DefaultVoyagerConfig().merge(clientVoyagerConfig)
 
+  if (clientVoyagerConfig && (clientVoyagerConfig.auditLogger || clientVoyagerConfig.metrics)) {
+    voyagerConfig.conflict.setConflictListener({
+      onConflict: (message, serverData, clientData, resolverInfo) => {
+        if (clientVoyagerConfig.metrics) {
+          clientVoyagerConfig.metrics.recordConflictMetrics(resolverInfo)
+        }
+      }
+    })
+  }
+
   // Build the context provider using user supplied context
   const contextProviderConfig = { userContext: context, ...voyagerConfig }
 
