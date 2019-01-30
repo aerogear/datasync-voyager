@@ -28,6 +28,12 @@ const serverResponseMetric = new Prometheus.Histogram({
   labelNames: ['request_type', 'error']
 })
 
+const conflictsMetric = new Prometheus.Counter({
+  name: 'conflicts',
+  help: 'Number of conflicts happened',
+  labelNames: ['operation_type', 'name']
+})
+
 export interface MetricsConfiguration {
   path: string
 }
@@ -80,6 +86,29 @@ export function updateResolverMetrics (resolverInfo: any, responseTime: number) 
     .inc(1)
 }
 
+export function recordConflictMetrics(resolverInfo: any) {
+  const {
+    operation: {operation: resolverMappingType},
+    fieldName: resolverMappingName,
+    path: resolverWholePath,
+    parentType: resolverParentType
+  } = resolverInfo
+
+  let path
+  if (resolverParentType.name === 'Query' || resolverParentType.name === 'Mutation' || resolverParentType.name === 'Subscription') {
+    path = `${resolverParentType.name}.${buildPath(resolverWholePath)}`
+  } else {
+    path = buildPath(resolverWholePath)
+  }
+
+  conflictsMetric
+    .labels(
+      resolverMappingType,
+      path
+    )
+    .inc(1)
+}
+
 function applyMetricsMiddleware (app: Application, config: MetricsConfiguration) {
   const path = config && config.path ? config.path : '/metrics'
   app.get(path, getMetrics)
@@ -94,6 +123,7 @@ function getMetrics (req: IncomingMessage, res: Response) {
   resolverTimingMetric.reset()
   resolverRequestsMetric.reset()
   serverResponseMetric.reset()
+  conflictsMetric.reset()
 }
 
 interface ResponseWithVoyagerMetrics extends Response {

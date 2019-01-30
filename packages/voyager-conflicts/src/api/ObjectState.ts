@@ -1,4 +1,4 @@
-import { ConflictLogger } from './ConflictLogger'
+import { ConflictListener } from './ConflictListener'
 import { ConflictResolution } from './ConflictResolution'
 import { ConflictResolutionStrategy } from './ConflictResolutionStrategy'
 import { ObjectStateData } from './ObjectStateData'
@@ -16,7 +16,7 @@ export interface ObjectState {
    * @param serverState the data currently on the server
    * @param clientState the data the client wishes to perform some mutation with
    */
-  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData): boolean
+  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, resolverInfo: any): boolean
 
   /**
    *
@@ -39,8 +39,8 @@ export interface ObjectState {
   resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData): Promise<ConflictResolution>
 
   /**
-   * Enable logging for conflict resolution package
-   * @param logger - logger implementation
+   * Set a listener for conflict resolution
+   * @param listener - listener implementation
    */
-  enableLogging(logger: ConflictLogger): void
+  setConflictListener(listener: ConflictListener): void
 }

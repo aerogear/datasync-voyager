@@ -1,6 +1,7 @@
 const express = require('express')
 const queries = require('./queries')
 const { VoyagerServer, gql } = require('@aerogear/voyager-server')
+const metrics = require('@aerogear/voyager-metrics')
 
 // Types
 const typeDefs = gql`
@@ -38,7 +39,7 @@ const customGreetingResolutionStrategy = function(serverData, clientData, baseDa
 const resolvers = {
   Mutation: {
     changeGreeting: async (obj, args, { conflict }, info) => {
-      if (conflict.hasConflict(greeting, args)) {
+      if (conflict.hasConflict(greeting, args, info)) {
 
         const serverState = greeting
         const clientState = args
@@ -54,7 +55,7 @@ const resolvers = {
       return greeting
     },
     changeGreetingClient: async (obj, args, { conflict }, info) => {
-      if (conflict.hasConflict(greeting, args)) {
+      if (conflict.hasConflict(greeting, args, info)) {
         const serverState = greeting
         const clientState = args
         return await conflict.resolveOnClient(serverState, clientState).response;
@@ -79,7 +80,7 @@ const context = ({ req }) => {
 }
 
 // Initialize the voyager server with our schema and context
-const server = VoyagerServer({
+const apolloConfig = {
   typeDefs,
   resolvers,
   playground: {
@@ -90,9 +91,18 @@ const server = VoyagerServer({
     }]
   },
   context
-})
+}
+
+const voyagerConfig = {
+  metrics
+}
+
+const server = VoyagerServer(apolloConfig, voyagerConfig)
 
 const app = express()
+
+metrics.applyMetricsMiddlewares(app)
+
 server.applyMiddleware({ app })
 
 module.exports = { app, server }

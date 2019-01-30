@@ -1,4 +1,4 @@
-import { ConflictLogger } from '../api/ConflictLogger'
+import { ConflictListener } from '../api/ConflictListener'
 import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
@@ -17,32 +17,23 @@ import { ObjectStateData } from '../api/ObjectStateData'
  * }
  */
 export class VersionedObjectState implements ObjectState {
-  private logger: ConflictLogger | undefined
+  private conflictListener: ConflictListener | undefined
 
-  public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData) {
+  public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData, resolverInfo: any) {
     if (serverData.version && clientData.version) {
       if (serverData.version !== clientData.version) {
-        if (this.logger) {
-          this.logger.info(`Conflict when saving data.
-          current: ${ JSON.stringify(serverData)},
-          client: ${JSON.stringify(clientData)}`)
+        if (this.conflictListener) {
+          this.conflictListener.onConflict('Conflict when saving data', serverData, clientData, resolverInfo)
         }
         return true
       }
-    } else if (this.logger) {
-      this.logger.info(
-        `Supplied object is missing version field required to determine conflict
-         server: ${JSON.stringify(serverData)}
-         client: ${JSON.stringify(clientData)}`)
+    } else {
+      throw new Error(`Supplied object is missing version field required to determine conflict. Server data: ${JSON.stringify(serverData)} Client data: ${JSON.stringify(clientData)}`)
     }
     return false
   }
 
   public nextState(currentObjectState: ObjectStateData) {
-    if (this.logger) {
-      this.logger.info(`Moving object to next state,
-      ${JSON.stringify(currentObjectState)}`)
-    }
     currentObjectState.version = currentObjectState.version + 1
     return currentObjectState
   }
@@ -64,8 +55,8 @@ export class VersionedObjectState implements ObjectState {
     return new ConflictResolution(true, resolvedState, clientState)
   }
 
-  public enableLogging(logger: ConflictLogger): void {
-    this.logger = logger
+  public setConflictListener(conflictListener: ConflictListener): void {
+    this.conflictListener = conflictListener
   }
 }
 
