@@ -15,6 +15,7 @@ export interface ObjectState {
    *
    * @param serverState the data currently on the server
    * @param clientState the data the client wishes to perform some mutation with
+   * @param resolverInfo resolver info that's coming from Apollo
    */
   hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, resolverInfo: any): boolean
 
@@ -33,6 +34,7 @@ export interface ObjectState {
 
   /**
    *
+   * @param strategy the conflict resolution strategy
    * @param serverState the current state of the object on the server
    * @param clientState the state of the object the client wishes to perform some mutation with
    */
