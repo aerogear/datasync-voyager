@@ -64,8 +64,14 @@ jobs:
       - run: CI=true npm run release:prep
       - run: TAG=$CIRCLE_TAG npm run release:validate
       - run: TAG=$CIRCLE_TAG npm run publish
-      - run: cd examples && TAG=$CIRCLE_TAG ./push-script.sh basic
-
+  containers_publish:
+    working_directory: ~/examples
+    docker:
+      # Node 8 LTS
+      - image: circleci/node:carbon
+    steps:
+      - checkout
+      - run: TAG=$CIRCLE_TAG ./push-script.sh basic
 workflows:
   version: 2
   build_and_release:
@@ -87,3 +93,9 @@ workflows:
               only: /.*/ # allow anything because tag syntax is validated as part of validate-release.sh
             branches:
               ignore: /.*/
+      - containers_publish:
+          requires:
+            - npm_publish
+          filters:
+            tags:
+              only: /.*/
