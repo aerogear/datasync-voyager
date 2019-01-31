@@ -65,13 +65,16 @@ jobs:
       - run: TAG=$CIRCLE_TAG npm run release:validate
       - run: TAG=$CIRCLE_TAG npm run publish
   containers_publish:
-    working_directory: ~/examples
+    working_directory: ~/aerogear
     docker:
       # Node 8 LTS
-      - image: circleci/node:carbon
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
-      - run: TAG=$CIRCLE_TAG ./push-script.sh basic
+      - setup_remote_docker:
+          version: 17.05.0-ce
+          docker_layer_caching: true
+      - run: cd examples && TAG=$CIRCLE_TAG ./push-script.sh basic
 workflows:
   version: 2
   build_and_release:
@@ -95,7 +98,10 @@ workflows:
               ignore: /.*/
       - containers_publish:
           requires:
-            - npm_publish
+            - test_examples
           filters:
             tags:
               only: /.*/
+            branches:
+              only:
+                - master
