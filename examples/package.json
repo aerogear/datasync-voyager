@@ -7,7 +7,12 @@
     "compile": "exit 0",
     "watch": "exit 0",
     "compile:clean": "exit 0",
-    "test-examples": "ava --concurrency=1 test/*.test.js"
+    "test-examples": "ava --concurrency=1 test/*.test.js",
+    "push-basic": "TAG=\"$npm_package_version\" ./push-script.sh basic",
+    "push-keycloak": "TAG=\"$npm_package_version\" ./push-script.sh keycloak",
+    "push-auditLogging": "TAG=\"$npm_package_version\" ./push-script.sh auditLogging",
+    "push-metrics": "TAG=\"$npm_package_version\" ./push-script.sh metrics",
+    "push-restapi": "TAG=\"$npm_package_version\" ./push-script.sh restapi"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -20,7 +25,8 @@
     "@aerogear/voyager-server": "^0.3.0",
     "express": "^4.16.4",
     "graphql-tools": "^4.0.3",
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "graphql": "^14.1.1"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.3",
