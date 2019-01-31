@@ -64,6 +64,7 @@ jobs:
       - run: CI=true npm run release:prep
       - run: TAG=$CIRCLE_TAG npm run release:validate
       - run: TAG=$CIRCLE_TAG npm run publish
+      - run: cd examples && TAG=$CIRCLE_TAG ./push-script.sh basic
 
 workflows:
   version: 2
