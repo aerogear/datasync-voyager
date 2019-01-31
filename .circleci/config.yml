@@ -67,10 +67,11 @@ jobs:
   containers_publish:
     working_directory: ~/aerogear
     docker:
-      # Node 8 LTS
+      # image for building docker containers
       - image: docker:17.05.0-ce-git
     steps:
       - checkout
+      # special woraround to allow running docker in docker https://circleci.com/docs/2.0/building-docker-images/
       - setup_remote_docker:
           version: 17.05.0-ce
           docker_layer_caching: true
