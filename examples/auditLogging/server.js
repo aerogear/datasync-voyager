@@ -14,7 +14,7 @@ const typeDefs = gql`
 let resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
-      context.auditLog('this is a custom audit log', obj, args, context, info)
+      context.auditLog('CUSTOM_LOG_TYPE', 'this is a custom audit log', obj, args, context, info)
       return `Hello world from ${context.serverName}`
     }
   }

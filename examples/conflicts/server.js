@@ -2,6 +2,7 @@ const express = require('express')
 const queries = require('./queries')
 const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 const metrics = require('@aerogear/voyager-metrics')
+const auditLogger = require('@aerogear/voyager-audit')
 
 // Types
 const typeDefs = gql`
@@ -38,8 +39,9 @@ const customGreetingResolutionStrategy = function(serverData, clientData, baseDa
 // Resolver functions. This is our business logic
 const resolvers = {
   Mutation: {
-    changeGreeting: async (obj, args, { conflict }, info) => {
-      if (conflict.hasConflict(greeting, args, info)) {
+    changeGreeting: async (obj, args, context, info) => {
+      const { conflict } = context
+      if (conflict.hasConflict(greeting, args, obj, args, context, info)) {
 
         const serverState = greeting
         const clientState = args
@@ -54,8 +56,9 @@ const resolvers = {
       greeting = conflict.nextState(args)
       return greeting
     },
-    changeGreetingClient: async (obj, args, { conflict }, info) => {
-      if (conflict.hasConflict(greeting, args, info)) {
+    changeGreetingClient: async (obj, args, context, info) => {
+      const { conflict } = context
+      if (conflict.hasConflict(greeting, args, obj, args, context, info)) {
         const serverState = greeting
         const clientState = args
         return await conflict.resolveOnClient(serverState, clientState).response;
@@ -94,7 +97,8 @@ const apolloConfig = {
 }
 
 const voyagerConfig = {
-  metrics
+  metrics,
+  auditLogger
 }
 
 const server = VoyagerServer(apolloConfig, voyagerConfig)
