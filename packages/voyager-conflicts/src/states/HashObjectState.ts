@@ -3,6 +3,7 @@ import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
+import { GraphQLResolveInfo } from 'graphql'
 
 /**
  * Object state manager using a hashing method provided by user
@@ -15,10 +16,10 @@ export class HashObjectState implements ObjectState {
     this.hash = hashImpl
   }
 
-  public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData, resolverInfo: any) {
-    if (this.hash(serverData) !== this.hash(clientData)) {
+  public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, obj: any, args: any, context: any, info: GraphQLResolveInfo) {
+    if (this.hash(serverState) !== this.hash(clientState)) {
       if (this.conflictListener) {
-        this.conflictListener.onConflict('Conflict when saving data', serverData, clientData, resolverInfo)
+        this.conflictListener.onConflict('Conflict when saving data', serverState, clientState, obj, args, context, info)
       }
       return true
     }

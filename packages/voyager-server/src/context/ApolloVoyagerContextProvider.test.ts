@@ -3,6 +3,7 @@ import { AuthContextProvider, DefaultAuthContextProvider, SecurityService } from
 import test from 'ava'
 import { DefaultVoyagerConfig } from '../config/DefaultVoyagerConfig'
 import { ApolloVoyagerContextProvider } from './ApolloVoyagerContextProvider'
+import { GraphQLResolveInfo } from 'graphql'
 
 test('DefaultVoyagerConfig will result in DefaultSecurityService inside the context', async (t) => {
   const { securityService, auditLogger, conflict } = new DefaultVoyagerConfig()
@@ -73,6 +74,9 @@ test('Passing a custom AuditLogger class will result in a custom auditLog functi
     }
     public auditLog(msg: string, obj: any, args: any): void {
       t.pass()
+    }
+    public logConflict (msg: string, serverData: any, clientData: any, obj: any, args: any, context: any, info: GraphQLResolveInfo): void {
+      // no op
     }
   }
 

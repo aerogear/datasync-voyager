@@ -3,6 +3,7 @@ import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
+import { GraphQLResolveInfo } from 'graphql'
 
 /**
  * Object state manager using a version field
@@ -19,16 +20,16 @@ import { ObjectStateData } from '../api/ObjectStateData'
 export class VersionedObjectState implements ObjectState {
   private conflictListener: ConflictListener | undefined
 
-  public hasConflict(serverData: ObjectStateData, clientData: ObjectStateData, resolverInfo: any) {
-    if (serverData.version && clientData.version) {
-      if (serverData.version !== clientData.version) {
+  public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, obj: any, args: any, context: any, info: GraphQLResolveInfo) {
+    if (serverState.version && clientState.version) {
+      if (serverState.version !== clientState.version) {
         if (this.conflictListener) {
-          this.conflictListener.onConflict('Conflict when saving data', serverData, clientData, resolverInfo)
+          this.conflictListener.onConflict('Conflict when saving data', serverState, clientState, obj, args, context, info)
         }
         return true
       }
     } else {
-      throw new Error(`Supplied object is missing version field required to determine conflict. Server data: ${JSON.stringify(serverData)} Client data: ${JSON.stringify(clientData)}`)
+      throw new Error(`Supplied object is missing version field required to determine conflict. Server data: ${JSON.stringify(serverState)} Client data: ${JSON.stringify(clientState)}`)
     }
     return false
   }

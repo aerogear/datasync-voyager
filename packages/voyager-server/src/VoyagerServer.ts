@@ -6,6 +6,7 @@ import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig'
 import { VoyagerConfig } from './config/VoyagerConfig'
 import { ApolloVoyagerContextProvider } from './context/ApolloVoyagerContextProvider'
 import { voyagerResolvers } from './voyagerResolver'
+import { GraphQLResolveInfo } from 'graphql'
 
 /**
  *
@@ -25,9 +26,12 @@ export function VoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: Vo
 
   if (clientVoyagerConfig && (clientVoyagerConfig.auditLogger || clientVoyagerConfig.metrics)) {
     voyagerConfig.conflict.setConflictListener({
-      onConflict: (message, serverData, clientData, resolverInfo) => {
+      onConflict: (message, serverData, clientData, obj, args, ctx, info) => {
         if (clientVoyagerConfig.metrics) {
-          clientVoyagerConfig.metrics.recordConflictMetrics(resolverInfo)
+          clientVoyagerConfig.metrics.recordConflictMetrics(info)
+        }
+        if (clientVoyagerConfig.auditLogger) {
+          clientVoyagerConfig.auditLogger.logConflict(message, serverData, clientData, obj, args, ctx, info)
         }
       }
     })

@@ -43,6 +43,10 @@ test('DefaultVoyagerConfig.merge() will override default audit logger with user 
     public auditLog (msg: string, obj: any, args: any, context: any, info: GraphQLResolveInfo): void {
       // no op
     }
+
+    public logConflict (msg: string, serverData: any, clientData: any, obj: any, args: any, context: any, info: GraphQLResolveInfo): void {
+      // no op
+    }
   }
 
   const auditLogger = new DummyAuditLogger()

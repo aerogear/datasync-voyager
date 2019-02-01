@@ -2,6 +2,7 @@ import { ConflictListener } from './ConflictListener'
 import { ConflictResolution } from './ConflictResolution'
 import { ConflictResolutionStrategy } from './ConflictResolutionStrategy'
 import { ObjectStateData } from './ObjectStateData'
+import { GraphQLResolveInfo } from 'graphql'
 
 /**
  * Interface for handling changing state of the object.
@@ -15,9 +16,12 @@ export interface ObjectState {
    *
    * @param serverState the data currently on the server
    * @param clientState the data the client wishes to perform some mutation with
-   * @param resolverInfo resolver info that's coming from Apollo
+   * @param obj object that's coming from Apollo
+   * @param args arguments that are coming from Apollo
+   * @param context context that's coming from Apollo
+   * @param info resolver info that's coming from Apollo
    */
-  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, resolverInfo: any): boolean
+  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, obj: any, args: any, context: any, info: GraphQLResolveInfo): boolean
 
   /**
    *
