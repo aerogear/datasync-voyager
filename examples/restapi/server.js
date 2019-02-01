@@ -2,6 +2,7 @@ const express = require("express");
 const queries = require("./queries");
 const axios = require("axios");
 const { VoyagerServer, gql } = require("@aerogear/voyager-server");
+const { GraphQLError } = require("graphql");
 
 // Types
 const typeDefs = gql`
@@ -35,7 +36,7 @@ const resolvers = {
         return data.Results;
       } catch (e) {
         //do some error handling if necessary here
-        throw new Error("Some error occured while calling the external API.");
+        throw new GraphQLError("Some error occured while calling the external API.");
       }
     }
   }

@@ -10,7 +10,7 @@ const resolvers = {
         const result = await axios.get(YOUR_ENDPOINT_HERE, params);
         return result.data;
       } catch (e) {
-        throw new Error("some error");
+        throw new GraphQLError("some error");
       }
     }
   }
