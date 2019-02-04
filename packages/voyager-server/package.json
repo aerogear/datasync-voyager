@@ -26,8 +26,8 @@
     "@aerogear/voyager-keycloak": "^0.3.0",
     "@aerogear/voyager-metrics": "^0.3.0",
     "@aerogear/voyager-tools": "^0.3.0",
-    "apollo-server": "2.2.2",
-    "apollo-server-express": "2.2.2",
+    "apollo-server": "2.3.3",
+    "apollo-server-express": "2.3.3",
     "graphql-tools": "^4.0.3"
   },
   "devDependencies": {
