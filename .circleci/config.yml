@@ -64,7 +64,7 @@ jobs:
       - run: CI=true npm run release:prep
       - run: TAG=$CIRCLE_TAG npm run release:validate
       - run: TAG=$CIRCLE_TAG npm run publish
-  containers_publish:
+  publish_example_containers:
     working_directory: ~/aerogear
     docker:
       # image for building docker containers
@@ -100,8 +100,9 @@ workflows:
               only: /.*/ # allow anything because tag syntax is validated as part of validate-release.sh
             branches:
               ignore: /.*/
-      - containers_publish:
+      - publish_example_containers:
           requires:
+            - npm_publish
             - test_examples
           filters:
             tags:
