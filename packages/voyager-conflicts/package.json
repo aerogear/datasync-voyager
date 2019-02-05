@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/voyager-conflicts",
-  "version": "0.3.0",
+  "version": "0.3.0-SNAPSHOT1",
   "description": "A package to provide conflict handler framework for GraphQL server",
   "main": "dist/index.js",
   "scripts": {
