@@ -1,6 +1,6 @@
 ## Conflict Example Server
 
-This example demonstrates how to use the `@aerogear/vogayer-conflicts` package to detect and handle data conflicts within the resolver functions.
+This example demonstrates how to use the `@aerogear/voyager-conflicts` package to detect and handle data conflicts within the resolver functions.
 
 ### Running Example
 
@@ -30,5 +30,3 @@ First execution of the `changeGreeting` is going to perform successful update.
 Second execution is going to cause conflict because version that is supplied did not change.
 3) Increment version and execute mutation again.
 Incrementing version will successfully save data without conflict.
-
-
