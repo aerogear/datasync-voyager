@@ -1,6 +1,6 @@
 == SDK Release Documentation
 
-The release process results in new versions of the packages being published on npm. The version numbers on all packages must always be the same.
+The release process results in new versions of the packages being gipublished on npm. The version numbers on all packages must always be the same.
 
 === How Releases Work
 
