@@ -1,8 +1,9 @@
 'use strict'
 import { FieldResolver, ResolverMappings, ResolverObject, ResolverWrapper, wrapResolvers } from '@aerogear/voyager-tools'
-import { VoyagerConfig } from './config/VoyagerConfig'
+import { CompleteVoyagerConfig } from './config/VoyagerConfig'
+import { ObjectConflictError } from '@aerogear/voyager-conflicts'
 
-export function voyagerResolvers (resolverMappings: ResolverMappings, config: VoyagerConfig): ResolverMappings {
+export function voyagerResolvers (resolverMappings: ResolverMappings, config: CompleteVoyagerConfig): ResolverMappings {
   return wrapResolvers(resolverMappings, voyagerResolverPartial(config))
 }
 
@@ -11,7 +12,7 @@ export interface VoyagerResolversConfig {
   auditLogging: boolean
 }
 
-function voyagerResolverPartial (config: VoyagerConfig): ResolverWrapper {
+function voyagerResolverPartial (config: CompleteVoyagerConfig): ResolverWrapper {
   const { metrics, auditLogger } = config
   return (resolverFn: FieldResolver): FieldResolver => {
     return (obj: any, args: any, context: any, info: any) => {
@@ -19,15 +20,17 @@ function voyagerResolverPartial (config: VoyagerConfig): ResolverWrapper {
         const resolverStartTime = Date.now()
         try {
           const result = await resolverFn(obj, args, context, info)
-          if (auditLogger) {
-            auditLogger.logResolverCompletion('', true, obj, args, context, info)
-          }
           resolve(result)
 
-          if (metrics) {
-            const timeTook = Date.now() - resolverStartTime
-            metrics.updateResolverMetrics(info, timeTook)
+          if (result instanceof ObjectConflictError) {
+            const conflict = result as ObjectConflictError
+            auditLogger.logConflict(conflict.message, conflict.conflictInfo.serverState, conflict.conflictInfo.clientState, obj, args, context, info)
+            metrics.recordConflictMetrics(info)
           }
+
+          const timeTook = Date.now() - resolverStartTime
+          metrics.updateResolverMetrics(info, timeTook)
+          auditLogger.logResolverCompletion('', true, obj, args, context, info)
         } catch (error) {
           // we only publish time in success. const timeTook
           // NOPE: const timeTook = Date.now() - resolverStartTime
