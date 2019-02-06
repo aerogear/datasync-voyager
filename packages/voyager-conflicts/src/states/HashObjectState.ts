@@ -1,9 +1,8 @@
-import { ConflictListener } from '../api/ConflictListener'
+import { ConflictListener, ListenerContext } from '../api/ConflictListener'
 import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
-import { GraphQLResolveInfo } from 'graphql'
 
 /**
  * Object state manager using a hashing method provided by user
@@ -16,10 +15,10 @@ export class HashObjectState implements ObjectState {
     this.hash = hashImpl
   }
 
-  public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, obj: any, args: any, context: any, info: GraphQLResolveInfo) {
+  public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, listenerContext?: ListenerContext) {
     if (this.hash(serverState) !== this.hash(clientState)) {
       if (this.conflictListener) {
-        this.conflictListener.onConflict('Conflict when saving data', serverState, clientState, obj, args, context, info)
+        this.conflictListener.onConflict('Conflict when saving data', serverState, clientState, listenerContext)
       }
       return true
     }

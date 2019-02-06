@@ -6,18 +6,6 @@ import { ObjectStateData } from '../api/ObjectStateData'
 import { GraphQLResolveInfo } from 'graphql'
 
 /**
- * Context object passed to listener that contains all parameters
- * that graphql resolvers accept. Users can pass `argument` variable to satisfy this interface
- * directly from resolver
- */
-export interface ListenerContext {
-  obj: any,
-  args: any,
-  context: any,
-  info: GraphQLResolveInfo
-}
-
-/**
  * Object state manager using a version field
  * Detects conflicts and allows moving to next state using the version field of the object
  *
@@ -35,14 +23,12 @@ export class VersionedObjectState implements ObjectState {
   public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, listenerContext?: ListenerContext) {
     if (serverState.version && clientState.version) {
       if (serverState.version !== clientState.version) {
-        if (this.conflictListener && listenerContext) {
+        if (this.conflictListener) {
           this.conflictListener.onConflict('Conflict when saving data',
             serverState,
             clientState,
-            listenerContext.obj,
-            listenerContext.args,
-            listenerContext.context,
-            listenerContext.info)
+            listenerContext
+          )
         }
         return true
       }

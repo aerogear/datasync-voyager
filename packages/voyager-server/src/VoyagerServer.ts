@@ -7,13 +7,14 @@ import { VoyagerConfig } from './config/VoyagerConfig'
 import { ApolloVoyagerContextProvider } from './context/ApolloVoyagerContextProvider'
 import { voyagerResolvers } from './voyagerResolver'
 import { GraphQLResolveInfo } from 'graphql'
+import { resultKeyNameFromField } from 'apollo-utilities';
 
 /**
  *
  * Initialises an Apollo server that has been extended with the voyager framework
  * @param baseApolloConfig
  */
-export function VoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: VoyagerConfig): ApolloServer {
+export function VoyagerServer(baseApolloConfig: Config, clientVoyagerConfig: VoyagerConfig): ApolloServer {
   const { typeDefs, resolvers, context } = baseApolloConfig
 
   if (typeDefs && resolvers) {
@@ -26,12 +27,16 @@ export function VoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: Vo
 
   if (clientVoyagerConfig && (clientVoyagerConfig.auditLogger || clientVoyagerConfig.metrics)) {
     voyagerConfig.conflict.setConflictListener({
-      onConflict: (message, serverData, clientData, obj, args, ctx, info) => {
-        if (clientVoyagerConfig.metrics) {
-          clientVoyagerConfig.metrics.recordConflictMetrics(info)
+      onConflict: (message, serverData, clientData, listenerContext) => {
+        if (listenerContext || !clientVoyagerConfig.metrics) {
+          return
         }
+        clientVoyagerConfig.metrics.recordConflictMetrics(listenerContext.info)
         if (clientVoyagerConfig.auditLogger) {
-          clientVoyagerConfig.auditLogger.logConflict(message, serverData, clientData, obj, args, ctx, info)
+          clientVoyagerConfig.auditLogger.logConflict(message, serverData, clientData, listenerContext.obj,
+            listenerContext.args,
+            listenerContext.context,
+            listenerContext.info)
         }
       }
     })
