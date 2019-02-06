@@ -4,20 +4,20 @@ import { SecurityService } from '@aerogear/voyager-keycloak'
 import { Metrics } from '@aerogear/voyager-metrics'
 
 export interface VoyagerConfig {
-  
+
   /**
-  * Enables Authentication and Authorization support
-  */
+   * Enables Authentication and Authorization support
+   */
   securityService?: SecurityService | null
 
   /**
-  * Enables metrics feature
-  */
+   * Enables metrics feature
+   */
   metrics?: Metrics | null
-  
+
   /**
-  * Enables audit logging feature
-  */
+   * Enables audit logging feature
+   */
   auditLogger?: AuditLogger | null
 }
 
