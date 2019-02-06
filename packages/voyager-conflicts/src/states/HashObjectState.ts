@@ -1,4 +1,3 @@
-import { ConflictListener } from '../api/ConflictListener'
 import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
@@ -9,7 +8,6 @@ import { ObjectStateData } from '../api/ObjectStateData'
  */
 export class HashObjectState implements ObjectState {
   private hash: (object: any) => string
-  private conflictListener: ConflictListener | undefined
 
   constructor(hashImpl: (object: any) => string) {
     this.hash = hashImpl
@@ -41,10 +39,6 @@ export class HashObjectState implements ObjectState {
     resolvedState = this.nextState(resolvedState)
 
     return new ConflictResolution(true, resolvedState, clientState)
-  }
-
-  public setConflictListener(conflictListener: ConflictListener): void {
-    this.conflictListener = conflictListener
   }
 
 }

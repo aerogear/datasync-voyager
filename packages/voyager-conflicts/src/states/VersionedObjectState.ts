@@ -1,4 +1,3 @@
-import { ConflictListener } from '../api/ConflictListener'
 import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
@@ -17,7 +16,6 @@ import { ObjectStateData } from '../api/ObjectStateData'
  * }
  */
 export class VersionedObjectState implements ObjectState {
-  private conflictListener: ConflictListener | undefined
 
   public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData) {
     if (serverState.version && clientState.version) {
@@ -50,10 +48,6 @@ export class VersionedObjectState implements ObjectState {
     resolvedState = this.nextState(resolvedState)
 
     return new ConflictResolution(true, resolvedState, clientState)
-  }
-
-  public setConflictListener(conflictListener: ConflictListener): void {
-    this.conflictListener = conflictListener
   }
 }
 

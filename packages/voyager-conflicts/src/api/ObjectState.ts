@@ -1,4 +1,3 @@
-import { ConflictListener } from './ConflictListener'
 import { ConflictResolution } from './ConflictResolution'
 import { ConflictResolutionStrategy } from './ConflictResolutionStrategy'
 import { ObjectStateData } from './ObjectStateData'
