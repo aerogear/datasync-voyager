@@ -1,7 +1,7 @@
 import { Config } from 'apollo-server-express'
-import { VoyagerConfig } from './config/VoyagerConfig'
+import { CompleteVoyagerConfig } from './config/VoyagerConfig'
 
-export function buildSchemaDirectives(apolloConfig: Config, voyagerConfig: VoyagerConfig) {
+export function buildSchemaDirectives(apolloConfig: Config, voyagerConfig: CompleteVoyagerConfig) {
   const userDirectives = apolloConfig.schemaDirectives
   const securityDirectives = voyagerConfig.securityService.getSchemaDirectives()
 
