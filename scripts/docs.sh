@@ -17,7 +17,7 @@ else
 fi
 
 echo "Generate documentation for packages"
-${PWD}/node_modules/.bin/lerna exec -- $TYPEDOC --mode file --out $DOCS_LOCATION/\${LERNA_PACKAGE_NAME:10} --excludePrivate --excludeExternals src/
+${PWD}/node_modules/.bin/lerna exec --ignore "voyager-example" -- $TYPEDOC --mode file --out $DOCS_LOCATION/\${LERNA_PACKAGE_NAME:10} --excludePrivate --excludeExternals src/
 
 echo "Documentation was generated. Go to docs -> docs.aerogear.org to view new documentation"
 
