@@ -5,7 +5,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Basic Example",
-      "program": "${workspaceFolder}/examples/basic/server.js",
+      "program": "${workspaceFolder}/examples/basic/index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
@@ -14,7 +14,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Keycloak Example",
-      "program": "${workspaceFolder}/examples/keycloak/server.js",
+      "program": "${workspaceFolder}/examples/keycloak/index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
@@ -23,7 +23,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Audit Logging Example",
-      "program": "${workspaceFolder}/examples/auditLogging/server.js",
+      "program": "${workspaceFolder}/examples/auditLogging/index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
@@ -32,7 +32,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Conflict Example",
-      "program": "${workspaceFolder}/examples/conflicts/server.js",
+      "program": "${workspaceFolder}/examples/conflicts/index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
@@ -41,7 +41,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Metrics Example",
-      "program": "${workspaceFolder}/examples/metrics/server.js",
+      "program": "${workspaceFolder}/examples/metrics/index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
