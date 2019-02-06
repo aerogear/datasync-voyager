@@ -3,6 +3,7 @@ const queries = require('./queries')
 const { VoyagerServer, gql } = require('@aerogear/voyager-server')
 const metrics = require('@aerogear/voyager-metrics')
 const auditLogger = require('@aerogear/voyager-audit')
+const { conflictHandler } = require('@aerogear/voyager-conflicts')
 
 // Types
 const typeDefs = gql`
@@ -40,8 +41,7 @@ const customGreetingResolutionStrategy = function(serverData, clientData, baseDa
 const resolvers = {
   Mutation: {
     changeGreeting: async (obj, args, context, info) => {
-      const { conflict } = context
-      if (conflict.hasConflict(greeting, args, obj, args, context, info)) {
+      if (conflictHandler.hasConflict(greeting, args, obj, args, context, info)) {
 
         const serverState = greeting
         const clientState = args
@@ -49,21 +49,20 @@ const resolvers = {
 
         // resolvedState is the new record the user should persist
         // response is the specially built message that should be returned to the client
-        const { resolvedState, response } = await conflict.resolveOnServer(strategy, serverState, clientState)
+        const { resolvedState, response } = await conflictHandler.resolveOnServer(strategy, serverState, clientState)
         greeting = resolvedState
         return response
       }
-      greeting = conflict.nextState(args)
+      greeting = conflictHandler.nextState(args)
       return greeting
     },
     changeGreetingClient: async (obj, args, context, info) => {
-      const { conflict } = context
-      if (conflict.hasConflict(greeting, args, obj, args, context, info)) {
+      if (conflictHandler.hasConflict(greeting, args, obj, args, context, info)) {
         const serverState = greeting
         const clientState = args
-        return await conflict.resolveOnClient(serverState, clientState).response;
+        return await conflictHandler.resolveOnClient(serverState, clientState).response;
       }
-      greeting = conflict.nextState(args)
+      greeting = conflictHandler.nextState(args)
       return greeting
     }
   },

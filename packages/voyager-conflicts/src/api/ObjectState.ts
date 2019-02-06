@@ -21,7 +21,7 @@ export interface ObjectState {
    * @param context context that's coming from Apollo
    * @param info resolver info that's coming from Apollo
    */
-  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, obj: any, args: any, context: any, info: GraphQLResolveInfo): boolean
+  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData): boolean
 
   /**
    *
@@ -44,9 +44,4 @@ export interface ObjectState {
    */
   resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData): Promise<ConflictResolution>
 
-  /**
-   * Set a listener for conflict resolution
-   * @param listener - listener implementation
-   */
-  setConflictListener(listener: ConflictListener): void
 }

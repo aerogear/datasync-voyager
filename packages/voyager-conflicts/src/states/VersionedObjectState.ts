@@ -3,7 +3,6 @@ import { ConflictResolution } from '../api/ConflictResolution'
 import { ConflictResolutionStrategy } from '../api/ConflictResolutionStrategy'
 import { ObjectState } from '../api/ObjectState'
 import { ObjectStateData } from '../api/ObjectStateData'
-import { GraphQLResolveInfo } from 'graphql'
 
 /**
  * Object state manager using a version field
@@ -20,12 +19,9 @@ import { GraphQLResolveInfo } from 'graphql'
 export class VersionedObjectState implements ObjectState {
   private conflictListener: ConflictListener | undefined
 
-  public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData, obj: any, args: any, context: any, info: GraphQLResolveInfo) {
+  public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData) {
     if (serverState.version && clientState.version) {
       if (serverState.version !== clientState.version) {
-        if (this.conflictListener) {
-          this.conflictListener.onConflict('Conflict when saving data', serverState, clientState, obj, args, context, info)
-        }
         return true
       }
     } else {
