@@ -6,5 +6,4 @@ export interface VoyagerContextProviderConfig {
   userContext?: any,
   securityService: SecurityService,
   auditLogger: any,
-  conflict: ObjectState
 }

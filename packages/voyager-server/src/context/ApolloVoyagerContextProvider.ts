@@ -64,8 +64,7 @@ export class ApolloVoyagerContextProvider {
     const defaultContext: VoyagerContext = {
       request: req,
       auth: new this.authContextProvider({ req }),
-      auditLog: this.auditLogger.auditLog,
-      conflict: this.config.conflict
+      auditLog: this.auditLogger.auditLog
     }
     return defaultContext
   }

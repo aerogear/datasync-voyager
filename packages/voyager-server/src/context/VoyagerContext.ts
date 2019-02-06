@@ -13,5 +13,4 @@ export interface VoyagerContext {
   request: IncomingMessage,
   auth: SecurityService
   auditLog: AuditLogMethod
-  conflict: ObjectState
 }
