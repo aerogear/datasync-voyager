@@ -4,6 +4,8 @@ import { Application } from 'express'
 import { IncomingMessage } from 'http'
 import Prometheus from 'prom-client'
 
+import { MetricsConfiguration } from './api'
+
 const resolverTimingMetric = new Prometheus.Histogram({
   name: 'resolver_timing_ms',
   help: 'Resolver response time in milliseconds',
@@ -33,10 +35,6 @@ const conflictsMetric = new Prometheus.Counter({
   help: 'Number of conflicts happened',
   labelNames: ['operation_type', 'name']
 })
-
-export interface MetricsConfiguration {
-  path: string
-}
 
 /**
  *
