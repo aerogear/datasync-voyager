@@ -8,7 +8,7 @@ test('With conflict', (t) => {
   const objectState = new VersionedObjectState()
   const serverData = { name: 'AeroGear', version: 1 }
   const clientData = { name: 'Red Hat', version: 2 }
-  t.deepEqual(objectState.hasConflict(serverData, clientData, {}, {}, {}, {} as GraphQLResolveInfo), true)
+  t.deepEqual(objectState.hasConflict(serverData, clientData), true)
 })
 
 test('Without conflict', (t) => {
@@ -16,7 +16,7 @@ test('Without conflict', (t) => {
   const serverData = { name: 'AeroGear', version: 1 }
   const clientData = { name: 'AeroGear', version: 1 }
 
-  t.deepEqual(objectState.hasConflict(serverData, clientData, {}, {}, {}, {} as GraphQLResolveInfo), false)
+  t.deepEqual(objectState.hasConflict(serverData, clientData), false)
 })
 
 test('Missing version', (t) => {
@@ -25,7 +25,7 @@ test('Missing version', (t) => {
   const clientData = { name: 'AeroGear', version: 1 }
 
   t.throws(() => {
-    objectState.hasConflict(serverData, clientData, {}, {}, {}, {} as GraphQLResolveInfo)
+    objectState.hasConflict(serverData, clientData)
   })
 })
 
