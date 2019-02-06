@@ -13,7 +13,8 @@
     "watch": "lerna exec --parallel --stream -- npm run watch",
     "release:prep": "./scripts/prepareRelease.sh",
     "release:validate": "./scripts/validateRelease.sh",
-    "publish": "./scripts/publishRelease.sh"
+    "publish": "./scripts/publishRelease.sh",
+    "generate:docs": "./scripts/docs.sh"
   },
   "dependencies": {},
   "devDependencies": {
@@ -28,6 +29,7 @@
     "lerna": "^3.4.3",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6"
+    "typescript": "^3.1.6",
+    "typedoc": "^0.14.2"
   }
 }
