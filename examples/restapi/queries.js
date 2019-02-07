@@ -5,6 +5,6 @@ const queries = `query getCarModels {
     Model_Name
   }
 }
-`;
+`
 
-module.exports = queries;
+module.exports = queries

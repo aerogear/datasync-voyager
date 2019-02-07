@@ -26,7 +26,6 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
-
       // log some of the auth related info added to the context
       console.log(context.auth.isAuthenticated())
       console.log(context.auth.accessToken.content.name)

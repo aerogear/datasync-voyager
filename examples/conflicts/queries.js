@@ -11,4 +11,3 @@ query greeting {
 }`
 
 module.exports = queries
-
