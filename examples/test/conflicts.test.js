@@ -6,21 +6,20 @@ const port = 4000
 app.listen({ port })
 
 const testQueries = {
-  greeting: "query { greeting }",
+  greeting: 'query { greeting }',
   mutation: (v) => `mutation { changeGreeting(msg: "Hello${v}", version: ${v}) {msg version}}`
 }
 
-async function sendQuery(query) {
-    return await axios({
-        method: 'POST',
-        url: `http://localhost:${port}${server.graphqlPath}`,
-        data: {
-            "query": query
-        },
-        headers: {'Content-Type': 'application/json'}
-    });
+function sendQuery (query) {
+  return axios({
+    method: 'POST',
+    url: `http://localhost:${port}${server.graphqlPath}`,
+    data: {
+      'query': query
+    },
+    headers: { 'Content-Type': 'application/json' }
+  })
 }
-
 
 test.serial('Sending a query should not return error', async t => {
   try {

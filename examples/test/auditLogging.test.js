@@ -5,15 +5,15 @@ const { server, app } = require('../auditLogging/server')
 const port = 4000
 app.listen({ port })
 
-async function sendQuery() {
-    return await axios({
-        method: 'POST',
-        url: `http://localhost:${port}${server.graphqlPath}`,
-        data: {
-            "query":"{ hello }"
-        },
-        headers: {'Content-Type': 'application/json'}
-    });
+function sendQuery () {
+  return axios({
+    method: 'POST',
+    url: `http://localhost:${port}${server.graphqlPath}`,
+    data: {
+      'query': '{ hello }'
+    },
+    headers: { 'Content-Type': 'application/json' }
+  })
 }
 
 test('Sending a request to metrics example app should return OK status code and no errors', async t => {
