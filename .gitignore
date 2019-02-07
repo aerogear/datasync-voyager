@@ -2,6 +2,7 @@
 # Ignore the compiled output.
 dist/
 
+package-lock.json
 packages/*/package-lock.json
 examples/package-lock.json
 
