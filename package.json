@@ -15,8 +15,7 @@
     "release:validate": "./scripts/validateRelease.sh",
     "publish": "./scripts/publishRelease.sh"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/express-session": "^1.15.11",
     "@types/graphql": "^0.13.2",
