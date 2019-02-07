@@ -102,10 +102,8 @@ workflows:
       - publish_example_containers:
           requires:
             - npm_publish
-            - test_examples
           filters:
             tags:
               only: /.*/
             branches:
-              only:
-                - master
+              ignore: /.*/
