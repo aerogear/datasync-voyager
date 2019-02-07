@@ -5,8 +5,10 @@
     "test": "lerna exec -- npm test",
     "bootstrap": "lerna bootstrap  --no-ci",
     "clean": "lerna clean --yes",
-    "lint": "tslint '*/*/src/**/*.ts' --exclude '*/*/src/**/*.test.ts' && tslint -c tslint_tests.json '*/*/src/**/*.test.ts'",
-    "format": "tslint '*/*/src/**/*.ts' --fix --force > /dev/null",
+    "lint": "npm run lint:ts",
+    "lint:ts": "tslint '*/*/src/**/*.ts' --exclude '*/*/src/**/*.test.ts' && tslint -c tslint_tests.json '*/*/src/**/*.test.ts'",
+    "lint:js": "standard",
+    "format": "tslint '*/*/src/**/*.ts' --fix --force > /dev/null && standard --fix",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
     "compile": "lerna exec -- npm run compile",
     "compile:clean": "lerna exec -- npm run compile:clean",
@@ -15,7 +17,6 @@
     "release:validate": "./scripts/validateRelease.sh",
     "publish": "./scripts/publishRelease.sh"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/express-session": "^1.15.11",
     "@types/graphql": "^0.13.2",
@@ -28,6 +29,7 @@
     "lerna": "^3.4.3",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6"
+    "typescript": "^3.1.6",
+    "standard": "^12.0.1"
   }
 }

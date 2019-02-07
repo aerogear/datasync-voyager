@@ -20,8 +20,11 @@ jobs:
           name: test
           command: npm test
       - run:
-          name: run lint
-          command: npm run lint
+          name: Lint all TypeScript code
+          command: npm run lint:ts
+      - run:
+          name: Lint all JavaScript code
+          command: npm run lint:js
   test_examples:
     docker:
       # Node 8 LTS
