@@ -38,7 +38,7 @@ test('Passing a custom security service will result in that service being inside
 
   class CustomSecurityService implements SecurityService {
     public getSchemaDirectives() {
-      return null
+      return {}
     }
     public applyAuthMiddleware() {
       return null

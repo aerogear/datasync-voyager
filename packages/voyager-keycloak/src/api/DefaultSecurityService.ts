@@ -4,7 +4,7 @@ import { SecurityService } from './SecurityService'
 export class DefaultSecurityService implements SecurityService {
 
   public getSchemaDirectives () {
-    return null
+    return {}
   }
 
   public applyAuthMiddleware () {

@@ -1,5 +1,3 @@
-import { Request } from 'express'
-import { IncomingMessage } from 'http'
 import { AuthContextProvider } from './api'
 
 export class KeycloakAuthContextProvider implements AuthContextProvider {
@@ -13,7 +11,7 @@ export class KeycloakAuthContextProvider implements AuthContextProvider {
     this.authenticated = !!((req && req.kauth && req.kauth.grant) ? req.kauth.grant.access_token : undefined)
   }
 
-  public isAuthenticated () {
+  public isAuthenticated (): boolean {
     return this.authenticated
   }
 

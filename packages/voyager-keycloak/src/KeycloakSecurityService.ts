@@ -1,31 +1,38 @@
 import { Router } from 'express'
 import session from 'express-session'
 import Keycloak from 'keycloak-connect'
-import { SecurityService } from './api'
 import { KeycloakAuthContextProvider } from './AuthContextProvider'
 import { schemaDirectives } from './schemaDirectives'
 import { getTokenObject } from './KeycloakToken'
+import {
+  SecurityService,
+  ApplyAuthMiddlewareOptions,
+  KeycloakSecurityServiceOptions,
+  AuthContextProviderClass,
+  Logger,
+  SchemaDirectives
+} from './api'
 
 export class KeycloakSecurityService implements SecurityService {
 
   public readonly keycloakConfig: any
   public readonly schemaDirectives: any
   public readonly authContextProvider: any
-  public readonly log: any
   public keycloak: any
+  public readonly log: Logger
 
-  constructor (keycloakConfig: any) {
+  constructor (keycloakConfig: any, options?: KeycloakSecurityServiceOptions) {
     this.keycloakConfig = keycloakConfig
     this.schemaDirectives = schemaDirectives
     this.authContextProvider = KeycloakAuthContextProvider
-    this.log = console // TODO we should come up with a good solution for this
+    this.log = options && options.log ? options.log : console
   }
 
-  public getSchemaDirectives () {
+  public getSchemaDirectives (): SchemaDirectives {
     return this.schemaDirectives
   }
 
-  public getAuthContextProvider () {
+  public getAuthContextProvider (): AuthContextProviderClass {
     return this.authContextProvider
   }
 
@@ -35,13 +42,14 @@ export class KeycloakSecurityService implements SecurityService {
    * @param {*} expressRouter express router that should be used to attach auth
    * @param {string} apiPath  location of the protected api
    */
-  public applyAuthMiddleware (expressRouter: Router, options: any) {
+  public applyAuthMiddleware (expressRouter: Router, options?: ApplyAuthMiddlewareOptions) {
 
     if (!this.keycloakConfig) {
       return this.log.info('Keycloak authentication is not configured')
     }
 
     const apiPath = options && options.apiPath ? options.apiPath : '/graphql'
+    const tokenEndpoint = options && options.tokenEndpoint ? options.tokenEndpoint : false
 
     this.log.info('Initializing Keycloak authentication')
     const memoryStore = new session.MemoryStore()
@@ -66,14 +74,16 @@ export class KeycloakSecurityService implements SecurityService {
     // Disable unauthenticated access
     expressRouter.use(apiPath, this.keycloak.protect())
 
-    expressRouter.get('/token', this.keycloak.protect(), function (req, res) {
-      if (req.session && req.session['keycloak-token']) {
-        return res.json({
-          'Authorization': 'Bearer ' + JSON.parse(req.session['keycloak-token']).access_token
-        })
-      }
-      res.json({})
-    })
+    if (tokenEndpoint) {
+      expressRouter.get('/token', this.keycloak.protect(), function (req, res) {
+        if (req.session && req.session['keycloak-token']) {
+          return res.json({
+            'Authorization': 'Bearer ' + JSON.parse(req.session['keycloak-token']).access_token
+          })
+        }
+        res.json({})
+      })
+    }
   }
 
   public async validateToken(token: string): Promise<boolean> {

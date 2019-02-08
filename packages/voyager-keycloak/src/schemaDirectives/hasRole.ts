@@ -1,5 +1,5 @@
 import { ForbiddenError } from 'apollo-server-express'
-import {defaultFieldResolver, GraphQLSchema} from 'graphql'
+import { defaultFieldResolver, GraphQLSchema } from 'graphql'
 import { SchemaDirectiveVisitor } from 'graphql-tools'
 import Joi from 'joi'
 import pino from 'pino' // also need to figure out where this comes from
@@ -40,8 +40,7 @@ export class HasRoleDirective extends SchemaDirectiveVisitor {
         throw new ForbiddenError(AuthorizationErrorMessage)
       }
 
-      const { request } = context
-      const token = (request && request.kauth && request.kauth.grant) ? request.kauth.grant.access_token : undefined
+      const token = context.auth.accessToken
 
       let foundRole = null // this will be the role the user was successfully authorized on
 

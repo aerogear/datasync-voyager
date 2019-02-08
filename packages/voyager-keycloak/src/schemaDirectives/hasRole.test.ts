@@ -4,7 +4,7 @@ import { GraphQLSchema } from 'graphql'
 import { VisitableSchemaType } from 'graphql-tools/dist/schemaVisitor'
 import { HasRoleDirective } from './hasRole'
 
-import {KeycloakAuthContextProvider} from '../AuthContextProvider'
+import { KeycloakAuthContextProvider } from '../AuthContextProvider'
 
 const createHasRoleDirective = (directiveArgs: any) => {
   return new HasRoleDirective({
@@ -216,4 +216,49 @@ test('if hasRole arguments are invalid, visitSchemaDirective does not throw, but
   t.throws(() => {
     directive.visitFieldDefinition(field)
   })
+})
+
+test('context.auth.hasRole() works even if request is not supplied in context', async (t) => {
+  t.plan(3)
+  const directiveArgs = {
+    role: 'admin'
+  }
+
+  const directive = createHasRoleDirective(directiveArgs)
+
+  const field = {
+    resolve: (root: any, args: any, context: any, info: any) => {
+      t.pass()
+    },
+    name: 'testField'
+  }
+
+  directive.visitFieldDefinition(field)
+
+  const root = {}
+  const args = {}
+  const req = {
+    kauth: {
+      grant: {
+        access_token: {
+          hasRole: (role: string) => {
+            t.pass()
+            t.deepEqual(role, directiveArgs.role)
+            return true
+          }
+        }
+      }
+    }
+  }
+  const context = {
+    auth: new KeycloakAuthContextProvider({ req })
+  }
+
+  const info = {
+    parentType: {
+      name: 'testParent'
+    }
+  }
+
+  await field.resolve(root, args, context, info)
 })
