@@ -4,6 +4,7 @@ import Keycloak from 'keycloak-connect'
 import { SecurityService } from './api'
 import { KeycloakAuthContextProvider } from './AuthContextProvider'
 import { schemaDirectives } from './schemaDirectives'
+import { getTokenObject } from './KeycloakToken'
 
 export class KeycloakSecurityService implements SecurityService {
 
@@ -76,39 +77,8 @@ export class KeycloakSecurityService implements SecurityService {
   }
 
   public async validateToken(token: string): Promise<boolean> {
-    const tokenObject = this.getTokenObject(token)
+    const tokenObject = getTokenObject(token)
     const result = await this.keycloak.grantManager.validateToken(tokenObject, 'Bearer')
     return (result === tokenObject) ? true : false
   }
-
-  public getTokenObject(token: string): KeycloakToken {
-    let fullToken: KeycloakToken = {}
-    if (token) {
-      try {
-        const parts = token.split('.')
-        fullToken = {
-          header: JSON.parse(Buffer.from(parts[0], 'base64').toString()),
-          content: JSON.parse(Buffer.from(parts[1], 'base64').toString()),
-          signature: Buffer.from(parts[2], 'base64'),
-          signed: parts[0] + '.' + parts[1],
-          isExpired: () => {
-            return ((fullToken.content.exp * 1000) < Date.now())
-          }
-        }
-      } catch (err) {
-        fullToken.content = {
-          exp: 0
-        }
-      }
-    }
-    return fullToken
-  }
-
-}
-interface KeycloakToken {
-  header?: any,
-  content?: any,
-  signature?: any,
-  signed?: string,
-  isExpired?: () => boolean
 }
