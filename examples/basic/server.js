@@ -13,7 +13,6 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
-
       // we can access the request object provided by the Voyager framework
       console.log(context.request.body)
 

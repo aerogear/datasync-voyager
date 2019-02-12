@@ -20,19 +20,19 @@ function modifyKeycloakServerUrl (url) {
   fs.writeFileSync(process.env.KEYCLOAK_CONFIG_FILE, JSON.stringify(keycloakConfig))
 }
 
-async function sendQuery(token, maxRedirects) {
+function sendQuery (token, maxRedirects) {
   const headers = { 'Content-Type': 'application/json' }
   if (token) {
     headers['Authorization'] = token
   }
-  return await axios({
-      method: 'POST',
-      url: `http://localhost:${exampleAppPort}${exampleAppGraphqlPath}`,
-      data: {
-          "query":"{ hello }"
-      },
-      headers,
-      maxRedirects
+  return axios({
+    method: 'POST',
+    url: `http://localhost:${exampleAppPort}${exampleAppGraphqlPath}`,
+    data: {
+      'query': '{ hello }'
+    },
+    headers,
+    maxRedirects
   })
 }
 
@@ -64,14 +64,14 @@ test('Unauthenticated request (with invalid token) should fail', async t => {
 })
 
 test('Authenticated request with client-role and realm role admin user should work', async t => {
-    const authToken = await getAuthToken(keycloakConfig, 'client-role-realm-admin', TEST_PASSWORD)
-    try {
-      const res = await sendQuery(authToken)
-      t.deepEqual(res.status, 200)
-      t.deepEqual(res.data.errors, undefined)
-    } catch (error) {
-      return console.error(error)
-    }
+  const authToken = await getAuthToken(keycloakConfig, 'client-role-realm-admin', TEST_PASSWORD)
+  try {
+    const res = await sendQuery(authToken)
+    t.deepEqual(res.status, 200)
+    t.deepEqual(res.data.errors, undefined)
+  } catch (error) {
+    return console.error(error)
+  }
 })
 
 test('Authenticated request with client-role admin user should work', async t => {

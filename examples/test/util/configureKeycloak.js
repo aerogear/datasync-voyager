@@ -1,7 +1,6 @@
 const axios = require('axios')
 const realmToImport = require('../../keycloak/config/realm-export.json')
 
-
 const config = {
   appRealmName: 'voyager-testing',
   adminRealmName: 'master',
@@ -16,7 +15,7 @@ const usersConfiguration = [
   { name: 'client-role-realm-admin', realmRole: 'admin', clientId: 'voyager-testing', clientRoleName: 'admin' },
   { name: 'client-role-admin', clientId: 'voyager-testing', clientRoleName: 'admin' },
   { name: 'realm-admin', realmRole: 'admin', clientId: 'voyager-testing' },
-  { name: 'user-without-role' },
+  { name: 'user-without-role' }
 ]
 
 async function authenticateKeycloak () {
@@ -33,7 +32,7 @@ async function importRealm () {
     method: 'POST',
     url: `${config.authServerUrl}/admin/realms`,
     data: realmToImport,
-    headers: {'Authorization': config.token, 'Content-Type': 'application/json'}
+    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
   }).catch((err) => { return console.error(err) })
 }
 
@@ -41,7 +40,7 @@ async function getRealmRoles () {
   const res = await axios({
     method: 'GET',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/roles`,
-    headers: {'Authorization': config.token}
+    headers: { 'Authorization': config.token }
   }).catch((err) => { return console.error(err) })
 
   return res.data
@@ -51,7 +50,7 @@ async function getClients () {
   const res = await axios({
     method: 'GET',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/clients`,
-    headers: {'Authorization': config.token}
+    headers: { 'Authorization': config.token }
   }).catch((err) => { return console.error(err) })
 
   return res.data
@@ -61,7 +60,7 @@ async function getClientRoles (client) {
   const res = await axios({
     method: 'GET',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/clients/${client.id}/roles`,
-    headers: {'Authorization': config.token}
+    headers: { 'Authorization': config.token }
   }).catch((err) => { return console.error(err) })
   return res.data
 }
@@ -72,10 +71,10 @@ async function createUser (name, password) {
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/users`,
     data: {
       'username': name,
-      'credentials': [{'type': 'password', 'value': password, 'temporary': false}],
+      'credentials': [{ 'type': 'password', 'value': password, 'temporary': false }],
       'enabled': true
     },
-    headers: {'Authorization': config.token, 'Content-Type': 'application/json'}
+    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
   })
   if (res) {
     return res.headers.location
@@ -87,7 +86,7 @@ async function assignRealmRoleToUser (userIdUrl, role) {
     method: 'POST',
     url: `${userIdUrl}/role-mappings/realm`,
     data: [role],
-    headers: {'Authorization': config.token, 'Content-Type': 'application/json'}
+    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
   }).catch((err) => { return console.error(err) })
 
   return res.data
@@ -98,7 +97,7 @@ async function assignClientRoleToUser (userIdUrl, client, role) {
     method: 'POST',
     url: `${userIdUrl}/role-mappings/clients/${client.id}`,
     data: [role],
-    headers: {'Authorization': config.token, 'Content-Type': 'application/json'}
+    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
   }).catch((err) => { return console.error(err) })
   return res.data
 }
@@ -110,7 +109,7 @@ async function prepareKeycloak (authServerUrl, testPassword) {
   const realmRoles = await getRealmRoles()
   const clients = await getClients()
 
-  for (user of usersConfiguration) {
+  for (let user of usersConfiguration) {
     // Create a new user
     const userIdUrl = await createUser(user.name, testPassword)
     // Assign realm role to user
@@ -132,7 +131,7 @@ async function resetKeycloakConfiguration () {
   await axios({
     method: 'DELETE',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}`,
-    headers: {'Authorization': config.token}
+    headers: { 'Authorization': config.token }
   }).catch((err) => { return console.error(err) })
 }
 

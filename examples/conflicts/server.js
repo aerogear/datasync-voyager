@@ -31,7 +31,7 @@ let greeting = {
 }
 
 // Custom conflict resolution strategy that concatenates the msg properties together
-const customGreetingResolutionStrategy = function(serverData, clientData, baseData) {
+const customGreetingResolutionStrategy = function (serverData, clientData, baseData) {
   return {
     msg: serverData.msg + ' ' + clientData.msg
   }
@@ -42,7 +42,6 @@ const resolvers = {
   Mutation: {
     changeGreeting: async (obj, args, context, info) => {
       if (conflictHandler.hasConflict(greeting, args, obj, args, context, info)) {
-
         const serverState = greeting
         const clientState = args
         const strategy = customGreetingResolutionStrategy
@@ -60,7 +59,7 @@ const resolvers = {
       if (conflictHandler.hasConflict(greeting, args, obj, args, context, info)) {
         const serverState = greeting
         const clientState = args
-        return await conflictHandler.resolveOnClient(serverState, clientState).response;
+        return conflictHandler.resolveOnClient(serverState, clientState).response
       }
       greeting = conflictHandler.nextState(args)
       return greeting
@@ -68,7 +67,7 @@ const resolvers = {
   },
   Query: {
     greeting: (obj, args, context, info) => {
-      return greeting.msg;
+      return greeting.msg
     }
   }
 }
