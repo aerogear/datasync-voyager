@@ -1,6 +1,6 @@
 {
   "name": "voyager-example",
-  "version": "0.4.0-rc2",
+  "version": "0.4.0",
   "private": true,
   "description": "",
   "scripts": {
@@ -17,12 +17,12 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@aerogear/voyager-audit": "^0.4.0-rc2",
-    "@aerogear/voyager-conflicts": "^0.4.0-rc2",
-    "@aerogear/voyager-keycloak": "^0.4.0-rc2",
-    "@aerogear/voyager-metrics": "^0.4.0-rc2",
-    "@aerogear/voyager-server": "^0.4.0-rc2",
-    "@aerogear/voyager-tools": "^0.4.0-rc2",
+    "@aerogear/voyager-audit": "^0.4.0",
+    "@aerogear/voyager-conflicts": "^0.4.0",
+    "@aerogear/voyager-keycloak": "^0.4.0",
+    "@aerogear/voyager-metrics": "^0.4.0",
+    "@aerogear/voyager-server": "^0.4.0",
+    "@aerogear/voyager-tools": "^0.4.0",
     "axios": "^0.18.0",
     "express": "^4.16.4",
     "graphql": "0.13.2",
