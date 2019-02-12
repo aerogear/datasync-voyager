@@ -4,6 +4,7 @@ import Keycloak from 'keycloak-connect'
 import { SecurityService } from './api'
 import { KeycloakAuthContextProvider } from './AuthContextProvider'
 import { schemaDirectives } from './schemaDirectives'
+import { getTokenObject } from './KeycloakToken'
 
 export class KeycloakSecurityService implements SecurityService {
 
@@ -11,6 +12,7 @@ export class KeycloakSecurityService implements SecurityService {
   public readonly schemaDirectives: any
   public readonly authContextProvider: any
   public readonly log: any
+  public keycloak: any
 
   constructor (keycloakConfig: any) {
     this.keycloakConfig = keycloakConfig
@@ -51,20 +53,20 @@ export class KeycloakSecurityService implements SecurityService {
       store: memoryStore
     }))
 
-    const keycloak = new Keycloak({
+    this.keycloak = new Keycloak({
       store: memoryStore
     }, this.keycloakConfig)
 
     // Install general keycloak middleware
-    expressRouter.use(keycloak.middleware({
+    expressRouter.use(this.keycloak.middleware({
       admin: apiPath
     }))
 
     // Protect the main route for all graphql services
     // Disable unauthenticated access
-    expressRouter.use(apiPath, keycloak.protect())
+    expressRouter.use(apiPath, this.keycloak.protect())
 
-    expressRouter.get('/token', keycloak.protect(), function (req, res) {
+    expressRouter.get('/token', this.keycloak.protect(), function (req, res) {
       if (req.session && req.session['keycloak-token']) {
         return res.json({
           'Authorization': 'Bearer ' + JSON.parse(req.session['keycloak-token']).access_token
@@ -72,5 +74,11 @@ export class KeycloakSecurityService implements SecurityService {
       }
       res.json({})
     })
+  }
+
+  public async validateToken(token: string): Promise<boolean> {
+    const tokenObject = getTokenObject(token)
+    const result = await this.keycloak.grantManager.validateToken(tokenObject, 'Bearer')
+    return (result === tokenObject) ? true : false
   }
 }
