@@ -1,5 +1,5 @@
 import { AuditLogger, DefaultAuditLogger } from '@aerogear/voyager-audit'
-import { DefaultSecurityService, SecurityService } from '@aerogear/voyager-keycloak'
+import { DefaultSecurityService, SecurityService, AuthContextProvider } from '@aerogear/voyager-keycloak'
 import test from 'ava'
 import { GraphQLResolveInfo } from 'graphql'
 import { DefaultVoyagerConfig } from './DefaultVoyagerConfig'
@@ -14,12 +14,24 @@ test('DefaultVoyagerConfig returns a blank security service by default', async (
 
 test('DefaultVoyagerConfig.merge() will override default security service with user supplied one', async (t) => {
 
-  class DummySecurityService implements SecurityService {
-    public getAuthContextProvider () {
+  class CustomAuthContextProvider implements AuthContextProvider {
+
+    public isAuthenticated() {
+      return false
+    }
+    public hasRole() {
+      return false
+    }
+    public getUser() {
       return null
     }
+  }
+  class DummySecurityService implements SecurityService {
+    public getAuthContextProvider () {
+      return CustomAuthContextProvider
+    }
     public getSchemaDirectives () {
-      return null
+      return {}
     }
     public applyAuthMiddleware () {
       return null

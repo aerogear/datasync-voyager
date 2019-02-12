@@ -1,4 +1,6 @@
 import { Router } from 'express'
+import { SchemaDirectives } from './SchemaDirectives'
+import { AuthContextProviderClass } from './AuthContextProvider'
 
 /**
  * This interface describes what a security service should look like.
@@ -12,7 +14,7 @@ export interface SecurityService {
    * getSchemaDirectives should return an object containing directive
    * implementations. e.g. @isAuthenticated, @hasRole
    */
-  getSchemaDirectives (): any
+  getSchemaDirectives (): SchemaDirectives
 
   /**
    * getAuthContextProvider returns the security service's AuthContextProvider
@@ -20,7 +22,7 @@ export interface SecurityService {
    * Auth related info from the request into the the GraphQL context
    * Inside resolve functions. Example: context.auth.user
    */
-  getAuthContextProvider (): any
+  getAuthContextProvider (): AuthContextProviderClass
 
   /**
    *

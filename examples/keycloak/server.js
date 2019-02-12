@@ -67,8 +67,8 @@ const app = express()
 // It's very important this is done before
 // Applying the apollo middleware
 // This function can also take an `options` argument
-// To specify things like apiPath and other potential config
-keycloakService.applyAuthMiddleware(app)
+// To specify things like apiPath and tokenEndpoint
+keycloakService.applyAuthMiddleware(app, { tokenEndpoint: true })
 server.applyMiddleware({ app })
 
 module.exports = { app, server }
