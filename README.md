@@ -22,6 +22,10 @@ The [Contributing Guide](./CONTRIBUTING.md) will give you all of the information
 
 The [Examples Guide](./examples/README.md) walks through some example applications which highlight some of Apollo Voyager Server's features.
 
+## Reference implementation 
+
+[Ionic Reference app](https://github.com/aerogear/ionic-showcase) provides example implementation of every feature offered by server together with Ionic based Mobile Application.
+
 ## API Docs
 
 The [API Documentation Page](./doc/api/api.md) links to the documentation for the individual packages included in this repo. The documentation is a work in progress.
