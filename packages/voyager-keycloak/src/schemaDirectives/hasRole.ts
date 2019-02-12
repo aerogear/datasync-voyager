@@ -24,7 +24,6 @@ export class HasRoleDirective extends SchemaDirectiveVisitor {
   public visitFieldDefinition (field: any) {
     const { resolve = defaultFieldResolver } = field
     const { error, value } = this.validateArgs()
-
     if (error) {
       log.error(`Invalid hasRole directive on field ${field.name}`, error)
       throw error
