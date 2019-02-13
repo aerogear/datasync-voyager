@@ -29,13 +29,11 @@ function voyagerResolverPartial (config: CompleteVoyagerConfig): ResolverWrapper
           }
 
           const timeTook = Date.now() - resolverStartTime
-          metrics.updateResolverMetrics(info, timeTook)
+          metrics.updateResolverMetrics(true, context, info, timeTook)
           auditLogger.logResolverCompletion('', true, obj, args, context, info)
         } catch (error) {
-          // we only publish time in success. const timeTook
-          // NOPE: const timeTook = Date.now() - resolverStartTime
-          // NOPE: updateResolverMetrics(info, timeTook)
-          // but, we audit log in case of failure too
+          const timeTook = Date.now() - resolverStartTime
+          metrics.updateResolverMetrics(false, context, info, timeTook)
           if (auditLogger) {
             auditLogger.logResolverCompletion(error.message, false, obj, args, context, info)
           }

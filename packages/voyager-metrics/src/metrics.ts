@@ -15,13 +15,13 @@ const resolverTimingMetric = new Prometheus.Histogram({
 const resolverRequestsMetric = new Prometheus.Counter({
   name: 'requests_resolved',
   help: 'Number of requests resolved by server',
-  labelNames: ['operation_type', 'path']
+  labelNames: ['operation_type', 'path', 'success', 'authenticated']
 })
 
 const resolverRequestsTotalMetric = new Prometheus.Counter({
   name: 'requests_resolved_total',
   help: 'Number of requests resolved by server in total',
-  labelNames: ['operation_type', 'path']
+  labelNames: ['operation_type', 'path', 'success', 'authenticated']
 })
 
 const serverResponseMetric = new Prometheus.Histogram({
@@ -36,6 +36,19 @@ const conflictsMetric = new Prometheus.Counter({
   labelNames: ['operation_type', 'name']
 })
 
+const uniqueClientsMetric = new Prometheus.Counter({
+  name: 'unique_clients',
+  help: 'Number of unique clients'
+})
+
+const uniqueUsersMetric = new Prometheus.Counter({
+  name: 'unique_users',
+  help: 'Number of unique users'
+})
+
+const uniqueClientIds = new Set()
+const uniqueUserIds = new Set()
+
 /**
  *
  * @param app
@@ -47,13 +60,20 @@ export function applyMetricsMiddlewares (app: Application, config: MetricsConfig
   applyMetricsMiddleware(app, config)
 }
 
-export function updateResolverMetrics (resolverInfo: any, responseTime: number) {
+export function updateResolverMetrics (success: boolean, context: any, resolverInfo: any, responseTime: number) {
   const {
     operation: {operation: resolverMappingType},
     fieldName: resolverMappingName,
     path: resolverWholePath,
     parentType: resolverParentType
   } = resolverInfo
+
+  const clientInfo = context && context.request && context.request.body && context.request.body.extensions && context.request.body.extensions.metrics || undefined
+  const authenticated = !!(context && context.auth && context.auth.isAuthenticated())
+  const userInfo = (context && context.auth && context.auth.accessToken) ? context.auth.accessToken.content : undefined
+
+  const clientId = clientInfo && clientInfo.clientId || 'UNKNOWN CLIENT ID'
+  const userId = userInfo && userInfo.email || 'UNKNOWN USER ID'
 
   let path
   if (resolverParentType.name === 'Query' || resolverParentType.name === 'Mutation' || resolverParentType.name === 'Subscription') {
@@ -72,16 +92,31 @@ export function updateResolverMetrics (resolverInfo: any, responseTime: number) 
   resolverRequestsMetric
     .labels(
       resolverMappingType,
-      path
+      path,
+      success + '',
+      authenticated + ''
     )
     .inc(1)
 
   resolverRequestsTotalMetric
     .labels(
       resolverMappingType,
-      path
+      path,
+      success + '',
+      authenticated + ''
     )
     .inc(1)
+
+  if (!uniqueClientIds.has(clientId)) {
+    uniqueClientIds.add(clientId)
+    uniqueClientsMetric.inc(1)
+  }
+
+  if (!uniqueUserIds.has(userId)) {
+    uniqueUserIds.add(userId)
+    uniqueUsersMetric.inc(1)
+  }
+
 }
 
 export function recordConflictMetrics(resolverInfo: any) {
@@ -122,6 +157,11 @@ function getMetrics (req: IncomingMessage, res: Response) {
   resolverRequestsMetric.reset()
   serverResponseMetric.reset()
   conflictsMetric.reset()
+  uniqueClientsMetric.reset()
+  uniqueUsersMetric.reset()
+
+  uniqueClientIds.clear()
+  uniqueUserIds.clear()
 }
 
 interface ResponseWithVoyagerMetrics extends Response {

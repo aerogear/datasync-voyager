@@ -1,4 +1,4 @@
 export interface Metrics {
-  updateResolverMetrics (resolverInfo: any, responseTime: number): void
+  updateResolverMetrics (success: boolean, context: any, resolverInfo: any, responseTime: number): void
   recordConflictMetrics(resolverInfo: any): void
 }
