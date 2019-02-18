@@ -36,18 +36,17 @@ const conflictsMetric = new Prometheus.Counter({
   labelNames: ['operation_type', 'name']
 })
 
-const uniqueClientsMetric = new Prometheus.Counter({
-  name: 'unique_clients',
-  help: 'Number of unique clients'
+const clientsMetric = new Prometheus.Counter({
+  name: 'clients',
+  help: 'Number of clients',
+  labelNames: ['client_id']
 })
 
-const uniqueUsersMetric = new Prometheus.Counter({
-  name: 'unique_users',
-  help: 'Number of unique users'
+const usersMetric = new Prometheus.Counter({
+  name: 'users',
+  help: 'Number of users',
+  labelNames: ['user_id']
 })
-
-const uniqueClientIds = new Set()
-const uniqueUserIds = new Set()
 
 /**
  *
@@ -107,16 +106,9 @@ export function updateResolverMetrics (success: boolean, context: any, resolverI
     )
     .inc(1)
 
-  if (!uniqueClientIds.has(clientId)) {
-    uniqueClientIds.add(clientId)
-    uniqueClientsMetric.inc(1)
-  }
+  clientsMetric.labels(clientId).inc(1)
 
-  if (!uniqueUserIds.has(userId)) {
-    uniqueUserIds.add(userId)
-    uniqueUsersMetric.inc(1)
-  }
-
+  usersMetric.labels(userId).inc(1)
 }
 
 export function recordConflictMetrics(resolverInfo: any) {
@@ -157,11 +149,8 @@ function getMetrics (req: IncomingMessage, res: Response) {
   resolverRequestsMetric.reset()
   serverResponseMetric.reset()
   conflictsMetric.reset()
-  uniqueClientsMetric.reset()
-  uniqueUsersMetric.reset()
-
-  uniqueClientIds.clear()
-  uniqueUserIds.clear()
+  clientsMetric.reset()
+  usersMetric.reset()
 }
 
 interface ResponseWithVoyagerMetrics extends Response {
