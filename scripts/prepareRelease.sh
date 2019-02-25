@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 echo "Preparing release"
 
 rm -Rf node_modules
