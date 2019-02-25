@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/aerogear
     docker:
       # Node 8 LTS
-      - image: circleci/node:carbon
+      - image: circleci/node:lts
     steps:
       - checkout
       - run:
@@ -28,7 +28,7 @@ jobs:
   test_examples:
     docker:
       # Node 8 LTS
-      - image: circleci/node:carbon
+      - image: circleci/node:lts
       # keycloak
       - image: jboss/keycloak:3.4.3.Final
         name: keycloak_instance
@@ -59,7 +59,7 @@ jobs:
     working_directory: ~/aerogear
     docker:
       # Node 8 LTS
-      - image: circleci/node:carbon
+      - image: circleci/node:lts
     steps:
       - checkout
         # Allows us to authenticate with the npm registry
