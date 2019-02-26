@@ -27,6 +27,9 @@ test('DefaultVoyagerConfig.merge() will override default security service with u
     }
   }
   class DummySecurityService implements SecurityService {
+    public getTypeDefs () {
+      return ''
+    }
     public getAuthContextProvider () {
       return CustomAuthContextProvider
     }
