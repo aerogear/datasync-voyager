@@ -28,6 +28,10 @@ export class KeycloakSecurityService implements SecurityService {
     this.log = options && options.log ? options.log : console
   }
 
+  public getTypeDefs(): string {
+    return 'directive @hasRole(role: [String]) on FIELD | FIELD_DEFINITION'
+  }
+
   public getSchemaDirectives (): SchemaDirectives {
     return this.schemaDirectives
   }
