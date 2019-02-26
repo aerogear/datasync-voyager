@@ -10,6 +10,13 @@ import { AuthContextProviderClass } from './AuthContextProvider'
  * with something like Keycloak, Auth0, Google Services etc.
  */
 export interface SecurityService {
+
+  /**
+   * getTypeDefs returns any additional SDL that should be added to a GraphQL schema
+   * to work with the security service.
+   */
+  getTypeDefs (): string
+
   /**
    * getSchemaDirectives should return an object containing directive
    * implementations. e.g. @isAuthenticated, @hasRole

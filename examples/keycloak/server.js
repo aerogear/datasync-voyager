@@ -15,8 +15,6 @@ const typeDefs = gql`
   # We did not have to define the directive here.
   # For some reason we do now, otherwise makeExecutableSchema does not work.
 
-  directive @hasRole(role: [String]) on FIELD | FIELD_DEFINITION
-
   type Query {
     hello: String @hasRole(role: "admin")
   }
@@ -50,7 +48,7 @@ const context = ({ req }) => {
 // Initialize the voyager server with our schema and context
 
 const apolloConfig = {
-  typeDefs,
+  typeDefs: [typeDefs, keycloakService.getTypeDefs()],
   resolvers,
   context
 }

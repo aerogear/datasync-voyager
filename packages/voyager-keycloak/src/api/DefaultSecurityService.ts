@@ -3,6 +3,9 @@ import { SecurityService } from './SecurityService'
 
 export class DefaultSecurityService implements SecurityService {
 
+  public getTypeDefs () {
+    return ''
+  }
   public getSchemaDirectives () {
     return {}
   }
