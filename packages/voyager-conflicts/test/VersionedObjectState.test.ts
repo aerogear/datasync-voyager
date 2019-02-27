@@ -2,7 +2,6 @@ import test from 'ava'
 import { VersionedObjectState, ObjectStateData } from '../src'
 import { ObjectConflictError } from '../src/api/ConflictResolution'
 import { strategies } from '../src/strategies'
-import { GraphQLResolveInfo } from 'graphql'
 
 test('With conflict', (t) => {
   const objectState = new VersionedObjectState()
