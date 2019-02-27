@@ -33,4 +33,16 @@ for package in $PACKAGES; do
   fi
 done
 
-echo "TAG and PACKAGE_VERSION are valid"
+for package in $PACKAGES; do
+  package_dir=$(lerna --loglevel=silent ls -l | grep $package | awk -F ' ' '{print $3}')
+  package_dist_dir="${package_dir}/dist"
+  if [ -d "${package_dist_dir}" ]
+  then
+      echo "dist dir ${package_dist_dir} present"
+  else
+      echo "dir ${package_dist_dir} not present, possible compilation error"
+      exit 1
+  fi
+done
+
+echo "TAG and PACKAGE_VERSION are valid, compilation good"
