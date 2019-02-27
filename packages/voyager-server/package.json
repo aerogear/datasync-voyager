@@ -26,8 +26,8 @@
     "@aerogear/voyager-keycloak": "^0.4.0",
     "@aerogear/voyager-metrics": "^0.4.0",
     "@aerogear/voyager-tools": "^0.4.0",
-    "apollo-server": "2.3.3",
-    "apollo-server-express": "2.3.3",
+    "apollo-server": "2.4.8",
+    "apollo-server-express": "2.4.8",
     "graphql-tools": "4.0.4"
   },
   "devDependencies": {
@@ -38,7 +38,7 @@
     "apollo-link-http": "1.5.11",
     "apollo-link-ws": "1.0.14",
     "apollo-utilities": "1.2.0",
-    "ava": "1.0.0-rc.2",
+    "ava": "1.2.1",
     "node-fetch": "2.3.0",
     "ts-node": "7.0.1",
     "typescript": "3.3.3333",
