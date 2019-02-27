@@ -21,23 +21,23 @@
     "test": "ava -v '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "apollo-server-express": "^2.3.3",
-    "express-session": "^1.15.6",
-    "graphql-tools": "^4.0.4",
-    "joi": "^14.3.0",
-    "keycloak-connect": "^4.6.0",
-    "pino": "^5.9.0"
+    "apollo-server-express": "2.4.8",
+    "express-session": "1.15.6",
+    "graphql-tools": "4.0.4",
+    "joi": "14.3.1",
+    "keycloak-connect": "4.8.3",
+    "pino": "5.11.1"
   },
   "devDependencies": {
-    "@types/express-session": "^1.15.11",
-    "@types/graphql": "^14.0.3",
-    "@types/joi": "^14.0.0",
-    "@types/keycloak-connect": "^4.5.0",
-    "@types/node": "^10.12.10",
-    "@types/pino": "^5.8.2",
+    "@types/express-session": "1.15.12",
+    "@types/graphql": "14.0.7",
+    "@types/joi": "14.3.2",
+    "@types/keycloak-connect": "4.5.1",
+    "@types/node": "10.12.27",
+    "@types/pino": "5.20.0",
     "ava": "1.0.0-rc.2",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.6"
+    "ts-node": "7.0.1",
+    "typescript": "3.3.3333"
   },
   "ava": {
     "compileEnhancements": false,

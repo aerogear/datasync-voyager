@@ -20,19 +20,19 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/express-session": "^1.15.11",
-    "@types/graphql": "^0.13.2",
-    "@types/joi": "^14.0.0",
-    "@types/keycloak-connect": "^4.5.0",
-    "@types/node": "^10.12.10",
-    "@types/pino": "^5.8.2",
+    "@types/express-session": "1.15.12",
+    "@types/graphql": "0.13.4",
+    "@types/joi": "14.3.2",
+    "@types/keycloak-connect": "4.5.1",
+    "@types/node": "10.12.27",
+    "@types/pino": "5.20.0",
     "ava": "1.0.0-rc.2",
-    "graphql": "^0.13.2",
-    "lerna": "^3.4.3",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "typescript": "^3.1.6",
-    "typedoc": "^0.14.2",
-    "standard": "^12.0.1"
+    "graphql": "0.13.2",
+    "lerna": "3.13.1",
+    "ts-node": "7.0.1",
+    "tslint": "5.13.0",
+    "typescript": "3.3.3333",
+    "typedoc": "0.14.2",
+    "standard": "12.0.1"
   }
 }
