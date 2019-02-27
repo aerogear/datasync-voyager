@@ -2,7 +2,7 @@
   "extends": [
     "config:base",
     ":pinVersions",
-    ":assignee(wtrocki,darahayes)"
+    ":pinAllExceptPeerDependencies"
   ],
   "groupName":"all"
 }
