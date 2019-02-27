@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/pino": "5.20.0",
-    "ava": "1.0.0-rc.2",
+    "ava": "1.2.1",
     "ts-node": "7.0.1",
     "typescript": "3.3.3333"
   },
