@@ -21,10 +21,7 @@
     ]
   },
   "devDependencies": {
-    "@types/chai": "4.1.7",
     "ava": "1.2.1",
-    "chai": "4.2.0",
-    "nyc": "11.9.0",
     "ts-node": "7.0.1",
     "typescript": "3.3.3333"
   },
