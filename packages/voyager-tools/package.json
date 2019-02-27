@@ -18,12 +18,12 @@
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
   "dependencies": {
-    "graphql-tools": "^4.0.3"
+    "graphql-tools": "4.0.4"
   },
   "devDependencies": {
     "ava": "1.0.0-rc.2",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.6"
+    "ts-node": "7.0.1",
+    "typescript": "3.3.3333"
   },
   "publishConfig": {
     "access": "public"
