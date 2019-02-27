@@ -1,6 +1,5 @@
 import test from 'ava'
 import { HashObjectState } from '../src'
-import { GraphQLResolveInfo } from 'graphql'
 
 test('With conflict', (t) => {
   const objectState = new HashObjectState((data) => JSON.stringify(data))
