@@ -74,6 +74,8 @@ jobs:
       - image: docker:17.12.1-ce-git
     steps:
       - checkout
+      - run: echo "Sleeping for 3 minutes to allow NPM publish to be effective"
+      - run: sleep 180
       # special woraround to allow running docker in docker https://circleci.com/docs/2.0/building-docker-images/
       - setup_remote_docker:
           version: 17.05.0-ce
