@@ -37,6 +37,10 @@ export class VersionedObjectState implements ObjectState {
     return new ConflictResolution(false, serverState, clientState)
   }
 
+  public reject(serverState: ObjectStateData, clientState: ObjectStateData) {
+    return new ConflictResolution(true, serverState, clientState)
+  }
+
   public async resolveOnServer(strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData) {
     let resolvedState = strategy(serverState, clientState)
 
