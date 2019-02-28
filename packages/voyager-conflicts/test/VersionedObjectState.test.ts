@@ -84,18 +84,17 @@ test('resolveOnServer works with the client wins strategy', async (t) => {
   t.deepEqual(resolution.response, expected.response)
 })
 
-test('resolveOnServer works with the server wins strategy', async (t) => {
+test('resolveOnServer works with the server (reject) strategy', async (t) => {
   const serverState = { name: 'AeroGear', version: 2 }
   const clientState = { name: 'Client', version: 1 }
   const objectState = new VersionedObjectState()
 
-  const strategy = strategies.serverWins
 
-  const resolution = await objectState.resolveOnServer(strategy, serverState, clientState)
+  const resolution = await objectState.reject(serverState, clientState)
 
   const expectedResolvedState = {
     name: 'AeroGear' ,
-    version: 3
+    version: 2
   }
 
   const expected = {
