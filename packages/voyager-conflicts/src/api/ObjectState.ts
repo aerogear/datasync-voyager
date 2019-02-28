@@ -41,6 +41,15 @@ export interface ObjectState {
    * @param serverState the current state of the object on the server
    * @param clientState the state of the object the client wishes to perform some mutation with
    */
-  resolveOnServer (strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData): Promise<ConflictResolution>
+  resolveOnServer(strategy: ConflictResolutionStrategy, serverState: ObjectStateData, clientState: ObjectStateData): Promise<ConflictResolution>
 
+  /**
+   * Inform clients that changes were rejected due to conflict without applying them to server.
+   * This means that client need to apply their changes again on top of the recent server and
+   * no automatic conflict resolution is possible.
+   *
+   * @param serverState
+   * @param clientState
+   */
+  reject(serverState: ObjectStateData, clientState: ObjectStateData): ConflictResolution
 }
