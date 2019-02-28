@@ -29,7 +29,11 @@ export class VersionedObjectState implements ObjectState {
   }
 
   public nextState(currentObjectState: ObjectStateData) {
-    currentObjectState.version = currentObjectState.version + 1
+    if (currentObjectState.version) {
+      currentObjectState.version = currentObjectState.version + 1
+    } else {
+      currentObjectState.version = 1
+    }
     return currentObjectState
   }
 
