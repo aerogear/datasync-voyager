@@ -24,7 +24,7 @@
     "@types/graphql": "14.0.7",
     "@types/joi": "14.3.2",
     "@types/keycloak-connect": "4.5.1",
-    "@types/node": "10.12.27",
+    "@types/node": "10.12.29",
     "@types/pino": "5.20.0",
     "ava": "1.2.1",
     "graphql": "14.1.1",
