@@ -10,7 +10,7 @@
     "test-examples": "ava --concurrency=1 test/*.test.js",
     "push-basic": "TAG=\"$npm_package_version\" ./push-script.sh basic",
     "push-keycloak": "TAG=\"$npm_package_version\" ./push-script.sh keycloak",
-    "push-auditLogging": "TAG=\"$npm_package_version\" ./push-script.sh auditLogging",
+    "push-audit_logging": "TAG=\"$npm_package_version\" ./push-script.sh audit_logging",
     "push-metrics": "TAG=\"$npm_package_version\" ./push-script.sh metrics",
     "push-restapi": "TAG=\"$npm_package_version\" ./push-script.sh restapi"
   },
