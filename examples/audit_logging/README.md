@@ -1,9 +1,9 @@
 ## Audit Logging Example
 
-`auditLogging/index.js` is the example of how to use audit logging feature with the `voyager-server` framework.
+`audit_logging/index.js` is the example of how to use audit logging feature with the `voyager-server` framework.
 
 ```
-$ node auditLogging/index.js
+$ node audit_logging/index.js
 🚀 Server ready at http://localhost:4000/graphql
 ```
 
