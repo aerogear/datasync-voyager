@@ -8,8 +8,6 @@ The project does this by taking the popular [Apollo Server](https://www.apollogr
 * Conflict Resolution
 * Authentication and Authorization
 
-**Warning:** This project is under heavy development and is not recommended for production usage.
-
 ## Local Development Setup
 
 The [Local Development Guide](./doc/guides/local-development.md) will help contributors to get started developing Apollo Voyager Server.
