@@ -1,6 +1,6 @@
 const test = require('ava')
 const axios = require('axios')
-const { server, app } = require('../auditLogging/server')
+const { server, app } = require('../audit_logging/server')
 
 const port = 4000
 app.listen({ port })

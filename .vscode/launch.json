@@ -23,7 +23,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Audit Logging Example",
-      "program": "${workspaceFolder}/examples/auditLogging/index.js",
+      "program": "${workspaceFolder}/examples/audit_logging/index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
