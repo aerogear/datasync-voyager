@@ -31,7 +31,7 @@
     "graphql-tools": "4.0.4"
   },
   "devDependencies": {
-    "@types/node-fetch": "2.1.6",
+    "@types/node-fetch": "2.1.7",
     "apollo-cache-inmemory": "1.5.1",
     "apollo-client": "2.5.1",
     "apollo-link": "1.2.11",
