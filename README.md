@@ -1,5 +1,8 @@
 # Apollo Voyager Server
 
+[![CircleCI](https://circleci.com/gh/aerogear/voyager-server.svg?style=svg)](https://circleci.com/gh/aerogear/voyager-server)
+[![Coverage Status](https://coveralls.io/repos/github/aerogear/voyager-server/badge.svg)](https://coveralls.io/github/aerogear/voyager-server)
+
 Home of the Aerogear Data Sync Framework. The goal of this project is to make it easier to build secure, production ready, realtime APIs and applications with GraphQL.
 
 The project does this by taking the popular [Apollo Server](https://www.apollographql.com/docs/apollo-server/) framework and adding additional components to solve some common problems.
