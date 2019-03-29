@@ -20,6 +20,9 @@ jobs:
           name: test
           command: npm test
       - run:
+          name: coverage
+          command: npm run coverage
+      - run:
           name: Lint all TypeScript code
           command: npm run lint:ts
       - run:

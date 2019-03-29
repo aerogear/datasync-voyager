@@ -16,6 +16,9 @@ yarn-error.log*
 # Coverage (from Jest)
 coverage/
 
+# Coverage (from nyc)
+.nyc_output
+
 # JUnit Reports (used mainly in CircleCI)
 reports/
 junit.xml
