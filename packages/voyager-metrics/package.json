@@ -24,12 +24,12 @@
     "@aerogear/voyager-tools": "^0.5.1",
     "apollo-server": "2.4.8",
     "apollo-server-express": "2.4.8",
-    "prom-client": "11.2.1"
+    "prom-client": "11.3.0"
   },
   "devDependencies": {
-    "ava": "1.4.0",
+    "ava": "1.4.1",
     "ts-node": "8.0.3",
-    "typescript": "3.3.4000"
+    "typescript": "3.4.3"
   },
   "ava": {
     "compileEnhancements": false,
