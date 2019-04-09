@@ -26,18 +26,18 @@
     "graphql-tools": "4.0.4",
     "joi": "14.3.1",
     "keycloak-connect": "4.8.3",
-    "pino": "5.11.3"
+    "pino": "5.12.2"
   },
   "devDependencies": {
     "@types/express-session": "1.15.12",
-    "@types/graphql": "14.0.7",
+    "@types/graphql": "14.2.0",
     "@types/joi": "14.3.2",
     "@types/keycloak-connect": "4.5.1",
-    "@types/node": "10.14.3",
+    "@types/node": "10.14.4",
     "@types/pino": "5.20.0",
-    "ava": "1.4.0",
+    "ava": "1.4.1",
     "ts-node": "8.0.3",
-    "typescript": "3.3.4000"
+    "typescript": "3.4.3"
   },
   "peerDependencies": {
     "graphql": "^0.12.0 || ^0.13.0 || ^14.0.0"
