@@ -21,9 +21,9 @@
     "graphql-tools": "4.0.4"
   },
   "devDependencies": {
-    "ava": "1.4.0",
+    "ava": "1.4.1",
     "ts-node": "8.0.3",
-    "typescript": "3.3.4000"
+    "typescript": "3.4.3"
   },
   "publishConfig": {
     "access": "public"
