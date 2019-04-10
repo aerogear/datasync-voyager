@@ -4,6 +4,7 @@
   "private": true,
   "description": "",
   "scripts": {
+    "start": "node basic/index.js",
     "compile": "exit 0",
     "watch": "exit 0",
     "compile:clean": "exit 0",
