@@ -4,6 +4,7 @@
 
 * Git
 * Node.js `v8.12.0` or higher. We recommend you install and manage Node.js versions using [Node Version Manager (nvm)](https://github.com/creationix/nvm)
+* Docker
 
 ### Setting up Your Local Environment
 
