@@ -4,5 +4,8 @@
     ":pinVersions",
     ":pinAllExceptPeerDependencies"
   ],
-  "groupName":"all"
+  "groupName":"all",
+  "ignoreDeps": [
+    "keycloak-connect"
+  ]
 }
