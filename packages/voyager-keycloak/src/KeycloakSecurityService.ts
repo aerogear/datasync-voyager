@@ -91,9 +91,9 @@ export class KeycloakSecurityService implements SecurityService {
   }
 
   public async onSubscriptionConnect(connectionParams: any, webSocket: any, context: any): Promise<any> {
-    let header = connectionParams.Authorization
+    const header = connectionParams.Authorization
                   || connectionParams.authorization
-                  || connectionParams.Auth 
+                  || connectionParams.Auth
                   || connectionParams.auth
     if (!header) {
       throw new Error('Access Denied - missing Authorization field in connection parameters')

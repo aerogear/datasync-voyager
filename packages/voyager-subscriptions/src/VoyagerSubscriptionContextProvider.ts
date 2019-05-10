@@ -24,7 +24,6 @@ export class VoyagerSubscriptionContextProvider {
   constructor(config: VoyagerSubscriptionServerOptions) {
     this.config = config
 
-
     if (typeof this.config.onConnect === 'function') {
       this.userOnConnectFunction = this.config.onConnect
     } else if (isObject(this.config.onConnect)) {
