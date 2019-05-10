@@ -46,13 +46,13 @@ export interface SecurityService {
 
   /**
    * onSubscriptionConnect is called when a client opens a websocket connection
-   * for a GraphQL subscription. Anything returned from this function is added 
+   * for a GraphQL subscription. Anything returned from this function is added
    * to the context within subscription resolvers
    * The main use case here is auth. Example - we could parse and validate a token
    * from the connectionParams and return a user object. Now this object is accessible
    * Within the subscription context.
    * Apollo docs: https://www.apollographql.com/docs/graphql-subscriptions/authentication
-   * 
+   *
    * @param connectionParams connection parameters provided by the websocket client
    * @param webSocket The websocket object
    * @param context
