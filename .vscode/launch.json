@@ -49,6 +49,15 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Launch Subscriptions Example",
+      "program": "${workspaceFolder}/examples/subscriptions/index.js",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch REST API integration Example",
       "program": "${workspaceFolder}/examples/restapi/index.js"
     }
