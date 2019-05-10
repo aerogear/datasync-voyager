@@ -29,3 +29,5 @@ node_modules/
 # Intellij files
 .idea
 *.iml
+
+*.tsbuildinfo
