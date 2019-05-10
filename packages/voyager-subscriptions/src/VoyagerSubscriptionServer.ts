@@ -5,10 +5,13 @@ import { execute, subscribe } from 'graphql'
 import { VoyagerSubscriptionServerOptions } from './api'
 import { VoyagerSubscriptionContextProvider } from './VoyagerSubscriptionContextProvider'
 
-// takes in security service + regular options
-// if security service has an onSubscriptionConnect, it adds it there,
-// sets up the subscription server
-
+/**
+ * Helper function that builds a regular SubscriptionServer
+ * with additional built in capabilities and integrations
+ * 
+ * @param options all of the regular options passed to SubscrptionServer + a SecurityService
+ * @param socketOptionsOrServer options for creating a socket or an already initialized Websocket.Server
+ */
 export function createSubscriptionServer(options: VoyagerSubscriptionServerOptions, socketOptionsOrServer: WebSocket.ServerOptions | WebSocket.Server): SubscriptionServer {
 
   const subscriptionContextProvider = new VoyagerSubscriptionContextProvider(options)

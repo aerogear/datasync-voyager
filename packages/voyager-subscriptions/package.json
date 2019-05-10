@@ -1,7 +1,7 @@
 {
   "name": "@aerogear/voyager-subscriptions",
   "version": "0.5.1",
-  "description": "Tooling library used across Apollo Voyager Server modules.",
+  "description": "Helper for building a GraphQL SubscriptionServer with additional capabilities and integrations",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
   "license": "Apache-2.0",
