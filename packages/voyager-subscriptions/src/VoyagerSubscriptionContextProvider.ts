@@ -59,11 +59,13 @@ export class VoyagerSubscriptionContextProvider {
   }
 
   private async getDefaultContext(connectionParams: any, webSocket: any, context: any): Promise<any> {
-    const auth = await this.securityService.onSubscriptionConnect(connectionParams, webSocket, context)
-    const defaultContext = {
-      auth
+    if (this.securityService) {
+      const auth = await this.securityService.onSubscriptionConnect(connectionParams, webSocket, context)
+      const defaultContext = {
+        auth
+      }
+      return defaultContext
     }
-    return defaultContext
   }
 }
 
