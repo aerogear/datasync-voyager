@@ -90,9 +90,28 @@ export class KeycloakSecurityService implements SecurityService {
     }
   }
 
-  public async validateToken(token: string): Promise<boolean> {
-    const tokenObject = getTokenObject(token)
-    const result = await this.keycloak.grantManager.validateToken(tokenObject, 'Bearer')
-    return (result === tokenObject) ? true : false
+  public async onSubscriptionConnect(connectionParams: any, webSocket: any, context: any): Promise<any> {
+    let header = connectionParams.Authorization
+                  || connectionParams.authorization
+                  || connectionParams.Auth 
+                  || connectionParams.auth
+    if (!header) {
+      throw new Error('Access Denied - missing Authorization field in connection parameters')
+    }
+    const token = this.getBearerTokenFromHeader(header)
+    try {
+      await this.keycloak.grantManager.validateToken(token, 'Bearer')
+      return token
+    } catch (e) {
+      this.log.error(`Error validating token from connectionParam ${header}\n${e}`)
+      throw new Error(`Access Denied - ${e}`)
+    }
+  }
+
+  private getBearerTokenFromHeader(header: any) {
+    if (header && typeof header === 'string' && (header.indexOf('bearer ') === 0 || header.indexOf('Bearer ') === 0)) {
+      const token = header.substring(7)
+      return getTokenObject(token)
+    }
   }
 }

@@ -17,6 +17,10 @@ export class DefaultSecurityService implements SecurityService {
   public getAuthContextProvider () {
     return DefaultAuthContextProvider
   }
+
+  public onSubscriptionConnect() {
+    return new Promise((resolve, reject) => resolve())
+  }
 }
 
 export class DefaultAuthContextProvider implements AuthContextProvider {
