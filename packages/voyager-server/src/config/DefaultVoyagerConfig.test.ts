@@ -39,6 +39,9 @@ test('DefaultVoyagerConfig.merge() will override default security service with u
     public applyAuthMiddleware () {
       return null
     }
+    public onSubscriptionConnect () {
+      return new Promise((resolve) => resolve())
+    }
   }
 
   const securityService = new DummySecurityService()
