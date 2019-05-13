@@ -49,6 +49,9 @@ test('Passing a custom security service will result in that service being inside
     public getAuthContextProvider() {
       return CustomAuthContextProvider
     }
+    public onSubscriptionConnect () {
+      return new Promise((resolve) => resolve())
+    }
   }
 
   const dummyRequest = {
