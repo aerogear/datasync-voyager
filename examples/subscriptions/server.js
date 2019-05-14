@@ -45,7 +45,7 @@ const apolloServer = VoyagerServer({
 const app = express()
 apolloServer.applyMiddleware({ app })
 
-module.exports = { 
+module.exports = {
   app,
   apolloServer,
   schema: apolloServer.schema
