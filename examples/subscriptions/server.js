@@ -37,16 +37,16 @@ const resolvers = {
 }
 
 // Initialize the voyager server with our schema and context
-const apolloServer = VoyagerServer({
+const server = VoyagerServer({
   typeDefs,
   resolvers
 })
 
 const app = express()
-apolloServer.applyMiddleware({ app })
+server.applyMiddleware({ app })
 
 module.exports = {
   app,
-  apolloServer,
-  schema: apolloServer.schema
+  server,
+  schema: server.schema
 }
