@@ -50,7 +50,7 @@ test('Basic Subscricption will return a result', async t => {
     `)
 
   // necessary hack to ensure the subscription is established before sending the query
-  await sleep(1000)
+  await sleep(100)
 
   await clientWrapper.client.query({
     query: gql`
