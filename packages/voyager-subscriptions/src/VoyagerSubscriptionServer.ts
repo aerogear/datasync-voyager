@@ -8,7 +8,7 @@ import { VoyagerSubscriptionContextProvider } from './VoyagerSubscriptionContext
 /**
  * Helper function that builds a regular SubscriptionServer
  * with additional built in capabilities and integrations
- * 
+ *
  * @param options all of the regular options passed to SubscrptionServer + a SecurityService
  * @param socketOptionsOrServer options for creating a socket or an already initialized Websocket.Server
  */
