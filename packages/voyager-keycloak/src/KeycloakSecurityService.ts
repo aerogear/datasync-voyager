@@ -3,7 +3,8 @@ import session from 'express-session'
 import Keycloak from 'keycloak-connect'
 import { KeycloakAuthContextProvider } from './AuthContextProvider'
 import { schemaDirectives } from './schemaDirectives'
-import { getTokenObject } from './KeycloakToken'
+import { Token } from './KeycloakToken'
+
 import {
   SecurityService,
   ApplyAuthMiddlewareOptions,
@@ -108,10 +109,10 @@ export class KeycloakSecurityService implements SecurityService {
     }
   }
 
-  private getBearerTokenFromHeader(header: any) {
+  private getBearerTokenFromHeader(header: any, clientId?: string) {
     if (header && typeof header === 'string' && (header.indexOf('bearer ') === 0 || header.indexOf('Bearer ') === 0)) {
       const token = header.substring(7)
-      return getTokenObject(token)
+      return new Token(token, clientId)
     }
   }
 }
