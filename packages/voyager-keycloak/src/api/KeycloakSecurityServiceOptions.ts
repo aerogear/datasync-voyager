@@ -4,5 +4,6 @@ export interface Logger {
 }
 
 export interface KeycloakSecurityServiceOptions {
-  log: Logger
+  log: Logger,
+  keycloak: any
 }
