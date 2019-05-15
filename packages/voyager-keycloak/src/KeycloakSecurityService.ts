@@ -27,6 +27,9 @@ export class KeycloakSecurityService implements SecurityService {
     this.schemaDirectives = schemaDirectives
     this.authContextProvider = KeycloakAuthContextProvider
     this.log = options && options.log ? options.log : console
+    if (options && options.keycloak) {
+      this.keycloak = options.keycloak
+    }
   }
 
   public getTypeDefs(): string {
@@ -66,9 +69,11 @@ export class KeycloakSecurityService implements SecurityService {
       store: memoryStore
     }))
 
-    this.keycloak = new Keycloak({
-      store: memoryStore
-    }, this.keycloakConfig)
+    if (!this.keycloak) {
+      this.keycloak = new Keycloak({
+        store: memoryStore
+      }, this.keycloakConfig)
+    }
 
     // Install general keycloak middleware
     expressRouter.use(this.keycloak.middleware({
@@ -96,10 +101,11 @@ export class KeycloakSecurityService implements SecurityService {
                   || connectionParams.authorization
                   || connectionParams.Auth
                   || connectionParams.auth
+    const clientId = connectionParams.clientId
     if (!header) {
       throw new Error('Access Denied - missing Authorization field in connection parameters')
     }
-    const token = this.getBearerTokenFromHeader(header)
+    const token = this.getBearerTokenFromHeader(header, clientId)
     try {
       await this.keycloak.grantManager.validateToken(token, 'Bearer')
       return token
