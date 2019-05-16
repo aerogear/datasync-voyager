@@ -18,10 +18,10 @@
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
   "dependencies": {
-    "@types/ws": "^6.0.1",
+    "@types/ws": "6.0.1",
     "@aerogear/voyager-keycloak": "0.5.1",
-    "ws": "^7.0.0",
-    "subscriptions-transport-ws": "^0.9.16"
+    "ws": "7.0.0",
+    "subscriptions-transport-ws": "0.9.16"
   },
   "devDependencies": {
     "ava": "1.4.1",
