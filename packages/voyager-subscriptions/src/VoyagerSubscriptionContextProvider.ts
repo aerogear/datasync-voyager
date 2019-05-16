@@ -1,9 +1,7 @@
 // import { AuditLogger } from '@aerogear/voyager-audit'
 import { SecurityService } from '@aerogear/voyager-keycloak'
 
-import { VoyagerSubscriptionServerOptions } from './api'
-
-type OnConnectFunction = (connectionParams: any, webSocket: any, context: any) => any
+import { VoyagerSubscriptionServerOptions, OnConnectFunction } from './api'
 
 /**
  * VoyagerSubscriptionContextProvider's purpose is to provide an
@@ -16,7 +14,7 @@ type OnConnectFunction = (connectionParams: any, webSocket: any, context: any) =
  */
 export class VoyagerSubscriptionContextProvider {
 
-  public onConnectFunction: any
+  public onConnectFunction?: Function
   public securityService?: SecurityService
 
   constructor(config: VoyagerSubscriptionServerOptions) {
