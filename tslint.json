@@ -34,6 +34,9 @@
     "max-classes-per-file": [
       false
     ],
+    "ban-types": [
+      false
+    ],
     "no-console": [
       true,
       "log"
