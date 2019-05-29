@@ -13,7 +13,7 @@ export class HashObjectState implements ObjectState {
     this.hash = hashImpl
   }
 
-  public hasConflict(serverState: ObjectStateData, clientState: ObjectStateData) {
+  public hasConflict(baseState: ObjectStateData, serverState: ObjectStateData, clientState: ObjectStateData) {
     if (this.hash(serverState) !== this.hash(clientState)) {
       return true
     }
@@ -23,6 +23,15 @@ export class HashObjectState implements ObjectState {
   public nextState(currentObjectState: ObjectStateData) {
     // Hash can be calculated at any time and it is not added to object
     return currentObjectState
+  }
+
+  public merge(base: ObjectStateData, server: ObjectStateData, client: ObjectStateData) {
+    const diff = this.getDiff(base, server)
+    diff.version = server.version
+    const iteration1 = Object.assign(base, client)
+    const iteration2 = Object.assign(iteration1, diff)
+    const result = this.nextState(iteration2)
+    return result
   }
 
   public resolveOnClient(serverState: ObjectStateData, clientState: ObjectStateData) {
@@ -43,6 +52,16 @@ export class HashObjectState implements ObjectState {
     resolvedState = this.nextState(resolvedState)
 
     return new ConflictResolution(true, resolvedState, clientState)
+  }
+
+  private getDiff(baseState: ObjectStateData, serverState: ObjectStateData) {
+    const diffObject: any = {}
+    for (const key in serverState) {
+      if (serverState[key] !== baseState[key]) {
+        diffObject[key] = serverState[key]
+      }
+    }
+    return diffObject
   }
 
 }

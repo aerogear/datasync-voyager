@@ -20,7 +20,9 @@ export interface ObjectState {
    * @param context context that's coming from Apollo
    * @param info resolver info that's coming from Apollo
    */
-  hasConflict(serverState: ObjectStateData, clientState: ObjectStateData): boolean
+  hasConflict(baseState: ObjectStateData, serverState: ObjectStateData, clientState: ObjectStateData): boolean
+
+  merge(baseState: ObjectStateData, serverState: ObjectStateData, clientState: ObjectStateData): ObjectStateData
 
   /**
    *
