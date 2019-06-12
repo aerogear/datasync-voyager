@@ -21,7 +21,7 @@
     "test": "ava -v '*.test.ts' '**/*.test.ts'"
   },
   "dependencies": {
-    "apollo-server-express": "2.5.0",
+    "apollo-server-express": "2.6.3",
     "express-session": "1.16.1",
     "graphql-tools": "4.0.4",
     "joi": "14.3.1",
