@@ -24,7 +24,7 @@
     "@aerogear/voyager-tools": "^0.5.1",
     "apollo-server": "2.6.3",
     "apollo-server-express": "2.6.3",
-    "prom-client": "11.3.0"
+    "prom-client": "11.5.0"
   },
   "devDependencies": {
     "ava": "1.4.1",
