@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "apollo-server-express": "2.6.3",
-    "express-session": "1.16.1",
+    "express-session": "1.16.2",
     "graphql-tools": "4.0.4",
     "joi": "14.3.1",
     "keycloak-connect": "6.0.1",
@@ -33,7 +33,7 @@
     "@types/graphql": "14.2.0",
     "@types/joi": "14.3.3",
     "@types/keycloak-connect": "4.5.1",
-    "@types/node": "10.14.7",
+    "@types/node": "10.14.9",
     "@types/pino": "5.20.0",
     "ava": "1.4.1",
     "ts-node": "8.2.0",
