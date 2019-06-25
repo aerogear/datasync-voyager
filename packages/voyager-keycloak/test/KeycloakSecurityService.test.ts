@@ -3,6 +3,43 @@ import test from 'ava'
 import { KeycloakSecurityService } from '../src/KeycloakSecurityService'
 import { Token } from '../src/KeycloakToken';
 
+test('onSubscriptionConnect throws if no connectionParams Provided', async t => {
+  const stubKeycloak = {
+    grantManager: {
+      validateToken: (token: string, type: 'string') => {
+        return new Promise((resolve, reject) => {
+          resolve(true)
+        })
+      }
+    }
+  }
+
+  const securityService = new KeycloakSecurityService({}, { log: console, keycloak: stubKeycloak })
+
+  await t.throwsAsync(async () => {
+    await securityService.onSubscriptionConnect(null, {}, {})
+  }, 'Access Denied - missing connection parameters for Authentication')
+})
+
+test('onSubscriptionConnect throws if no connectionParams is not an object', async t => {
+  const stubKeycloak = {
+    grantManager: {
+      validateToken: (token: string, type: 'string') => {
+        return new Promise((resolve, reject) => {
+          resolve(true)
+        })
+      }
+    }
+  }
+
+  const securityService = new KeycloakSecurityService({}, { log: console, keycloak: stubKeycloak })
+  const connectionParams = 'not an object'
+
+  await t.throwsAsync(async () => {
+    await securityService.onSubscriptionConnect(connectionParams, {}, {})
+  }, 'Access Denied - missing connection parameters for Authentication')
+})
+
 test('onSubscriptionConnect throws if no Auth provided', async t => {
   const stubKeycloak = {
     grantManager: {
