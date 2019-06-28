@@ -23,21 +23,21 @@
   "dependencies": {
     "apollo-server-express": "2.6.3",
     "express-session": "1.16.2",
-    "graphql-tools": "4.0.4",
+    "graphql-tools": "4.0.5",
     "joi": "14.3.1",
     "keycloak-connect": "6.0.1",
     "pino": "5.12.6"
   },
   "devDependencies": {
-    "@types/express-session": "1.15.12",
-    "@types/graphql": "14.2.0",
+    "@types/express-session": "1.15.13",
+    "@types/graphql": "14.2.2",
     "@types/joi": "14.3.3",
     "@types/keycloak-connect": "4.5.1",
-    "@types/node": "10.14.9",
+    "@types/node": "10.14.10",
     "@types/pino": "5.20.0",
     "ava": "1.4.1",
-    "ts-node": "8.2.0",
-    "typescript": "3.5.1"
+    "ts-node": "8.3.0",
+    "typescript": "3.5.2"
   },
   "peerDependencies": {
     "graphql": "^0.12.0 || ^0.13.0 || ^14.0.0"

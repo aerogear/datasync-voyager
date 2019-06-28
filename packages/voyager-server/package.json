@@ -28,10 +28,10 @@
     "@aerogear/voyager-tools": "^0.5.1",
     "apollo-server": "2.6.3",
     "apollo-server-express": "2.6.3",
-    "graphql-tools": "4.0.4"
+    "graphql-tools": "4.0.5"
   },
   "devDependencies": {
-    "@types/node-fetch": "2.3.5",
+    "@types/node-fetch": "2.3.7",
     "apollo-cache-inmemory": "1.5.1",
     "apollo-client": "2.5.1",
     "apollo-link": "1.2.11",
@@ -40,9 +40,9 @@
     "apollo-utilities": "1.2.1",
     "ava": "1.4.1",
     "node-fetch": "2.6.0",
-    "ts-node": "8.2.0",
-    "typescript": "3.5.1",
-    "ws": "7.0.0"
+    "ts-node": "8.3.0",
+    "typescript": "3.5.2",
+    "ws": "7.0.1"
   },
   "ava": {
     "compileEnhancements": false,
