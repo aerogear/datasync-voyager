@@ -1,5 +1,18 @@
 # Configuring AMQ Online for MQTT Messaging
 
+Red Hat AMQ supports the MQTT protocol which makes it a suitable Pubsub technology for powering GraphQL subscriptions at scale. This document provides recommendations for 
+
+* Configuring AMQ Online for MQTT messaging.
+* Connecting to AMQ Online and using it as a pubsub within server applications.
+
+## Terminology
+
+[AMQ Online](https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/using_amq_online_on_openshift_container_platform/index#assembly-intro-using-messaging) is a mechanism that allows developers to consume the features of Red Hat AMQ within OpenShift.
+
+[Red Hat AMQ](https://access.redhat.com/documentation/en-us/red_hat_amq/7.3/html/introducing_red_hat_amq_7/about) provides fast, lightweight, and secure messaging for Internet-scale applications. AMQ Broker supports multiple protocols and fast message persistence.
+
+[MQTT](http://mqtt.org/) stands for MQ Telemetry Transport. It is a publish/subscribe, extremely simple and lightweight messaging protocol.
+
 ## Prerequisites
 
 * OpenShift Cluster
