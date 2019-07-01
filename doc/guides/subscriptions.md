@@ -6,15 +6,6 @@ To set up subscriptions in your voyager server, these steps must be followed.
 * Configure a Publish Subscribe Mechanism
 * Define Subscriptions in the Schema and Implement Subscription Resolvers
 
-Additional Topics
-
-* Authentication Over Websockets using Keycloak
-* Keycloak Authorization in Subscriptions
-* GraphQL MQTT PubSub setup
-* AMQ Online Setup (Showcase)
-* AMQ Online Setup (Generic)
-* Relavant links
-
 ## Configure SubscriptionServer using voyager-subscriptions
 
 A typical Voyager Server setup without subscriptions is shown below.
