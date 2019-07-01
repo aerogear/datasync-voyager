@@ -1,6 +1,6 @@
 # Subscriptions
 
-To set up subscriptions in your voyager server, these steps must be followed.
+To set up subscriptions in voyager server, these steps must be followed.
 
 * Configure SubscriptionServer using voyager-subscriptions
 * Configure a Publish Subscribe Mechanism
