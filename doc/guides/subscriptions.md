@@ -113,7 +113,7 @@ This section specifically describes how to set up an MQTT `PubSub` for powering 
 
 The [`@aerogear/graphql-mqtt-subscriptions`](https://npm.im/@aerogear/graphql-mqtt-subscriptions) module provides an `AsyncIterator` interface used for [implementing subscription resolvers](#define-subscriptions-in-the-schema-and-implement-subscription-resolvers) It allows you to connect our GraphQL server to an MQTT broker to support horizontally scalable subscriptions.
 
-## How it Works
+## Procedure
 
 * Initialize an MQTT client and pass it into this module.
 * This module provides the `PubSub` interface used to implement subscriptions.
