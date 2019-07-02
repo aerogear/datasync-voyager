@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "tsc --build tsconfig.json",
     "watch": "tsc --build tsconfig.json --watch",
-    "test": "ava '*.test.ts' '**/*.test.ts'",
+    "test": "ava -v",
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
   "author": "AeroGear Team<aerogear@googlegroups.com>",
@@ -16,6 +16,9 @@
     "extensions": [
       "ts"
     ],
+    "files": [
+			"**/*.test.ts"
+		],
     "require": [
       "ts-node/register"
     ]
