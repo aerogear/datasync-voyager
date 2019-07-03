@@ -42,6 +42,9 @@
     "extension": [
       ".ts"
     ],
+    "include": [
+      "packages/**/*.ts"
+    ],
     "exclude": [
       "**/*.test.ts"
     ]
