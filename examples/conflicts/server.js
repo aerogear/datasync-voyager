@@ -29,11 +29,11 @@ let greeting = {
 const resolvers = {
   Mutation: {
     changeGreeting: async (obj, args, context, info) => {
-      const conflictError = conflictHandler.checkForConflict(greeting, args);
+      const conflictError = conflictHandler.checkForConflict(greeting, args)
       if (conflictError) {
-        throw conflictError;
+        throw conflictError
       }
-      greeting = args;
+      greeting = args
       return greeting
     }
   },
