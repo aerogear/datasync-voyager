@@ -1,2 +1,2 @@
 // Conflict api
-export * from 'offix-server-conflicts'
+export * from 'offix-conflicts-server'

@@ -35,6 +35,6 @@
     "access": "public"
   },
   "dependencies": {
-    "offix-conflicts-server": "^0.6.0"
+    "offix-conflicts-server": "^0.6.1"
   }
 }
