@@ -21,7 +21,7 @@
     "test": "ava -v"
   },
   "dependencies": {
-    "apollo-server-express": "2.6.7",
+    "apollo-server-express": "2.6.8",
     "express-session": "1.16.2",
     "graphql-tools": "4.0.5",
     "joi": "14.3.1",
