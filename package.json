@@ -27,7 +27,7 @@
     "@types/keycloak-connect": "4.5.1",
     "@types/node": "10.14.12",
     "@types/pino": "5.20.0",
-    "ava": "2.1.0",
+    "ava": "2.2.0",
     "coveralls": "3.0.4",
     "graphql": "14.4.2",
     "lerna": "3.15.0",
@@ -36,7 +36,7 @@
     "ts-node": "8.3.0",
     "tslint": "5.18.0",
     "typedoc": "0.14.2",
-    "typescript": "3.5.2"
+    "typescript": "3.5.3"
   },
   "nyc": {
     "extension": [
