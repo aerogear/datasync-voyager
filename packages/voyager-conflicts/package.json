@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "tsc --build tsconfig.json",
     "watch": "tsc --build tsconfig.json --watch",
-    "test": "ava -v",
+    "test": "echo 'no tests for conficts package'",
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
   "author": "AeroGear Team<aerogear@googlegroups.com>",
@@ -33,5 +33,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "offix-conflicts-server": "^0.6.1"
   }
 }

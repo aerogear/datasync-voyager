@@ -1,5 +1,4 @@
 import { AuditLogger } from '@aerogear/voyager-audit'
-import { ObjectState } from '@aerogear/voyager-conflicts'
 import { SecurityService } from '@aerogear/voyager-keycloak'
 import { Metrics } from '@aerogear/voyager-metrics'
 
