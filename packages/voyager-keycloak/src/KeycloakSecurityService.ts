@@ -11,6 +11,7 @@ import {
   Logger,
   SchemaDirectives
 } from './api'
+import { Token } from 'keycloak-connect-graphql/dist/KeycloakTypings';
 
 export class KeycloakSecurityService implements SecurityService {
 
@@ -96,7 +97,7 @@ export class KeycloakSecurityService implements SecurityService {
     const keycloakSubscriptionHandler = new KeycloakSubscriptionHandler({ keycloak: this.keycloak })
     const token = await keycloakSubscriptionHandler.onSubscriptionConnect(connectionParams, webSocket, context)
     return {
-      kauth: new KeycloakSubscriptionContext(token)
+      kauth: new KeycloakSubscriptionContext(token as any) //TODO fix type
     }
   }
 }
