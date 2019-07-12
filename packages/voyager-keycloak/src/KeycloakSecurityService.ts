@@ -95,8 +95,10 @@ export class KeycloakSecurityService implements SecurityService {
   public async onSubscriptionConnect(connectionParams: any, webSocket: any, context: any): Promise<any> {
     const keycloakSubscriptionHandler = new KeycloakSubscriptionHandler({ keycloak: this.keycloak })
     const token = await keycloakSubscriptionHandler.onSubscriptionConnect(connectionParams, webSocket, context)
+    const subscriptionContext = new KeycloakSubscriptionContext(token as any) // TODO fix type
     return {
-      kauth: new KeycloakSubscriptionContext(token as any) // TODO fix type
+      kauth: subscriptionContext,
+      auth: subscriptionContext // keep backwards compatibility with voyager-server
     }
   }
 }
