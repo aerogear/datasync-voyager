@@ -21,21 +21,15 @@
     "test": "ava -v"
   },
   "dependencies": {
-    "apollo-server-express": "2.6.8",
     "express-session": "1.16.2",
-    "graphql-tools": "4.0.5",
-    "joi": "14.3.1",
     "keycloak-connect": "6.0.1",
-    "pino": "5.12.6",
     "keycloak-connect-graphql": "0.1.1-rc2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.0",
     "@types/express-session": "1.15.13",
-    "@types/graphql": "14.2.2",
-    "@types/joi": "14.3.3",
     "@types/keycloak-connect": "4.5.1",
     "@types/node": "10.14.12",
-    "@types/pino": "5.20.0",
     "ava": "2.2.0",
     "ts-node": "8.3.0",
     "typescript": "3.5.3"
@@ -49,8 +43,8 @@
       "ts"
     ],
     "files": [
-			"**/*.test.ts"
-		],
+      "**/*.test.ts"
+    ],
     "require": [
       "ts-node/register"
     ]
