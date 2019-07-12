@@ -4,6 +4,18 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Run AVA test",
+      "program": "${workspaceFolder}/node_modules/ava/profile.js",
+      "args": [
+        "${file}"
+      ],
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Basic Example",
       "program": "${workspaceFolder}/examples/basic/index.js",
       "outFiles": [

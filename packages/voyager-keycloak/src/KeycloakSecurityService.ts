@@ -1,9 +1,7 @@
 import { Router } from 'express'
 import session from 'express-session'
 import Keycloak from 'keycloak-connect'
-import { KeycloakAuthContextProvider } from './AuthContextProvider'
-import { schemaDirectives } from './schemaDirectives'
-import { Token } from './KeycloakToken'
+import { KeycloakTypeDefs, KeycloakSchemaDirectives, KeycloakContext, KeycloakSubscriptionHandler, KeycloakSubscriptionContext } from 'keycloak-connect-graphql'
 
 import {
   SecurityService,
@@ -24,8 +22,6 @@ export class KeycloakSecurityService implements SecurityService {
 
   constructor (keycloakConfig: any, options?: KeycloakSecurityServiceOptions) {
     this.keycloakConfig = keycloakConfig
-    this.schemaDirectives = schemaDirectives
-    this.authContextProvider = KeycloakAuthContextProvider
     this.log = options && options.log ? options.log : console
     if (options && options.keycloak) {
       this.keycloak = options.keycloak
@@ -33,15 +29,15 @@ export class KeycloakSecurityService implements SecurityService {
   }
 
   public getTypeDefs(): string {
-    return 'directive @hasRole(role: [String]) on FIELD | FIELD_DEFINITION'
+    return KeycloakTypeDefs
   }
 
   public getSchemaDirectives (): SchemaDirectives {
-    return this.schemaDirectives
+    return KeycloakSchemaDirectives
   }
 
   public getAuthContextProvider (): AuthContextProviderClass {
-    return this.authContextProvider
+    return KeycloakContext
   }
 
   /**
@@ -97,31 +93,10 @@ export class KeycloakSecurityService implements SecurityService {
   }
 
   public async onSubscriptionConnect(connectionParams: any, webSocket: any, context: any): Promise<any> {
-    if (!connectionParams || typeof connectionParams !== 'object') {
-      throw new Error('Access Denied - missing connection parameters for Authentication')
-    }
-    const header = connectionParams.Authorization
-                  || connectionParams.authorization
-                  || connectionParams.Auth
-                  || connectionParams.auth
-    const clientId = connectionParams.clientId
-    if (!header) {
-      throw new Error('Access Denied - missing Authorization field in connection parameters')
-    }
-    const token = this.getBearerTokenFromHeader(header, clientId)
-    try {
-      await this.keycloak.grantManager.validateToken(token, 'Bearer')
-      return token
-    } catch (e) {
-      this.log.error(`Error validating token from connectionParam ${header}\n${e}`)
-      throw new Error(`Access Denied - ${e}`)
-    }
-  }
-
-  private getBearerTokenFromHeader(header: any, clientId?: string) {
-    if (header && typeof header === 'string' && (header.indexOf('bearer ') === 0 || header.indexOf('Bearer ') === 0)) {
-      const token = header.substring(7)
-      return new Token(token, clientId)
+    const keycloakSubscriptionHandler = new KeycloakSubscriptionHandler({ keycloak: this.keycloak })
+    const token = await keycloakSubscriptionHandler.onSubscriptionConnect(connectionParams, webSocket, context)
+    return {
+      kauth: new KeycloakSubscriptionContext(token)
     }
   }
 }

@@ -1,7 +1,6 @@
 import test from 'ava'
 
 import { KeycloakSecurityService } from '../src/KeycloakSecurityService'
-import { Token } from '../src/KeycloakToken';
 
 test('onSubscriptionConnect throws if no connectionParams Provided', async t => {
   const stubKeycloak = {
@@ -76,7 +75,7 @@ test('onSubscriptionConnect returns a token Object if the keycloak library consi
   const connectionParams = { Authorization: tokenString }
 
   const token = await securityService.onSubscriptionConnect(connectionParams, {}, {})
-  t.truthy(token instanceof Token)
+  t.truthy(token)
 })
 
 test('the token object will have hasRole, hasRealmRole and hasPermissions if the', async t => {
@@ -97,9 +96,8 @@ test('the token object will have hasRole, hasRealmRole and hasPermissions if the
   const securityService = new KeycloakSecurityService({}, { log: console, keycloak: stubKeycloak })
   const connectionParams = { Authorization: tokenString, clientId: 'voyager-testing' }
 
-  const token: Token = await securityService.onSubscriptionConnect(connectionParams, {}, {})
-  t.truthy(token instanceof Token)
-  t.truthy(token.hasRole('tester'))
+  const context = await securityService.onSubscriptionConnect(connectionParams, {}, {})
+  t.truthy(context.kauth.accessToken.hasRole('tester'))
 })
 
 test('If the keycloak token validation fails, then onSubscriptionConnect will throw', async t => {
