@@ -61,10 +61,14 @@ export class ApolloVoyagerContextProvider {
   }
 
   private getDefaultContext({ req }: { req: IncomingMessage }): VoyagerContext {
+    const authContextProvider = new this.authContextProvider({ req })
     const defaultContext: VoyagerContext = {
       request: req,
-      auth: new this.authContextProvider({ req }),
+      auth: authContextProvider,
       auditLog: this.auditLogger.auditLog
+    }
+    if (this.authContextProvider.contextKey) {
+      defaultContext[this.authContextProvider.contextKey] = authContextProvider
     }
     return defaultContext
   }

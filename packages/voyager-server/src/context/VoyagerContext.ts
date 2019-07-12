@@ -9,7 +9,8 @@ import { IncomingMessage } from 'http'
  * resolverFunction(obj:any, args: Type, context: VoyagerContext)
  */
 export interface VoyagerContext {
-  request: IncomingMessage,
+  request: IncomingMessage
   auth: SecurityService
   auditLog: AuditLogMethod
+  [key: string]: any
 }
