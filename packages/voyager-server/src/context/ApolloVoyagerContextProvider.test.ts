@@ -69,6 +69,57 @@ test('Passing a custom security service will result in that service being inside
   t.deepEqual(context, expectedContext)
 })
 
+test('If AuthContextProvider has a contextKey, then the context provider instance will also exist on that key', async (t) => {
+  const { auditLogger } = new DefaultVoyagerConfig()
+  const customContextKey = 'customContextKey'
+
+  class CustomAuthContextProvider implements AuthContextProvider {
+    
+    public static contextKey = customContextKey
+
+    public isAuthenticated() {
+      return false
+    }
+    public hasRole() {
+      return false
+    }
+    public getUser() {
+      return null
+    }
+  }
+
+  class CustomSecurityService implements SecurityService {
+    public getTypeDefs () {
+      return ''
+    }
+    public getSchemaDirectives() {
+      return {}
+    }
+    public applyAuthMiddleware() {
+      return null
+    }
+    public getAuthContextProvider() {
+      return CustomAuthContextProvider
+    }
+    public onSubscriptionConnect () {
+      return new Promise((resolve) => resolve())
+    }
+  }
+
+  const dummyRequest = {
+    method: 'GET',
+    url: '/graphql'
+  }
+
+  const securityService = new CustomSecurityService()
+  const contextProvider = new ApolloVoyagerContextProvider({ securityService, auditLogger })
+
+  const contextFn = contextProvider.getContext()
+  const context = await contextFn({ req: dummyRequest })
+
+  t.deepEqual(context[customContextKey], new CustomAuthContextProvider())
+})
+
 test('Passing a custom AuditLogger class will result in a custom auditLog function in the context', async (t) => {
   t.plan(2)
 
