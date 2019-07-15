@@ -19,8 +19,7 @@ test('if a Security Service is passed, the result of its onSubscriptionConnect w
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: expectedValue }
-  t.deepEqual(result, expectedResult)
+  t.deepEqual(result, expectedValue)
 })
 
 test('if a Security Service\'s onSubscriptionConnect rejects, getOnConnect() will throw', async (t) => {
@@ -63,7 +62,7 @@ test('the framework provided context is merged with the result from onConnect', 
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: { hello: 'world' }, foo: 'bar' }
+  const expectedResult = { hello: 'world', foo: 'bar' }
   t.deepEqual(result, expectedResult)
 })
 
@@ -100,7 +99,7 @@ test('onConnect can be an async function', async (t) => {
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: { hello: 'world' }, foo: 'bar' }
+  const expectedResult = { hello: 'world', foo: 'bar' }
   t.deepEqual(result, expectedResult)
 })
 
@@ -122,7 +121,7 @@ test('onConnect can return a promise', async (t) => {
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: { hello: 'world' }, foo: 'bar' }
+  const expectedResult = { hello: 'world', foo: 'bar' }
   t.deepEqual(result, expectedResult)
 })
 
@@ -166,7 +165,7 @@ test('onConnect can return undefined', async (t) => {
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: { hello: 'world' } }
+  const expectedResult = { hello: 'world' }
   t.deepEqual(result, expectedResult)
 })
 
@@ -183,6 +182,7 @@ test('VoyagerSubscriptionContextProvider constructor throws if onConnect is not 
   const securityService = new CustomSecurityService()
 
   t.throws(() => {
+    //@ts-ignore
     new VoyagerSubscriptionContextProvider({ securityService, onConnect })
   }, 'Invalid SubscriptionServer Config - onConnect must be a function')
 })
@@ -196,7 +196,7 @@ test('onConnect will override properties provided by default', async (t) => {
   }
 
   const onConnect = function() {
-    return { auth: 'myCustomAuth' , foo: 'bar'}
+    return { hello: 'universe' , foo: 'bar'}
   }
   
   const securityService = new CustomSecurityService()
@@ -205,7 +205,7 @@ test('onConnect will override properties provided by default', async (t) => {
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: 'myCustomAuth', foo: 'bar' }
+  const expectedResult = { hello: 'universe', foo: 'bar' }
   t.deepEqual(result, expectedResult)
 })
 
@@ -227,7 +227,7 @@ test('onConnect can return non object values, but they won\'t be in the combined
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: { hello: 'world' }}
+  const expectedResult = { hello: 'world' }
   t.deepEqual(result, expectedResult)
 })
 
@@ -252,6 +252,6 @@ test('onConnect can return arrays and they will be destructured into the combine
   const contextFn = contextProvider.getOnConnectFunction()
   const result = await contextFn({}, {}, {})
 
-  const expectedResult = { auth: { hello: 'world' }, 0: a, 1: b, 2: c }
+  const expectedResult = { hello: 'world', 0: a, 1: b, 2: c }
   t.deepEqual(result, expectedResult)
 })
