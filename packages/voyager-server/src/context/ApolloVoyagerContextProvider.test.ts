@@ -74,7 +74,6 @@ test('If AuthContextProvider has a contextKey, then the context provider instanc
   const customContextKey = 'customContextKey'
 
   class CustomAuthContextProvider implements AuthContextProvider {
-    
     public static contextKey = customContextKey
 
     public isAuthenticated() {
