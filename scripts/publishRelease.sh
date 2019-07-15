@@ -4,6 +4,7 @@
 TAG=$TAG
 
 RELEASE_SYNTAX='^[0-9]+\.[0-9]+\.[0-9]+$'
+MASTER_PRERELEASE_SYNTAX='^[0-9]+\.[0-9]+\.[0-9]+-dev\..+$'
 PRERELEASE_SYNTAX='^[0-9]+\.[0-9]+\.[0-9]+(-.+)+$'
 
 if [ ! "$CI" = true ]; then
@@ -16,6 +17,9 @@ fi
 if [[ "$(echo $TAG | grep -E $RELEASE_SYNTAX)" == "$TAG" ]]; then
   echo "publishing a new release: $TAG"
   lerna --no-private exec npm publish
+elif [[ "$(echo $TAG | grep -E $MASTER_PRERELEASE_SYNTAX)" == "$TAG" ]]; then
+  echo "publishing a new master pre release: $TAG"
+  lerna --no-private exec "npm publish --tag dev"
 elif [[ "$(echo $TAG | grep -E $PRERELEASE_SYNTAX)" == "$TAG" ]]; then
   echo "publishing a new pre release: $TAG"
   lerna --no-private exec "npm publish --tag next"
