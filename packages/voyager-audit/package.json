@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/voyager-audit",
-  "version": "0.5.1",
+  "version": "0.7.0",
   "description": "Adds audit logging capabilities to Apollo Voyager Server.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@aerogear/voyager-tools": "^0.5.1",
+    "@aerogear/voyager-tools": "^0.7.0",
     "graphql-tools": "4.0.5",
     "pino": "5.12.6"
   },
@@ -40,8 +40,8 @@
       "ts"
     ],
     "files": [
-			"**/*.test.ts"
-		],
+      "**/*.test.ts"
+    ],
     "require": [
       "ts-node/register"
     ]
