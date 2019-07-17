@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/voyager-conflicts",
-  "version": "0.5.1",
+  "version": "0.7.0",
   "description": "A package to provide conflict handler framework for GraphQL server",
   "main": "dist/index.js",
   "scripts": {
@@ -17,8 +17,8 @@
       "ts"
     ],
     "files": [
-			"**/*.test.ts"
-		],
+      "**/*.test.ts"
+    ],
     "require": [
       "ts-node/register"
     ]

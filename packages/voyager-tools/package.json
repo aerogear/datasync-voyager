@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/voyager-tools",
-  "version": "0.5.1",
+  "version": "0.7.0",
   "description": "Tooling library used across Apollo Voyager Server modules.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
@@ -34,8 +34,8 @@
       "ts"
     ],
     "files": [
-			"**/*.test.ts"
-		],
+      "**/*.test.ts"
+    ],
     "require": [
       "ts-node/register"
     ]
