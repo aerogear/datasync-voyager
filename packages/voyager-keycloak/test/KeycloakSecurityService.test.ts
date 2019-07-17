@@ -4,6 +4,9 @@ import { KeycloakSecurityService } from '../src/KeycloakSecurityService'
 
 test('onSubscriptionConnect throws if no connectionParams Provided', async t => {
   const stubKeycloak = {
+    config: {
+      clientId: 'voyager-testing',
+    },
     grantManager: {
       validateToken: (token: string, type: 'string') => {
         return new Promise((resolve, reject) => {
@@ -22,6 +25,9 @@ test('onSubscriptionConnect throws if no connectionParams Provided', async t => 
 
 test('onSubscriptionConnect throws if no connectionParams is not an object', async t => {
   const stubKeycloak = {
+    config: {
+      clientId: 'voyager-testing',
+    },
     grantManager: {
       validateToken: (token: string, type: 'string') => {
         return new Promise((resolve, reject) => {
@@ -41,6 +47,9 @@ test('onSubscriptionConnect throws if no connectionParams is not an object', asy
 
 test('onSubscriptionConnect throws if no Auth provided', async t => {
   const stubKeycloak = {
+    config: {
+      clientId: 'voyager-testing',
+    },
     grantManager: {
       validateToken: (token: string, type: 'string') => {
         return new Promise((resolve, reject) => {
@@ -60,6 +69,9 @@ test('onSubscriptionConnect throws if no Auth provided', async t => {
 
 test('onSubscriptionConnect returns a token Object if the keycloak library considers it valid', async t => {
   const stubKeycloak = {
+    config: {
+      clientId: 'voyager-testing',
+    },
     grantManager: {
       validateToken: (token: string, type: 'string') => {
         return new Promise((resolve, reject) => {
@@ -80,6 +92,9 @@ test('onSubscriptionConnect returns a token Object if the keycloak library consi
 
 test('the token object will have hasRole, hasRealmRole and hasPermissions if the', async t => {
   const stubKeycloak = {
+    config: {
+      clientId: 'voyager-testing',
+    },
     grantManager: {
       validateToken: (token: string, type: 'string') => {
         return new Promise((resolve, reject) => {
@@ -103,6 +118,9 @@ test('the token object will have hasRole, hasRealmRole and hasPermissions if the
 test('If the keycloak token validation fails, then onSubscriptionConnect will throw', async t => {
   const errorMsg = 'token is invalid'
   const stubKeycloak = {
+    config: {
+      clientId: 'voyager-testing',
+    },
     grantManager: {
       validateToken: (token: string, type: 'string') => {
         return new Promise((resolve, reject) => {
