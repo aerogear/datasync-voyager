@@ -5,7 +5,7 @@ about: Create a report to help us improve
 ---
 
 <!--
-Thank you for reporting a possible bug in Apollo Voyager Server
+Thank you for reporting a possible bug in Voyager Server
 
 Please fill in as much of the template below as you can.
 

@@ -1,7 +1,7 @@
 {
   "name": "@aerogear/voyager-server",
   "version": "0.7.0",
-  "description": "The core Apollo Voyager Server library.",
+  "description": "The core Voyager Server library.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
   "repository": {

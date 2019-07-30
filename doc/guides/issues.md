@@ -6,11 +6,11 @@ The AeroGear team tracks issues for all of the AeroGear projects in the [AeroGea
 
 ## GitHub
 
-We understand that for some people, JIRA can be a barrier to entry for creating issues and contributing in general. The maintainers of the Apollo Voyager Server welcome issues created in GitHub. Feel free to [Create an Issue](https://github.com/aerogear/voyager-server/issues/new) and select from one of our issue templates. We will do our best to triage these issues in GitHub.
+We understand that for some people, JIRA can be a barrier to entry for creating issues and contributing in general. The maintainers of the Voyager Server welcome issues created in GitHub. Feel free to [Create an Issue](https://github.com/aerogear/voyager-server/issues/new) and select from one of our issue templates. We will do our best to triage these issues in GitHub.
 
 ## Asking for Help
 
-If you have a question about Apollo Voyager Server that is not a bug report or feature
+If you have a question about Voyager Server that is not a bug report or feature
 request, feel free to [create an issue using the help issue template](https://github.com/aerogear/voyager-server/issues/new?template=3-help.md).
 
 You can also reach the aerogear team at [#aerogear](ircs://chat.freenode.net:6697/aerogear) on [Freenode IRC](https://freenode.net/) or the 

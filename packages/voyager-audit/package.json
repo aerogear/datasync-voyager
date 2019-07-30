@@ -1,7 +1,7 @@
 {
   "name": "@aerogear/voyager-audit",
   "version": "0.7.0",
-  "description": "Adds audit logging capabilities to Apollo Voyager Server.",
+  "description": "Adds audit logging capabilities to Voyager Server.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
   "license": "Apache-2.0",
