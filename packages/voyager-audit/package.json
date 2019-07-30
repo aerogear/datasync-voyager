@@ -23,7 +23,7 @@
   "dependencies": {
     "@aerogear/voyager-tools": "^0.7.0",
     "graphql-tools": "4.0.5",
-    "pino": "5.12.6"
+    "pino": "5.13.1"
   },
   "devDependencies": {
     "@types/pino": "5.20.0",
