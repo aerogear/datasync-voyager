@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/voyager-subscriptions",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Helper for building a GraphQL SubscriptionServer with additional capabilities and integrations",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
@@ -18,7 +18,7 @@
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
   "dependencies": {
-    "@aerogear/voyager-keycloak": "^0.7.0",
+    "@aerogear/voyager-keycloak": "^0.7.1",
     "@types/ws": "6.0.1",
     "subscriptions-transport-ws": "0.9.16",
     "ws": "7.1.1"
