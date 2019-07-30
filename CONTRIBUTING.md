@@ -1,4 +1,4 @@
-# Contributing to Apollo Voyager Server
+# Contributing to Voyager Server
 
 ## Issues
 
@@ -12,6 +12,6 @@
 
 ## Code of Conduct
 
-The Apollo Voyager Server project has a
+The Voyager Server project has a
 [Code of Conduct](./CODE_OF_CONDUCT.md)
 to which all contributors must adhere.

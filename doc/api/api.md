@@ -1,6 +1,6 @@
-### Apollo Voyager Server API Documentation
+### Voyager Server API Documentation
 
-This API reference links to the individual API docs for each package in the Apollo Voyager Server Framework.
+This API reference links to the individual API docs for each package in the Voyager Server Framework.
 
 * [voyager-server]
 * voyager-audit

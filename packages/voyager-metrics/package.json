@@ -1,7 +1,7 @@
 {
   "name": "@aerogear/voyager-metrics",
   "version": "0.7.0",
-  "description": "Adds Prometheus metrics to Apollo Voyager Server.",
+  "description": "Adds Prometheus metrics to Voyager Server.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
   "repository": {
