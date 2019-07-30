@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/voyager-metrics",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Adds Prometheus metrics to Voyager Server.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
@@ -21,7 +21,7 @@
     "test": "ava -v"
   },
   "dependencies": {
-    "@aerogear/voyager-tools": "^0.7.0",
+    "@aerogear/voyager-tools": "^0.7.1",
     "apollo-server": "2.8.0",
     "apollo-server-express": "2.8.0",
     "prom-client": "11.5.3"
