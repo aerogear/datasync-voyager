@@ -1,5 +1,11 @@
 ## Basic Example
 
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
+
+## Running the Example
+
 `basic/index.js` is the simplest example of how to use the `voyager-server` framework.
 
 ```

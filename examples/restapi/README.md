@@ -1,5 +1,11 @@
 ## External REST API Integration Example
 
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
+
+## Running the Example
+
 Using GraphQL it's possible to write resolvers that call some other APIs.
 
 ```js

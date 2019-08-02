@@ -1,5 +1,11 @@
 ## Metrics Example
 
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
+
+## Running the Example
+
 `metrics/index.js` is the example of how to use metrics feature with the `voyager-server` framework.
 
 ```

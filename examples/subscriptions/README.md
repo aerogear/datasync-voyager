@@ -1,5 +1,11 @@
 ## Subscriptions
 
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
+
+## Running the Example
+
 `subscriptions/index.js` is the simplest example of how to use the `@aerogear/voyager-subscriptions` module to set up subscriptions in a server.
 
 ```
