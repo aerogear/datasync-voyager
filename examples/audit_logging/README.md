@@ -1,5 +1,11 @@
 ## Audit Logging Example
 
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
+
+## Running the Example
+
 `audit_logging/index.js` is the example of how to use audit logging feature with the `voyager-server` framework.
 
 ```

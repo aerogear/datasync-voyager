@@ -1,11 +1,16 @@
 ## Keycloak Example
 
+
 `keycloak/index.js` shows how we can use the `KeycloakSecurityService` from `voyager-keycloak` to protect our app with Keycloak.
 
 This example shows
 
 * How to set up authentication on the `/graphql` endpoint
 * How to add role based access control on a Schema level using the `@hasRole` directive.
+
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
 
 ### Keycloak Setup
 

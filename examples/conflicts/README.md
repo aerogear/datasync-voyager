@@ -2,7 +2,11 @@
 
 This example demonstrates how to use the `@aerogear/voyager-conflicts` package to detect and handle data conflicts within the resolver functions.
 
-### Running Example
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
+
+## Running the Example
 
 ```
 $ node ./conflicts/index.js

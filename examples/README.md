@@ -2,6 +2,10 @@
 
 Set of example applications that show how the AeroGear Voyager Server can be used.
 
+## Prerequisites
+
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../doc/guides/local-development.md) guide.
+
 ## Examples
 
 * [Basic Example Application](./basic) - This typical hello world example shows how to set up Voyager Server.
@@ -9,6 +13,4 @@ Set of example applications that show how the AeroGear Voyager Server can be use
 * [Conflict example](./conflicts) - Conflict handling example
 * [External REST API integration example](./restapi) - This example shows GraphQL integration with another API
 
-## Running
 
-If you have run the `npm run bootstrap` command, the dependencies should already be installed.
