@@ -15,7 +15,7 @@ The Voyager framework has a small ecosystem of components for building GraphQL b
 
 ### Client
 
-* [https://www.npmjs.com/package/@aerogear/voyager-client](voyager-client) - JavaScript Client Library for building applications with Offline Capabilities
+* [voyager-client](https://www.npmjs.com/package/@aerogear/voyager-client) - JavaScript Client Library for building applications with Offline Capabilities
 
 ### Server
 
