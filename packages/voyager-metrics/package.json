@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@aerogear/voyager-tools": "^0.7.1",
-    "apollo-server": "2.8.0",
-    "apollo-server-express": "2.8.0",
+    "apollo-server": "2.8.2",
+    "apollo-server-express": "2.8.2",
     "prom-client": "11.5.3"
   },
   "devDependencies": {
