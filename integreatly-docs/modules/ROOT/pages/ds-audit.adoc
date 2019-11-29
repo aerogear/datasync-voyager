@@ -1,0 +1,14 @@
+// tag::excludeDownstream[]
+include::_partials/attributes.adoc[]
+// end::excludeDownstream[]
+
+
+[id='audit_{context}']
+= Enabling audit logs and viewing reports
+:page-partial:
+:toc:
+
+include::_partials/data-sync/server-audit-logs.adoc[leveloffset=+1]
+
+[#sync-js-client-audit-logs]
+include::_partials/data-sync/js-client-audit-logs.adoc[leveloffset=+1]

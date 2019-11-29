@@ -1,0 +1,23 @@
+[id="conflict-resolution-introduction"]
+
+= Introduction
+
+Typically, mobile apps allow users to modify data while offline, which results in conflicts. 
+A *conflict* occurs when two or more users try to modify the same data.
+
+For example, a user modifies a record while offline, and another user deletes that record at the same time. 
+The system needs to resolve the conflicting data.
+
+Conflict resolution can be handled in two phases:
+
+* *Conflict detection* is the ability of an application to detect the possibility of incorrect data being stored.
+
+* *Conflict resolution* is the process of ensuring that the correct data is stored.
+
+With {org-name} Data Sync:
+
+* You implement conflict detection exclusively in the code associated with mutations.
+
+* The {sync-server} module provides conflict detection on the server side.
+
+* The {sync-client} module provides conflict resolution on the client side.

@@ -1,0 +1,116 @@
+[id="server-create-a-graphql-schema-for-an-existing-data-source-{context}"]
+= Create a GraphQL schema for an existing data source schema.
+
+Create a GraphQL schema for an existing data source schema.
+
+.Prerequisites
+
+* link:https://github.com/jstaffor/mobile-docs/blob/master/modules/ROOT/pages/_partials/sync/server-getting-started.adoc[Getting Started with Hello World Data Sync].
+* You are familiar with Data Sync Server operations, for example, stopping and starting Data Sync Server.
+
+.Procedure
+
+. If the Data Sync Server is running, stop it.
++
+. Edit the `index.js` file and replace its contents with the following content:
++
+[source,javascript]
+----
+const express = require('express')
+//Include our server libraries
+const { VoyagerServer, gql } = require('@aerogear/voyager-server')
+
+// Stub that reflects data source mapping
+const employees = [{employee_id: 1, employee_name: "joe", cateory_id: 1 }, {employee_id: 2, employee_name: "john", cateory_id: 2}];
+
+const categories = [{category_id: 1, employee_type:"Manager", security_clearance: 1}, {category_id: 2, employee_type:"Associate", security_clearance: 2}];
+
+//GraphQL schema for mapping to data source mapping
+const typeDefs = gql`
+  type Employee {
+      employee_id: ID!,
+      employee_name: String!
+      category: Category
+  }
+  type Category {
+      category_id: ID!,
+      employee_type: String!,
+      security_clearance: ID!
+  }
+  type Query {
+    listEmployees: [Employee]
+  }
+`
+
+//Create the resolvers for your schema
+const resolvers = {
+  Query: {
+    listEmployees: (obj, args, context, info) => {
+      return employees;
+    }
+  },
+  Employee: {
+    category(employee) {
+        return filter(categories, {category_id: employee.cateory_id});
+    }
+  }
+}
+
+//Initialize the library with your GraphQL information
+const server = VoyagerServer({
+  typeDefs,
+  resolvers
+})
+
+//Connect the server to express
+const app = express()
+server.applyMiddleware({ app })
+
+app.listen(4000, () =>
+  console.log(`🚀 Server ready at http://localhost:4000/graphql`)
+)
+----
++
+. Start the server.
++
+. Open an internet browser and browse to `http://localhost:4000/graphql`.
++
+. To list Employees, execute the following command in the GraphQL window:
++
+[source,javascript]
+----
+{
+  listEmployees
+  {
+    employee_id,
+    employee_name,
+  }
+}
+----
+
+.Verification steps
+
+For the example above, the output should be:
+
+[source,javascript]
+----
+{
+  "data": {
+    "listEmployees": [
+      {
+        "employee_id": "1",
+        "employee_name": "joe"
+      },
+      {
+        "employee_id": "2",
+        "employee_name": "john"
+      }
+    ]
+  }
+}
+----
+
+.Additional resources
+
+* For more information about Mutations, Queries and Input Types, please see link:https://graphql.org/graphql-js/mutations-and-input-types/[Mutations and Input Types].
+* For more information about Resolver Maps, see link:https://www.apollographql.com/docs/graphql-tools/resolvers#resolver-map[Resolver Maps].

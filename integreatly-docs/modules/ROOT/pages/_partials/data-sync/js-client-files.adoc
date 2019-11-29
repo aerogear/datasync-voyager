@@ -1,0 +1,83 @@
+= Implementing file upload on the client
+
+{sync-client} provides support for uploading binary data along with the GraphQL queries.
+The binary upload implementation uses the `apollo-upload-client` package built by the Apollo community.
+
+== Introduction
+
+The upload functionality uses the GraphQL multipart form requests specification.
+The File upload needs to be implemented on both server and client:
+
+1. On the client HTML FileList objects are mapped into a mutation and sent to the server in a multipart request.
+
+2. On the server: The multipart request is handled. The server processes it and provides an upload argument to a resolver.
+In the resolver function, the upload promise resolves an object.
+
+NOTE: File upload is based on link:https://github.com/jaydenseric/graphql-multipart-request-spec[graphql-multipart-request-spec].
+
+== Enabling File Upload
+
+File upload feature needs to be enabled by passing `fileUpload` flag to config object:
+
+[source, javascript]
+----
+
+const config = {
+  ...
+  fileUpload: true
+  ...
+};
+
+//create a new client
+----
+
+= Uploading Files from GraphQL
+
+File upload capability adds a new GraphQL scalar `Upload` that can be used for mutations that operate on binary data.
+The `Upload` scalar maps html `FileList` HTML5 object in GraphQL schemas.
+The first step required to work with binary uploads is to write mutation that will contain `Upload` scalar.
+The following example demonstrates how to upload a profile picture:
+
+[source, javascript]
+----
+import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo'
+
+export const UPLOAD_PROFILE = gql`
+mutation changeProfilePicture($file: Upload!) {
+  changeProfilePicture(file: $file) {
+    filename
+    mimetype
+    encoding
+  }
+}
+`;
+----
+
+
+== Executing mutations
+
+The `Upload` scalar will be mapped  to object returned from HTML file input.
+
+The following example shows file upload in a React application.
+
+
+[source, javascript]
+----
+
+const uploadOneFile = () => {
+  return (
+    <Mutation mutation={UPLOAD_PROFILE}>
+      {uploadFile => (
+        <input
+        type="file"
+        required
+        onChange={({ target: { validity, files: [file] } }) =>
+          validity.valid && uploadFile({ variables: { file } });
+        }
+       />
+      )}
+    </Mutation>
+  );
+};
+----

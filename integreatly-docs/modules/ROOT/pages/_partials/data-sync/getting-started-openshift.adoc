@@ -1,0 +1,43 @@
+.Prerequisites
+* You have Docker installed on your local machine.
+* You have access to an OpenShift cluster with the Service Catalog.
+* You have completed the server getting started guide.
+
+= Overview
+
+To connect your Data Sync server and client to other services, you need to run your application in OpenShift.  Data Sync provides a service catalog item to help with this.
+
+Data Sync requires your server application to be packaged as a Docker formatted container and published to a public respository such as link:https://hub.docker.com/[Docker hub].
+
+[#building-and-publishing-the-container]
+= Building and publishing the {sync-service} server container
+
+To build a server into a container, create a `Dockerfile` in the project's directory.  This container will need to include your server source code, its dependencies, and be configured to execute your server.
+
+As an example:
+
+[source,dockerfile]
+----
+FROM node:10
+WORKDIR /usr/src/app
+# copy Node.js specific files
+COPY package*.json ./
+# copy application source file to the workdir
+COPY index.js .
+RUN npm install
+# TCP port that application is listening on
+EXPOSE 4000
+CMD [ "node", "index.js" ]
+----
+
+Build the Docker container and tag it:
+[source,bash]
+----
+$ docker build . --tag  <your-repo>/<container-name>
+----
+
+Push your container to Dockerhub's repository:
+[source,bash]
+----
+$ docker push <your-repo>/<container-name>
+----

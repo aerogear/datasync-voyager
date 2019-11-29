@@ -1,0 +1,273 @@
+[id="server-deploying-a-data-sync-server-on-openshfit-{context}"]
+= Deploying a Data Sync server on OpenShift
+
+This section describes how to deploy an app built using the Data Sync framework to OpenShift.
+The app is built from source code. For more information, see https://github.com/aerogear/voyager-server[Apollo Voyager Server].
+
+For this procedure, an example app is deployed to an OpenShift environment.
+For more information, see xref:server-getting-started-with-an-example-data-source-{context}[Getting started with an example data source].
+
+.Prerequisites
+
+* You have a running OpenShift environment.
+* You have forked the link:https://github.com/aerogear/voyager-server[Apollo Voyager Server] and the forked repo must be public.
+* You understand `git`.
+
+.Procedure
+
+. If the {sync-server} is running, stop it.
++
+. Copy the contents from `index.js` and use this code to replace the contents in `examples/basic/server.js`.
++
+. Save these changes and commit the changes to your forked github repository.
++
+. Create a blank `yaml` file locally.
++
+. Open the `yaml` file and copy the following code into the `yaml` file:
++
+[source,yaml]
+----
+
+---
+kind: Template
+apiVersion: v1
+metadata:
+  name: datasync-server-app
+  annotations:
+    openshift.io/display-name: Data Sync App
+    description: |-
+          This template allows for the deployment of the DataSync Server App from source code.
+    iconClass: icon-nodejs
+    openshift.io/provider-display-name: Red Hat, Inc.
+    openshift.io/documentation-url: https://docs.aerogear.org/aerogear/latest/data-sync.html#sync-server-openshift
+    openshift.io/support-url: https://access.redhat.com
+    template.openshift.io/bindable: 'false'
+message: 'The following service(s) have been created in your project: ${NAME}.'
+labels:
+  template: data-sync-server-app
+  app: data-sync-server-app
+objects:
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+    annotations:
+      description: Exposes and load balances the application pods
+  spec:
+    ports:
+    - name: http
+      port:  ${{PORT}}
+      targetPort:  ${{PORT}}
+    selector:
+      name: "${NAME}"
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+  spec:
+    host: "${APPLICATION_DOMAIN}"
+    to:
+      kind: Service
+      name: "${NAME}"
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+    annotations:
+      description: Keeps track of changes in the application image
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+    annotations:
+      description: Defines how to build the application
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    source:
+      type: Git
+      git:
+        uri: "${SOURCE_REPOSITORY_URL}"
+        ref: "${SOURCE_REPOSITORY_REF}"
+      contextDir: "${CONTEXT_DIR}"
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: "${BUILDER_IMAGE}"
+          namespace: openshift
+        env:
+        - name: NPM_MIRROR
+          value: "${NPM_MIRROR}"
+    output:
+      to:
+        kind: ImageStreamTag
+        name: "${NAME}:latest"
+    triggers:
+    - type: ImageChange
+    - type: ConfigChange
+    - type: GitHub
+      github:
+        secret: "${GITHUB_WEBHOOK_SECRET}"
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+    annotations:
+      description: Defines how to deploy the application server
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    strategy:
+      type: Rolling
+    triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - ${NAME}
+        from:
+          kind: ImageStreamTag
+          name: "${NAME}:latest"
+    - type: ConfigChange
+    replicas: 1
+    selector:
+      name: "${NAME}"
+    template:
+      metadata:
+        name: "${NAME}"
+        labels:
+          name: "${NAME}"
+      spec:
+        containers:
+        - name: "${NAME}"
+          image: " "
+          ports:
+          - containerPort:  ${{PORT}}
+          resources:
+            limits:
+              memory: "${MEMORY_LIMIT}"
+          env: []
+parameters:
+- name: NAME
+  displayName: Name
+  description: The name assigned to all of the frontend objects defined in this template.
+  required: true
+  value: data-sync-app
+- name: MEMORY_LIMIT
+  displayName: Memory Limit
+  description: Maximum amount of memory the container can use.
+  required: true
+  value: 512Mi
+- name: SOURCE_REPOSITORY_URL
+  displayName: Git Repository URL
+  description: The URL of the repository with your application source code.
+  required: true
+  value: 'https://github.com/aerogear/voyager-server'
+- name: BUILDER_IMAGE
+  displayName: S2I Builder Image
+  description: The S2I builder image to use when building this application
+  required: true
+  value: nodejs:10
+- name: SOURCE_REPOSITORY_REF
+  displayName: Git Reference
+  description: Set this to a branch name, tag or other ref of your repository if you
+    are not using the default branch.
+- name: CONTEXT_DIR
+  displayName: Context Directory
+  description: Set this to the relative path to your project if it is not in the root
+    of your repository.
+  value: 'examples'
+- name: PORT
+  displayName: Service port
+  description: Port number used by application
+  value: '4000'
+- name: APPLICATION_DOMAIN
+  displayName: Application Hostname
+  description: The exposed hostname that will route to the Node.js service, if left
+    blank a value will be defaulted.
+  value: ''
+- name: GITHUB_WEBHOOK_SECRET
+  displayName: GitHub Webhook Secret
+  description: Github trigger secret.  A difficult to guess string encoded as part
+    of the webhook URL.  Not encrypted.
+  generate: expression
+  from: "[a-zA-Z0-9]{40}"
+- name: GENERIC_WEBHOOK_SECRET
+  displayName: Generic Webhook Secret
+  description: A secret string used to configure the Generic webhook.
+  generate: expression
+  from: "[a-zA-Z0-9]{40}"
+- name: NPM_MIRROR
+  displayName: Custom NPM Mirror URL
+  description: The custom NPM mirror URL
+  value: ''
+----
++
+. Replace the value `https://github.com/aerogear/voyager-server` with the URL for your github repo, and save the file.
++
+. Log in to the environment and browse to a project.
++
+. Click *Add to Project > Import YAML/JSON* to open a screen that allows the user to input raw `yaml` code.
++
+. Copy the contents from the local `yaml` file and paste it into the input box (that was opened in the point above).
++
+. Click *Create* and then *Continue*.
++
+. Review the information and click *Create*.
++
+Note: The value for the _Git Repository URL_ should match the URL for your github repo.
++
+. Once your application is created, click *Close*.
+
+.Verification steps
+
+. Click *Applications > Deployments* to display the _Deployments_ screen.
++
+. Click on the name of your application to view the deployment options.
++
+. Click *Environment* and then input `NODE_ENV` into the _Name_ field and `development` into the accompanying _Value_ field.
++
+Note: This triggers an automatic redeployment.
++
+. Browse to the _Overview_ screen and click on the URL to open your application in a browser.
++
+Note: _ok_ is displayed in the browser.
++
+. Add `qraphql` to the end of the URL to open GraphQL in the browser.
++
+. To list Employees, execute the following command in the GraphQL window:
++
+[source,javascript]
+----
+{
+  listEmployees
+  {
+    employee_id,
+    employee_name
+  }
+}
+----
++
+. The output is displayed:
+
+[source,javascript]
+----
+{
+  "data": {
+    "listEmployees": [
+      {
+        "employee_id": "1",
+        "employee_name": "joe"
+      },
+      {
+        "employee_id": "2",
+        "employee_name": "john"
+      }
+    ]
+  }
+}
+----
+
+.Additional resources
+
+* For more information about deploying to Production environments, see link:https://github.com/aerogear/datasync-deployment[DataSync Production Deployment].
+* For more information about using a private repo, see link:https://docs.openshift.com/container-platform/3.9/dev_guide/builds/build_inputs.html#source-clone-secrets[Source Clone Secrets].

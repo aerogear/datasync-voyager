@@ -1,0 +1,95 @@
+= Adding a mutation to a Data Sync client
+
+.Prerequisites
+* You have Node.js and npm installed.
+* You have completed the link:{data-sync-queries-link}[Queries section] and the server is still running.
+
+
+. Modify the client application to perform the mutation:
++
+.src/index.js
+[source,javascript]
+----
+// gql is a utility function that handles gql queries
+import gql from 'graphql-tag';
+
+import { OfflineClient } from '@aerogear/voyager-client';
+
+// connect to the local service.
+let config = {
+  httpUrl: "http://localhost:4000/graphql",
+  wsUrl: "ws://localhost:4000/graphql",
+}
+
+async function addPerson() {
+
+  // Actually create the client
+  let offlineClient = new OfflineClient(config);
+  let client = await offlineClient.init();
+
+  // Execute the mutation
+  client.mutate({
+      mutation: gql`
+       mutation {
+         post(name: "John Doe", address: "1 Red Hill") {
+           id
+         }
+       }
+       `
+    })
+    //Print the response of the query
+    .then( ({data}) => {
+      console.log(data)
+    });
+}
+
+addPerson();
+----
+
+. Build and run the client application.
+. Browse the client application and check the console output.
++
+It should include an array similar to the following:
++
+[source,json]
+----
+{
+  "data": {
+    "post": {
+      "id": "person-1"
+    }
+  }
+}
+----
++
+. Browse http://localhost:4000/graphql and enter the playground query for the addressbook. For example:
++
+[source,json]
+----
+{
+  addressBook {
+    name
+    address
+
+}
+----
++
+Results should be similar to:
++
+[source,json]
+----
+{
+  "data": {
+    "addressBook": [
+      {
+        "name": "Alex Smith",
+        "address": "1 Square Place, City"
+      },
+      {
+        "name": "John Doe",
+        "address": "1 Red Hill"
+      }
+    ]
+  }
+}
+----

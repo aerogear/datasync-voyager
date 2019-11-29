@@ -1,0 +1,18 @@
+// tag::excludeDownstream[]
+include::_partials/attributes.adoc[]
+// end::excludeDownstream[]
+
+
+[id='auth_{context}']
+= Supporting authentication and authorization in your mobile app
+:page-partial:
+:toc:
+
+
+[#sync-server-auth]
+include::_partials/data-sync/server-auth.adoc[leveloffset=+1]
+
+include::_partials/data-sync/server-auth-websockets.adoc[leveloffset=+1]
+
+[#sync-js-client-auth]
+include::_partials/data-sync/js-client-auth.adoc[leveloffset=+1]

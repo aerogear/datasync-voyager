@@ -1,0 +1,10 @@
+The link:https://github.com/aerogear/ionic-showcase[sample application] demonstrates features offered by the {sync-service} framework, including:
+
+* GraphQL Schema
+* Offline Storage
+* Conflict Resolution
+* Subscriptions
+
+//tag::excludeDownstream[]
+See the xref:showcase-apps.adoc[Showcase Apps section] for instructions about how to run it.
+//end::excludeDownstream[]

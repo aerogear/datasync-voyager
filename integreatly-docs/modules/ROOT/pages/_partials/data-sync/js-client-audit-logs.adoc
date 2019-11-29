@@ -1,0 +1,27 @@
+= Enabling audit logs on the client
+
+As described in the <<#sync-server-audit-logs, Server Audit Logs>> section, device information can be logged as part of an audit log message. To enable it:
+
+. The Cordova plugin `cordova-plugin-aerogear-metrics` has to be installed so that the device, client and app information can be collected.
+
++
+[source,bash]
+----
+cordova plugin add cordova-plugin-aerogear-metrics
+----
+
+. Set `auditLogging` to true when creating a client instance.
+
++
+[source,javascript]
+----
+import { createClient } from '@aerogear/voyager-client';
+
+const config = {
+  ...
+  auditLogging: true,
+  ...
+}
+
+return await createClient(config);
+----

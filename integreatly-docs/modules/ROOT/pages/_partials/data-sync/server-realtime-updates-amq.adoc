@@ -1,0 +1,336 @@
+= Configuring AMQ Online for MQTT Messaging
+
+Red Hat AMQ supports the MQTT protocol which makes it a suitable PubSub technology for powering GraphQL subscriptions at scale. 
+
+This section provides recommendations for
+
+* Configuring AMQ Online for MQTT messaging.
+* Connecting to AMQ Online and using it as a pubsub within server applications.
+
+.Terminology
+
+* https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/using_amq_online_on_openshift_container_platform/index#assembly-intro-using-messaging[AMQ Online] is a mechanism that allows developers to consume the features of Red Hat AMQ within OpenShift.
+
+* https://access.redhat.com/documentation/en-us/red_hat_amq/7.3/html/introducing_red_hat_amq_7/about[Red Hat AMQ] provides fast, lightweight, and secure messaging for Internet-scale applications. AMQ Broker supports multiple protocols and fast message persistence.
+
+* http://mqtt.org/[MQTT] stands for MQ Telemetry Transport. It is a publish/subscribe, extremely simple and lightweight messaging protocol.
+
+// tag::excludeDownstream[]
+.Prerequisites
+
+* OpenShift Cluster
+* AMQ Online is installed in the OpenShift cluster
+// end::excludeDownstream[]
+
+AMQ Online includes many configuration options that could address the specific needs of your application. 
+The minimum configuration steps for using AMQ Online for MQTT messaging and enabling GraphQL subscriptions are:
+
+. Create an `AddressSpace`
+. Create an `Address`
+. Create a `MessagingUser`
+
+== Creating an address space
+
+A user can request messaging resources by creating an `AddressSpace`. There are two types of address space, `standard` and `brokered`. 
+You must use the `brokered` address space for MQTT based applications. 
+
+.Procedure
+. Create an address space, for example, the following resource creates a brokered `AddressSpace`:
++
+[source,yaml,options="nowrap"]
+----
+apiVersion: enmasse.io/v1beta1
+kind: AddressSpace
+metadata:
+  name: myaddressspace
+spec:
+  type: brokered
+  plan: brokered-single-broker
+----
+
+. Create the `AddressSpace`.
++
+----
+oc create -f brokered-address-space.yaml
+----
+
+. Check the status of the address space:
++
+----
+oc get <`AddressSpace` name> -o yaml
+----
++
+The output displays information about the address space, including details required for connecting applications.
+
+.Additional Information
+
+See https://access.redhat.com/documentation/en-us/red_hat_amq/7.3/html-single/using_amq_online_on_openshift_container_platform/index#create-address-space-cli-messaging[Creating address spaces using the command line] for more information.
+
+== Creating an Address
+
+An adress is part of an `AddressSpace` and represents a destination for sending and receiving messages. 
+Use an `Address` with type `topic` to represent an MQTT topic.
+
+. Create an address definition:
++
+----
+apiVersion: enmasse.io/v1beta1
+kind: Address
+metadata:
+    name: myaddressspace.myaddress # must have the format <`AddressSpace` name>.<address name>
+spec:
+    address: myaddress
+    type: topic
+    plan: brokered-topic
+----
+
+. Create the address:
++
+----
+oc create -f topic-address.yaml
+----
+
+NOTE: See the xref:#realtime-updates-{context}[Configuring your server for real-time updates] guide for more information about using `pubsub.asyncIterator()`.
+Create an Address for each topic name passed into `pubsub.asyncIterator()`.
+
+.Additional Information
+
+See https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/using_amq_online_on_openshift_container_platform/index#create-address-cli-messaging[Creating addresses using the command line] for more information.
+
+== Creating an AMQ Online user
+
+A messaging client connects using an AMQ Online user, also known as a`MessagingUser`. 
+A `MessagingUser` specifies an authorization policy that controls which addresses can be used and the operations that can be performed on those addresses.
+
+Users are configured as `MessagingUser` resources. 
+Users can be created, deleted, read, updated, and listed.
+
+. Create a user definition:
++
+----
+apiVersion: user.enmasse.io/v1beta1
+kind: MessagingUser
+metadata:
+  name: myaddressspace.mymessaginguser # must be in the format <`AddressSpace` name>.<username>
+spec:
+  username: mymessaginguser
+  authentication:
+    type: password
+    password: cGFzc3dvcmQ= # must be Base64 encoded. Password is 'password'
+  authorization:
+    - addresses: ["*"]
+      operations: ["send", "recv"]
+----
+
+. Create the `MessagingUser`.
++
+----
+oc create -f my-messaging-user.yaml
+----
+
+An application can now connect to an AMQ Online address using this user's credentials. 
+
+For more information see the https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/using_amq_online_on_openshift_container_platform/index#con-user-model-messaging[AMQ Online User Model].
+
+= Using GraphQL MQTT PubSub with AMQ Online
+
+.Prerequisites
+
+// tag::excludeDownstream[]
+* OpenShift cluster
+* AMQ Online is installed in the OpenShift cluster
+// end::excludeDownstream[]
+
+The following AMQ Online resources are available for MQTT Applications 
+
+* AddressSpace
+* Address 
+* MessagingUser
+
+This section describes how to use https://npm.im/@aerogear/graphql-mqtt-subscriptions[`@aerogear/graphql-mqtt-subscriptions`] to connect to an AMQ Online `Address`.
+
+. Retrieve the connection details for the `AddressSpace` you want to use:
++
+----
+oc get addressspace <addressspace> -o yaml
+----
+
+. Determine which method you want to use to connect to the address:
++
+* Using the service hostname - Allows clients to connect from within the OpenShift cluster.
++
+{org-name} recommends that applications running inside OpenShift connect using the service hostname. 
+The service hostname is only accessible within the OpenShift cluster. This ensures messages routed between your application and AMQ Online stay within the OpenShift cluster and never go onto the public internet.
++
+* Using the external hostname - Allows clients to connect from outside the OpenShift cluster.
++
+The external hostname allows connections from outside the OpenShift cluster. This is useful for the following cases:
++
+** Production applications running outside of OpenShift connecting and publishing messages.
+** Quick Prototyping and local development. Create a non-production `AddressSpace`, allowing developers to connect applications from their local environments.
+
+
+
+. To connect to an AMQ Online `Address` using the service hostname
+.. Retrieve the service hostname:
++
+[source,bash]
+----
+oc get addressspace <addressspace name> -o jsonpath='{.status.endpointStatuses[?(@.name=="messaging")].serviceHost
+----
+.. Add code to create the connection, for example:
++
+[source,js]
+----
+const mqtt = require('mqtt')
+const { MQTTPubSub } = require('@aerogear/graphql-mqtt-subscriptions')
+
+const client = mqtt.connect({
+  host: '<internal host name>',
+  username: '<MessagingUser name>',
+  password: '<MessagingUser password>',
+  port: 5762,
+})
+
+const pubsub = new MQTTPubSub({ client })
+----
+
+.. To encrypt all messages between your application and the AMQ Online broker, enable TLS, for example:
++
+[source,js]
+----
+const mqtt = require('mqtt')
+const { MQTTPubSub } = require('@aerogear/graphql-mqtt-subscriptions')
+
+const host = '<internal host name>'
+
+const client = mqtt.connect({
+  host: host,
+  servername: host,
+  username: '<MessagingUser name>',
+  password: '<MessagingUser password>',
+  port: 5761,
+  protocol: 'tls',
+  rejectUnauthorized: false,
+})
+
+const pubsub = new MQTTPubSub({ client })
+----
+
+. To connect to an AMQ Online `Address` using the external hostname:
++
+NOTE: The external hostname typically accept only accept TLS connections.
+
+.. Retrieve the external hostname:
++
+[source,bash]
+----
+oc get addressspace <addressspace name> -o jsonpath='{.status.endpointStatuses[?(@.name=="messaging")].externalHost
+----
+
+.. Connect to the external hostname, for example:
++
+[source,js]
+----
+const mqtt = require('mqtt')
+const { MQTTPubSub } = require('@aerogear/graphql-mqtt-subscriptions')
+
+const host = '<internal host name>'
+
+const client = mqtt.connect({
+  host: host,
+  servername: host,
+  username: '<MessagingUser name>',
+  password: '<MessagingUser password>',
+  port: 443,
+  protocol: 'tls',
+  rejectUnauthorized: false,
+})
+
+const pubsub = new MQTTPubSub({ client })
+----
+
+. If you use TLS, note the following additional `mqtt.connect` options:
++
+* `servername` - when connecting to a message broker in OpenShift using TLS, this property must be set otherwise the connection will fail, because the messages are being routed through a proxy resulting in the client being presented with multiple certificates. By setting the `servername`, the client will use https://en.wikipedia.org/wiki/Server_Name_Indication[Server Name Indication (SNI)] to request the correct certificate as part of the TLS connection setup.
+* `protocol` - must be set to `'tls'`
+* `rejectUnauthorizated` - must be set to false, otherwise the connection will fail. This tells the client to ignore certificate errors. Again, this is needed because the client is presented with multiple certificates and one of the certificates is for a different hostname than the one being requested, which normally results in an error.
+* `port` - must be set to 5761 for service hostname or 443 for external hostname.
+
+
+
+== Using environment variables for configuration
+
+{org-name} recommends that you use environment variables for connection, for example:
+
+[source,js]
+----
+const mqtt = require('mqtt')
+const { MQTTPubSub } = require('@aerogear/graphql-mqtt-subscriptions')
+
+const host = process.env.MQTT_HOST || 'localhost'
+
+const client = mqtt.connect({
+  host: host,
+  servername: host,
+  username: process.env.MQTT_USERNAME,
+  password: process.env.MQTT_PASSWORD,
+  port: process.env.MQTT_PORT || 1883,
+  protocol: process.env.MQTT_PROTOCOL || 'mqtt',
+  rejectUnauthorized: false,
+})
+
+const pubsub = new MQTTPubSub({ client })
+----
+
+In this example, the connection options can be configured using environment variables, but sensible defaults for the `host`, `port` and `protocol` are provided for local development.
+
+== Troubleshooting MQTT Connection Issues
+
+=== Troubleshooting MQTT Events
+
+The `mqtt` module emits various events during runtime.
+It recommended to add listeners for these events for regular operation and for troubleshooting.
+
+[source,js]
+----
+client.on('connect', () => {
+  console.log('client has connected')
+})
+
+client.on('reconnect', () => {
+  console.log('client has reconnected')
+})
+
+client.on('offline', () => {
+  console.log('Client has gone offline')
+})
+
+client.on('error', (error) => {
+  console.log(`an error has occurred ${error}`)
+})
+----
+
+Read the https://www.npmjs.com/package/mqtt[`mqtt documentation`] to learn about all of the events and what causes them.
+
+=== Troubleshooting MQTT Configuration Issues
+
+If your application is experiencing connection errors, the most important thing to check is the configuration being passed into `mqtt.connect`. Because your application may run locally or in OpenShift, it may connect using internal or external hostnames, and it may or may not use TLS, it's very easy to accidentally provide the wrong configuration.
+
+The Node.js `mqtt` module does not report any errors if parameters such as `hostname` or `port` are incorrect. Instead, it will silently fail and allow your application to start without messaging capabilities.
+
+It may be necessary to handle this scenario in your application. The following workaround can be used.
+
+[source,js]
+----
+const TIMEOUT = 10 // number of seconds to wait before checking if the client is connected
+
+setTimeout(() => {
+  if (!client.connected) {
+    console.log(`client not connected after ${TIMEOUT} seconds`)
+	// process.exit(1) if you wish
+  }
+}, TIMEOUT * 1000)
+----
+
+This code can be used to detect if the MQTT client hasn't connected. This can be helpful for detecting potential configuration issues and allows your application to respond to that scenario.

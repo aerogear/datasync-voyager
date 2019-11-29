@@ -1,0 +1,21 @@
+//':context:' is a vital parameter. See: http://asciidoctor.org/docs/user-manual/#include-multiple
+[id='ref-data-sync-terminology-{context}']
+= Data Sync terminology
+
+This section describes terminology that is associated with Data Sync.
+
+.Data Sync terms
+
+GraphQL:: A query language for your API, and a server-side runtime for executing queries that use a type system. For more information, see link:https://graphql.org/learn[GraphQL].
+
+Apollo:: link:https://www.apollographql.com/[Apollo] is an implementation of GraphQL designed for the needs of product engineering teams building modern, data-driven applications.
+Apollo includes two open-source libraries, Apollo Server and Apollo Client.
+The Data Sync Framework leverages Apollo functionality.
+
+Sync Server:: The Sync Server is a framework for building Node.js based GraphQL API.
+
+Sync Client:: The Sync Client is a JavaScript client offering client side extensions and server side integration. The Sync Client can be integrated into frameworks such as React and Angular.
+
+Data sources:: Data Sync framework is typically used in conjunction with a data source for data persistence however, an app built using the Data Sync framework works without a data source.
+
+Data Sync framework:: Data Sync is a JavaScript framework that enables a developer to add the capability to synchronize data in real-time for both mobile and web clients.

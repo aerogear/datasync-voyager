@@ -1,0 +1,15 @@
+// tag::excludeDownstream[]
+include::_partials/attributes.adoc[]
+// end::excludeDownstream[]
+
+
+[id='conflict_{context}']
+= Resolving Conflicts in your Data Sync app
+:page-partial:
+:toc:
+
+include::_partials/data-sync/conflicts-introduction.adoc[leveloffset=+1]
+
+include::_partials/data-sync/server-offline-and-conflict.adoc[leveloffset=+1]
+
+include::_partials/data-sync/js-client-conflict.adoc[leveloffset=+1]

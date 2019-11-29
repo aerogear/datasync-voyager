@@ -1,0 +1,79 @@
+[id="client-mutating-a-data-sync-server-using-a-data-sync-client-{context}"]
+= Mutating a Data Sync server using a Data Sync client
+
+Build a Data Sync Server and query the mutation.
+The Data Sync Server will be running locally in this procedure.
+
+.Prerequisites
+
+* The example in xref:server-using-mutations-with-a-data-sync-server-and-a-data-sync-client-{context}[Using Mutations with a Data Sync Server] runs locally.
+* Basic knowledge of `npm`.
+
+.Procedure
+
+. Create a basic link:https://webpack.js.org/guides/getting-started/[_webpack project_] repo.
++
+. Open a terminal and navigate into the cloned project.
++
+. To add the necessary Data Sync Client javascript libraries to your basic _webpack project_, execute the following commands:
++
+[source,bash]
+----
+npm install @aerogear/voyager-client
+npm install graphql-tag
+----
++
+. Before continuing, build the project and ensure that it successfully builds by executing `npm run build`.
++
+. Replace the contents of `/src/index.js` with:
++
+[source,javascript]
+----
+// gql is a utility function that handles gql queries
+import gql from 'graphql-tag';
+
+import { OfflineClient } from '@aerogear/voyager-client';
+
+// connect to the local service.
+let config = {
+  httpUrl: "http://localhost:4000/graphql",
+  wsUrl: "ws://localhost:4000/graphql",
+}
+
+async function addPerson() {
+
+  // Actually create the client
+  let offlineClient = new OfflineClient(config);
+  let client = await offlineClient.init();
+
+  // Execute the mutation
+  client.mutate({
+      mutation: gql`
+       mutation {
+         post(name: "John Doe", address: "1 Red Hill") {
+           id
+         }
+       }
+       `
+    })
+    //Print the response of the query
+    .then( ({data}) => {
+      document.write(JSON.stringify(data))
+    });
+}
+
+addPerson();
+----
++
+. Build the project again by executing `npm run build`.
+
+.Verification steps
+
+. Ensure that link:https://github.com/aerogear/mobile-docs/blob/master/modules/ROOT/pages/_partials/data-sync/server-using-mutations-with-a-data-sync-server-and-a-data-sync-client.adoc[using Mutations with a Data Sync Server] is running.
++
+. Open `/dist/index.html` in a web browser and you should see the following content:
++
+[source,bash]
+----
+{"post":{"id":"person-1","__typename":"Person"}}
+----

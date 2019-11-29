@@ -1,0 +1,59 @@
+[id="creating-a-voyager-server-container-image-for-use-with-openshift-{context}"]
+= Creating a voyager server container image for use with OpenShift
+
+This section describes how to create a container image using a local voyager server repo.
+
+Although it is not covered in this section, you can add the Apollo Voyager Server.
+For more information, see xref:server-getting-started-with-an-example-data-source-{context}[Getting started with an example data source].
+
+.Prerequisites
+
+* You have cloned the link:https://github.com/aerogear/voyager-server[Apollo Voyager Server] locally.
+* Docker is installed and is running on your local machine. As an alternative, use `podman`, or `buildah`.
+
+.Procedure
+
+. Open a terminal and browse to the _Apollo Voyager Server_ repo on your local machine.
++
+. Create a Dockerfile, for example, `touch Dockerfile`.
++
+. Open the Dockerfile and add the following content, then save the changes:
++
+[source,dockerfile]
+----
+FROM node:10
+WORKDIR /usr/src/app
+# copy Node.js specific files
+COPY package*.json ./
+# copy application source file to the workdir
+COPY index.js .
+RUN npm install
+# TCP port that application is listening on
+EXPOSE 4000
+CMD [ "node", "index.js" ]
+----
++
+. Build the container image and tag it:
++
+[source,bash]
+----
+$ docker build -t aerogear/showcase-server:latest .
+----
++
+NOTE: Alternatively, you can use `Podman` to build a container image: `podman build -t aerogear/showcase-server:latest .`.
++
+. Once the process is complete, a success message is displayed:
+[source,bash]
+----
+$ Successfully built 6490624e298b
+$ Successfully tagged aerogear/showcase-server:latest
+----
+
+.Verification steps
+
+For the example above, to verify if a container image has been created locally, execute `docker images` in the terminal and a similar message is displayed:
+[source,bash]
+----
+REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
+aerogear/showcase-server                   latest              6490624e298b        3 hours ago         1.1GB
+----

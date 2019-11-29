@@ -1,0 +1,37 @@
+// The ID is used as an anchor for linking to the module. Avoid changing it after the module has been published to ensure existing links are not broken.
+[id="introducing-data-sync-{context}"]
+
+// The `context` attribute enables module reuse. Every module's ID includes {context}, which ensures that the module has a unique ID even if it is reused multiple times in a guide.
+= Introducing Data Sync
+
+Data Sync is a JavaScript framework that enables a developer to add real time data synchronization to both mobile and web clients.
+The Data Sync framework also provides offline capabilities that allow a client to continue operating offline and once connectivity is re-established, the client is automatically synchronized.
+An app built using the Data Sync framework typically connects to a data source for data persistence however, an app built using the Data Sync framework works without a data source.
+
+An app built using the Data Sync framework comprises of two components:
+
+* The Data Sync client is a JavaScript client offering client side extensions and server side integration. 
+The Data Sync client can be integrated into frameworks such as React and Angular.
+
+* The Data Sync server is a framework for building Node.js based GraphQL API.
+The Data Sync server offers enterprise extensions for ensuring data security, integrity, and monitoring.
+It can be integrated into existing Node.js application.
+
+The {sync-service} framework uses the link:https://www.apollographql.com/[Apollo platform] as the GraphQL implementation.
+
+.Additional resources
+
+* Real-time data synchronization across mobile and web clients.
+** Websockets allow for real-time data synchronization across multiple Data Sync clients. Data Sync clients receive updates from the Data Sync server without having to explicitly query their local data as conflict detection is handled by the Data Sync server.
+
+* A Data Sync client can perform any operation regardless of the connectivity state.
+** If network connectivity is a concern, a Data Sync client can perform any operation regardless of its connectivity state. A Data Sync client can perform the same operations when it is on-line or off-line, and this functionality ensures that you can safely use Data Sync to create business critical applications.
+
+* Offers fully customizable conflict detection and resolution to the developer.
+** Data Sync enables users to detect and resolve conflicts on the Data Sync server resulting in the seamless transmission of data to various Data Sync clients. Data Sync also allows for conflict resolution on the Data Sync client should a developer want to adopt this strategy.
+
+* Instant synchronous queries provide instant feedback for developers.
+** When a Data Sync client is on-line, instant queries allow a developer to quickly react to errors and display results to users when the operation is executed. Developers can retrieve an instant response or error from the Data Sync server however the Data Sync client must have a connection to the Data Sync server.
+
+* Flexible data sources.
+** Data Sync can connect to various data sources, for example, cloud storage, databases such as MongoDB and PostgreSQL, and existing back-end data sources.

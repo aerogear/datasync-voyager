@@ -1,0 +1,42 @@
+
+= Provisioning the {sync-service} server application as a service
+
+To provision the {service-name} mobile service:
+
+. Log into the OpenShift console.
+. Choose a project where you have previously provisioned Mobile Developer Console.
+. Select *Catalog* from the left hand menu.
++
+You can filter the catalog items to only show mobile specific items by selecting the *Mobile* tab.
+. Choose the {service-name} service.
+
+. Follow the wizard for provisioning that service.
++
+NOTE: If prompted to *Create a Binding*, choose *Do not bind at this time*.
+
+Fill in all of the required parameters for the service:
+
+image::sync-app-creation-dialog.png[Sync Application Creation Dialog]
+
+.Configuration
+[options="header"]
+|====
+|Field|Default|Description
+|Sync Application Name||Fill in name of your {sync-service} application
+|Sync Application Docker image||Fill in URL too your {sync-service} application docker image
+|Sync Application Docker image version|latest|Tag of your docker image
+|Sync Application Port||Port number that {sync-service} application is listening on
+|Sync Application metrics endpoint|/metrics|Path to the metrics endpoint (default value is recommended)
+|Sync Application GraphQL Endpoint|/graphql|Path to the GraphQL endpoint (default value is recommended)
+|Database Server Hostname||Database server hostname that is used to connect by the {sync-service}
+|Database Server Port||Database server port that is used to connect by the {sync-service}
+|Database Server Username||Database server username that is used to connect by the {sync-service}
+|Database Server Password||Database server password that is used to connect by the {sync-service}
+|Database name||Name of the database that is used to connect by the {sync-service}
+|Use SSL?|false|Use SSL connection to the SQL server
+|====
+
+Once the wizard steps are completed, navigate to the Project Overview in OpenShift to see the newly provisioned service.
+Provisioning a service may take some time.
+
+Once the provision is completed, you should be able to see it in the Mobile Developer Console: go to the Mobile Developer Console and click on any mobile client, and you should see the newly provisioned {sync-service} server in the `Unbound Services` section. If you want your client app to use the {sync-service} server, just click on `Bind To App` button and complete the wizard. Once it's bound, copy the updated `mobile-services.json` file to your client app and you can then initialise the {sync-service} client SDK.

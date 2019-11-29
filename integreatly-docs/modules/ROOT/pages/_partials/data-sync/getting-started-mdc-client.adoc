@@ -1,0 +1,89 @@
+= Connecting a Client
+
+.Prerequisites
+* You have access to an OpenShift cluster with the Service Catalog.
+* You have completed the OpenShift getting started guide.
+* You have created a mobile client and bound your data sync server.
+* You have completed the client getting started guide.
+
+Once a service is bound to a mobile client, MDC will provide a mobile-services.json file that is used by the AeroGear client libraries to automatically configure the Data Sync client.  It is very important that you use your version of this file and not the one used in this example as system specific values will be different.
+
+== Updating the Hello World Sync Client
+
+The Hello World client application we wrote uses a hard coded server url.  We need to remove this url and instead pass the mobile-services config to the client.  We will also use the AeroGear core library to parse this file and pass that configuration to the Data Sync library.
+
+.Configure the core library with mobile-services.json
+[source, javascript]
+----
+const { init }  = require("@aerogear/app");
+
+const core = init({
+  "version": 1,
+  "namespace": "myproject",
+  "clientId": "getting-started",
+  "services": [
+    {
+      "id": "0637bfd3-33aa-11e9-968e-52540014a8c2",
+      "name": "sync-app-getting-started-getting-started",
+      "type": "sync-app",
+      "url": "https://sync-app-getting-started-myproject.192.168.42.138.nip.io/graphql",
+      "config": {
+        "websocketUrl": "wss://sync-app-getting-started-myproject.192.168.42.138.nip.io/graphql"
+      }
+    }
+  ]
+});
+----
+
+Once you have initialized the core, we can use it to configure the Data Sync client by setting the `openShiftConfig` property when we call `createClient`.
+
+.Updated data sync client
+[source,javascript]
+----
+let client = await createClient({
+    openShiftConfig:core.config
+  });
+----
+
+And now, as before, we can use the client to make queries.  A full example may look like the following code
+
+.Updated hello world index.js
+[source,javascript]
+----
+import gql from 'graphql-tag';
+const { init }  = require("@aerogear/app");
+import { createClient } from '@aerogear/voyager-client';
+
+const core = init({
+  "version": 1,
+  "namespace": "myproject",
+  "clientId": "getting-started",
+  "services": [
+    {
+      "id": "0637bfd3-33aa-11e9-968e-52540014a8c2",
+      "name": "sync-app-getting-started-getting-started",
+      "type": "sync-app",
+      "url": "https://sync-app-getting-started-myproject.192.168.42.138.nip.io/graphql",
+      "config": {
+        "websocketUrl": "wss://sync-app-getting-started-myproject.192.168.42.138.nip.io/graphql"
+      }
+    }
+  ]
+});
+
+async function helloWorld() {
+  let client = await createClient({
+    openShiftConfig:core.config
+  });
+  client.query({
+      fetchPolicy: 'network-only',
+      query: gql`{hello}`
+    })
+    .then( ({data}) => {
+      console.log(data.hello)
+    });
+}
+
+helloWorld();
+
+----

@@ -1,0 +1,102 @@
+= Monitoring a {sync-server}
+:toc:
+
+{sync-server} can expose a variety of useful metrics that can be consumed and visualised by the {metrics-service} service. (Prometheus for data collection and Grafana for Visualisation).
+
+The `@aerogear/voyager-metrics` module can be used to mount a metrics middleware, exposing a metrics endpoint that can be consumed by prometheus (default: `/metrics`).
+
+== Enabling Metrics in {sync-server}
+
+. Import the `@aerogear/voyager-metrics` module.
++
+[source,javascript]
+----
+const metrics = require('@aerogear/voyager-metrics')
+----
+
+. Apply the metrics middleware to your Express app. This will expose metrics at the given endpoint.
++
+[source,javascript]
+----
+const app = express()
+metrics.applyMetricsMiddlewares(app, { path: '/metrics' })
+----
+
+. Inject the metrics module into {sync-server}. This will ensure metrics at the GraphQL level can be exposed.
++
+[source,javascript]
+----
+const voyagerConfig = {
+  metrics
+}
+const server = VoyagerServer(apolloConfig, voyagerConfig)
+----
+
+The link:https://github.com/aerogear/voyager-server/blob/master/examples/metrics[Metrics Example Server Guide] has an example server based off the instructions above and shows all of the steps needed to get it running.
+
+// include::../metrics/monitoring-sync.adoc[leveloffset=2]
+== Monitoring a {sync-server} Application
+
+.Prerequisites
+
+* You have provisioned the {metrics-service} service.
+* You have provisioned your {sync-service} service.
+* You have enabled metrics in {sync-server}.
+
+NOTE: The {metrics-service} Service and your {sync-server} application must be provisioned in the same OpenShift project to access data.
+
+== Overview
+
+As there can be multiple {sync-server} applications in a namespace, {sync-server} application provisioning procedure creates a new Grafana dashboard for the {sync-server} application
+that is being provisioned.
+
+After the {metrics-service} Service (includes Grafana for visualization and the Prometheus monitoring system) and your {sync-server} application are provisioned,
+you should be able to see the "Data Sync Metrics - <your app name>" in the list of available dashboards (navigate to Grafana's exposed URL -> Log in ->
+Home -> Select *Data Sync Metrics - <your app name>*).
+
+=== Dashboard panel descriptions
+
+The Data Sync dashboard consists of several panels which give you an overview of the specific
+events and resources, such as memory usage, CPU usage, resolved operation count etc.
+
+The dashboard is separated into 2 section. "Client" section shows some basic metrics about the clients and users and the "Server" secion shows some metrics about the server status.
+
+Below you will find a detailed description of each panel and its values.
+
+.Singlestat Panels
+
+Singlestat panels show you the main summary of a single data series.
+
+* *CPU Usage*: CPU usage percentage of the {sync-server} application used currently.
+
+* *Memory Usage*: The amount of memory currently used by the {sync-server} application.
+
+.Graph panels
+
+Used to show how certain values change over time, e.g. the number of operations resolved.
+
+* *Unique Clients Over Time*: Overview of the number of unique clients over the selected time range. Note that a "client" is a an application installation on a device.
+  The client id is reset when the application is reinstalled on the same device.
+
+* *Unique Users Over Time*: Overview of the number of unique users over the selected time range. Note that a "user" is a user who is authenticated with the {keycloak-service}.
+
+* *Memory Usage in Time*: The amount of memory used by the {sync-server} application over time.
+
+* *CPU Usage in Time*: The percentage of CPU used by the {sync-server} application over time.
+
+* *Queries/Mutations Resolved*: Overview of the resolved queries and mutations over time.
+
+* *Resolver Timings*: Overview of the how long it took to resolve operations over time.
+
+* *Server Response Time*: Overview of the how long it took the server to respond the requests.
+
+* *Operations vs Conflicts*: Overview of the resolver executions and the conflicts happened.
+
+* *Conflicts Over Time per Operation*: Overview of the conflicts and what operation caused them.
+
+
+== Additional resources
+
+* link:http://docs.grafana.org/features/panels/singlestat/#singlestat-panel[Singlestat Panel]
+* link:http://docs.grafana.org/features/panels/graph/#graph-panel[Graph Panel]
+* link:https://grafana.com/plugins/grafana-piechart-panel[Pie Chart]

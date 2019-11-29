@@ -1,0 +1,164 @@
+[id="conflict-resolution-{context}"]
+
+= Detecting conflicts on the server
+
+A typical flow for detecting conflicts includes the following steps:
+
+. *A Mutation Occurs* - A client tries to modify or delete an object on the server using a GraphQL mutation
+. *Read the Object* - The server reads the current object that the client is trying to modify from the data source
+. *Conflict Detection* - The server compares the current object with the data sent by the client to see if there is a conflict. 
+The developer chooses how the comparison is performed.
+
+The `aerogear/voyager-conflicts` module helps developers with the *Conflict Detection* steps regardless of the storage technology, while the fetching and storing of data is the responsibility of the developer.
+
+This release supports the following implementations:
+
+* `VersionedObjectState` - depends on the version field supplied in objects (the version field is used by default when importing conflictHandler). For details, please see: xref:version-based-conflict[]
+* `HashObjectState` - depends on a hash calculated from the entire object. For details, please see: xref:hash-based-conflict[]
+
+These implementations are based on the `ObjectState` interface and that interface can be extended to provide custom implementations for conflict detection.
+
+.Prerequisites
+
+* GraphQL server with resolvers.
+* Database or any other form of data storage that can cause data conflicts.
+{org-name} recommends that you store data in a secure location.
+If you use a database, it is your responsibility to administer, maintain and backup that database.
+If you use any other form of data storage, you are responsible for backing up the data.
+
+[#version-based-conflict]
+== Implementing version based conflict detection
+
+Version based conflict resolution is the recommended and simplest approach for conflict detection and resolution. The core idea is that every object has a `version` property with an integer value. A *conflict* occurs when the version number sent by the client does not match the version stored in the server. This means a different client has already updated the object.
+
+.Procedure
+
+. Import the link:https://npmjs.com/package/@aerogear/voyager-conflicts[@aerogear/voyager-conflicts] package.
+
++
+[source,javascript]
+----
+const { conflictHandler } = require('@aerogear/voyager-conflicts')
+----
+
+. Add a version field to the GraphQL type that should support conflict resolution. The version should also be stored in the data storage.
+
++
+[source,graphql]
+----
+type Task {
+  title: String
+  version: Int
+}
+----
+
+. Add an example mutation.
+
++
+[source,graphql]
+----
+type Mutation {
+  updateTask(title: String!, version: Int!): Task
+}
+----
+
+. Implement the resolver. Every conflict can be handled using a set of predefined steps, for example:
+
++
+[source,javascript]
+----
+// 1. Read data from data source
+const serverData = db.find(clientData.id)
+// 2. Check for conflicts
+const conflict = conflictHandler.checkForConflicts(serverData, clientData)
+// 3. If there is a conflict, return the details to the client
+if(conflict) {
+    throw conflict;
+}
+// 4. Save object to data source
+db.save(clientData.id, clientData)
+----
+
+In the example above, the `throw` statement ensures that the client receives all necessary data to resolve the conflict client-side. For more information about this data, please see xref:error-structure[Structure of the Conflict Error].
+
+Since the conflict will be resolved on the client, it is not required to persist the data. However, if there is no conflict, the data sent by the client should be persisted. For more information on resolving the conflict client-side, please see: xref:resolving-conflicts-on-the-client-2[Resolving Conflicts on the Client].
+
+[#hash-based-conflict]
+== Implementing hash based conflict detection
+
+Hash based conflict detection is a mechanism to detect conflicts based on the _total_ object being updated by the client. It does this by hashing each object and comparing the hashes. This tells the server whether or not the objects are equivalent and can be considered conflict free.
+
+.Procedure
+
+. Import the link:https://npmjs.com/package/@aerogear/voyager-conflicts[@aerogear/voyager-conflicts] package.
+
++
+[source,javascript]
+----
+const { HashObjectState } = require('@aerogear/voyager-conflicts')
+----
+
+. When using the `HashObjectState` implementation, a hashing function must be provided. The function signature should be as follows:
+
++
+[source, javascript]
+----
+const hashFunction = (object) {
+  // Using the Hash library of your choice
+  const hashedObject = Hash(object)
+  // return the hashedObject in string form
+  return hashedObject;
+}
+----
+
+. Provide this function when instantiating the `HashObjectState`:
+
++
+[source,javascript]
+----
+const conflictHandler = new HashObjectState(hashFunction)
+----
+
+. Implement the resolver. Every conflict can be handled using a set of predefined steps, for example:
+
++
+[source,javascript]
+----
+// 1. Read data from data source
+const serverData = db.find(clientData.id)
+// 2. Check for conflicts
+const conflict = conflictHandler.checkForConflicts(serverData, clientData)
+// 3. If there is a conflict, return the details to the client
+if(conflict) {
+    throw conflict;
+}
+// 4. Save object to data source
+db.save(clientData.id, clientData)
+----
+
+In the example above, the `throw` statement ensures the client receives all necessary data to resolve the conflict client-side. For more information about this data please see xref:error-structure[Structure of the Conflict Error].
+
+Since the conflict will be resolved on the client, it is not required to persist the data. However, if there is no conflict, the data sent by the client should be persisted. For more information on resolving the conflict client-side, please see: xref:resolving-conflicts-on-the-client-2[Resolving Conflicts on the Client].
+
+
+[#error-structure]
+== About the structure of the conflict error
+
+The server needs to return a specific error when a conflict is detected containing both the server and client states. This allows the client to resolve the conflict.
+
+[source,javascript]
+----
+ "extensions": {
+        "code": "INTERNAL_SERVER_ERROR",
+        "exception": {
+          "conflictInfo": {
+            "serverState": {
+                 //..
+            },
+            "clientState": {
+              //..
+            }
+          },
+        }
+ }
+----
