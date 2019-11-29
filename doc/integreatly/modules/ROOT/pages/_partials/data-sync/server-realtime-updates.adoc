@@ -1,0 +1,165 @@
+[id="realtime-updates-{context}"]
+= Implementing real-time updates on a Data Sync server 
+
+The follow code shows typical code for a Data Sync Server without subscriptions:
+
+[%collapsible]
+====
+[source,js]
+----
+const apolloServer = VoyagerServer({
+  typeDefs,
+  resolvers
+})
+
+const app = express()
+apolloServer.applyMiddleware({ app })
+
+app.listen({ port }, () =>
+  console.log(`🚀 Server ready at http://localhost:${port}${apolloServer.graphqlPath}`)
+)
+----
+====
+
+The following sections outline the steps required to enable real-time updates:
+
+. Implement a SubscriptionServer
+. Implement a Publish Subscribe Mechanism
+. Define subscriptions in the schema
+. Implement resolvers
+
+== Implementing a SubscriptionServer using voyager-subscription
+
+To allow you create GraphQL subscription types in your schema:
+
+. Install the `@aerogear/voyager-subscriptions` package:
++
+----
+$ npm i @aerogear/voyager-subscriptions
+----
+
+. Configure SubscriptionServer using `@aerogear/voyager-subscriptions`
++
+[%collapsible]
+====
+[source,js]
+----
+const { createSubscriptionServer } = require('@aerogear/voyager-subscriptions')
+
+const apolloServer = VoyagerServer({
+  typeDefs,
+  resolvers
+})
+
+const app = express()
+apolloServer.applyMiddleware({ app })
+const port = 4000
+
+const server = app.listen({ port }, () => {
+  console.log(`🚀 Server ready at http://localhost:${port}${apolloServer.graphqlPath}`)
+
+  createSubscriptionServer({ schema: apolloServer.schema }, {
+    server,
+    path: '/graphql'
+  })
+})
+----
+====
++
+The `createSubscriptionServer` code:
++
+* returns a `SubscriptionServer` instance 
+* installs handlers for 
+** managing websocket connections
+** delivering subscriptions on the server
+* provides integrations with other modules such as `@aerogear/voyager-keycloak`.
+
+.Additional Information
+
+For more information about arguments and options, see the https://npm.im/subscriptions-transport-ws[subscriptions-transport-ws] module.
+
+
+== Implementing a Publish Subscribe Mechanism
+
+WARNING: This procedure describes an in-memory implementation which is useful for prototyping but not suitable for production. {org-name} recommends using link:npm.im/@aerogear/graphql-mqtt-subscriptions[MQTT PubSub] in production. See xref:pub-sub[] for more information about all the implementation methods.
+
+To provide a channel to push updates to the client using the default `PubSub` provided by `apollo-server`, you implement a Publish Subscribe mechanism, for example:
+
+[%collapsible]
+====
+[source,js]
+----
+const { PubSub } = require('apollo-server')
+
+const pubsub = new PubSub()
+----
+====
+
+.Addtional Information
+Subscriptions depend on a https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern[publish subscribe] mechanism to generate the events that notify a subscription. There are https://www.apollographql.com/docs/apollo-server/features/subscriptions/#pubsub-implementations[several PubSub implementations] available based on the `PubSubEngine` interface.
+
+
+== Defining subscriptions in the schema
+
+Subscriptions are a root level type. 
+They are defined in the schema similar to `Query` and `Mutation`. 
+For example, in the following schema, a `Task` type is defined and so are mutations and subscriptions.
+
+[%collapsible]
+====
+----
+type Subscription {
+  taskCreated: Task
+}
+
+type Mutation {
+  createTask(title: String!, description: String!): Task
+}
+
+type Task {
+  id: ID!
+  title: String!
+  description: String!
+}
+----
+====
+
+
+== Implementing resolvers
+
+Inside the resolver map, subscription resolvers return an `AsyncIterator,` which listens for events.
+To generate an event, call the `publish` method. 
+The `pubsub.publish` code is typically located inside a mutation resolver.
+
+In the following example, when a new task is created, the `createTask` resolver publishes the result of this mutation to the `TaskCreated` channel.
+
+[%collapsible]
+====
+[source,js]
+----
+const TASK_CREATED = 'TaskCreated'
+
+const resolvers = {
+  Subscription: {
+    taskCreated: {
+      subscribe: () => pubSub.asyncIterator(TASK_CREATED)
+    }
+  },
+  Mutation: {
+    createTask: async (obj, args, context, info) => {
+      const task = tasks.create(args)
+      pubSub.publish(TASK_CREATED, { taskCreated: task })
+      return task
+    }
+  },
+}
+----
+====
+
+NOTE: This subscription server does not implement authentication or authorization. For information about implementing authenication and authorization, see link:{data-sync-auth-link}[Supporting authentication and authorization in your mobile app].
+
+.Additional Information
+
+For information on how to use subscriptions in your client code, see xref:sync-js-client-realtime-updates[Realtime Updates].
+
+

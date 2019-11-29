@@ -1,0 +1,50 @@
+[[sync-js-client-advanced-topics]]
+= Advanced Topics
+:toc:
+
+== Logging Debug Messages
+
+The {sync-client} uses the link:https://www.npmjs.com/package/debug[debug module] to log debug messages.
+
+To enable debug logs, run the following code in a browser's console:
+
+[source, javascript]
+----
+localStorage.debug = 'AeroGearSync:*'
+----
+
+Certain features can be enabled separately:
+
+[source, javascript]
+----
+localStorage.debug = 'AeroGearSync:offlineMutates*'
+----
+
+== Optimistic UI
+
+By default mutations are not applied to the UI until responses are received from the server. To provide better user experience, an application may want to update the UI immediately. link:https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-mutation-options-optimisticResponse[Optimistic response] is an easy way to achieve this goal, and {sync-client} provides a helper method to work with optimistic responses:
+
+[source, javascript]
+----
+ import { createOptimisticResponse } from "@aerogear/voyager-client";
+
+ client.mutate({
+   mutation: ADD_TASK,
+   variables: item,
+   optimisticResponse: createOptimisticResponse("createTask", "Task", item);
+ });
+----
+
+To detect if the provided data is an optimistic response, the `optimisticResponse` flag can be used.
+
+//Is this id mapping completely transparent to developers? If not, what action do they need to take? If it is, then we should probably remove this section.
+// === Mapping Client and Server ID for Optimistic Responses
+
+// When using `OptimisticReponse` helper from SDK specific mutations that create new element response is going to have client side generated id. Subsequent edits for this objects will also refer to this id. When becoming online, all offline changes are going to be performed in specific order updating client side id with id returned from server for subsequent edits.
+
+The `OptimisticResponse` feature and the <<#sync-client-offline-queue-listener, offlineQueueListener>> can be used together to deliver great offline experience for an application.
+
+//tag::excludeDownstream[]
+See the xref:showcase-apps.adoc[Showcase Apps section] for more information.
+//end::excludeDownstream[]
+

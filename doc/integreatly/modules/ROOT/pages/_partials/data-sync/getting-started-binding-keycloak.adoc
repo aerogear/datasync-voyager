@@ -1,0 +1,68 @@
+= Binding {sync-service} to {keycloak-service}
+
+In this section, we will show you how to protect your {sync-service} application using the {keycloak-service} service.
+
+.Prerequisites
+
+- There is a {keycloak-service} service available.
+- You have provisioned a {sync-service} application using our playbook.
+- oc tools must be installed
+
+Any application that connects to {keycloak-service} must consume a `keycloak.json` file. This section demonstrates how to add a `keycloak.json` file to your {sync-service} application deployment. It is still your application's responsibility to consume this file. We have provided an link:https://github.com/aerogear/voyager-server/tree/master/examples/keycloak[example project].
+
+.Procedure
+
+. Create a client for your application in the {keycloak-service} Administration Console
+. Click on the `Installation` tab, select `Keycloak OIDC JSON` for `Format` Option, and then click on `Download`. Save the downloaded `keycloak.json`.
+
+. Create a {keycloak-service} secret:
++
+[source, bash]
+----
+oc create secret generic sync-keycloak-doc \
+  --from-file=keycloak=./keycloak.json
+----
++
+The command creates a secret named `sync-keycloak-doc`. 
++
+The secret will contain one key, `keycloak`, with the value being the text of the `keycloak.json` file.
++
+You can view the secret with either `oc get secret sync-keycloak-doc` or the OpenShift web console.
+
+. Create a patch for your deployment configuration
++
+This step requires patching the {sync-service} application's deployment config to create and mount a volume with the {keycloak-service} secret we just created. Replace `$YOUR_DEPLOYMENT_CONFIG_NAME` in the following yaml section with the deployment config name of your {sync-service} application and save this file as `secret.yaml`.
++
+[source, yaml]
+----
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+          - name: KEYCLOAK_CONFIG
+            value: /config/keycloak.json
+          name: $YOUR_DEPLOYMENT_CONFIG_NAME
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /config
+              readOnly: true
+      volumes:
+          - name: secret-volume
+            secret:
+              items:
+                - key: keycloak
+                  path: keycloak.json
+              secretName: sync-keycloak-doc
+----
+
+. Apply the patch.
++
+After replacing `$YOUR_DEPLOYMENT_CONFIG_NAME` with the deployment config name, run the following command to patch the deployment configuration and trigger your application to redeploy.
++
+[source, bash]
+----
+oc patch deploymentconfig $YOUR_DEPLOYMENT_CONFIG_NAME -p "$(cat secret.yaml)"
+----
++
+Once your application has redeployed, it should be able to read the keycloak.json file pointed to by the KEYCLOAK_CONFIG environment variable.

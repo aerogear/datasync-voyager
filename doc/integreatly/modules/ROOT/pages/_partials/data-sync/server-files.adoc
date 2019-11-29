@@ -1,0 +1,52 @@
+= Enabling file uploads on the server
+
+{sync-server} provides support for uploading binary data along with the GraphQL queries.
+The implementation relies on upstream `Apollo Server` capabilities.
+
+The upload functionality uses the GraphQL multipart form requests specification.
+File upload needs to be implemented on both server and client:
+
+1. On the client HTML FileList objects are mapped into a mutation and sent to the server in a multipart request.
+
+2. On the server: The multipart request is handled. The server processes it and provides an upload argument to a resolver.
+In the resolver function, the upload promise resolves an object.
+
+NOTE: File upload is based on link:https://github.com/jaydenseric/graphql-multipart-request-spec[graphql-multipart-request-spec].
+
+.Procedure
+
+To enable file uploads, create a schema and use the `Upload` scalar.
+For example:
+
+[source, javascript]
+----
+const { ApolloServer, gql } = require('apollo-server');
+
+const typeDefs = gql`
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
+  type Query {
+    uploads: [File]
+  }
+  type Mutation {
+    singleUpload(file: Upload!): File!
+  }
+`;
+----
+
+The following schema enables file uploads. The `Upload` scalar will be injected as one of the arguments in the resolvers.
+The `Upload` scalar contains all file metadata and a link:https://nodejs.org/api/stream.html#stream_readable_streams[Readable Stream] that can be used to save the file to a specific location.
+
+[source, javascript]
+----
+
+    async singleUpload(parent, { file }) {
+      const { stream, filename, mimetype, encoding } = await file;
+      // Save file and return required metadata
+    }
+----
+
+See link:https://blog.apollographql.com/file-uploads-with-apollo-server-2-0-5db2f3f60675[Official Apollo blog post] for more information.

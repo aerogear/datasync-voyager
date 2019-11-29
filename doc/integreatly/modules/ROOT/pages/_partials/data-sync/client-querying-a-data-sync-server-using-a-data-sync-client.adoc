@@ -1,0 +1,106 @@
+[id="client-querying-a-data-sync-server-using-a-data-sync-client-{context}"]
+= Querying a Data Sync Server using a Data Sync Client
+
+Build a Data Sync Client that queries a Data Sync Server.
+Both the Data Sync Client and the Data Sync Server will be running locally in this procedure.
+
+.Prerequisites
+
+Basic knowledge of `npm`.
+
+.Procedure
+
+. Create a basic link:https://webpack.js.org/guides/getting-started/[_webpack project_] repo.
++
+. Open a terminal and navigate into the cloned project.
++
+. To add the necessary Data Sync Client javascript libraries to your basic _webpack project_, execute the following commands:
++
+[source,bash]
+----
+npm install @aerogear/voyager-client
+npm install graphql-tag
+----
++
+. Before continuing, build the project and ensure that it successfully builds by executing `npm run build` - the output should be similar to:
++
+[source,bash]
+----
+Hash: af3fac784fa617d45d8e
+Version: webpack 4.33.0
+Time: 309ms
+Built at: 2019-12-31 10:10:10
+  Asset      Size  Chunks             Chunk Names
+main.js  70.4 KiB       0  [emitted]  main
+----
++
+. Replace the contents of `/src/index.js` with:
++
+[source,javascript]
+----
+// gql is a utility function that handles gql queries
+import gql from 'graphql-tag';
+
+import { OfflineClient } from '@aerogear/voyager-client';
+
+// For our client application, we will connect to the local service.
+let config = {
+  httpUrl: "http://localhost:4000/graphql",
+  wsUrl: "ws://localhost:4000/graphql",
+}
+
+async function queryEmployees() {
+
+  // Actually create the client
+  let offlineClient = new OfflineClient(config);
+  let client = await offlineClient.init();
+
+  // Execute the query
+  client.query({
+      fetchPolicy: 'network-only',
+      query: gql`
+      {
+        listEmployees
+        {
+      		employee_id,
+          employee_name,
+        }
+      }
+      `
+    })
+    //Print the response of the query
+    .then( ({data}) => {
+      document.write(JSON.stringify(data))
+    });
+}
+
+queryEmployees();
+----
++
+. Build the project again by executing `npm run build` - the _size_ of the `main.js` file should have increased:
++
+[source,bash]
+----
+Version: webpack 4.33.0
+Time: 4859ms
+Built at: 2019-06-12 10:52:31
+  Asset     Size  Chunks                    Chunk Names
+main.js  275 KiB       0  [emitted]  [big]  main
+----
+
+.Verification steps
+
+. Ensure that link:https://github.com/aerogear/mobile-docs/blob/master/modules/ROOT/pages/_partials/data-sync/server-create-a-graphql-schema-for-an-existing-data-source.adoc[Getting started with an example data source schema] is running.
++
+. Open `/dist/index.html` in a web browser.
++
+. Open the web browser's _Console_.
++
+. Expand the data in the Console and you should see the following content:
++
+[source,bash]
+----
+0:{employee_id: "1", employee_name: "joe", __typename: "Employee"}
+1:{employee_id: "2", employee_name: "john", __typename: "Employee"}
+length:2
+----

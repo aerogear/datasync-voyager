@@ -1,0 +1,25 @@
+// tag::excludeDownstream[]
+include::_partials/attributes.adoc[]
+// end::excludeDownstream[]
+
+
+
+[[introduction]]
+
+include::_partials/data-sync/introducing-data-sync.adoc[leveloffset=2,tags=!excludeDownstream]
+
+include::_partials/data-sync/data-sync-technical-overview.adoc[leveloffset=2,tags=!excludeDownstream]
+
+include::_partials/data-sync/ref_terminology.adoc[leveloffset=+2]
+
+[id='{context}_additional-resources-{context}']
+
+.Additional resources
+
+* link:https://graphql.org/learn[Learn GraphQL]
+* link:https://github.com/aerogear/voyager-server[Voyager Server GitHub repository]
+* link:https://github.com/aerogear/aerogear-js-sdk/tree/master/packages/sync[Voyager Client GitHub repository]
+* link:https://www.apollographql.com/docs/apollo-server[Apollo Server]
+* link:https://www.apollographql.com/docs/react[Apollo Client]
+
+:service-name: {sync-service}

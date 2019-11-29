@@ -1,0 +1,22 @@
+[id="server-getting-started-with-an-example-data-source-schema-{context}"]
+= Getting started with an example data source schema
+
+Create a GraphQL schema for an existing data source schema.
+
+[.Employee]
+|===
+| employee_id, `ID`
+| employee_name, `String`
+| category_id, `ID`
+|===
+
+[.Category]
+|===
+| category_id, `ID`
+| employee_type, `String`
+| security_clearance, `ID`
+|===
+
+.Additional resources
+
+* For more information on data sources, see link:https://docs.okd.io/latest/using_images/db_images/mysql.html[MySQL], link:https://docs.okd.io/latest/using_images/db_images/postgresql.html[PostgreSQL], link:https://docs.okd.io/latest/using_images/db_images/mongodb.html[MongoDB], or link:https://docs.okd.io/latest/using_images/db_images/mariadb.html[MariaDB].

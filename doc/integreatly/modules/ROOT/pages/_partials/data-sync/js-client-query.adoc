@@ -1,0 +1,130 @@
+= Querying a Data Sync server using a Data Sync client
+
+.Prerequisites
+* You have Node.js and npm installed.
+* You have created an empty web project that supports ES6, for example, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
+* You have completed the server getting started guide and the application is running.
+
+This section describes how to use the {sync-client} to create mobile and web applications that can communicate with the Voyager server application.
+
+Data Sync provides JavaScript libraries which integrate your javascript app using with a server that also uses Data Sync.  
+The client libraries are based on the link:https://www.apollographql.com/docs/react/api/apollo-client.html[Apollo client].
+
+You will add the libraries to your mobile project, configure the client classes, connect to the server, and confirm that it works.
+
+. Create an address book server:
+.. Create an `index-2.js` file with the following content:
++
+[source,javascript]
+----
+include::index-2.js[]
+----
+
+.. Run the server:
++
+[source,bash]
+----
+$ node index-2.js
+
+🚀 Server ready at http://localhost:4000/graphql
+----
+
+.. Browse `http://localhost:4000/graphql` and interact with the playground. For example:
++
+[source,javascript]
+----
+{
+  addressBook {
+    name
+    address
+    
+  }
+}
+----
+
+.. Check the output. For the example above, the output should be:
++
+[source,javascript]
+----
+{
+  "data": {
+    "addressBook": [
+      {
+        "name": "Alice Roberts",
+        "address": "1 Red Square, Waterford"
+      }
+    ]
+  }
+}
+----
+
+
+
+
+. Add the following libraries to your javascript client:
++
+[source,bash]
+----
+npm install @aerogear/voyager-client
+npm install graphql
+npm install graphql-tag
+----
++
+NOTE: A prerequisite is that you have created an empty web project that supports ES6, for example, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
+
+. Create an `index.js` file to make the same query as step 1, but from JavaScript. 
++
+In this example, a config object is created, and the `httpUrl` field is set to the url of the Voyager server application. 
+If the client app uses subscriptions, then the `wsUrl` field is required too.
++
+.src/index.js
+[source,javascript]
+----
+// gql is a utility function that handles gql queries
+import gql from 'graphql-tag';
+
+import { OfflineClient } from '@aerogear/voyager-client';
+
+// connect to the local service.
+let config = {
+  httpUrl: "http://localhost:4000/graphql",
+  wsUrl: "ws://localhost:4000/graphql",
+}
+
+async function queryPeople() {
+
+  // Actually create the client
+  let offlineClient = new OfflineClient(config);
+  let client = await offlineClient.init();
+
+  // Execute the query
+  client.query({
+      fetchPolicy: 'network-only',
+      query: gql`
+      query addressBook{
+        addressBook{
+        name
+        address
+        }
+      }
+      `
+    })
+    //Print the response of the query
+    .then( ({data}) => {
+      console.log(data.addressBook)
+    });
+}
+
+queryPeople();
+----
+
+. Build and run the client application.
+. Browse the client application and check the console output.
++
+It should include an array similar to the following:
++
+----
+address: "1 Red Square, Waterford"
+name: "Alice Roberts"
+__typename: "Person"
+----

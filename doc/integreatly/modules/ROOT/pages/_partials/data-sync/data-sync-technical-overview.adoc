@@ -1,0 +1,27 @@
+[id="data-sync-technical-overview-{context}"]
+= Data Sync Technical Overview
+
+This section describes the technical aspects of Data Sync.
+
+// tag::excludeDownstream[]
+
+image::RHMDS_Data_Sync_35_0919_framework.png[Data Sync Technical Overview]
+
+// end::excludeDownstream[]
+
+// tag::excludeUpstream[]
+
+image::RHMDS_Data_Sync_35_0919_framework.png[Data Sync Technical Overview]
+
+// end::excludeUpstream[]
+
+.Data Sync case study
+[options="header"]
+|====
+|Component|Technical Role
+|Sync Client| The Sync Client is a client side JavaScript library used for building web and mobile applications. It allows for simple Sync Server integration.
+|Sync Server| The Sync Server is based on the Apollo Server framework and it performs two primary functions. It sends and retrieves data from a data source, and it syncs data across the Sync Clients. Sync Server uses GraphQL to create custom connections that in turn allow various types of Sync Clients to connect.
+|Data sources| The data source stores data. This data is typically what is synchronized across the Sync Clients.
+|====
+
+For more information about the Apollo Server framework, see link:https://www.apollographql.com/docs/apollo-server/[_Start here to learn about the Apollo platform_].

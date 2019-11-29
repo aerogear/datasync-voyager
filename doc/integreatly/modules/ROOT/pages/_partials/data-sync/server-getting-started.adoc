@@ -1,0 +1,76 @@
+[id="getting-started-with-hello-world-{context}"]
+= Getting Started with Hello World {sync-service}
+
+In this example, you add the {sync-server} library to your link:https://expressjs.com/[Express] node.js project, create an `index-1.js` file, run the server, and query GraphQL.
+
+* {sync-server} is a set of Node.js libraries that can be used to build a Data Sync server.
+
+* {sync-server} is the starting point for developing a {sync-service} application. 
+
+
+.Prerequisites
+
+* You have Node.js and npm installed.
+* You have created a node.js project.
+
+.Procedure
+
+. Add libraries to your Node.js application:
++
+====
+[source,bash]
+----
+$ npm install graphql <1>
+$ npm install express <2>
+$ npm install @aerogear/voyager-server <3>
+----
+
+<1> See https://graphql.org/
+<2> See https://expressjs.com/
+<3> The {sync-server} library that enables data sync
+====
+
+. Create an `index-1.js` file with the following content:
++
+[source,javascript]
+----
+include::index-1.js[]
+----
+
+. Run the server:
++
+[source,bash]
+----
+$ node index-1.js
+
+🚀 Server ready at http://localhost:4000/graphql
+----
+
+. Browse `http://localhost:4000/graphql` and interact with the playground. For example:
++
+[source,javascript]
+----
+{
+  hello
+}
+----
+
+. Check the output. For the example above, the output should be:
++
+[source,javascript]
+----
+{
+  "data": {
+    "hello": "Hello world"
+  }
+}
+----
+
+To get started with the  {sync-service} framework, see the link:https://github.com/aerogear/ionic-showcase[sample application].
+In this app, you can explore a more complex schema.
+
+Before proceeding, make sure you have an understanding of the following GraphQL concepts:
+
+* Schema design
+* Resolvers
+* Subscriptions
