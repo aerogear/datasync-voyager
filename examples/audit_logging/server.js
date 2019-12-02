@@ -11,7 +11,7 @@ const typeDefs = gql`
 `
 
 // Resolver functions. This is our business logic
-let resolvers = {
+const resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
       context.auditLog('CUSTOM_LOG_TYPE', 'this is a custom audit log', obj, args, context, info)

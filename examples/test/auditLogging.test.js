@@ -10,7 +10,7 @@ function sendQuery () {
     method: 'POST',
     url: `http://localhost:${port}${server.graphqlPath}`,
     data: {
-      'query': '{ hello }'
+      query: '{ hello }'
     },
     headers: { 'Content-Type': 'application/json' }
   })

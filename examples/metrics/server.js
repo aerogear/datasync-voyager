@@ -11,7 +11,7 @@ const typeDefs = gql`
 `
 
 // Resolver functions. This is our business logic
-let resolvers = {
+const resolvers = {
   Query: {
     hello: (obj, args, context, info) => {
       return `Hello world from ${context.serverName}`

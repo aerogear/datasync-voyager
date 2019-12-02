@@ -43,7 +43,7 @@ test('Sending a request to basic example app should return OK status code and no
 })
 
 test('Basic Subscricption will return a result', async t => {
-  let subscription = clientWrapper.subscribe(gql`
+  const subscription = clientWrapper.subscribe(gql`
       subscription s1 {
         hello
       }

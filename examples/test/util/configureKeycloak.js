@@ -24,7 +24,7 @@ async function authenticateKeycloak () {
     url: `${config.authServerUrl}/realms/${config.adminRealmName}/protocol/openid-connect/token`,
     data: `client_id=${config.resource}&username=${config.username}&password=${config.password}&grant_type=password`
   }).catch((err) => { return console.error(err) })
-  return `Bearer ${res.data['access_token']}`
+  return `Bearer ${res.data.access_token}`
 }
 
 async function importRealm () {
@@ -32,7 +32,7 @@ async function importRealm () {
     method: 'POST',
     url: `${config.authServerUrl}/admin/realms`,
     data: realmToImport,
-    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
+    headers: { Authorization: config.token, 'Content-Type': 'application/json' }
   }).catch((err) => { return console.error(err) })
 }
 
@@ -40,7 +40,7 @@ async function getRealmRoles () {
   const res = await axios({
     method: 'GET',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/roles`,
-    headers: { 'Authorization': config.token }
+    headers: { Authorization: config.token }
   }).catch((err) => { return console.error(err) })
 
   return res.data
@@ -50,7 +50,7 @@ async function getClients () {
   const res = await axios({
     method: 'GET',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/clients`,
-    headers: { 'Authorization': config.token }
+    headers: { Authorization: config.token }
   }).catch((err) => { return console.error(err) })
 
   return res.data
@@ -60,7 +60,7 @@ async function getClientRoles (client) {
   const res = await axios({
     method: 'GET',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/clients/${client.id}/roles`,
-    headers: { 'Authorization': config.token }
+    headers: { Authorization: config.token }
   }).catch((err) => { return console.error(err) })
   return res.data
 }
@@ -70,11 +70,11 @@ async function createUser (name, password) {
     method: 'post',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}/users`,
     data: {
-      'username': name,
-      'credentials': [{ 'type': 'password', 'value': password, 'temporary': false }],
-      'enabled': true
+      username: name,
+      credentials: [{ type: 'password', value: password, temporary: false }],
+      enabled: true
     },
-    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
+    headers: { Authorization: config.token, 'Content-Type': 'application/json' }
   })
   if (res) {
     return res.headers.location
@@ -86,7 +86,7 @@ async function assignRealmRoleToUser (userIdUrl, role) {
     method: 'POST',
     url: `${userIdUrl}/role-mappings/realm`,
     data: [role],
-    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
+    headers: { Authorization: config.token, 'Content-Type': 'application/json' }
   }).catch((err) => { return console.error(err) })
 
   return res.data
@@ -97,7 +97,7 @@ async function assignClientRoleToUser (userIdUrl, client, role) {
     method: 'POST',
     url: `${userIdUrl}/role-mappings/clients/${client.id}`,
     data: [role],
-    headers: { 'Authorization': config.token, 'Content-Type': 'application/json' }
+    headers: { Authorization: config.token, 'Content-Type': 'application/json' }
   }).catch((err) => { return console.error(err) })
   return res.data
 }
@@ -109,7 +109,7 @@ async function prepareKeycloak (authServerUrl, testPassword) {
   const realmRoles = await getRealmRoles()
   const clients = await getClients()
 
-  for (let user of usersConfiguration) {
+  for (const user of usersConfiguration) {
     // Create a new user
     const userIdUrl = await createUser(user.name, testPassword)
     // Assign realm role to user
@@ -131,7 +131,7 @@ async function resetKeycloakConfiguration () {
   await axios({
     method: 'DELETE',
     url: `${config.authServerUrl}/admin/realms/${config.appRealmName}`,
-    headers: { 'Authorization': config.token }
+    headers: { Authorization: config.token }
   }).catch((err) => { return console.error(err) })
 }
 

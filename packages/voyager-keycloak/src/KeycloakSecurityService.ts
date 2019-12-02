@@ -63,7 +63,7 @@ export class KeycloakSecurityService implements SecurityService {
       resave: false,
       saveUninitialized: true,
       store: memoryStore
-    }))
+    }) as any)
 
     if (!this.keycloak) {
       this.keycloak = new Keycloak({
