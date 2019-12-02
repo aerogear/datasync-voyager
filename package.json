@@ -22,22 +22,22 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/express-session": "1.15.13",
+    "@types/express-session": "1.15.16",
     "@types/graphql": "14.2.3",
-    "@types/joi": "14.3.3",
+    "@types/joi": "14.3.4",
     "@types/keycloak-connect": "4.5.1",
-    "@types/node": "10.14.13",
+    "@types/node": "10.17.6",
     "@types/pino": "5.20.0",
-    "ava": "2.2.0",
-    "coveralls": "3.0.5",
-    "graphql": "14.4.2",
+    "ava": "2.4.0",
+    "coveralls": "3.0.9",
+    "graphql": "14.5.8",
     "lerna": "3.19.0",
     "nyc": "14.1.1",
     "standard": "12.0.1",
-    "ts-node": "8.3.0",
-    "tslint": "5.18.0",
-    "typedoc": "0.15.0",
-    "typescript": "3.5.3"
+    "ts-node": "8.5.4",
+    "tslint": "5.20.1",
+    "typedoc": "0.15.3",
+    "typescript": "3.7.2"
   },
   "nyc": {
     "extension": [
