@@ -23,7 +23,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/express-session": "1.15.16",
-    "@types/graphql": "14.2.3",
+    "@types/graphql": "14.5.0",
     "@types/joi": "14.3.4",
     "@types/keycloak-connect": "4.5.1",
     "@types/node": "10.17.6",
