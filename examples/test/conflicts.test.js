@@ -15,7 +15,7 @@ function sendQuery (query) {
     method: 'POST',
     url: `http://localhost:${port}${server.graphqlPath}`,
     data: {
-      'query': query
+      query: query
     },
     headers: { 'Content-Type': 'application/json' }
   })
@@ -41,7 +41,7 @@ test.serial('Sending a mutation with correct version number should not return er
   }
 })
 
-test.serial(`Sending a query should return the new version of greeting response`, async t => {
+test.serial('Sending a query should return the new version of greeting response', async t => {
   try {
     const res = await sendQuery(testQueries.greeting)
     t.deepEqual(res.status, 200)

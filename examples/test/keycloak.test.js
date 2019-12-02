@@ -23,13 +23,13 @@ function modifyKeycloakServerUrl (url) {
 function sendQuery (token, maxRedirects) {
   const headers = { 'Content-Type': 'application/json' }
   if (token) {
-    headers['Authorization'] = token
+    headers.Authorization = token
   }
   return axios({
     method: 'POST',
     url: `http://localhost:${exampleAppPort}${exampleAppGraphqlPath}`,
     data: {
-      'query': '{ hello }'
+      query: '{ hello }'
     },
     headers,
     maxRedirects

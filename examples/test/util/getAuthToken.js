@@ -6,7 +6,7 @@ async function getAuthToken (keycloakConfig, username, password) {
     url: `${keycloakConfig['auth-server-url']}/realms/${keycloakConfig.realm}/protocol/openid-connect/token`,
     data: `client_id=${keycloakConfig.resource}&username=${username}&password=${password}&grant_type=password`
   })
-  return `Bearer ${res.data['access_token']}`
+  return `Bearer ${res.data.access_token}`
 }
 
 module.exports = getAuthToken
