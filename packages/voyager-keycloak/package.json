@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "express-session": "1.17.0",
-    "keycloak-connect": "6.0.1",
+    "keycloak-connect": "8.0.1",
     "keycloak-connect-graphql": "0.2.2"
   },
   "devDependencies": {
