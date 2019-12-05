@@ -2,11 +2,9 @@
 
 = Introduction
 
-Typically, mobile apps allow users to modify data while offline, which results in conflicts. 
-A *conflict* occurs when two or more users try to modify the same data.
+Mobile apps allow users to modify data while offline, which can result in conflicts. 
 
-For example, a user modifies a record while offline, and another user deletes that record at the same time. 
-The system needs to resolve the conflicting data.
+A *conflict* occurs when two or more users try to modify the same data. The system needs to resolve the conflicting data.
 
 Conflict resolution can be handled in two phases:
 

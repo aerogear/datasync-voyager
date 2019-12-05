@@ -1,8 +1,7 @@
 [id="client-mutating-a-data-sync-server-using-a-data-sync-client-{context}"]
 = Mutating a Data Sync server using a Data Sync client
 
-Build a Data Sync Server and query the mutation.
-The Data Sync Server will be running locally in this procedure.
+Build a Data Sync server and query the mutation. The Data Sync server runs locally in this procedure.
 
 .Prerequisites
 
@@ -13,9 +12,9 @@ The Data Sync Server will be running locally in this procedure.
 
 . Create a basic link:https://webpack.js.org/guides/getting-started/[_webpack project_] repo.
 +
-. Open a terminal and navigate into the cloned project.
+. Open a terminal and navigate to the cloned project.
 +
-. To add the necessary Data Sync Client javascript libraries to your basic _webpack project_, execute the following commands:
+. To add the necessary Data Sync client javascript libraries to your basic _webpack project_, execute the following commands:
 +
 [source,bash]
 ----
@@ -23,7 +22,7 @@ npm install @aerogear/voyager-client
 npm install graphql-tag
 ----
 +
-. Before continuing, build the project and ensure that it successfully builds by executing `npm run build`.
+. Ensure the project successfully builds by executing the command `npm run build`.
 +
 . Replace the contents of `/src/index.js` with:
 +

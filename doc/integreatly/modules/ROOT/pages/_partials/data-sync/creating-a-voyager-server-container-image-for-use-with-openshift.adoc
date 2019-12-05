@@ -9,13 +9,18 @@ For more information, see xref:server-getting-started-with-an-example-data-sourc
 .Prerequisites
 
 * You have cloned the link:https://github.com/aerogear/voyager-server[Apollo Voyager Server] locally.
-* Docker is installed and is running on your local machine. As an alternative, use `podman`, or `buildah`.
+* Docker is installed and is running on your local machine. As an alternative use `podman`, or `buildah`.
 
 .Procedure
 
-. Open a terminal and browse to the _Apollo Voyager Server_ repo on your local machine.
+. Open a terminal and navigate to the _Apollo Voyager Server_ repo on your local machine.
 +
-. Create a Dockerfile, for example, `touch Dockerfile`.
+. Create a Dockerfile using the following command:
++
+[source]
+----
+touch Dockerfile
+----
 +
 . Open the Dockerfile and add the following content, then save the changes:
 +
@@ -51,7 +56,14 @@ $ Successfully tagged aerogear/showcase-server:latest
 
 .Verification steps
 
-For the example above, to verify if a container image has been created locally, execute `docker images` in the terminal and a similar message is displayed:
+To verify if a container image has been created locally, execute the command in your terminal:
+[source]
+----
+docker images
+----
+
+A similar message is displayed:
++
 [source,bash]
 ----
 REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
