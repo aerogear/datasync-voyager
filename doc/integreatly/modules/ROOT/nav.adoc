@@ -13,6 +13,7 @@ include::{partialsdir}/attributes.adoc[]
 *** xref:ds-conflict.adoc[Conflict Resolution]
 *** xref:ds-files.adoc[File Upload]
 *** xref:ds-audit.adoc[Audit Logs]
-*** xref:ds-advanced.adoc[Advanced Topics]
+*** xref:ds-debug.adoc[Debugging Data Sync Apps]
+*** xref:ds-performance.adoc[Improving UI Performance]
 *** xref:ds-openshift.adoc[Running on OpenShift]
 

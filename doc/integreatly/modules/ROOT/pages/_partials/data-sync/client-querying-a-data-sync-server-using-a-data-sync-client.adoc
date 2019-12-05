@@ -1,20 +1,20 @@
 [id="client-querying-a-data-sync-server-using-a-data-sync-client-{context}"]
-= Querying a Data Sync Server using a Data Sync Client
+= Querying a Data Sync server using a Data Sync client
 
-Build a Data Sync Client that queries a Data Sync Server.
-Both the Data Sync Client and the Data Sync Server will be running locally in this procedure.
+Build a Data Sync client that queries a Data Sync server.
+Both the Data Sync client and the Data Sync server run locally in this procedure.
 
 .Prerequisites
 
-Basic knowledge of `npm`.
+* Basic knowledge of `npm`.
 
 .Procedure
 
 . Create a basic link:https://webpack.js.org/guides/getting-started/[_webpack project_] repo.
 +
-. Open a terminal and navigate into the cloned project.
+. Open a terminal and navigate to the cloned project.
 +
-. To add the necessary Data Sync Client javascript libraries to your basic _webpack project_, execute the following commands:
+. To add the necessary Data Sync client javascript libraries to your basic _webpack project_, execute the following commands:
 +
 [source,bash]
 ----
@@ -22,7 +22,14 @@ npm install @aerogear/voyager-client
 npm install graphql-tag
 ----
 +
-. Before continuing, build the project and ensure that it successfully builds by executing `npm run build` - the output should be similar to:
+. Ensure the project successfully builds by executing the following command:
++
+[source,bash]
+----
+npm run build
+----
++
+The output should be similar to:
 +
 [source,bash]
 ----
@@ -77,7 +84,7 @@ async function queryEmployees() {
 queryEmployees();
 ----
 +
-. Build the project again by executing `npm run build` - the _size_ of the `main.js` file should have increased:
+. Build the project again by executing `npm run build`. The _size_ of the `main.js` file should have increased:
 +
 [source,bash]
 ----
@@ -94,9 +101,9 @@ main.js  275 KiB       0  [emitted]  [big]  main
 +
 . Open `/dist/index.html` in a web browser.
 +
-. Open the web browser's _Console_.
+. Open the web browser's console.
 +
-. Expand the data in the Console and you should see the following content:
+. Expand the data in the console. You should see the following content:
 +
 [source,bash]
 ----

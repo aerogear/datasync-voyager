@@ -3,8 +3,8 @@
 
 This section describes a typical Data Sync case study that includes:
 
-* Mobile and web Sync Clients built using the Data Sync Server framework.
-* Node.js Sync Server built using the Data Sync framework that includes a GraphQL based API.
+* Mobile and web sync clients built using the Data Sync server framework.
+* Node.js Sync server built using the Data Sync framework that includes a GraphQL based API.
 * Data sources that include PostgreSQL, MongoDB, and back-end data sources.
 
 // tag::excludeDownstream[]
@@ -23,7 +23,7 @@ image::data-sync-case-study-generic.png[Data Sync Case Study]
 [options="header"]
 |====
 |Component|Description
-|Sync Client| Multiple Sync Clients (of various types) are transmitting data to, and receiving data from, the Sync Server.
-|Sync Server| Data Sync is detecting data conflicts and resolving these in real-time, resulting in the seamless transmission of data to various Sync Clients.
-|Data sources| Sync Server is receiving data from, and transmitting data to, multiple data sources.
+|Sync Client| Multiple Sync clients (of various types) are transmitting data to, and receiving data from, the Sync server.
+|Sync Server| Data Sync is detecting data conflicts and resolving these in real-time, resulting in the seamless transmission of data to various Sync clients.
+|Data sources| The Sync server is receiving data from, and transmitting data to multiple data sources.
 |====
