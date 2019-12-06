@@ -1,5 +1,5 @@
 import test from 'ava'
 
-test('DELETE ME DUMMY', t => {
+test('No tests for now', t => {
   t.is(true, true)
 })
