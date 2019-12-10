@@ -53,7 +53,7 @@
   },
   "standard": {
     "ignore": [
-      "/doc/**/*.js"
+      "/docs/**/*.js"
     ]
   }
 }
