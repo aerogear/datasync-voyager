@@ -2,7 +2,7 @@
   "name": "@aerogear/voyager-server-monorepo",
   "private": true,
   "scripts": {
-    "test": "nyc lerna exec -- npm test",
+    "test": "nyc lerna exec -- npm test && cd voyager-client && npm test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "bootstrap": "lerna bootstrap  --no-ci",
     "clean": "lerna clean --yes",
@@ -11,7 +11,8 @@
     "lint:js": "standard",
     "format": "tslint '*/*/src/**/*.ts' --fix --force > /dev/null && standard --fix",
     "cleanInstall": "lerna exec npm install --ignore-scripts",
-    "compile": "lerna exec -- npm run compile",
+    "postinstall": "cd voyager-client && npm install",
+    "compile": "lerna exec -- npm run compile && cd voyager-client && npm run compile",
     "compile:clean": "lerna exec -- npm run compile:clean",
     "watch": "lerna exec --parallel --stream -- npm run watch",
     "release:prep": "./scripts/prepareRelease.sh",

@@ -1,0 +1,53 @@
+{
+  "name": "@aerogear/voyager-client",
+  "version": "3.0.0",
+  "description": "AeroGear Voyager GraphQL client",
+  "author": "AeroGear Team<aerogear@googlegroups.com>",
+  "homepage": "https://github.com/aerogear/voyager-server#readme",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aerogear/voyager-server/tree/master/packages/voyager-client"
+  },
+  "keywords": [
+    "aerogear",
+    "aerogear services",
+    "graphql"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "compile": "tsc --build tsconfig.json",
+    "watch": "tsc --build tsconfig.json --watch",
+    "compile:clean": "tsc --build tsconfig.json --clean",
+    "test": "ava -v"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "offix-client-boost": "0.12.0"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.23",
+    "ts-jest": "24.2.0",
+    "jest": "24.9.0",
+    "ts-node": "8.5.4",
+    "typescript": "3.7.2"
+  },
+  "peerDependencies": {
+    "graphql": "^0.13.0 || ^14.0.0"
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "files": [
+      "**/*.test.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
+}
