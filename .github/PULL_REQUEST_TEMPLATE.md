@@ -17,4 +17,4 @@ Contributors guide: https://github.com/aerogear/voyager-server/blob/master/CONTR
 - [ ] `npm test` passes
 - [ ] tests are included
 - [ ] documentation is changed or added
-- [ ] commit message follows [commit guidelines](../doc/guides/pull-requests.md#commit-message-guidelines)
+- [ ] commit message follows [commit guidelines](../resources/pull-requests.md#commit-message-guidelines)

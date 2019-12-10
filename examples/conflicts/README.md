@@ -4,7 +4,7 @@ This example demonstrates how to use the `@aerogear/voyager-conflicts` package t
 
 ## Prerequisites
 
-* Ensure the examples can be run by following the [Setting up Your Local Environment](../../doc/guides/local-development.md) guide.
+* Ensure the examples can be run by following the [Setting up Your Local Environment](../../resources/local-development.md) guide.
 
 ## Running the Example
 
