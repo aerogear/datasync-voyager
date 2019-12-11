@@ -5,6 +5,3 @@ The link:https://github.com/aerogear/ionic-showcase[sample application] demonstr
 * Conflict Resolution
 * Subscriptions
 
-//tag::excludeDownstream[]
-See the xref:showcase-apps.adoc[Showcase Apps section] for instructions about how to run it.
-//end::excludeDownstream[]
