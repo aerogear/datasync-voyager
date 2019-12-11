@@ -13,6 +13,8 @@ include::_partials/data-sync/getting-started-openshift.adoc[leveloffset=+1]
 [#sync-server-provisioning-data-sync-templates]
 include::_partials/data-sync/openshift-templates.adoc[leveloffset=+1]
 
+[#sync-server-getting-started-mdc-client]	
+include::_partials/data-sync/getting-started-mdc-client.adoc[leveloffset=+1]
 
 [#sync-server-binding]
 //include::_partials/data-sync/binding.adoc[leveloffset=+1,tags={include-tags}]
