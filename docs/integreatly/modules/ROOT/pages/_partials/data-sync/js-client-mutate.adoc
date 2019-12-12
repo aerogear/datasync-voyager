@@ -13,7 +13,7 @@
 // gql is a utility function that handles gql queries
 import gql from 'graphql-tag';
 
-import { OfflineClient } from '@aerogear/voyager-client';
+import { OfflineClient } from 'offix-client-boost';
 
 // connect to the local service.
 let config = {
