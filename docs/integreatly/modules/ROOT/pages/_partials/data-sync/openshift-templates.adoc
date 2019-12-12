@@ -21,12 +21,7 @@ Server side requires client application available on github link:https://github.
 
 Note: Use the Showcase server template for demo purposes only. Do not use this template in a production environment.
 
+When running on Red Hat Managed Integration templates will be available by Searching `DataSync`  in OpenShift catalog
 
-// tag::excludeUpstream[]
-When running on Red Hat Managed Integration templates will be available in *Mobile* > *App*  category in OpenShift catalog
-// end::excludeUpstream[]
+Source code for templates along with documentation can be found in link:https://github.com/aerogear/datasync-deployment[datasync-deployment] repository.
 
-
-// tag::excludeDownstream[]
-Templates along with documentation can be found in link:https://github.com/aerogear/datasync-deployment[datasync-deployment] repository.
-// end::excludeDownstream[]

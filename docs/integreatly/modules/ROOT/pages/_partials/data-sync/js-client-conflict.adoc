@@ -44,18 +44,6 @@ client.offlineMutate({
 })
 ----
 
-* If using Apollo's `mutate` function, provide the `returnType` parameter as follows:
-+
-[source,javascript]
-----
-client.mutate({
-  ...
-  context: {
-    returnType: 'Task'
-  }
-  ...
-})
-----
 
 The client automatically resolves the conflicts based on the current strategy and notifies listeners as required.
 
