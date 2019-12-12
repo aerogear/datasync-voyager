@@ -65,7 +65,7 @@ $ node index-2.js
 +
 [source,bash]
 ----
-npm install offix-client-boost
+npm install @aerogear/voyager-server
 npm install graphql
 npm install graphql-tag
 ----
@@ -83,7 +83,7 @@ If the client app uses subscriptions, then the `wsUrl` field is required too.
 // gql is a utility function that handles gql queries
 import gql from 'graphql-tag';
 
-import { OfflineClient } from 'offix-client-boost';
+import { OfflineClient } from '@aerogear/voyager-server';
 
 // connect to the local service.
 let config = {
