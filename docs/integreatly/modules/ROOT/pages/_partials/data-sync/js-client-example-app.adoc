@@ -1,4 +1,0 @@
-= Example application
-
-Try SDK using sample application:
-https://github.com/aerogear/ionic-showcase

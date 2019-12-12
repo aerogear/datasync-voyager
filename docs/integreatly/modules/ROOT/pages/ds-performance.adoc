@@ -1,6 +1,0 @@
-// tag::excludeDownstream[]
-include::_partials/attributes.adoc[]
-// end::excludeDownstream[]
-
-include::_partials/data-sync/js-client-improving-ui-performance.adoc[leveloffset=+1]
-
