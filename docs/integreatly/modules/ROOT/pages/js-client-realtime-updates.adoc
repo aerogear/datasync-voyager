@@ -40,7 +40,7 @@ where `<your_websocket_url>` is the full URL of the websocket endpoint of your G
 +
 [source,javascript]
 ----
-const { createClient } = require("@aerogear/voyager-server");
+const { createClient } = require("@aerogear/voyager-client");
 
 const client = createClient(config)
 ----
@@ -110,7 +110,7 @@ Use the following example to re-run a query after a client returns to an online 
 
 [source, javascript]
 ----
-const { CordovaNetworkStatus, NetworkInfo } = require("@aerogear/voyager-server");
+const { CordovaNetworkStatus, NetworkInfo } = require("@aerogear/voyager-client");
 const networkStatus = new CordovaNetworkStatus();
 
 networkStatus.onStatusChangeListener({
