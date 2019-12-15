@@ -1,6 +1,6 @@
-# Voyager Server
+# AeroGear Data Sync
 
-[![CircleCI](https://circleci.com/gh/aerogear/voyager-server.svg?style=svg)](https://circleci.com/gh/aerogear/voyager-server)
+[![CircleCI](https://circleci.com/gh/aerogear/datasync.svg?style=svg)](https://circleci.com/gh/aerogear/datasync)
 [![Coverage Status](https://coveralls.io/repos/github/aerogear/voyager-server/badge.svg)](https://coveralls.io/github/aerogear/voyager-server)
 
 Home of the Aerogear Data Sync Framework. The goal of this project is to make it easier to build secure, production ready, realtime APIs and applications with GraphQL.
