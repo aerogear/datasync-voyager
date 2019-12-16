@@ -1,6 +1,7 @@
 
 # Ignore the compiled output.
 dist/
+build/
 
 package-lock.json
 packages/*/package-lock.json

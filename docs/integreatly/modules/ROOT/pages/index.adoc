@@ -3,7 +3,6 @@ include::_partials/attributes.adoc[]
 // end::excludeDownstream[]
 
 = Developing a {sync-service} Application
-:page-partial:
 
 Unlike other mobile services which provide a server and an API, Data Sync is a framework that you use to develop services. Typically, you develop a {sync-service} service as follows:
 

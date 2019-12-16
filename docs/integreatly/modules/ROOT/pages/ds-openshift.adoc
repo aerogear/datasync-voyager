@@ -5,17 +5,16 @@ include::_partials/attributes.adoc[]
 
 [id='openshift_{context}']
 = Running a {sync-service} app on OpenShift
-:page-partial:
-:toc:
+
 [#sync-server-getting-started-openshift]
-include::_partials/data-sync/getting-started-openshift.adoc[leveloffset=+1]
+include::getting-started-openshift.adoc[leveloffset=+1]
 
 [#sync-server-provisioning-data-sync-templates]
-include::_partials/data-sync/openshift-templates.adoc[leveloffset=+1]
+include::openshift-templates.adoc[leveloffset=+1]
 
 
 [#sync-server-binding]
 //include::_partials/data-sync/binding.adoc[leveloffset=+1,tags={include-tags}]
 
 [#sync-server-binding-keycloak]
-include::_partials/data-sync/getting-started-binding-keycloak.adoc[leveloffset=+1]
+include::getting-started-binding-keycloak.adoc[leveloffset=+1]

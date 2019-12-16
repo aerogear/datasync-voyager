@@ -3,5 +3,5 @@ include::_partials/attributes.adoc[]
 // end::excludeDownstream[]
 
 
-include::_partials/data-sync/js-client-offline.adoc[]
+include::js-client-offline.adoc[]
 

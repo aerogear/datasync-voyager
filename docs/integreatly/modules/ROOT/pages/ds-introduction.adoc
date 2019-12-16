@@ -4,16 +4,16 @@ include::_partials/attributes.adoc[]
 
 
 
-[[introduction]]
+= Introduction
 
-include::_partials/data-sync/introducing-data-sync.adoc[leveloffset=2,tags=!excludeDownstream]
+include::introducing-data-sync.adoc[leveloffset=+1]
 
-include::_partials/data-sync/data-sync-technical-overview.adoc[leveloffset=2,tags=!excludeDownstream]
+include::data-sync-technical-overview.adoc[leveloffset=+1]
 
-include::_partials/data-sync/ref_terminology.adoc[leveloffset=+2]
+include::ref_terminology.adoc[leveloffset=+1]
+
 
 [id='{context}_additional-resources-{context}']
-
 .Additional resources
 
 * link:https://graphql.org/learn[Learn GraphQL]

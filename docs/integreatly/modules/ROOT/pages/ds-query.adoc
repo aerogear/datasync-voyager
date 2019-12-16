@@ -2,4 +2,4 @@
 include::_partials/attributes.adoc[]
 // end::excludeDownstream[]
 
-include::_partials/data-sync/js-client-query.adoc[]
+include::js-client-query.adoc[]
