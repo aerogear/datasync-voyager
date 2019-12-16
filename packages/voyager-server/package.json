@@ -42,7 +42,7 @@
     "node-fetch": "2.6.0",
     "ts-node": "8.5.4",
     "typescript": "3.7.3",
-    "ws": "7.2.0"
+    "ws": "7.2.1"
   },
   "ava": {
     "compileEnhancements": false,
