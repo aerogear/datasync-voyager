@@ -16,5 +16,3 @@ include::openshift-templates.adoc[leveloffset=+1]
 [#sync-server-binding]
 //include::_partials/data-sync/binding.adoc[leveloffset=+1,tags={include-tags}]
 
-[#sync-server-binding-keycloak]
-include::getting-started-binding-keycloak.adoc[leveloffset=+1]
