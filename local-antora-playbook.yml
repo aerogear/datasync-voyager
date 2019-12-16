@@ -1,11 +1,12 @@
 site:
   title: Data Sync
   url: 
-  start_page: docs::index
+  start_page: data-sync::index
 content:
   sources:
     - url: .
-      branches: HEAD       
+      branches: HEAD
+      start_path: docs/integreatly
 ui:
   bundle:
     url: https://github.com/integr8ly/user-docs-site/raw/master/ui-bundle.zip

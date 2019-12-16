@@ -17,7 +17,7 @@ You will add the libraries to your mobile project, configure the client classes,
 +
 [source,javascript]
 ----
-include::index-2.js[]
+include::_partials/index-2.js[]
 ----
 
 .. Run the server:

@@ -29,7 +29,7 @@ The Voyager framework has a small ecosystem of components for building GraphQL b
 
 ## Local Development Setup
 
-The [Local Development Guide](./doc/guides/local-development.md) will help contributors to get started developing Voyager Server.
+The [Local Development Guide](./docs/guides/local-development.md) will help contributors to get started developing Voyager Server.
 
 ## Contributing
 
@@ -43,6 +43,9 @@ The [Examples Guide](./examples/README.md) walks through some example applicatio
 
 [Ionic Reference app](https://github.com/aerogear/ionic-showcase) provides example implementation of every feature offered by server together with Ionic based Mobile Application.
 
-## API Docs
+## Docs
 
-The [API Documentation Page](./doc/api/api.md) links to the documentation for the individual packages included in this repo. The documentation is a work in progress.
+
+Documentation in ```docs/integreatly``` can be previewed using [Antora](https://docs.antora.org) using:
+
+```antora local-antora-playbook.yml```

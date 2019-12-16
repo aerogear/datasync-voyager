@@ -34,7 +34,7 @@ $ npm install @aerogear/voyager-server <3>
 +
 [source,javascript]
 ----
-include::index-1.js[]
+include::_partials/index-1.js[]
 ----
 
 . Run the server:
