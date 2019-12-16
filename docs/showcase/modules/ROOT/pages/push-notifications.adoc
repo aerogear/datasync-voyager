@@ -1,0 +1,8 @@
+
+
+= {unifiedpush-service}
+
+
+. Send a push notification as described in
+link:{push-guide-link}#sending[Sending a Push Notification]
+. Launch the showcase app and view the notification.

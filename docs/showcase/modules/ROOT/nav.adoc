@@ -1,0 +1,9 @@
+include::{partialsdir}/attributes.adoc[]
+
+* xref:index.adoc[Showcase Apps]
+** xref:index.adoc#app[Showcase App Setup]
+** xref:index.adoc#binding[Service Binding]
+** xref:index.adoc#downloading-the-mobile-services-configuration-file[Downloading the Mobile Services Configuration File]
+** xref:index.adoc#build[Building and Running the Showcase Apps]
+** xref:index.adoc#certs[Using Self Signed Certs]
+** xref:index.adoc#features[Demonstrating the Showcase App Features]

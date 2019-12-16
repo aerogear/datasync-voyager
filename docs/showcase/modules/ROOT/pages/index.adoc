@@ -1,0 +1,26 @@
+
+
+include::_partials/attributes.adoc[]
+
+:toc:
+
+= Using the Showcase App
+
+include::service-setup.adoc[leveloffset=1,tags={include-tags}]
+
+
+// tag::excludeDownstream[]
+[#certs]
+
+include::proc_self-signed-certs.adoc[leveloffset=1,tags={include-tags}]
+// end::excludeDownstream[]
+
+[#features]
+== Demonstrating the ShowCase App features
+
+include::identity-management-demo.adoc[leveloffset=2,tags={include-tags}]
+
+include::sync.adoc[leveloffset=2,tags={include-tags}]
+
+include::push-notifications.adoc[leveloffset=2},tags={include-tags}]
+

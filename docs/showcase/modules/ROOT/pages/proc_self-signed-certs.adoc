@@ -1,0 +1,191 @@
+//[[using-self-signed-certificates-in-mobile-clients]]
+= Using Self-Signed Certificates in Mobile Apps
+
+NOTE: Before you can run a mobile app and connect to {product-name}, you must configure self-signed certificates on the mobile device.
+
+Throughout the development lifecycle of a mobile app, a common requirement is to integrate and connect with back-end services in a secure manner.
+This is achieved using SSL/TLS.
+
+However, in order for the client device to connect over SSL/TLS, it needs to trust the certificates used by the back-end services, which are signed by a certificate authority.
+Most client devices have a list of well-known and trusted certificate authorities pre-installed and this allows the client devices to verify the certificates used by the back-end services.
+
+A typical OpenShift development environment uses self-signed certificates that are not signed by any of the trusted certificate authorities.
+In such an environment, the client devices cannot establish secure connections with the back-end services that are running on a local OpenShift cluster.
+
+The suggested workaround is to manually extract the root certificate from the cluster, install it on the device, and make sure your application trusts the new certificate.
+
+[[extracting-root-ca]]
+== 1. Extracting the OpenShift Root Certificate Authority Cert
+
+.. Log into OpenShift as the admin user:
++
+[source,bash]
+----
+$ oc login -u system:admin
+----
+
+.. Run the following command:
++
+[source,bash]
+----
+$ oc get secret router-certs --template='{{index .data "tls.crt"}}' -n default  |  \
+base64 --decode | sed -e '1,/^-----END RSA PRIVATE KEY-----$/ d'  > /tmp/localcluster.crt
+----
++
+The resulting file is located in the `/tmp` directory.
+
+[[installing-on-device]]
+== 2. Installing the OpenShift Root Certificate Authority Cert on a Device
+
+[tabs]
+====
+Android::
++
+--
+To install the cert on an Android emulator:
+
+. https://support.google.com/android/answer/2819522?hl=en[Set screen lock] on the mobile device to allow for the installation of the certificate.
+
+. Click on the *certificate file* and drag it onto the emulator. It should be copied to the _Downloads_ folder on the device.
+
+. Install the certificate on your device:
++
+.. To choose a file, navigate to _Settings > Security & location > Advanced > Encryption & credentials > Install from SD card_. From here, navigate to the _Downloads_ folder and you should see the certificate file.
+.. Navigate to the `Downloads` folder and choose the certificate file.
+The Android system detects the certificate and lets you install it. For more information, see the link:https://support.google.com/nexus/answer/2844832?hl=en[sample guide for Google Nexus devices].
+
+To install the cert on a real Android device:
+
+. https://support.google.com/android/answer/2819522?hl=en[Enable screen lock] on the mobile device to allow for the installation of the certificate.
+. Copy the file to your device using one of the following methods:
++
+* Email attachment (Recommended) - Email the certificate to an address accessible from the device and download the attachment.
+* Cloud service - Use a cloud storage service such as Dropbox or Google Drive that is accessible from the device, and download from the device.
+* USB - Attach the device to a computer and drag the certificate to a devices file system.
+** Use the https://support.google.com/nexus/answer/2840804?hl=en[example guide for Google Nexus devices].
+The procedure might be different for other devices.
+** Use the link:https://developer.android.com/studio/command-line/adb[Android Debug Bridge (adb) documentation^] for the push command to push the certificate to the connected device, for example:
++
+----
+$ adb push /tmp/localcluster.crt /sdcard/Download/localcluster.crt
+----
+. Install the certificate on your device:
++
+If you are use the email or cloud service method, you are prompted by the Android system automatically to install the file.
+Follow the instructions to complete the process.
++
+If you are using the USB approach, you must install the certificate manually:
++
+.. Go to Settings > Security & location > Advanced > Encryption & credentials > Install from SD card.
+You are prompted to choose a file.
+.. Navigate to the `Downloads` folder and choose the certificate file.
+The Android system detects the certificate and lets you install it. For more information, see the link:https://support.google.com/nexus/answer/2844832?hl=en[sample guide for Google Nexus devices].
+
+To verify the self-signed certificate is installed correctly, use a browser on the device to open the OpenShift web console. You should not see any warnings or errors relating to the certificate.
+--
+iOS::
++
+--
+To install the cert on an iOS  simulator:
+
+. Drag and drop the certificate file to the simulator, and use Safari to download the certificate to the simulator.
+
+. Install the downloaded certificate:
++
+.. Go to Settings > General > Profile.
+You should see a profile with a name similar to `openshift-signer@xxxxxxx`.
+.. Tap on the profile.
+An *Install* button appears in the top right corner of the screen.
+.. Tap the *Install* button to install the cert.
+
+. Trust the installed certificate in iOS.
+Go to Settings > General > About > Certificate Trust Settings, and enable the newly installed root certificate.
+See the link:https://support.apple.com/en-us/HT204477[Apple support site] for more instructions.
+
+To install the cert on a real iOS device:
+
+. Enable https://support.apple.com/en-us/ht204060[Passcode] or https://support.apple.com/en-us/ht201371[TouchID] protection on the mobile device to ensure the certificate can be installed.
+. Copy the file to your device using one of the following methods:
++
+* Email attachment (Recommended) - Email the certificate to an address accessible from the device and download the attachment.
+* Cloud service - Use a cloud storage service such as Dropbox or Google Drive that is accessible from the device, and download from the device.
+
+. Add the certificate to your device:
++
+When you download the certificate, the device should automatically detect a profile. Follow the on screen instructions to complete the process.
+
+. Trust the installed certificate in iOS.
+Go to Settings > General > About > Certificate Trust Settings, and enable the newly installed root certificate.
+See the link:https://support.apple.com/en-us/HT204477[Apple support site] for more instructions.
+
+To verify the self-signed certificate is installed correctly, use a browser on the deveice to open the OpenShift web console. You should not see any warnings or errors about the certificate.
+
+--
+====
+
+[[trust-self-signed-cert]]
+== 3. Trusting the Certificate In Your App.
+
+In the previous procedures, you ensured that the operating system trusts the cert.
+However, if you are using newer versions of the Android or iOS operating systems, you also need to update your mobile app to make sure it trusts the certificate.
+
+[tabs]
+====
+Android::
++
+--
+. Create a `network_security_config.xml` file with the following code.
++
+[source,xml]
+----
+<network-security-config>
+  <base-config>
+    <trust-anchors>
+      <certificates src="user"/>
+      <certificates src="system"/>
+    </trust-anchors>
+  </base-config>
+</network-security-config>
+----
++
+Save this file in the following location:
+// tag::excludeDownstream[]
+* `res/xml` directory for native apps
+// end::excludeDownstream[]
+* the root directory of the project for JavaScript apps
+
+. Update the manifest file of your Android application to use this configuration.
+// tag::excludeDownstream[]
+.. If you are developing a native application, open the `AndroidManifest.xml` file and add the following code to the `application` tag:
++
+[source,xml]
+----
+<application android:networkSecurityConfig="@xml/network_security_config" ... />
+----
+// end::excludeDownstream[]
+.. If you are developing a Cordova application, add the following code the `config.xml` file in for the `android` platform:
++
+[source,xml]
+----
+<resource-file src="network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
+<edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+    <application android:networkSecurityConfig="@xml/network_security_config" />
+</edit-config>
+----
++
+You also need to add `xmlns:android="http://schemas.android.com/apk/res/android"` to the `widget` tag in the same `config.xml` file.
+
+For more information, check the link:https://developer.android.com/training/articles/security-config[Android network security configuration guide].
+--
+iOS::
++
+--
+
+. Add the `NSAllowsArbitraryLoads` key to the `Info.plist` file of your iOS project.
+. Set the `NSAllowsArbitraryLoads` key to `Yes` to disable the App Transport Security (ATS) feature for your application.
+
+NOTE: Only perform these steps for development or debug purposes, the resulting app will not pass the App Store review process.
+
+For more information, see the https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW60[Apple developer docs].
+--
+====
