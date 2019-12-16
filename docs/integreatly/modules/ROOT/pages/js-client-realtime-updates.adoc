@@ -104,7 +104,6 @@ When using subscriptions to provide your client with realtime updates it is impo
 
 To avoid this, {sync-client} provides a `NetworkStatus` interface which can be used along with the `NetworkInfo` interface to implement custom checks of network status.
 
-For more information about how to import and configure a custom network status checker, see xref:sync-js-client-advanced-topics[Advanced Topics].
 
 Use the following example to re-run a query after a client returns to an online state:
 
