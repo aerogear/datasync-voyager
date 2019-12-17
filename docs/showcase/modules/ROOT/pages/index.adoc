@@ -4,7 +4,10 @@ include::_partials/attributes.adoc[]
 
 :toc:
 
-= Setting up the Showcase app
+
+= Using the Showcase app
+
+== Setting up the Showcase app
 
 1. Log into your OpenShift cluster.
 
@@ -13,7 +16,6 @@ include::_partials/attributes.adoc[]
 3. Retrieve and note the route from the *Data Sync Showcase* project.
 
 
-= Using the Showcase app
 
 include::build-and-deploy.adoc[leveloffset=1,tags={include-tags}]
 
