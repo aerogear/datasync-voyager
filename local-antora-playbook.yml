@@ -1,5 +1,5 @@
 site:
-  title: Data Sync
+  title: Data Sync and Showcase Docs
   url: 
   start_page: data-sync::index
 content:
@@ -7,6 +7,9 @@ content:
     - url: .
       branches: HEAD
       start_path: docs/integreatly
+    - url: .
+      branches: HEAD
+      start_path: docs/showcase
 ui:
   bundle:
     url: https://github.com/integr8ly/user-docs-site/raw/master/ui-bundle.zip

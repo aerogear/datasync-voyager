@@ -1,0 +1,39 @@
+
+
+[[building-and-deploying-the-showcase-apps]]
+[#build]
+= Building and Running the Showcase App
+
+. Clone the showcase app and checkout the release tag {showcase-version}
++
+[source,bash,subs="attributes"]
+----
+$ git clone https://github.com/aerogear/ionic-showcase.git
+$ cd ionic-showcase
+$ git checkout{showcase-version}
+----
+
+. Build the Mobile App
++
+[source,bash,subs="attributes"]
+----
+$ npm install
+$ npm run ionic:build
+----
+
+
+. Run the Mobile App on a device if connected or on the emulator if no device is connected:
++
+[source,bash,subs="attributes"]
+----
+$ npm run ionic:android # to run on an Android device or emulator
+$ npm run ionic:ios # to run on an iOS device or emulator
+----
++
+Alternatively, you can use Cordova commands directly to specify the target:
++
+[source,bash,subs="attributes"]
+----
+$ ionic cordova run android --device      # run on a connected device
+$ ionic cordova run android --emulator    # run on the Android emulator
+----

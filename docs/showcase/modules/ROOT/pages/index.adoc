@@ -1,0 +1,31 @@
+
+
+include::_partials/attributes.adoc[]
+
+:toc:
+
+
+= Using the Showcase app
+
+== Setting up the Showcase app
+
+1. Log into your OpenShift cluster.
+
+2. Select *Data Sync Showcase* from the Service Catalog.
+
+3. Retrieve and note the route from the *Data Sync Showcase* project.
+
+
+
+include::build-and-deploy.adoc[leveloffset=1,tags={include-tags}]
+
+
+[#features]
+== Demonstrating the ShowCase App features
+
+include::identity-management-demo.adoc[leveloffset=2,tags={include-tags}]
+
+include::sync.adoc[leveloffset=2,tags={include-tags}]
+
+include::push-notifications.adoc[leveloffset=2},tags={include-tags}]
+

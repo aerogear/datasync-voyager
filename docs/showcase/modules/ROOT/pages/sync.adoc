@@ -1,0 +1,13 @@
+= {sync-service}
+
+
+NOTE: To demonstrate all the features that {sync-service} offers, use the same app from multiple devices at the same time.
+
+From the showcase app:
+
+. Select the *Manage Tasks* menu item.
+. View tasks created from other devices and edit them. Check that the tasks have changed from other devices.
+. Create new tasks and see those tasks displayed on other devices.
+. Invoke *Airplane Mode* to bring your device offline.
+. Create more tasks and edit some existing tasks. 
+. Switch the device back online and see the new and edited tasks synchronized to the other devices.

@@ -1,0 +1,15 @@
+
+
+= {keycloak-service}
+
+.Prerequisite
+
+Make sure you have created a user and set up credentials for that user as describe in the link:{idm-docs-link}[{idm-name} Documentation].
+
+
+From the showcase app:
+
+. Click the *Login* button.
+. A login page is displayed, enter your credentials.
+. Once the login is successful, navigate to *User Profile* page and see the roles and basic information about the user.
+

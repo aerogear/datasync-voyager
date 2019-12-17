@@ -1,0 +1,3 @@
+include::{partialsdir}/attributes.adoc[]
+
+* xref:index.adoc[Running the Showcase App]
