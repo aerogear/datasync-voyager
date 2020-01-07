@@ -6,7 +6,7 @@
 
 Data Sync is a JavaScript framework that enables a developer to add real time data synchronization to both mobile and web clients.
 The Data Sync framework also provides offline capabilities that allow a client to continue operating offline and once connectivity is re-established, the client is automatically synchronized.
-An app built using the Data Sync framework typically connects to a data source for data persistence however, an app built using the Data Sync framework works without a data source.
+An app built using the Data Sync framework typically connects to a data source for data persistence; however, an app built using the Data Sync framework works without a data source.
 
 An app built using the Data Sync framework comprises of two components:
 

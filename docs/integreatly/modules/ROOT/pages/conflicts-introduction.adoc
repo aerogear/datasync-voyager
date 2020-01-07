@@ -2,7 +2,7 @@
 
 = Introduction
 
-Mobile apps allow users to modify data while offline, which can result in conflicts. 
+Mobile apps allow users to modify data while offline. This can result in conflicts. 
 
 A *conflict* occurs when two or more users try to modify the same data. The system needs to resolve the conflicting data.
 

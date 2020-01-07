@@ -4,10 +4,10 @@ include::_partials/attributes.adoc[]
 
 = Developing a {sync-service} Application
 
-Unlike other mobile services which provide a server and an API, Data Sync is a framework that you use to develop services. Typically, you develop a {sync-service} service as follows:
+Unlike other mobile services which provide a server and an API, Data Sync is a framework that allows you to develop services. Typically, you develop a {sync-service} service as follows:
 
 . Design a link:https://graphql.org/learn[GraphQL] schema.
-. Develop a Data Sync server and Data Sync client, with the features you require, for example, real-time updates.
+. Develop a Data Sync server and Data Sync client, with the features you require
 . Containerize your Data Sync server and deploy it to OpenShift.
 //. Bind your mobile app to that Data Sync server.
 . Configure your mobile app to point to the Data Sync server.

@@ -11,7 +11,7 @@ In this example, you add the {sync-server} library to your link:https://expressj
 .Prerequisites
 
 * You have Node.js and npm installed.
-* You have created a node.js project.
+* You have created a `node.js` project.
 
 .Procedure
 

@@ -1,12 +1,12 @@
 = Implementing authentication and authorization on your client
 
-With {sync-client}, user information can be passed to a {sync-service} server application in two ways: headers or tokens.
+With {sync-client}, user information can be passed to a {sync-service} server application in two ways, by using headers or by using tokens.
 
 Headers are used to authentication HTTP requests to the server, which are used for queries and mutations.
 
 Tokens are used to authenticate WebSocket connections, which are used for subscriptions.
 
-Both of them can be set via the `authContextProvider` configuration option. Here is an example
+Both ways can be set by the `authContextProvider` configuration option. For example:
 
 [source, javascript]
 ----

@@ -2,18 +2,18 @@
 
 Red Hat AMQ supports the MQTT protocol which makes it a suitable PubSub technology for powering GraphQL subscriptions at scale. 
 
-This section provides recommendations for
+This section provides recommendations for:
 
 * Configuring AMQ Online for MQTT messaging.
 * Connecting to AMQ Online and using it as a pubsub within server applications.
 
 .Terminology
 
-* https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/using_amq_online_on_openshift_container_platform/index#assembly-intro-using-messaging[AMQ Online] is a mechanism that allows developers to consume the features of Red Hat AMQ within OpenShift.
+* https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/installing_and_managing_amq_online_on_openshift/index[AMQ Online] is a mechanism that allows developers to consume the features of Red Hat AMQ within OpenShift.
 
-* https://access.redhat.com/documentation/en-us/red_hat_amq/7.3/html/introducing_red_hat_amq_7/about[Red Hat AMQ] provides fast, lightweight, and secure messaging for Internet-scale applications. AMQ Broker supports multiple protocols and fast message persistence.
+* https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/introducing_red_hat_amq_7/about[Red Hat AMQ] provides fast, lightweight, and secure messaging for Internet-scale applications. AMQ Broker supports multiple protocols and fast message persistence.
 
-* http://mqtt.org/[MQTT] stands for MQ Telemetry Transport. It is a publish/subscribe, extremely simple and lightweight messaging protocol.
+* http://mqtt.org/[MQTT] stands for MQ Telemetry Transport. It is a publish-subscribe, extremely simple and lightweight messaging protocol.
 
 // tag::excludeDownstream[]
 .Prerequisites
@@ -22,7 +22,7 @@ This section provides recommendations for
 * AMQ Online is installed in the OpenShift cluster
 // end::excludeDownstream[]
 
-AMQ Online includes many configuration options that could address the specific needs of your application. 
+AMQ Online includes many configuration options that address the specific needs of your application. 
 The minimum configuration steps for using AMQ Online for MQTT messaging and enabling GraphQL subscriptions are:
 
 . Create an `AddressSpace`
@@ -31,11 +31,11 @@ The minimum configuration steps for using AMQ Online for MQTT messaging and enab
 
 == Creating an address space
 
-A user can request messaging resources by creating an `AddressSpace`. There are two types of address space, `standard` and `brokered`. 
+A user can request messaging resources by creating an `AddressSpace`. There are two types of address spaces, `standard` and `brokered`. 
 You must use the `brokered` address space for MQTT based applications. 
 
 .Procedure
-. Create an address space, for example, the following resource creates a brokered `AddressSpace`:
+. Create an address space. For example, the following resource creates a brokered `AddressSpace`:
 +
 [source,yaml,options="nowrap"]
 ----
@@ -64,7 +64,7 @@ The output displays information about the address space, including details requi
 
 .Additional Information
 
-See https://access.redhat.com/documentation/en-us/red_hat_amq/7.3/html-single/using_amq_online_on_openshift_container_platform/index#create-address-space-cli-messaging[Creating address spaces using the command line] for more information.
+See link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_online_on_openshift/managing-address-spaces-messaging#create-address-space-cli-messaging[Creating address spaces using the command line] for more information.
 
 == Creating an Address
 
@@ -95,7 +95,7 @@ Create an Address for each topic name passed into `pubsub.asyncIterator()`.
 
 .Additional Information
 
-See https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/using_amq_online_on_openshift_container_platform/index#create-address-cli-messaging[Creating addresses using the command line] for more information.
+See link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_online_on_openshift/managing-address-spaces-messaging#create-address-space-cli-messaging[Creating addresses using the command line] for more information.
 
 == Creating an AMQ Online user
 
@@ -130,7 +130,7 @@ oc create -f my-messaging-user.yaml
 
 An application can now connect to an AMQ Online address using this user's credentials. 
 
-For more information see the https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/using_amq_online_on_openshift_container_platform/index#con-user-model-messaging[AMQ Online User Model].
+For more information see the link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_online_on_openshift/con-user-model-messaging[AMQ Online User Model].
 
 = Using GraphQL MQTT PubSub with AMQ Online
 
@@ -311,11 +311,11 @@ client.on('error', (error) => {
 })
 ----
 
-Read the https://www.npmjs.com/package/mqtt[`mqtt documentation`] to learn about all of the events and what causes them.
+Read the https://www.npmjs.com/package/mqtt[MQTT documentation] to learn about all of the events and what causes them.
 
 === Troubleshooting MQTT Configuration Issues
 
-If your application is experiencing connection errors, the most important thing to check is the configuration being passed into `mqtt.connect`. Because your application may run locally or in OpenShift, it may connect using internal or external hostnames, and it may or may not use TLS, it's very easy to accidentally provide the wrong configuration.
+If your application is experiencing connection errors, the most important thing to check is the configuration being passed into `mqtt.connect`. Because your application may run locally or in OpenShift, it may connect using internal or external hostnames, and it may or may not use TLS. It is very easy to accidentally provide the wrong configuration.
 
 The Node.js `mqtt` module does not report any errors if parameters such as `hostname` or `port` are incorrect. Instead, it will silently fail and allow your application to start without messaging capabilities.
 

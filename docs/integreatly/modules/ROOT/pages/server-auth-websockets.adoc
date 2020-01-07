@@ -7,9 +7,9 @@ Prerequisites:
 * xref:sync-server-auth[Configure Data Sync Server for Authentication and Authorization]
 * xref:ds-realtime.adoc#realtime-updates-{context}[Configuring Your Server for real-time updates]
 
-This section describes how to implement Authentication and Authorization over websockets with {idm-name}. For more generic documentation on Authentication over Websockets, read Apollo's https://www.apollographql.com/docs/apollo-server/features/subscriptions/#authentication-over-websocket[Authentication Over Websocket] document.
+This section describes how to implement authentication and authorization over websockets with {idm-name}. For more information on authentication over websockets, read Apollo's https://www.apollographql.com/docs/apollo-server/features/subscriptions/#authentication-over-websocket[Authentication Over Websocket] documention.
 
-The Voyager Client supports adding token information to `connectionParams` that will be sent with the first WebSocket message. In the server, this token is used to authenticate the connection and to allow the subscription to proceeed. Read the section on xref:sync-js-client-auth[{idm-name} Authentication in Voyager Client] to ensure the {idm-name} token is being sent to the server.
+The Voyager Client supports adding token information to `connectionParams` that will be sent with the first WebSocket message. In the server, this token is used to authenticate the connection and to allow the subscription to proceeed. Read the section on xref:sync-js-client-auth[{idm-name} Authentication in Voyager Client] to ensure the {idm-name} token is sent to the server.
 
 In the server, `createSubscriptionServer` accepts a `SecurityService` instance in addition to the regular options that can be passed to a standard `SubscriptionServer`. The `KeycloakSecurityService` from `@aerogear/voyager-keycloak` is used to validate the {idm-name} token passed by the client in the initial WebSocket message.
 
