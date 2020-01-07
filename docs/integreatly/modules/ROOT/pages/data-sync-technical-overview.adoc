@@ -24,4 +24,4 @@ image::RHMDS_Data_Sync_35_0919_framework.png[Data Sync Technical Overview]
 |Data sources| The data source stores data. This data is typically what is synchronized across the Sync clients.
 |====
 
-For more information about the Apollo Server framework, see link:https://www.apollographql.com/docs/apollo-server/[_Start here to learn about the Apollo platform_].
+For more information about the Apollo Server framework, link:https://www.apollographql.com/docs/apollo-server/[start here to learn about the Apollo platform].

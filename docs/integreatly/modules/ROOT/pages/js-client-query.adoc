@@ -2,12 +2,12 @@
 
 .Prerequisites
 * You have Node.js and npm installed.
-* You have created an empty web project that supports ES6, for example, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
+* You have created an empty web project that supports ES6, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
 * You have completed the server getting started guide and the application is running.
 
 This section describes how to use the {sync-client} to create mobile and web applications that can communicate with the Voyager server application.
 
-Data Sync provides JavaScript libraries which integrate your javascript app using with a server that also uses Data Sync.  
+Data Sync provides JavaScript libraries which integrate your javascript app  with a server that also uses Data Sync.  
 The client libraries are based on the link:https://www.apollographql.com/docs/react/api/apollo-client.html[Apollo client].
 
 You will add the libraries to your mobile project, configure the client classes, connect to the server, and confirm that it works.
@@ -70,12 +70,12 @@ npm install graphql
 npm install graphql-tag
 ----
 +
-NOTE: A prerequisite is that you have created an empty web project that supports ES6, for example, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
+NOTE: A prerequisite is that you have created an empty web project that supports ES6, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
 
 . Create an `index.js` file to make the same query as step 1, but from JavaScript. 
 +
-In this example, a config object is created, and the `httpUrl` field is set to the url of the Voyager server application. 
-If the client app uses subscriptions, then the `wsUrl` field is required too.
+In this example, a config object is created, and the `httpUrl` field is set to the URL of the Voyager server application. 
+If the client app uses subscriptions, then the `wsUrl` field is also required.
 +
 .src/index.js
 [source,javascript]

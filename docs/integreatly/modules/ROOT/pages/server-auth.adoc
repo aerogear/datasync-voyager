@@ -60,12 +60,12 @@ The link:https://github.com/aerogear/voyager-server/blob/master/examples/keycloa
 
 == Using the hasRole directive in a schema
 
-The Voyager Keycloak module provides the `@hasRole` directive to define role based authorisation in your schema. The `@hasRole` directive is a special annotation that can be applied to
+The Voyager Keycloak module provides the `@hasRole` directive to define role based authorisation in your schema. The `@hasRole` directive is a special annotation that can be applied to:
 
-* Fields
-* Queries
-* Mutations
-* Subscriptions
+* fields
+* queries
+* mutations
+* subscriptions
 
 The `@hasRole` usage is as follows:
 
@@ -82,7 +82,7 @@ The syntax for checking a realm role is `@hasRole(role: "realm:<role>")`. For ex
 
 .Example: Using the @hasRole Directive to Apply Role Based Authorization in a Schema
 
-The following example demonstrates how the `@hasRole` directive can be used to define role based authorization on various parts of a GraphQL schema. This example schema represents publishing application like a news or blog website.
+The following example demonstrates how the `@hasRole` directive can be used to define role based authorization on various parts of a GraphQL schema. This example schema represents publishing an application like a news or blog website.
 
 [source,graphql]
 ----
@@ -115,22 +115,22 @@ type Mutation {
 
 There are two types:
 
-* `Post` - This might be an article or a blog post
-* `Author` - This would represent the person that authored a Post
+* `Post` - An article or a blog post
+* `Author` - Represents the person that authored a Post
 
-There are two Queries:
+There are two queries:
 
-* `allPosts` - This might return a list of posts
-* `getAuthor` - This would return details about an Author
+* `allPosts` - Returns a list of posts
+* `getAuthor` - Returns details about an Author
 
-There are two Mutations:
+There are two mutations:
 
-* `editPost` - This would edit an existing post
-* `deletePost` - This would delete a post.
+* `editPost` - Edits an existing post
+* `deletePost` - Delete a post.
 
 .Role Based Authorization on Queries and Mutations
 
-In the example schema, the `@hasRole` directive has been applied to the `editPost` and `deletePost` mutations. The same could be done on Queries.
+In the example schema, the `@hasRole` directive has been applied to the `editPost` and `deletePost` mutations. The same can be done on queries.
 
 * Only users with the roles `editor` and/or `admin` are allowed to perform the `editPost` mutation.
 * Only users with the role `admin` are allowed to perform the `deletePost` mutation.
@@ -143,4 +143,4 @@ In the example schema, the `Author` type has the fields `address` and `age` whic
 
 This means that users without the role `admin` are not authorized to request these fields in any query or mutation.
 
-For example, non admin users are allowed to run the `getAuthor` query, but they cannot request back the `address` or `age` fields.
+For example, non-admin users are allowed to run the `getAuthor` query, but cannot request the `address` or `age` fields.

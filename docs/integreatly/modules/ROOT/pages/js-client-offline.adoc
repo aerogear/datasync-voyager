@@ -4,7 +4,7 @@
 
 == About offline functionality
 
-Your mobile app can run offline and allow users to query and create mutations using the @aerogear/voyager-client module. 
+Your mobile app can run offline and allows users to query and create mutations using the @aerogear/voyager-client module. 
 
 All queries are performed against the cache, a mutation store (or offline store) supports offline mutations.
 
@@ -34,7 +34,7 @@ For more information about `mutate` and the options available, see link:https://
 The @aerogear/voyager-client module provides an `OfflineClient` class which exposes the following functionality:
 
 * direct access to the mutation store
-* allows you register multiple offline event listeners as described in xref:sync-client-offline-queue-listener[]
+* allows you to register multiple offline event listeners as described in xref:sync-client-offline-queue-listener[]
 * automatically ensures the mobile app's local cache is kept up to date. This client automatically generates `update` methods as described in xref:cache-update-helpers[].
 
 To create the client:
@@ -68,8 +68,8 @@ If a mutation occurs while the device is offline, the `client.mutate` function:
 - returns immediately
 - returns a promise with an error
 
-You can check the _error_ object to isolate errors relating to offline state.
-Invoking the `watchOfflineChange()` method on an _error_ object watches for when an offline change is synced with the server, and sends a notification when triggered.
+You can check the _error_ object to isolate errors related to the offline state.
+Invoking the `watchOfflineChange()` method on an _error_ object, watches for when an offline change is synced with the server, and sends a notification when triggered.
 
 For example:
 [source, javascript]

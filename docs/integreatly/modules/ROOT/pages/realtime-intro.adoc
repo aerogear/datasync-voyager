@@ -2,10 +2,11 @@
 = Introduction to real-time updates
 
 After developing some queries and mutations, you might want to implement real-time updates.
-These are supported in the GraphQL specification by an operation type called `Subscription`.
-To support subscriptions in a production environment, Data Sync implements subscriptions using an MQTT PubSub subscription mechanism, however you might want to use the Apollo PubSub module to develop proof-of-concept applications.  
 
-When coding for real-time updates, you use the following modules:
+Real-time updates are supported in the GraphQL specification by an operation type called `Subscription`.
+To support subscriptions in a production environment, Data Sync implements subscriptions using an MQTT PubSub subscription mechanism; however, you might want to use the Apollo PubSub module to develop proof-of-concept applications.  
+
+When coding for real-time updates, use the following modules:
 
 * @aerogear/voyager-server - supports clients that use voyager-client to enable GraphQL queries and mutations
 * @aerogear/voyager-subscriptions - supports clients that use voyager-client to enable GraphQL subscriptions
@@ -17,7 +18,7 @@ The flow can be summarized as follows:
 
 * Client connects to the server using websockets, and subscribes to certain events.
 * As events occur, the server notifies the clients that are subscribed to those events.
-* Any _currently connected_ client that is subscribed to a given event receives it.
+* Any _currently connected_ client that is subscribed to a given event receives updates.
 * The client can close the connection at any time and no longer receives updates.
 
 To receive updates, the client must be currently connected to the server.

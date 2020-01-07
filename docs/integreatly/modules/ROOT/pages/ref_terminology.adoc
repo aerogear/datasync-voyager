@@ -16,6 +16,6 @@ Sync Server:: The Sync Server is a framework for building Node.js based GraphQL 
 
 Sync Client:: The Sync Client is a JavaScript client offering client side extensions and server side integration. The Sync Client can be integrated into frameworks such as React and Angular.
 
-Data sources:: Data Sync framework is typically used in conjunction with a data source for data persistence however, an app built using the Data Sync framework works without a data source.
+Data sources:: The Data Sync framework is typically used in conjunction with a data source for data persistence; however, an app built using the Data Sync framework works without a data source.
 
 Data Sync framework:: Data Sync is a JavaScript framework that enables a developer to add the capability to synchronize data in real-time for both mobile and web clients.
