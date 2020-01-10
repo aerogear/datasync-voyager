@@ -1,24 +1,28 @@
 [id='deploying-app_{context}']
 = Deploying your Data Sync server application
 
+:doctype: book
+include::_partials/attributes.adoc[]
+
+
 .Prerequisites
 * Data Sync server application working locally
 
 
 .Procedure
-
 . Log in to the Solution Explorer.
 . Navigate to the OpenShift console.
-. Click *Create Project* enter details for your application.
-. Navigate to the Project overview.
+. Click *Create Project*. 
+. Enter the details for your application, when prompted.
+. Navigate to the *Project Overview* screen.
 . Search for the *Data Sync App* in the Service Catalog.
 . In the *Configuration* section:
 .. Enter the Git URL for the application repository.
 +
 NOTE: To use a private repository, see  link:https://access.redhat.com/documentation/en-us/openshift_dedicated/3/html-single/developer_guide/index#dev-guide-new-app[Creating New Applications].
 
-.. Fill out the required fields (indicated by a *).
-.. Fill out any optional fields if necessary.
-. Complete the wizard start provisioning the Data Sync server application.
-. Wait for the service to become ready.
-. In project overview use the application URL displayed in the top right corner to verify your application is available.
+.. Enter information for the required fields (indicated by ** * **).
+.. Complete any optional fields, if necessary.
+. Complete the Wizard to start provisioning the Data Sync server application.
+. Wait for the service to display a ready status.
+. On the **Project Overview** screen, use the application URL displayed in the top right corner to verify your application is available.
