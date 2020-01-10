@@ -1,0 +1,14 @@
+include::_partials/attributes.adoc[]
+
+include::index.adoc[leveloffset=+1]
+include::ds-introduction.adoc[leveloffset=+1]
+include::ds-getting-started.adoc[leveloffset=+1]
+include::ds-query.adoc[leveloffset=+1]
+include::ds-mutation.adoc[leveloffset=+1]
+include::ds-offline.adoc[leveloffset=+1]
+include::ds-realtime.adoc[leveloffset=+1]
+include::ds-auth.adoc[leveloffset=+1]
+include::ds-conflict.adoc[leveloffset=+1]
+include::ds-files.adoc[leveloffset=+1]
+include::ds-openshift.adoc[leveloffset=+1]
+

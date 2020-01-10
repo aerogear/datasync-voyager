@@ -11,5 +11,5 @@ include::{partialsdir}/attributes.adoc[]
 *** xref:ds-auth.adoc[Authz]
 *** xref:ds-conflict.adoc[Conflict Resolution]
 *** xref:ds-files.adoc[File Upload]
-*** xref:ds-openshift.adoc[Running on OpenShift]
+*** xref:ds-openshift.adoc[Running on Integreatly]
 

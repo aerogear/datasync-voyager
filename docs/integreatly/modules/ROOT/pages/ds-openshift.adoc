@@ -4,15 +4,11 @@ include::_partials/attributes.adoc[]
 
 
 [id='openshift_{context}']
-= Running a {sync-service} app on OpenShift
+= Running a {sync-service} app on {product-name}
 
 [#sync-server-getting-started-openshift]
-include::getting-started-openshift.adoc[leveloffset=+1]
+include::deploying-app.adoc[leveloffset=+1]
 
 [#sync-server-provisioning-data-sync-templates]
 include::openshift-templates.adoc[leveloffset=+1]
-
-
-[#sync-server-binding]
-//include::_partials/data-sync/binding.adoc[leveloffset=+1,tags={include-tags}]
 
