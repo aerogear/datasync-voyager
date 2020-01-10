@@ -4,7 +4,6 @@
 include::_partials/attributes.adoc[]
 
 .Prerequisites
-
 * You have followed the documentation to deploy your {sync-service} server application.
 * You have set up a web project that supports ES6. For example:
 ** Using https://reactjs.org/docs/create-a-new-react-app.html[Create React App]
@@ -14,13 +13,12 @@ include::_partials/attributes.adoc[]
 
 
 .Procedure
-
 . Get the hostname of the {sync-service} Server application.
 .. In your teriminal, run the command:
 +
 [source,bash]
 ----
-oc get route <data-sync-application-name>
+$ oc get route <data-sync-application-name>
 ----
 +
 .. Verify the output as:
@@ -73,6 +71,5 @@ The client is now ready to make queries and mutations to the {sync-service} serv
 
 
 .Additional Information
-
 * For more information on performing queries, see the link:./ds-query[Querying a {sync-service} server using a {sync-service} client] documentation.
 * For more information on performing mutations, see the link:./ds-mutation[Adding a mutation to a {sync-service} client] documentation.
