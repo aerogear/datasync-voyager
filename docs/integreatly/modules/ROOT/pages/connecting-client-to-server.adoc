@@ -1,35 +1,37 @@
 = Connecting the {sync-service} client to your {sync-service} server application
+
 :doctype: book
 
-.Prerequisites
 
-* You have followed the documentation to deploy your {sync-service} server application.
+.Prerequisites
+* You have deployed your {sync-service} server application.
 * You have set up a web project that supports ES6. For example:
 ** Using https://reactjs.org/docs/create-a-new-react-app.html[Create React App]
 ** Using https://ionicframework.com/getting-started[Ionic Getting Started]
 ** Using https://angular.io/start[Getting Started with Angular]
 ** Using https://webpack.js.org/guides/getting-started/[Webpack Getting Started Guide]
 
-= Procedure
 
+.Procedure
 . Get the hostname of the {sync-service} Server application.
-.. Run the command
+.. In your teriminal, run the command:
 +
 [source,bash]
 ----
-oc get route <data-sync-application-name>
+$ oc get route <data-sync-application-name>
 ----
 +
-.. Check the output:
+.. Verify the output as:
 +
 [source,bash]
 ----
 NAME                             HOST/PORT               PATH      SERVICES        PORT      TERMINATION   WILDCARD
 <sync-server-application-name>   <sync-server-hostname>            data-sync-app   <all>                   None
 ----
-+
+
 .. Record the value for `<sync-server-hostname>`.
-. Add the following libraries to your project:
+
+. Make sure the `@aerogear/voyager-client`, `graphql`, and `graphql-tag` libraries are added to your project. If necessary, add them by using the following commands:
 +
 [source,javascript]
 ----
@@ -37,23 +39,10 @@ npm install @aerogear/voyager-client
 npm install graphql
 npm install graphql-tag
 ----
-+
+
+
 . In your project source code, import and configure the client using the server hostname.
 +
-[source,javascript]
-----
-import { createClient } from '@aerogear/voyager-client'
-
-const config = {
-  httpUrl: 'https://<sync-server-hostname>/graphql',
-  wsUrl: 'wss://<sync-server-hostname>/graphql'
-}
-
-const client = await createClient(config)
-----
-
-NOTE: if your {sync-service} server application is not available through HTTPS, then the config should be changed as follows.
-
 [source,javascript]
 ----
 const config = {
@@ -62,10 +51,9 @@ const config = {
 }
 ----
 +
-
 The client is now ready to make queries and mutations to the {sync-service} server application.
 
-To learn how to perform queries and mutations, see the following:
 
-* link:./ds-query[Querying a {sync-service} server using a {sync-service} client].
-* link:./ds-mutation[Adding a mutation to a {sync-service} client].
+.Additional Information
+* For more information on performing queries, see the link:./ds-query[Querying a {sync-service} server using a {sync-service} client] documentation.
+* For more information on performing mutations, see the link:./ds-mutation[Adding a mutation to a {sync-service} client] documentation.
