@@ -2,7 +2,6 @@
 = Deploying your Data Sync server application
 
 :doctype: book
-include::_partials/attributes.adoc[]
 
 
 .Prerequisites
