@@ -1,7 +1,7 @@
 = Connecting the {sync-service} client to your {sync-service} server application
 
 :doctype: book
-include::_partials/attributes.adoc[]
+
 
 .Prerequisites
 * You have followed the documentation to deploy your {sync-service} server application.
