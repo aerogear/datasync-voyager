@@ -1,5 +1,7 @@
 = Connecting the {sync-service} client to your {sync-service} server application
+
 :doctype: book
+include::_partials/attributes.adoc[]
 
 .Prerequisites
 
@@ -10,17 +12,18 @@
 ** Using https://angular.io/start[Getting Started with Angular]
 ** Using https://webpack.js.org/guides/getting-started/[Webpack Getting Started Guide]
 
-= Procedure
+
+.Procedure
 
 . Get the hostname of the {sync-service} Server application.
-.. Run the command
+.. In your teriminal, run the command:
 +
 [source,bash]
 ----
 oc get route <data-sync-application-name>
 ----
 +
-.. Check the output:
+.. Verify the output as:
 +
 [source,bash]
 ----
@@ -29,7 +32,8 @@ NAME                             HOST/PORT               PATH      SERVICES     
 ----
 +
 .. Record the value for `<sync-server-hostname>`.
-. Add the following libraries to your project:
+
+. Add the `@aerogear/voyager-client`, `graphql`, and `graphql-tag` libraries to your project by using the following commands:
 +
 [source,javascript]
 ----
@@ -38,6 +42,7 @@ npm install graphql
 npm install graphql-tag
 ----
 +
+
 . In your project source code, import and configure the client using the server hostname.
 +
 [source,javascript]
@@ -51,9 +56,10 @@ const config = {
 
 const client = await createClient(config)
 ----
-
-NOTE: if your {sync-service} server application is not available through HTTPS, then the config should be changed as follows.
-
++
+NOTE: Use the alternative config, if your {sync-service} server application is not available through HTTPS. 
++
+.Alternative config
 [source,javascript]
 ----
 const config = {
@@ -65,7 +71,8 @@ const config = {
 
 The client is now ready to make queries and mutations to the {sync-service} server application.
 
-To learn how to perform queries and mutations, see the following:
 
-* link:./ds-query[Querying a {sync-service} server using a {sync-service} client].
-* link:./ds-mutation[Adding a mutation to a {sync-service} client].
+.Additional Information
+
+* For more information on performing queries, see the link:./ds-query[Querying a {sync-service} server using a {sync-service} client] documentation.
+* For more information on performing mutations, see the link:./ds-mutation[Adding a mutation to a {sync-service} client] documentation.
