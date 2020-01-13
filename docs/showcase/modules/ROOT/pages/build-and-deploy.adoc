@@ -18,9 +18,8 @@ $ git checkout{showcase-version}
 [source,bash,subs="attributes"]
 ----
 $ npm install
-$ npm run ionic:build
+$ npm run build:prod
 ----
-
 
 . Run the Mobile App on a device if connected or on the emulator if no device is connected:
 +
