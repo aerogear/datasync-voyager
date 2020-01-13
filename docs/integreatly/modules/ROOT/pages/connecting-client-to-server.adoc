@@ -54,6 +54,7 @@ const config = {
 The client is now ready to make queries and mutations to the {sync-service} server application.
 
 
-.Additional Information
-* For more information on performing queries, see the link:./ds-query[Querying a {sync-service} server using a {sync-service} client] documentation.
-* For more information on performing mutations, see the link:./ds-mutation[Adding a mutation to a {sync-service} client] documentation.
+//Commenting out - link:./ds-query and link:./ds-mutation need to be reformatted.
+//.Additional Information
+//* For more information on performing queries, see the link:./ds-query[Querying a {sync-service} server using a {sync-service} client] documentation.
+//* For more information on performing mutations, see the link:./ds-mutation[Adding a mutation to a {sync-service} client] documentation.
