@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "ava": "2.4.0",
-    "ts-node": "8.5.4",
-    "typescript": "3.7.3"
+    "ts-node": "8.6.1",
+    "typescript": "3.7.4"
   },
   "ava": {
     "compileEnhancements": false,
