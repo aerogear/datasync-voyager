@@ -23,13 +23,13 @@
   "dependencies": {
     "@aerogear/voyager-tools": "^0.7.1",
     "graphql-tools": "4.0.6",
-    "pino": "5.15.0"
+    "pino": "5.16.0"
   },
   "devDependencies": {
     "@types/pino": "5.20.0",
     "ava": "2.4.0",
-    "ts-node": "8.5.4",
-    "typescript": "3.7.3"
+    "ts-node": "8.6.1",
+    "typescript": "3.7.4"
   },
   "peerDependencies": {
     "graphql": "^0.13.0 || ^14.0.0"

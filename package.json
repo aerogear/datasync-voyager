@@ -27,7 +27,7 @@
     "@types/graphql": "14.5.0",
     "@types/joi": "14.3.4",
     "@types/keycloak-connect": "4.5.1",
-    "@types/node": "10.17.11",
+    "@types/node": "10.17.13",
     "@types/pino": "5.20.0",
     "ava": "2.4.0",
     "coveralls": "3.0.9",
@@ -35,10 +35,10 @@
     "lerna": "3.19.0",
     "nyc": "14.1.1",
     "standard": "14.3.1",
-    "ts-node": "8.5.4",
+    "ts-node": "8.6.1",
     "tslint": "5.20.1",
-    "typedoc": "0.15.5",
-    "typescript": "3.7.3"
+    "typedoc": "0.16.2",
+    "typescript": "3.7.4"
   },
   "nyc": {
     "extension": [
