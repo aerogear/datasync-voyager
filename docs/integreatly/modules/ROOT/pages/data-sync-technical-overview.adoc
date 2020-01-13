@@ -1,6 +1,5 @@
 [id="data-sync-technical-overview-{context}"]
 = Data Sync technical overview
-:page-partial:
 
 
 This section describes the technical aspects of Data Sync.
