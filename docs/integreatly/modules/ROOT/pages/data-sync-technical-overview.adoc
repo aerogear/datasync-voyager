@@ -1,19 +1,11 @@
 [id="data-sync-technical-overview-{context}"]
 = Data Sync technical overview
+:page-partial:
+
 
 This section describes the technical aspects of Data Sync.
 
-// tag::excludeDownstream[]
-
 image::RHMDS_Data_Sync_35_0919_framework.png[Data Sync Technical Overview]
-
-// end::excludeDownstream[]
-
-// tag::excludeUpstream[]
-
-image::RHMDS_Data_Sync_35_0919_framework.png[Data Sync Technical Overview]
-
-// end::excludeUpstream[]
 
 .Data Sync case study
 [options="header"]
