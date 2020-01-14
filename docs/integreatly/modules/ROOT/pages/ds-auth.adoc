@@ -6,7 +6,6 @@ include::_partials/attributes.adoc[]
 [id='auth_{context}']
 = Supporting authentication and authorization in your mobile app
 :page-partial:
-:toc:
 
 
 [#sync-server-auth]

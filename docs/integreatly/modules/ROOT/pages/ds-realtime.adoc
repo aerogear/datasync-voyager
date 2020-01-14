@@ -11,6 +11,6 @@ include::server-realtime-updates.adoc[leveloffset=+1]
 
 include::server-mqtt-pubsub.adoc[leveloffset=+1]
 
-include::server-realtime-updates-amq.adoc[leveloffset=+2]
+include::server-realtime-updates-amq.adoc[leveloffset=+1]
 
 include::js-client-realtime-updates.adoc[leveloffset=+1]

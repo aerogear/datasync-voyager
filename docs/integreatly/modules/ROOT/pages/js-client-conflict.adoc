@@ -1,3 +1,4 @@
+[id="resolving-conflicts-on-the-client"]
 = Resolving Conflicts on the client
 
 A typical flow for resolving conflicts includes the following steps:
