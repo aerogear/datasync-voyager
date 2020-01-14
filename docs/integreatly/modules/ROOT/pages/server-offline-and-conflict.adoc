@@ -81,7 +81,7 @@ db.save(clientData.id, clientData)
 
 In the example above, the `throw` statement ensures that the client receives all necessary data to resolve the conflict client-side. For more information about this data, please see xref:error-structure[Structure of the Conflict Error].
 
-Since the conflict will be resolved on the client, it is not required to persist the data. However, if there is no conflict, the data sent by the client should be persisted. For more information on resolving the conflict client-side, please see: xref:resolving-conflicts-on-the-client-2[Resolving Conflicts on the Client].
+Since the conflict will be resolved on the client, it is not required to persist the data. However, if there is no conflict, the data sent by the client should be persisted. For more information on resolving the conflict client-side, please see: xref:resolving-conflicts-on-the-client[Resolving Conflicts on the Client].
 
 [#hash-based-conflict]
 == Implementing hash based conflict detection
@@ -138,7 +138,7 @@ db.save(clientData.id, clientData)
 
 In the example above, the `throw` statement ensures the client receives all necessary data to resolve the conflict client-side. For more information about this data please see xref:error-structure[Structure of the Conflict Error].
 
-Since the conflict will be resolved on the client, it is not required to persist the data. However, if there is no conflict, the data sent by the client should be persisted. For more information on resolving the conflict client-side, please see: xref:resolving-conflicts-on-the-client-2[Resolving Conflicts on the Client].
+Since the conflict will be resolved on the client, it is not required to persist the data. However, if there is no conflict, the data sent by the client should be persisted. For more information on resolving the conflict client-side, please see: xref:resolving-conflicts-on-the-client[Resolving Conflicts on the Client].
 
 
 [#error-structure]
