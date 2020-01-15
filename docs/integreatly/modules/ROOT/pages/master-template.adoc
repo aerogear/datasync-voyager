@@ -1,6 +1,5 @@
-include::_partials/attributes.adoc[]
 
-include::index.adoc[leveloffset=+0]
+include::index.adoc[]
 include::ds-introduction.adoc[leveloffset=+1]
 include::ds-getting-started.adoc[leveloffset=+1]
 include::ds-query.adoc[leveloffset=+1]

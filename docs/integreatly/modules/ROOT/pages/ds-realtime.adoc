@@ -1,6 +1,4 @@
-// tag::excludeDownstream[]
 include::_partials/attributes.adoc[]
-// end::excludeDownstream[]
 
 [id='realtime_{context}']
 = Supporting real-time updates in your mobile app
