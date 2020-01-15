@@ -1,6 +1,4 @@
-// tag::excludeDownstream[]
 include::_partials/attributes.adoc[]
-// end::excludeDownstream[]
 
 
 [id='auth_{context}']

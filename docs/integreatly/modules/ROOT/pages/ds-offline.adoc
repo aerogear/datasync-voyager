@@ -1,6 +1,4 @@
-// tag::excludeDownstream[]
 include::_partials/attributes.adoc[]
-// end::excludeDownstream[]
 
 
 include::js-client-offline.adoc[]

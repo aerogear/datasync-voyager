@@ -15,12 +15,6 @@ This section provides recommendations for:
 
 * http://mqtt.org/[MQTT] stands for MQ Telemetry Transport. It is a publish-subscribe, extremely simple and lightweight messaging protocol.
 
-// tag::excludeDownstream[]
-.Prerequisites
-
-* OpenShift Cluster
-* AMQ Online is installed in the OpenShift cluster
-// end::excludeDownstream[]
 
 AMQ Online includes many configuration options that address the specific needs of your application. 
 The minimum configuration steps for using AMQ Online for MQTT messaging and enabling GraphQL subscriptions are:
@@ -135,11 +129,6 @@ For more information see the link:https://access.redhat.com/documentation/en-us/
 = Using GraphQL MQTT PubSub with AMQ Online
 
 .Prerequisites
-
-// tag::excludeDownstream[]
-* OpenShift cluster
-* AMQ Online is installed in the OpenShift cluster
-// end::excludeDownstream[]
 
 The following AMQ Online resources are available for MQTT Applications 
 

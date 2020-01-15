@@ -1,5 +1,4 @@
-// tag::excludeDownstream[]
-:org-name: AeroGear
+
 
 :product-name: Red Hat Managed Integration
 
