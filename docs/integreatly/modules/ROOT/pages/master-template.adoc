@@ -1,14 +1,4 @@
 
-:toc:
-:sectnums:
-:toclevels: 5
-
-:context: data-sync
-
-include::shared/attributes.adoc[]
-
-:imagesdir: shared/sync-images
-
 include::index.adoc[]
 include::ds-introduction.adoc[leveloffset=+1]
 include::ds-getting-started.adoc[leveloffset=+1]
