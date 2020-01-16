@@ -5,7 +5,7 @@
 
 
 .Prerequisites
-* Data Sync server application working locally
+* You have a Data Sync server application working locally
 
 
 .Procedure

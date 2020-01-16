@@ -74,9 +74,8 @@ The `createSubscriptionServer` code:
 ** delivering subscriptions on the server
 * provides integrations with other modules such as `@aerogear/voyager-keycloak`.
 
-.Additional Information
-
-For more information about arguments and options, see the https://npm.im/subscriptions-transport-ws[subscriptions-transport-ws] module.
+.Additional resources
+* For more information about arguments and options, see the https://npm.im/subscriptions-transport-ws[subscriptions-transport-ws] module.
 
 
 == Implementing a Publish Subscribe Mechanism
@@ -158,8 +157,7 @@ const resolvers = {
 
 NOTE: This subscription server does not implement authentication or authorization. For information about implementing authenication and authorization, see link:{data-sync-auth-link}[Supporting authentication and authorization in your mobile app].
 
-.Additional Information
-
-For information on how to use subscriptions in your client code, see xref:sync-js-client-realtime-updates[Realtime Updates].
+.Additional resources
+* For information on how to use subscriptions in your client code, see xref:sync-js-client-realtime-updates[Realtime Updates].
 
 

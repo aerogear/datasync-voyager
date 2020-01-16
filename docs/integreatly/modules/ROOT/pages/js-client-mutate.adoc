@@ -4,7 +4,7 @@
 * You have Node.js and npm installed.
 * You have completed the link:{data-sync-queries-link}[Queries section] and the server is still running.
 
-
+.Procedure
 . Modify the client application to perform the mutation:
 +
 .src/index.js

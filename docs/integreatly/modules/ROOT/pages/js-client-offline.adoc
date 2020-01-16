@@ -95,7 +95,7 @@ To set up the offline client, see xref:setup-offline-client[].
 
 Once set up is complete, `offlineMutate` is then available to use. 
 
-Note: The `offlineMutate` method accepts the same parameters as `mutate` with some additional optional parameters also available.
+NOTE: The `offlineMutate` method accepts the same parameters as `mutate` with some additional optional parameters also available.
 
 
 [source,javascript]
