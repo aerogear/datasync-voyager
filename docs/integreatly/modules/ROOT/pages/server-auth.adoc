@@ -11,7 +11,6 @@ The `@aerogear/voyager-keycloak` module provides the following features out of t
 * Integration with GraphQL context - Use the `context` object within the GraphQL resolvers to access user credentials and several helper functions.
 
 .Prerequisites
-
 * There is a {idm-name} service available.
 * You must add a valid `keycloak.json` config file to your project.
   ** Create a client for your application in the Keycloak administration console.
@@ -20,6 +19,7 @@ The `@aerogear/voyager-keycloak` module provides the following features out of t
 
 == Protecting {sync-server} using {idm-name}
 
+.Procedure
 . Import the `@aerogear/voyager-keycloak` module
 
 +

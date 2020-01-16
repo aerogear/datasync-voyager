@@ -1,10 +1,5 @@
 = Querying a Data Sync server using a Data Sync client
 
-.Prerequisites
-* You have Node.js and npm installed.
-* You have created an empty web project that supports ES6, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
-* You have completed the server getting started guide and the application is running.
-
 This section describes how to use the {sync-client} to create mobile and web applications that can communicate with the Voyager server application.
 
 Data Sync provides JavaScript libraries which integrate your javascript app  with a server that also uses Data Sync.  
@@ -12,6 +7,13 @@ The client libraries are based on the link:https://www.apollographql.com/docs/re
 
 You will add the libraries to your mobile project, configure the client classes, connect to the server, and confirm that it works.
 
+.Prerequisites
+* You have Node.js and npm installed.
+* You have created an empty web project that supports ES6, using the link:https://webpack.js.org/guides/getting-started/[webpack getting started] guide.
+* You have completed the server getting started guide and the application is running.
+
+
+.Procedure
 . Create an address book server:
 .. Create an `index-2.js` file with the following content:
 +
@@ -57,8 +59,6 @@ $ node index-2.js
   }
 }
 ----
-
-
 
 
 . Add the following libraries to your javascript client:

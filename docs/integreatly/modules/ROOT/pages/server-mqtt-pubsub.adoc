@@ -40,7 +40,6 @@ The `pubsub` instance can then be used to publish and subscribe to events in the
 
 // TODO maybe link or show example code in showcase app?
 
-.Additional Information
-
+.Additional resources
 * link:https://www.npmjs.com/package/mqtt#connect[mqtt.connect documentation].
 * link:https://npmjs.com/package/@aerogear/graphql-mqtt-subscriptions[MQTTPubSub documentation]

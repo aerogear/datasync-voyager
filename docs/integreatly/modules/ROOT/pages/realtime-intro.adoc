@@ -26,5 +26,4 @@ The client does not receive events from subscriptions while offline.
 To support inactive clients, use Push Notifications.
 
 .Additional resources
-
 * For more information about GraphQL subscriptions, see the link:https://www.apollographql.com/docs/apollo-server/features/subscriptions.html[Subscriptions documentation].

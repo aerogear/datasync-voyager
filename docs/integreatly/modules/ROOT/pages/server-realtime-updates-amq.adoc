@@ -56,9 +56,8 @@ oc get <`AddressSpace` name> -o yaml
 +
 The output displays information about the address space, including details required for connecting applications.
 
-.Additional Information
-
-See link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_online_on_openshift/managing-address-spaces-messaging#create-address-space-cli-messaging[Creating address spaces using the command line] for more information.
+.Additional resources
+* See link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_online_on_openshift/managing-address-spaces-messaging#create-address-space-cli-messaging[Creating address spaces using the command line] for more information.
 
 == Creating an Address
 
@@ -87,9 +86,8 @@ oc create -f topic-address.yaml
 NOTE: See the xref:#realtime-updates-{context}[Configuring your server for real-time updates] guide for more information about using `pubsub.asyncIterator()`.
 Create an Address for each topic name passed into `pubsub.asyncIterator()`.
 
-.Additional Information
-
-See link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_online_on_openshift/managing-address-spaces-messaging#create-address-space-cli-messaging[Creating addresses using the command line] for more information.
+.Additional resources
+* See link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_online_on_openshift/managing-address-spaces-messaging#create-address-space-cli-messaging[Creating addresses using the command line] for more information.
 
 == Creating an AMQ Online user
 
