@@ -1,7 +1,7 @@
 include::{partialsdir}/attributes.adoc[]
 
 
-** xref:index.adoc[{sync-service}]
+** xref:index.adoc[Data Sync]
 *** xref:ds-introduction.adoc[Introduction]
 *** xref:ds-getting-started.adoc[Getting Started]
 *** xref:ds-query.adoc[Queries]

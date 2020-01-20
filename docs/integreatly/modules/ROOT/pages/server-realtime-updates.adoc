@@ -126,6 +126,12 @@ type Task {
 
 == Implementing resolvers
 
+
+ifndef::data-sync-auth-link[]
+:data-sync-auth-link: ./ds-auth.html
+endif::data-sync-auth-link[]
+
+
 Inside the resolver map, subscription resolvers return an `AsyncIterator,` which listens for events.
 To generate an event, call the `publish` method. 
 The `pubsub.publish` code is typically located inside a mutation resolver.
@@ -155,7 +161,7 @@ const resolvers = {
 ----
 ====
 
-NOTE: This subscription server does not implement authentication or authorization. For information about implementing authenication and authorization, see link:{data-sync-auth-link}[Supporting authentication and authorization in your mobile app].
+NOTE: This subscription server does not implement authentication or authorization. For information about implementing authenication and authorization, see link:{data-sync-auth-link}#implementing-authentication-and-authorization-on-your-client[Supporting authentication and authorization in your mobile app].
 
 .Additional resources
 * For information on how to use subscriptions in your client code, see xref:sync-js-client-realtime-updates[Realtime Updates].
