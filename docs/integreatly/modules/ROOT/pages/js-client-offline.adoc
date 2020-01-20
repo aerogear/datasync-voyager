@@ -24,7 +24,7 @@ Mutations can change query results, make sure to call the `refetchQueries` or `u
 
 The @aerogear/voyager-client module also provides cache helper functions to reduce the amount of code required, as described in xref:cache-update-helpers[].
 
-For more information about `mutate` and the options available, see link:https://www.apollographql.com/docs/react/essentials/mutations.html#props[Apollo's document about mutations].
+For more information about `mutate` and the options available, see link:https://www.apollographql.com/docs/react/data/mutations/[Apollo's document about mutations].
 
 
 [#setup-offline-client]
