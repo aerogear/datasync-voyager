@@ -3,6 +3,7 @@
 = Authentication Over Websockets using {idm-name}
 
 Prerequisites:
+
 * xref:sync-server-auth[Configure Data Sync Server for Authentication and Authorization]
 * xref:ds-realtime.adoc#realtime-updates-{context}[Configuring Your Server for real-time updates]
 
