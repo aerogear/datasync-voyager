@@ -58,7 +58,7 @@ In the three examples below, `subscribeToMore` ensures that any further updates 
 
 Using `subscribeToMore` ensures the cache is easily updated as all GraphQL queries are automatically notified.
 
-For more information, see the  link:https://www.apollographql.com/docs/angular/features/subscriptions.html#subscribe-to-more[subscribeToMore documentation].
+For more information, see the  link:https://www.apollographql.com/docs/angular/features/subscriptions/#subscribetomore[subscribeToMore documentation].
 
 [source,javascript]
 ----
