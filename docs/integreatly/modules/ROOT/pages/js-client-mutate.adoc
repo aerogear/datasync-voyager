@@ -1,8 +1,13 @@
 = Adding a mutation to a Data Sync client
 
+ifndef::data-sync-queries-link[]
+:data-sync-queries-link: ./ds-query.html
+endif::data-sync-queries-link[]
+
+
 .Prerequisites
 * You have Node.js and npm installed.
-* You have completed the link:{data-sync-queries-link}[Queries section] and the server is still running.
+* You have completed the link:{data-sync-queries-link}#querying-a-data-sync-server-using-a-data-sync-client[Queries section] and the server is still running.
 
 .Procedure
 . Modify the client application to perform the mutation:

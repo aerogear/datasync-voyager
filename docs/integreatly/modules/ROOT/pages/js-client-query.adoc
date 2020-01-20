@@ -1,3 +1,4 @@
+[id='querying-a-data-sync-server-using-a-data-sync-client']
 = Querying a Data Sync server using a Data Sync client
 
 This section describes how to use the {sync-client} to create mobile and web applications that can communicate with the Voyager server application.

@@ -1,3 +1,4 @@
+[id='implementing-authentication-and-authorization-on-your-client']
 = Implementing authentication and authorization on your client
 
 With {sync-client}, user information can be passed to a {sync-service} server application in two ways, by using headers or by using tokens.
