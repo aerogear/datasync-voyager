@@ -5,7 +5,7 @@ You can use the Apollo PubSub mechanism for development, but you must use the MQ
 
 == Using the Apollo PubSub mechanism
 
-The xref:realtime-updates-{context}[] section describes how to set up the default `PubSub` provided by `apollo-server`. For a production system, use link:npm.im/@aerogear/graphql-mqtt-subscriptions[MQTT PubSub].
+The xref:realtime-updates-{context}[] section describes how to set up the default `PubSub` provided by `apollo-server`. For a production system, use link:https://npmjs.com/package/@aerogear/graphql-mqtt-subscriptions[MQTT PubSub].
 
 
 == Using the MQTT PubSub mechanism

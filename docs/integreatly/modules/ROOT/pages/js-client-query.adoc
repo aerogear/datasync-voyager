@@ -4,7 +4,7 @@
 This section describes how to use the {sync-client} to create mobile and web applications that can communicate with the Voyager server application.
 
 Data Sync provides JavaScript libraries which integrate your javascript app  with a server that also uses Data Sync.  
-The client libraries are based on the link:https://www.apollographql.com/docs/react/api/apollo-client.html[Apollo client].
+The client libraries are based on the link:https://www.apollographql.com/docs/react/[Apollo client].
 
 You will add the libraries to your mobile project, configure the client classes, connect to the server, and confirm that it works.
 
