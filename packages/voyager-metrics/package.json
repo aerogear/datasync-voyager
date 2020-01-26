@@ -27,7 +27,7 @@
     "prom-client": "11.5.3"
   },
   "devDependencies": {
-    "ava": "2.4.0",
+    "ava": "3.0.0",
     "ts-node": "8.6.1",
     "typescript": "3.7.4"
   },

@@ -29,7 +29,7 @@
     "@types/keycloak-connect": "4.5.1",
     "@types/node": "^10.17.13",
     "@types/pino": "5.20.0",
-    "ava": "^2.4.0",
+    "ava": "^3.0.0",
     "coveralls": "3.0.9",
     "graphql": "14.5.8",
     "lerna": "3.20.2",
