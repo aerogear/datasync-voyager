@@ -21,10 +21,10 @@
     "test": "ava -v"
   },
   "dependencies": {
-    "@aerogear/voyager-audit": "^0.7.1",
+    "@aerogear/voyager-audit": "0.7.1",
     "@aerogear/voyager-conflicts": "^0.7.1",
     "@aerogear/voyager-keycloak": "^0.7.1",
-    "@aerogear/voyager-metrics": "^0.7.1",
+    "@aerogear/voyager-metrics": "0.7.1",
     "@aerogear/voyager-tools": "^0.7.1",
     "apollo-server": "2.10.0",
     "apollo-server-express": "2.10.0",
