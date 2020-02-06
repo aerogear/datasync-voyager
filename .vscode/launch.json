@@ -19,29 +19,12 @@
         "${workspaceFolder}/**/*.js"
       ]
     },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Audit Logging Example",
-      "program": "${workspaceFolder}/examples/audit_logging/index.js",
-      "outFiles": [
-        "${workspaceFolder}/**/*.js"
-      ]
-    },
+    
     {
       "type": "node",
       "request": "launch",
       "name": "Launch Conflict Example",
       "program": "${workspaceFolder}/examples/conflicts/index.js",
-      "outFiles": [
-        "${workspaceFolder}/**/*.js"
-      ]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Metrics Example",
-      "program": "${workspaceFolder}/examples/metrics/index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]

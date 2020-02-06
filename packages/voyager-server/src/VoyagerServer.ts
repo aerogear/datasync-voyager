@@ -5,7 +5,6 @@ import { buildSchemaDirectives } from './buildSchemaDirectives'
 import { DefaultVoyagerConfig } from './config/DefaultVoyagerConfig'
 import { VoyagerConfig } from './config/VoyagerConfig'
 import { ApolloVoyagerContextProvider } from './context/ApolloVoyagerContextProvider'
-import { voyagerResolvers } from './voyagerResolver'
 
 /**
  *
@@ -13,15 +12,9 @@ import { voyagerResolvers } from './voyagerResolver'
  * @param baseApolloConfig
  */
 export function VoyagerServer (baseApolloConfig: Config, clientVoyagerConfig: VoyagerConfig): ApolloServer {
-  const { typeDefs, resolvers, context } = baseApolloConfig
+  const { context } = baseApolloConfig
 
   const voyagerConfig = new DefaultVoyagerConfig().merge(clientVoyagerConfig)
-
-  if (typeDefs && resolvers) {
-    if (clientVoyagerConfig && (clientVoyagerConfig.auditLogger || clientVoyagerConfig.metrics)) {
-      baseApolloConfig.resolvers = voyagerResolvers(resolvers as ResolverMappings, voyagerConfig)
-    }
-  }
 
   // Build the context provider using user supplied context
   const contextProviderConfig = { userContext: context, ...voyagerConfig }
