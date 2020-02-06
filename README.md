@@ -22,8 +22,6 @@ The Voyager framework has a small ecosystem of components for building GraphQL b
 * [voyager-server](https://www.npmjs.com/package/@aerogear/voyager-server) - The core Voyager Server module.
 * [voyager-keycloak](https://www.npmjs.com/package/@aerogear/voyager-keycloak) - Adds Authentication and Authorization to Voyager Server using [keycloak](https://www.keycloak.org/index.html).
 * [voyager-conflicts](https://www.npmjs.com/package/@aerogear/voyager-conflicts) - Provides server side conflict detection mechanisms for building offline enabled applications.
-* [voyager-metrics](https://www.npmjs.com/package/@aerogear/voyager-metrics) - Adds Prometheus metrics to Voyager Server. Integrates with the AeroGear Mobile Metrics service.
-* [voyager-audit](https://www.npmjs.com/package/@aerogear/voyager-audit) - Adds Audit Logging functionality to Voyager Server. Audit logs can be consumed and visualised by the OpenShift EFK stack. (ElasticSearch + Fluentd + Kibana).
 * [voyager-subscriptions](https://www.npmjs.com/package/@aerogear/voyager-subscriptions) - Simplifies the set up of GraphQL Subscriptions, used for real time updates.
 * [graphl-mqtt-subscriptions](https://www.npmjs.com/package/@aerogear/graphql-mqtt-subscriptions) - Enables the use of an MQTT Broker (Such as Mosquitto/RabbitMQ/Red Hat AMQ) as the Pub/Sub mechanism for GraphQL Subscriptions.
 
