@@ -49,7 +49,6 @@ test('DefaultVoyagerConfig.merge() will override default security service with u
   t.truthy(voyagerConfig.securityService instanceof DummySecurityService)
 })
 
-
 test('DefaultVoyagerConfig.merge() will still give you defaults if user explicitly sets them to null', (t) => {
   const voyagerConfig = new DefaultVoyagerConfig().merge({ securityService: null })
 

@@ -2,7 +2,6 @@ import { AuthContextProvider, DefaultAuthContextProvider, SecurityService } from
 import test from 'ava'
 import { DefaultVoyagerConfig } from '../config/DefaultVoyagerConfig'
 import { ApolloVoyagerContextProvider } from './ApolloVoyagerContextProvider'
-import { GraphQLResolveInfo } from 'graphql'
 
 test('DefaultVoyagerConfig will result in DefaultSecurityService inside the context', async (t) => {
   const { securityService } = new DefaultVoyagerConfig()
@@ -10,7 +9,7 @@ test('DefaultVoyagerConfig will result in DefaultSecurityService inside the cont
 
   const dummyRequest = {
     method: 'GET',
-    url: '/graphql' 
+    url: '/graphql 
   }
 
   const contextFn = contextProvider.getContext()
