@@ -62,7 +62,7 @@ export class ApolloVoyagerContextProvider {
     const authContextProvider = new this.authContextProvider({ req })
     const defaultContext: VoyagerContext = {
       request: req,
-      auth: authContextProvider,
+      auth: authContextProvider
     }
     if (this.authContextProvider.contextKey) {
       defaultContext[this.authContextProvider.contextKey] = authContextProvider
