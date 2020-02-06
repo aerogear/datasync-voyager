@@ -26,20 +26,19 @@
     "access": "public"
   },
   "dependencies": {
-    "offix-client-boost": "0.13.0"
+    "offix-client-boost": "0.13.1"
   },
   "devDependencies": {
-    "@types/jest": "24.0.25",
+    "@types/jest": "24.9.1",
     "ts-jest": "24.3.0",
     "jest": "24.9.0",
-    "ts-node": "8.6.1",
-    "typescript": "3.7.4"
+    "ts-node": "8.6.2",
+    "typescript": "3.7.5"
   },
   "peerDependencies": {
     "graphql": "^0.13.0 || ^14.0.0"
   },
   "ava": {
-    "compileEnhancements": false,
     "extensions": [
       "ts"
     ],

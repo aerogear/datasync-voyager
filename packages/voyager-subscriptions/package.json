@@ -24,9 +24,9 @@
     "ws": "7.2.1"
   },
   "devDependencies": {
-    "ava": "2.4.0",
-    "ts-node": "8.6.1",
-    "typescript": "3.7.4"
+    "ava": "3.2.0",
+    "ts-node": "8.6.2",
+    "typescript": "3.7.5"
   },
   "peerDependencies": {
     "graphql": "^0.13.0 || ^14.0.0"
@@ -35,7 +35,6 @@
     "access": "public"
   },
   "ava": {
-    "compileEnhancements": false,
     "extensions": [
       "ts"
     ],

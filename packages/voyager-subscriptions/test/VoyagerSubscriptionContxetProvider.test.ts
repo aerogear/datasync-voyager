@@ -41,7 +41,7 @@ test('if a Security Service\'s onSubscriptionConnect rejects, getOnConnect() wil
 
   await t.throwsAsync(async () => {
     await contextFn({}, {}, {})
-  }, failureMsg)
+  }, null, failureMsg)
 })
 
 test('the framework provided context is merged with the result from onConnect', async (t) => {
@@ -146,7 +146,7 @@ test('the combineContexts function throws if onConnect rejects', async (t) => {
 
   await t.throwsAsync(async () => {
     await contextFn({}, {}, {})
-  }, failureMsg)
+  }, null, failureMsg)
 })
 
 test('onConnect can return undefined', async (t) => {
@@ -184,7 +184,7 @@ test('VoyagerSubscriptionContextProvider constructor throws if onConnect is not 
   t.throws(() => {
     //@ts-ignore
     new VoyagerSubscriptionContextProvider({ securityService, onConnect })
-  }, 'Invalid SubscriptionServer Config - onConnect must be a function')
+  }, null, 'Invalid SubscriptionServer Config - onConnect must be a function')
 })
 
 test('onConnect will override properties provided by default', async (t) => {
