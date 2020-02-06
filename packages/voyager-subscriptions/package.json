@@ -24,7 +24,7 @@
     "ws": "7.2.1"
   },
   "devDependencies": {
-    "ava": "2.4.0",
+    "ava": "3.2.0",
     "ts-node": "8.6.2",
     "typescript": "3.7.5"
   },
@@ -35,7 +35,6 @@
     "access": "public"
   },
   "ava": {
-    "compileEnhancements": false,
     "extensions": [
       "ts"
     ],

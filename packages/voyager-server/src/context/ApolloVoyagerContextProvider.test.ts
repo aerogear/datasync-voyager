@@ -317,7 +317,7 @@ test('getContext throws when userContext function throws', async (t) => {
 
   await t.throwsAsync(async () => {
     await contextFn({})
-  }, errorMsg)
+  }, null, errorMsg)
 })
 
 test('getContext throws when userContext Promise rejects', async (t) => {
@@ -334,5 +334,5 @@ test('getContext throws when userContext Promise rejects', async (t) => {
 
   await t.throwsAsync(async () => {
     await contextFn({})
-  }, errorMsg)
+  }, null, errorMsg)
 })

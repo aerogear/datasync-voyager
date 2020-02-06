@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/pino": "5.20.0",
-    "ava": "2.4.0",
+    "ava": "3.2.0",
     "ts-node": "8.6.2",
     "typescript": "3.7.5"
   },
@@ -35,7 +35,6 @@
     "graphql": "^0.13.0 || ^14.0.0"
   },
   "ava": {
-    "compileEnhancements": false,
     "extensions": [
       "ts"
     ],
