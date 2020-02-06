@@ -1,4 +1,4 @@
-import { AuditLogger } from '@aerogear/voyager-audit'
+
 import { IncomingMessage } from 'http'
 import { VoyagerContext } from './VoyagerContext'
 import { VoyagerContextProviderConfig } from './VoyagerContextConfig'
@@ -8,12 +8,11 @@ type ContextFunction = (object: any) => any
 /**
  * The VoyagerContextProvider will be used to extend the GraphQL context
  * With info from the various Voyager framework components
- * e.g. Security, Audit Logging, client info.
+ * e.g. Security, client info.
  */
 export class ApolloVoyagerContextProvider {
 
   public config: VoyagerContextProviderConfig
-  public auditLogger: AuditLogger
   public authContextProvider: any
   public userContextFunction: any
   public userContextObject: any
@@ -28,7 +27,6 @@ export class ApolloVoyagerContextProvider {
     }
 
     this.authContextProvider = this.config.securityService.getAuthContextProvider()
-    this.auditLogger = this.config.auditLogger
   }
 
   /**
@@ -65,7 +63,6 @@ export class ApolloVoyagerContextProvider {
     const defaultContext: VoyagerContext = {
       request: req,
       auth: authContextProvider,
-      auditLog: this.auditLogger.auditLog
     }
     if (this.authContextProvider.contextKey) {
       defaultContext[this.authContextProvider.contextKey] = authContextProvider

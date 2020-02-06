@@ -18,10 +18,8 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@aerogear/voyager-audit": "^0.7.1",
     "@aerogear/voyager-conflicts": "^0.7.1",
     "@aerogear/voyager-keycloak": "^0.7.1",
-    "@aerogear/voyager-metrics": "^0.7.1",
     "@aerogear/voyager-server": "^0.7.1",
     "@aerogear/voyager-subscriptions": "^0.7.1",
     "@aerogear/voyager-tools": "^0.7.1",

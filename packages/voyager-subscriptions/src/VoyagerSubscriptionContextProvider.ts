@@ -1,4 +1,3 @@
-// import { AuditLogger } from '@aerogear/voyager-audit'
 import { SecurityService } from '@aerogear/voyager-keycloak'
 
 import { VoyagerSubscriptionServerOptions, OnConnectFunction } from './api'
@@ -35,7 +34,7 @@ export class VoyagerSubscriptionContextProvider {
    * the returned onConnect function combines the contexts (results) of the
    * developer onConnect and a default onConnect provided here.
    * This allows us to inject additional integrations into subscriptions such as
-   * auth, metrics, auditLogging, etc
+   * auth, etc
    */
   public getOnConnectFunction(): OnConnectFunction {
     const subscriptionContextProvider = this

@@ -1,4 +1,3 @@
-import { AuditLogMethod } from '@aerogear/voyager-audit'
 import { SecurityService } from '@aerogear/voyager-keycloak'
 import { IncomingMessage } from 'http'
 
@@ -11,6 +10,5 @@ import { IncomingMessage } from 'http'
 export interface VoyagerContext {
   request: IncomingMessage
   auth: SecurityService
-  auditLog: AuditLogMethod
   [key: string]: any
 }
