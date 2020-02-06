@@ -9,7 +9,7 @@ test('DefaultVoyagerConfig will result in DefaultSecurityService inside the cont
 
   const dummyRequest = {
     method: 'GET',
-    url: '/graphql 
+    url: '/graphql'
   }
 
   const contextFn = contextProvider.getContext()
