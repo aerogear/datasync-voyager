@@ -13,6 +13,9 @@ The project does this by taking the popular [Apollo Server](https://www.apollogr
 
 The Voyager framework has a small ecosystem of components for building GraphQL based applications.
 
+NOTE: For latest example of the datasync platform please go to:
+https://github.com/aerogear/datasync-starter
+
 ### Client
 
 * [voyager-client](https://www.npmjs.com/package/@aerogear/voyager-client) - JavaScript Client Library for building applications with Offline Capabilities
@@ -36,10 +39,6 @@ The [Contributing Guide](./CONTRIBUTING.md) will give you all of the information
 ## Examples
 
 The [Examples Guide](./examples/README.md) walks through some example applications which highlight some of Voyager Server's features.
-
-## Reference implementation 
-
-[Ionic Reference app](https://github.com/aerogear/ionic-showcase) provides example implementation of every feature offered by server together with Ionic based Mobile Application.
 
 ## Docs
 
