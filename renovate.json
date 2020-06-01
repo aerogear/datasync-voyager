@@ -4,5 +4,6 @@
     ":pinVersions",
     ":pinAllExceptPeerDependencies"
   ],
-  "groupName":"all"
+  "groupName":"all",
+  "ignoreDeps": ["graphql"]
 }
