@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import { SchemaDirectives } from './SchemaDirectives'
 import { AuthContextProviderClass } from './AuthContextProvider'
 
 /**
@@ -21,7 +20,7 @@ export interface SecurityService {
    * getSchemaDirectives should return an object containing directive
    * implementations. e.g. @isAuthenticated, @hasRole
    */
-  getSchemaDirectives (): SchemaDirectives
+  getSchemaDirectives (): any
 
   /**
    * getAuthContextProvider returns the security service's AuthContextProvider

@@ -9,7 +9,6 @@ import {
   KeycloakSecurityServiceOptions,
   AuthContextProviderClass,
   Logger,
-  SchemaDirectives
 } from './api'
 
 export class KeycloakSecurityService implements SecurityService {
@@ -32,7 +31,7 @@ export class KeycloakSecurityService implements SecurityService {
     return KeycloakTypeDefs
   }
 
-  public getSchemaDirectives (): SchemaDirectives {
+  public getSchemaDirectives () {
     return KeycloakSchemaDirectives
   }
 
