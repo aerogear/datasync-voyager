@@ -3,7 +3,9 @@
 [![CircleCI](https://circleci.com/gh/aerogear/datasync.svg?style=svg)](https://circleci.com/gh/aerogear/datasync)
 [![Coverage Status](https://coveralls.io/repos/github/aerogear/voyager-server/badge.svg)](https://coveralls.io/github/aerogear/voyager-server)
 
-Home of the Aerogear Data Sync Framework. The goal of this project is to make it easier to build secure, production ready, realtime APIs and applications with GraphQL.
+Home of the Aerogear Data Sync. The goal of this project is to make it easier to build secure, production ready, realtime APIs and applications with GraphQL.
+
+DataSync is based on Graphback (https://graphback.dev) platform that uses additional packages providing an extension to support enterprise grade solutions for the synchronization and authentication etc.
 
 The project does this by taking the popular [Apollo Server](https://www.apollographql.com/docs/apollo-server/) framework and adding additional components to solve some common problems.
 
