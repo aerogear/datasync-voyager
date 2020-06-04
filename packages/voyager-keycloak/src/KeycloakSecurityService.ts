@@ -8,7 +8,7 @@ import {
   ApplyAuthMiddlewareOptions,
   KeycloakSecurityServiceOptions,
   AuthContextProviderClass,
-  Logger,
+  Logger
 } from './api'
 
 export class KeycloakSecurityService implements SecurityService {
