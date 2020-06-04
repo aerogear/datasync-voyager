@@ -23,9 +23,9 @@
     ]
   },
   "devDependencies": {
-    "ava": "3.2.0",
-    "ts-node": "8.6.2",
-    "typescript": "3.7.5"
+    "ava": "3.8.2",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.3"
   },
   "peerDependencies": {
     "graphql": "^0.13.0 || ^14.0.0"
@@ -34,6 +34,6 @@
     "access": "public"
   },
   "dependencies": {
-    "offix-conflicts-server": "0.13.1"
+    "offix-conflicts-server": "0.15.1"
   }
 }
