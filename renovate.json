@@ -6,7 +6,7 @@
   ],
   "groupName":"all",
    "ignoreDeps": [
-    "ava"
-  ],
-  "ignoreDeps": ["graphql"]
+    "ava",
+    "graphql"
+  ]
 }
