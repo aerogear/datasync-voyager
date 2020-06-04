@@ -1,6 +1,6 @@
 {
   "name": "@aerogear/voyager-server",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "The core Voyager Server library.",
   "author": "AeroGear Team<aerogear@googlegroups.com>",
   "homepage": "http://aerogear.org",
@@ -21,9 +21,9 @@
     "test": "ava -v"
   },
   "dependencies": {
-    "@aerogear/voyager-conflicts": "^0.8.0",
-    "@aerogear/voyager-keycloak": "^0.8.0",
-    "@aerogear/voyager-tools": "^0.8.0",
+    "@aerogear/voyager-conflicts": "0.9.0",
+    "@aerogear/voyager-keycloak": "0.9.0",
+    "@aerogear/voyager-tools": "0.9.0",
     "apollo-server": "2.10.0",
     "apollo-server-express": "2.10.0",
     "graphql-tools": "4.0.6"
