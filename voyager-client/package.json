@@ -33,7 +33,7 @@
     "ts-jest": "25.5.1",
     "jest": "26.0.1",
     "ts-node": "8.10.2",
-    "typescript": "3.9.3"
+    "typescript": "3.9.5"
   },
   "peerDependencies": {
     "graphql": "^0.13.0 || ^14.0.0"
