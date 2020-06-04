@@ -28,7 +28,7 @@
     "@types/joi": "14.3.4",
     "@types/keycloak-connect": "4.5.4",
     "@types/node": "10.17.24",
-    "@types/pino": "5.20.0",
+    "@types/pino": "6.0.1",
     "ava": "3.8.2",
     "coveralls": "3.1.0",
     "graphql": "14.6.0",
