@@ -91,7 +91,7 @@ jobs:
     working_directory: ~/aerogear
     docker:
       # image for building docker containers
-      - image: docker:17.12.1-ce-git
+      - image: docker:18.06.3-ce-git
     steps:
       - checkout
       - run: echo "Sleeping for 3 minutes to allow NPM publish to be effective"

@@ -29,10 +29,10 @@
     "@types/express": "4.17.6",
     "@types/express-session": "1.17.0",
     "@types/keycloak-connect": "4.5.4",
-    "@types/node": "12.12.44",
+    "@types/node": "18.15.11",
     "ava": "3.8.2",
-    "ts-node": "8.10.2",
-    "typescript": "3.9.5"
+    "ts-node": "10.9.1",
+    "typescript": "5.0.4"
   },
   "peerDependencies": {
     "graphql": "^0.13.0 || ^14.0.0"
