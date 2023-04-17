@@ -18,7 +18,7 @@
     "compile:clean": "tsc --build tsconfig.json --clean"
   },
   "dependencies": {
-    "graphql-tools": "4.0.6"
+    "graphql-tools": "8.3.20"
   },
   "devDependencies": {
     "ava": "3.8.2",

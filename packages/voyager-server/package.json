@@ -26,7 +26,7 @@
     "@aerogear/voyager-tools": "0.9.0",
     "apollo-server": "2.19.1",
     "apollo-server-express": "2.19.1",
-    "graphql-tools": "4.0.6"
+    "graphql-tools": "8.3.20"
   },
   "devDependencies": {
     "@types/node-fetch": "2.5.7",
