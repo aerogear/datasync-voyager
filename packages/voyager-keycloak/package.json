@@ -21,18 +21,18 @@
     "test": "ava -v"
   },
   "dependencies": {
-    "express-session": "1.17.1",
+    "express-session": "1.17.3",
     "keycloak-connect": "10.0.2",
-    "keycloak-connect-graphql": "0.6.0"
+    "keycloak-connect-graphql": "0.7.0"
   },
   "devDependencies": {
-    "@types/express": "4.17.6",
-    "@types/express-session": "1.17.0",
+    "@types/express": "4.17.17",
+    "@types/express-session": "1.17.7",
     "@types/keycloak-connect": "4.5.4",
-    "@types/node": "12.12.44",
+    "@types/node": "12.20.55",
     "ava": "3.8.2",
     "ts-node": "8.10.2",
-    "typescript": "3.9.5"
+    "typescript": "3.9.10"
   },
   "peerDependencies": {
     "graphql": "^0.13.0 || ^14.0.0"
